@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$solar-system-primary: mat-palette($mat-indigo);
-$solar-system-accent: mat-palette($mat-pink, A200, A100, A400);
+$solar-system-primary: mat-palette($mat-blue);
+$solar-system-accent: mat-palette($mat-cyan, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $solar-system-warn: mat-palette($mat-red);
