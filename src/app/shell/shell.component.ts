@@ -49,7 +49,7 @@ export class ShellComponent implements AfterViewInit {
       return n;
     }
 
-    var svg = d3.select("#vis").selectAll("svg")
+    var svg = d3.select("#svg").selectAll("svg")
         .data(d3.range(1, (1 << 7) + 1))
       .enter().append("svg")
         .attr("width", width)
