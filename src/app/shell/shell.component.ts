@@ -1,7 +1,4 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import * as d3 from "d3";
 
 @Component({
@@ -11,13 +8,7 @@ import * as d3 from "d3";
 })
 export class ShellComponent implements AfterViewInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  constructor(private breakpointObserver: BreakpointObserver) {  }
+  constructor() {  }
 
   ngAfterViewInit(): void {
     var width = 1 << 7,
@@ -58,19 +49,19 @@ export class ShellComponent implements AfterViewInit {
       return n;
     }
 
-var svg = d3.select("#vis").selectAll("svg")
-    .data(d3.range(1, (1 << 7) + 1))
-  .enter().append("svg")
-    .attr("width", width)
-    .attr("height", height);
-svg.append("text")
-    .attr("dy", "1em")
-    .text(String);
-svg.append("g")
-    .attr("transform", "translate(" + [width / 2, height / 2] + ")")
-    .each(function(d) {
-      d3.select(this).call(diagram, primeFactors(d), width / 2);
-    });
+    var svg = d3.select("#vis").selectAll("svg")
+        .data(d3.range(1, (1 << 7) + 1))
+      .enter().append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    svg.append("text")
+        .attr("dy", "1em")
+        .text(String);
+    svg.append("g")
+        .attr("transform", "translate(" + [width / 2, height / 2] + ")")
+        .each(function(d) {
+          d3.select(this).call(diagram, primeFactors(d), width / 2);
+        });
   }
 
 }
