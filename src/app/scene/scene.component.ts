@@ -1,5 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
-import * as d3 from "d3";
+import { Component, AfterViewInit } from '@angular/core';
+import { CelestialBody, Point } from './scene.model';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-scene',
@@ -8,60 +9,59 @@ import * as d3 from "d3";
 })
 export class SceneComponent implements AfterViewInit {
 
-  constructor() { }
-
-  ngAfterViewInit(): void {
-    var width = 1 << 7,
-    height = 1 << 7;
-
-    function diagram(selection, factors, size) {
-      if (factors.length) {
-        var n = factors.pop(),
-            offset = n === 4 ? 45 : n === 2 ? 0 : -90,
-            radius = n * size / (n + 2),
-            δy = n & 1 ? (radius / 2) * (1 - Math.cos(Math.PI / n)) : 0;
-        selection.selectAll("g")
-            .data(d3.range(n))
-          .enter().append("g")
-            .attr("transform", function(d) {
-              var angle = d * 360 / n + offset;
-              return "translate(0," + δy + ")rotate(" + angle + ")translate(" + radius + ")rotate(" + -angle + ")";
-            })
-            .call(diagram, factors, 2 * size / (n + 2));
-      } else selection.append("circle").attr("r", size * .9);
+  public bodies: CelestialBody[] = [
+    {
+      position: {
+        x: 0,
+        y: 0
+      },
+      speed: 0,
+      orientation: 0,
+      mass: 1.9885e30,
+      radius: 696342,
+      name: 'sun'
+    }, {
+      position: {
+        x: 0,
+        y: 147095000
+      },
+      speed: 29.78,
+      orientation: 60,
+      mass: 5.97237e24,
+      radius: 6371,
+      name: 'earth'
     }
+  ];
 
-    function primeFactors(n) {
-      var factors = [],
-          f;
-      while (n > 1) {
-        factors.push(f = factor(n));
-        n /= f;
-      }
-      return factors;
-    }
+  private width: number;
+  private height: number;
+  private center: Point;
 
-    function factor(n) {
-      if (n % 4 === 0) return 4;
-      for (var i = 2; i <= n / 2; i++) {
-        if (n % i === 0) return i;
-      }
-      return n;
-    }
+  constructor() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.center = {
+      x: this.width / 2,
+      y: this.height / 2
+    };
+  }
 
-    var svg = d3.select("#svg").selectAll("svg")
-        .data(d3.range(1, (1 << 7) + 1))
-      .enter().append("svg")
-        .attr("width", width)
-        .attr("height", height);
-    svg.append("text")
-        .attr("dy", "1em")
-        .text(String);
-    svg.append("g")
-        .attr("transform", "translate(" + [width / 2, height / 2] + ")")
-        .each(function(d) {
-          d3.select(this).call(diagram, primeFactors(d), width / 2);
-        });
+  ngAfterViewInit() {
+    var svg = d3.select('svg');
+    var g = svg.append('g'); 
+
+    const zoom = d3.zoom().on('zoom', (e) => g.attr('transform', e.transform));
+    svg.call(zoom);
+    svg.call(zoom.transform, d3.zoomIdentity.translate(this.center.x, this.center.y).scale(10 / this.bodies[0].radius));
+
+    g.selectAll('.celestial-body')
+      .data(this.bodies)
+      .enter()
+      .append('circle')
+        .attr('class', 'celestial-body')
+        .attr('r', (body) => body.radius)
+        .attr('cx', (body) => body.position.x)
+        .attr('cy', (body) => body.position.y);
   }
 
 }
