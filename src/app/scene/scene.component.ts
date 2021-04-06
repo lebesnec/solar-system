@@ -19,7 +19,7 @@ export class SceneComponent implements AfterViewInit {
       orientation: 0,
       mass: 1.9885e30,
       radius: 696342,
-      name: 'sun'
+      type: 'sun'
     }, {
       position: {
         x: 0,
@@ -29,20 +29,16 @@ export class SceneComponent implements AfterViewInit {
       orientation: 60,
       mass: 5.97237e24,
       radius: 6371,
-      name: 'earth'
+      type: 'earth'
     }
   ];
 
-  private width: number;
-  private height: number;
   private center: Point;
 
   constructor() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
     this.center = {
-      x: this.width / 2,
-      y: this.height / 2
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2
     };
   }
 
@@ -58,7 +54,7 @@ export class SceneComponent implements AfterViewInit {
       .data(this.bodies)
       .enter()
       .append('circle')
-        .attr('class', 'celestial-body')
+        .attr('class', (body) => 'celestial-body ' + body.type)
         .attr('r', (body) => body.radius)
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);

@@ -13,3 +13,13 @@ svg {
     stroke-width: 1;
     fill: rgb(43, 43, 43);
 }
+
+:host ::ng-deep .celestial-body.sun {
+    stroke: rgb(168, 160, 114);
+    fill: rgb(185, 167, 0);
+}
+
+:host ::ng-deep .celestial-body.earth {
+    stroke: rgb(91, 106, 148);
+    fill: rgb(60, 112, 255);
+}

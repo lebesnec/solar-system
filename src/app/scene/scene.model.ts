@@ -9,5 +9,5 @@ export interface CelestialBody {
     orientation: number;
     mass: number;
     radius: number;
-    name: string;
+    type: string;
 }
