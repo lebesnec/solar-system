@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CelestialBody } from './scene.model';
+import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +16,24 @@ export class SceneService {
         y: 0
       },
       speed: 0,
-      orientation: 0,
       mass: 1.9885e30,
       radius: 696342,
-      type: 'sun'
+      semiMajorAxis: 0,
+      eccentricity: 0,
+      trueAnomaly: 0,
+      type: CELESTIAL_BODY_TYPE.SUN
     }, {
       position: {
         x: 0,
         y: 147095000
       },
       speed: 29.78,
-      orientation: 60,
       mass: 5.97237e24,
       radius: 6371,
-      type: 'earth'
+      semiMajorAxis: 149598023,
+      eccentricity: 0.0167086,
+      trueAnomaly: 0,
+      type: CELESTIAL_BODY_TYPE.PLANET
     }
   ];
 
