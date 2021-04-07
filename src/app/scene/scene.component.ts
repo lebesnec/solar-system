@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { CelestialBody, Point } from './scene.model';
+import { Point } from './scene.model';
 import * as d3 from 'd3';
+import { SceneService } from './scene.service';
 
 @Component({
   selector: 'app-scene',
@@ -9,38 +10,16 @@ import * as d3 from 'd3';
 })
 export class SceneComponent implements AfterViewInit {
 
-  public bodies: CelestialBody[] = [
-    {
-      position: {
-        x: 0,
-        y: 0
-      },
-      speed: 0,
-      orientation: 0,
-      mass: 1.9885e30,
-      radius: 696342,
-      type: 'sun'
-    }, {
-      position: {
-        x: 0,
-        y: 147095000
-      },
-      speed: 29.78,
-      orientation: 60,
-      mass: 5.97237e24,
-      radius: 6371,
-      type: 'earth'
-    }
-  ];
+  private width: number = window.innerWidth; // px
+  private height: number = window.innerHeight; // px
+  private center: Point = {
+    x: window.innerWidth / 2, // px
+    y: window.innerHeight / 2 // px
+  };
 
-  private center: Point;
-
-  constructor() {
-    this.center = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2
-    };
-  }
+  constructor(
+    private sceneService: SceneService
+  ) { }
 
   ngAfterViewInit() {
     var svg = d3.select('svg');
@@ -48,10 +27,13 @@ export class SceneComponent implements AfterViewInit {
 
     const zoom = d3.zoom().on('zoom', (e) => g.attr('transform', e.transform));
     svg.call(zoom);
-    svg.call(zoom.transform, d3.zoomIdentity.translate(this.center.x, this.center.y).scale(10 / this.bodies[0].radius));
+    const defaultZoom = d3.zoomIdentity
+                          .translate(this.center.x, this.center.y)
+                          .scale(Math.min(this.width, this.height) / this.sceneService.SOLAR_SYSTEM_SIZE);
+    svg.call(zoom.transform, defaultZoom);
 
     g.selectAll('.celestial-body')
-      .data(this.bodies)
+      .data(this.sceneService.getSolarSystem())
       .enter()
       .append('circle')
         .attr('class', (body) => 'celestial-body ' + body.type)

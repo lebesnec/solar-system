@@ -4,10 +4,10 @@ export interface Point {
 }
 
 export interface CelestialBody {
-    position: Point,
+    position: Point, // km
     speed: number;
     orientation: number;
-    mass: number;
-    radius: number;
+    mass: number; // kg
+    radius: number; // km
     type: string;
 }
