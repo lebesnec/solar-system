@@ -7,13 +7,17 @@ import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
 export class SceneService {
 
   /**
-   * Gravitational constant in m^3.kg^−1.s^−2
+   * degrees to radian
    */
-  public readonly G = 6.6743e-11;
+  public readonly DEG_TO_RAD = Math.PI / 180;
   /**
    * Astronomical units to kilometers
    */
   public readonly AU_TO_KM = 1.496e8;
+  /**
+   * Gravitational constant in m^3.kg^−1.s^−2
+   */
+   public readonly G = 6.6743e-11;
   /**
    * in km
    */
@@ -55,6 +59,15 @@ export class SceneService {
 
   constructor() { 
     this.SUN.satellites = [ this.EARTH ];
+  }
+
+  public setTrueAnomaly(body: CelestialBody, trueAnomaly) {
+    body.trueAnomaly = trueAnomaly;
+    const d = this.getDistanceToFocusPoint(body);
+    body.position = {
+      x: d * Math.sin((90 - trueAnomaly) * this.DEG_TO_RAD),
+      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD),
+    };
   }
 
   /**
