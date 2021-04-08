@@ -23,7 +23,7 @@ export class SceneComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     var svg = d3.select('svg');
-    var g = svg.append('g'); 
+    var g = svg.append('g');
 
     const zoom = d3.zoom().on('zoom', (e) => g.attr('transform', e.transform));
     svg.call(zoom);
@@ -33,7 +33,7 @@ export class SceneComponent implements AfterViewInit {
     svg.call(zoom.transform, defaultZoom);
 
     g.selectAll('.celestial-body')
-      .data(this.sceneService.getSolarSystem())
+      .data(this.sceneService.SOLAR_SYSTEM)
       .enter()
       .append('circle')
         .attr('class', (body) => 'celestial-body ' + body.type)

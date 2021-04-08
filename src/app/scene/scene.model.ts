@@ -9,13 +9,24 @@ export enum CELESTIAL_BODY_TYPE {
     SATELLITE = 'satellite'
 }
 
+/**
+ * position: km
+ * speed: TODO
+ * mass: kg
+ * radius: km
+ * semiMajorAxis: km
+ * eccentricity: dimensionless, between 0 & 1
+ * trueAnomaly: degrees, between 0 & 360
+ */
 export interface CelestialBody {
-    position: Point, // km
+    position: Point,
     speed: number;
-    mass: number; // kg
-    radius: number; // km
-    semiMajorAxis: number; // km
-    eccentricity: number; // dimensionless, between 0 & 1
-    trueAnomaly: number; // degrees, between 0 & 360
+    mass: number;
+    radius: number;
+    semiMajorAxis: number;
+    eccentricity: number;
+    trueAnomaly: number;
     type: CELESTIAL_BODY_TYPE;
+    satellites: CelestialBody[];
+    orbitBody: CelestialBody | null
 }
