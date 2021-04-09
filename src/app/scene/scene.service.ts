@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
+import { CelestialBody, CELESTIAL_BODY_TYPE, Point } from './scene.model';
+import * as d3 from 'd3';
 
 @Injectable({
   providedIn: 'root'
@@ -61,12 +62,16 @@ export class SceneService {
     this.SUN.satellites = [ this.EARTH ];
   }
 
-  public setTrueAnomaly(body: CelestialBody, trueAnomaly) {
-    body.trueAnomaly = trueAnomaly;
-    const d = this.getDistanceToFocusPoint(body);
-    body.position = {
-      x: d * Math.sin((90 - trueAnomaly) * this.DEG_TO_RAD),
-      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD),
+  public getOrbit(body: CelestialBody): Point[] {
+    return d3.range(360).map((trueAnomaly) => this.getPositionFromTrueAnomaly(body, trueAnomaly));
+  }
+
+  public getPositionFromTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
+    const d = this.getDistanceToFocusPoint(body, trueAnomaly);
+    console.log(d * Math.cos(trueAnomaly * this.DEG_TO_RAD), d * Math.sin(trueAnomaly * this.DEG_TO_RAD));
+    return {
+      x: d * Math.cos(trueAnomaly * this.DEG_TO_RAD),
+      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD)
     };
   }
 
@@ -75,8 +80,8 @@ export class SceneService {
    * @param body 
    * @returns km
    */
-  public getDistanceToFocusPoint(body: CelestialBody): number {
-    return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(body.trueAnomaly)));
+  public getDistanceToFocusPoint(body: CelestialBody, trueAnomaly: number): number {
+    return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(trueAnomaly * this.DEG_TO_RAD)));
   }
 
   /**
@@ -87,7 +92,7 @@ export class SceneService {
   public getOrbitalPeriod(body: CelestialBody): number {
     if (body.orbitBody) {
       return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (this.G * body.orbitBody.mass)) / (60 * 60);
-    }else {
+    } else {
       return 0;
     }
   }
