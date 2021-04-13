@@ -23,7 +23,7 @@ export class SceneComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    const svg = d3.select('svg'); // .attr("viewBox", [0, 0, this.width, this.height]);
+    const svg = d3.select('svg');
     const g = svg.append('g');
 
     this.initZoom(svg, g);
@@ -33,7 +33,7 @@ export class SceneComponent implements AfterViewInit {
       .enter()
       .append('circle')
         .attr('class', (body) => 'celestial-body ' + body.type)
-        .attr('r', (body) => body.radius)
+        .attr('r', (body) => body.radius / this.sceneService.KM_TO_PX)
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);
 
@@ -43,12 +43,12 @@ export class SceneComponent implements AfterViewInit {
       .append('circle')
         .attr('class', 'orbit')
         .attr('r', 1 / this.scale) //TODO 
-        .attr('cx', (position) => position.x / 10)
-        .attr('cy', (position) => position.y / 10);
+        .attr('cx', (position) => position.x)
+        .attr('cy', (position) => position.y);
   }
 
   private initZoom(svg, g) {
-    const zoom = d3.zoom().on('zoom', (e) => { // .extent([[0, 0], [this.width, this.height]]).scaleExtent([1, 8])
+    const zoom = d3.zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
       g.attr('transform', e.transform);
     });
@@ -56,8 +56,7 @@ export class SceneComponent implements AfterViewInit {
 
     const defaultZoom = d3.zoomIdentity
                           .translate(this.center.x, this.center.y)
-                          // .scale(1);
-                          .scale(Math.min(this.width, this.height) / this.sceneService.SOLAR_SYSTEM_SIZE);
+                          .scale(Math.min(this.width, this.height) / (this.sceneService.SOLAR_SYSTEM_SIZE / this.sceneService.KM_TO_PX));
     svg.call(zoom.transform, defaultZoom);
   }
 

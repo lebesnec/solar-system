@@ -11,18 +11,29 @@ export class SceneService {
    * degrees to radian
    */
   public readonly DEG_TO_RAD = Math.PI / 180;
+
   /**
    * Astronomical units to kilometers
    */
   public readonly AU_TO_KM = 1.496e8;
+
   /**
    * Gravitational constant in m^3.kg^−1.s^−2
    */
-   public readonly G = 6.6743e-11;
+  public readonly G = 6.6743e-11;
+  
   /**
    * in km
    */
-  public readonly SOLAR_SYSTEM_SIZE = 1 * this.AU_TO_KM; // TODO 80
+  public readonly SOLAR_SYSTEM_SIZE = 80 * this.AU_TO_KM;
+
+  /**
+   * SVG does not work well with big number so we have to divide each value
+   * (in km) by this ratio before drawing. This does NOT take into account
+   * the scale applied by the current zoom !
+   * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
+   */
+  public readonly KM_TO_PX = 1e5;
 
   public readonly SUN: CelestialBody = {
     position: {
@@ -43,7 +54,7 @@ export class SceneService {
   public readonly EARTH: CelestialBody = {
     position: {
       x: 0,
-      y: 147095000
+      y: 147095000 / this.KM_TO_PX // TODO
     },
     speed: 29.78,
     mass: 5.97237e24,
@@ -62,16 +73,22 @@ export class SceneService {
     this.SUN.satellites = [ this.EARTH ];
   }
 
+  /** 
+   * in px
+   */
   public getOrbit(body: CelestialBody): Point[] {
     return d3.range(360).map((trueAnomaly) => this.getPositionFromTrueAnomaly(body, trueAnomaly));
   }
 
+  /**
+   * in px
+   */
   public getPositionFromTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
     console.log(d * Math.cos(trueAnomaly * this.DEG_TO_RAD), d * Math.sin(trueAnomaly * this.DEG_TO_RAD));
     return {
-      x: d * Math.cos(trueAnomaly * this.DEG_TO_RAD),
-      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD)
+      x: d * Math.cos(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX,
+      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX
     };
   }
 
@@ -91,6 +108,7 @@ export class SceneService {
    */
   public getOrbitalPeriod(body: CelestialBody): number {
     if (body.orbitBody) {
+      // TODO > max_int
       return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (this.G * body.orbitBody.mass)) / (60 * 60);
     } else {
       return 0;
