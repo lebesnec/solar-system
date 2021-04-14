@@ -30,21 +30,28 @@ export class SceneComponent implements AfterViewInit {
 
     g.selectAll('.celestial-body')
       .data(this.sceneService.SOLAR_SYSTEM)
-      .enter()
-      .append('circle')
-        .attr('class', (body) => 'celestial-body ' + body.type)
+      .join('circle')
+        .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body)
         .attr('r', (body) => body.radius / this.sceneService.KM_TO_PX)
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);
 
     g.selectAll('.orbit')
-      .data(this.sceneService.getOrbit(this.sceneService.EARTH))
-      .enter()
-      .append('circle')
+      .data(this.sceneService.getOrbit(this.sceneService.MERCURY))
+      .join('circle')
         .attr('class', 'orbit')
-        .attr('r', 1 / this.scale) //TODO 
+        .attr('r', 0.01 / this.scale) //TODO 
         .attr('cx', (position) => position.x)
         .attr('cy', (position) => position.y);
+
+    // g.selectAll('.orbit')
+    //   .data(this.sceneService.getOrbit(this.sceneService.EARTH))
+    //   .enter()
+    //   .append('circle')
+    //     .attr('class', 'orbit')
+    //     .attr('r', 1 / this.scale) //TODO 
+    //     .attr('cx', (position) => position.x)
+    //     .attr('cy', (position) => position.y);
   }
 
   private initZoom(svg, g) {

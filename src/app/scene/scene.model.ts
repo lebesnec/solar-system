@@ -19,6 +19,7 @@ export enum CELESTIAL_BODY_TYPE {
  * trueAnomaly: degrees, between 0 & 360
  */
 export interface CelestialBody {
+    id: string,
     position: Point,
     speed: number;
     mass: number;

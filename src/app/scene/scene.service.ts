@@ -36,6 +36,7 @@ export class SceneService {
   public readonly KM_TO_PX = 1e5;
 
   public readonly SUN: CelestialBody = {
+    id: 'sun',
     position: {
       x: 0,
       y: 0
@@ -51,7 +52,25 @@ export class SceneService {
     orbitBody: null
   };
 
+  public readonly MERCURY: CelestialBody = {
+    id: 'mercury',
+    position: {
+      x: 0,
+      y: 57909050 / this.KM_TO_PX // TODO
+    },
+    speed: 47.36,
+    mass: 3.3011e23,
+    radius: 2440,
+    semiMajorAxis: 57909050,
+    eccentricity: 0.20563,
+    trueAnomaly: 0,
+    type: CELESTIAL_BODY_TYPE.PLANET,
+    satellites: [],
+    orbitBody: this.SUN
+  };
+
   public readonly EARTH: CelestialBody = {
+    id: 'earth',
     position: {
       x: 0,
       y: 147095000 / this.KM_TO_PX // TODO
@@ -67,10 +86,10 @@ export class SceneService {
     orbitBody: this.SUN
   };
 
-  public readonly SOLAR_SYSTEM: CelestialBody[] = [ this.SUN, this.EARTH ];
+  public readonly SOLAR_SYSTEM: CelestialBody[] = [ this.SUN, this.MERCURY, this.EARTH ];
 
   constructor() { 
-    this.SUN.satellites = [ this.EARTH ];
+    this.SUN.satellites = [ this.MERCURY, this.EARTH ];
   }
 
   /** 
