@@ -1,7 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Point } from './scene.model';
 import * as d3 from 'd3';
-import { KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE } from './scene.service';
+import { SceneService } from './scene.service';
+import { KM_TO_PX, SOLAR_SYSTEM, SOLAR_SYSTEM_SIZE } from './scene.data';
 
 @Component({
   selector: 'app-scene',
@@ -29,17 +30,16 @@ export class SceneComponent implements AfterViewInit {
     this.initZoom(svg, g);
 
     g.selectAll('.celestial-body')
-      .data(this.sceneService.SOLAR_SYSTEM)
+      .data(SOLAR_SYSTEM)
       .join('circle')
         .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
         .attr('r', (body) => body.radius / KM_TO_PX)
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);
 
-    const orbitData = this.sceneService.SOLAR_SYSTEM
-                        .filter((body) => body.id !== 'sun')
-                        .map((body) => this.sceneService.getOrbit(body))
-                        .flat();
+    const orbitData = SOLAR_SYSTEM.filter((body) => body.id !== 'sun')
+                                  .map((body) => this.sceneService.getOrbit(body))
+                                  .flat();
 
     g.selectAll('.orbit')
       .data(orbitData)
