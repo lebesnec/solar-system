@@ -64,12 +64,13 @@ export class SceneComponent implements AfterViewInit {
                             path: this.sceneService.getOrbit(body, 8)
                           }
                         });
+    const lineFn = d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y);
 
     g.selectAll('.orbit')
       .data(orbitsData)
       .join('path')
         .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-        .attr('d', (orbit) => d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y)(orbit.path));
+        .attr('d', (orbit) => lineFn(orbit.path));
   }
 
 }
