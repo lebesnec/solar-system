@@ -4,7 +4,7 @@ export interface Point {
 }
 
 export enum CELESTIAL_BODY_TYPE {
-    SUN = 'sun',
+    STAR = 'star',
     PLANET = 'planet',
     SATELLITE = 'satellite'
 }
@@ -30,4 +30,10 @@ export interface CelestialBody {
     type: CELESTIAL_BODY_TYPE;
     satellites: CelestialBody[];
     orbitBody: CelestialBody | null
+}
+
+export interface OrbitPoint {
+    body: CelestialBody;
+    trueAnomaly: number;
+    position: Point;
 }

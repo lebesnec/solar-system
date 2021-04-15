@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CelestialBody, CELESTIAL_BODY_TYPE, Point } from './scene.model';
+import { CelestialBody, CELESTIAL_BODY_TYPE, OrbitPoint, Point } from './scene.model';
 import * as d3 from 'd3';
 
 @Injectable({
@@ -47,7 +47,7 @@ export class SceneService {
     semiMajorAxis: 0,
     eccentricity: 0,
     trueAnomaly: 0,
-    type: CELESTIAL_BODY_TYPE.SUN,
+    type: CELESTIAL_BODY_TYPE.STAR,
     satellites: [],
     orbitBody: null
   };
@@ -93,10 +93,16 @@ export class SceneService {
   }
 
   /** 
-   * in px
+   * position in px
    */
-  public getOrbit(body: CelestialBody): Point[] {
-    return d3.range(360).map((trueAnomaly) => this.getPositionFromTrueAnomaly(body, trueAnomaly));
+  public getOrbit(body: CelestialBody): OrbitPoint[] {
+    return d3.range(360).map((trueAnomaly) => {
+      return {
+        body,
+        trueAnomaly,
+        position: this.getPositionFromTrueAnomaly(body, trueAnomaly)
+      };
+    });
   }
 
   /**
@@ -104,7 +110,6 @@ export class SceneService {
    */
   public getPositionFromTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
-    console.log(d * Math.cos(trueAnomaly * this.DEG_TO_RAD), d * Math.sin(trueAnomaly * this.DEG_TO_RAD));
     return {
       x: d * Math.cos(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX,
       y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX
