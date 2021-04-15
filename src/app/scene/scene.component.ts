@@ -28,36 +28,8 @@ export class SceneComponent implements AfterViewInit {
     const g = svg.append('g');
 
     this.initZoom(svg, g);
-
-    g.selectAll('.celestial-body')
-      .data(SOLAR_SYSTEM)
-      .join('circle')
-        .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-        .attr('r', (body) => body.radius / KM_TO_PX)
-        .attr('cx', (body) => body.position.x)
-        .attr('cy', (body) => body.position.y);
-
-    const orbitsData = SOLAR_SYSTEM.filter((body) => body.id !== 'sun')
-                                    .map((body) => {
-                                      return {
-                                        body,
-                                        path: this.sceneService.getOrbit(body, 8)
-                                      }
-                                    });
-
-    g.selectAll('.orbit')
-      .data(orbitsData)
-      .join('path')
-        .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-        .attr('d', (orbit) => d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y)(orbit.path));
-
-    // g.selectAll('.orbit')
-    //   .data(orbitData)
-    //   .join('circle')
-    //     .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-    //     .attr('r', 0.1 / this.scale) //TODO 
-    //     .attr('cx', (orbit) => orbit.position.x)
-    //     .attr('cy', (orbit) => orbit.position.y);
+    this.initCelestialBodies(g);
+    this.initOrbits(g);
   }
 
   private initZoom(svg, g) {
@@ -71,6 +43,33 @@ export class SceneComponent implements AfterViewInit {
                           .translate(this.center.x, this.center.y)
                           .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     svg.call(zoom.transform, defaultZoom);
+  }
+
+  private initCelestialBodies(g) {
+    g.selectAll('.celestial-body')
+      .data(SOLAR_SYSTEM)
+      .join('circle')
+        .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
+        .attr('r', (body) => body.radius / KM_TO_PX)
+        .attr('cx', (body) => body.position.x)
+        .attr('cy', (body) => body.position.y);
+  }
+
+  private initOrbits(g) {
+    const orbitsData = SOLAR_SYSTEM
+                        .filter((body) => body.id !== 'sun')
+                        .map((body) => {
+                          return {
+                            body,
+                            path: this.sceneService.getOrbit(body, 8)
+                          }
+                        });
+
+    g.selectAll('.orbit')
+      .data(orbitsData)
+      .join('path')
+        .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
+        .attr('d', (orbit) => d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y)(orbit.path));
   }
 
 }
