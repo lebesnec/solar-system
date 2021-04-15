@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Point } from './scene.model';
 import * as d3 from 'd3';
-import { SceneService } from './scene.service';
+import { KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE } from './scene.service';
 
 @Component({
   selector: 'app-scene',
@@ -32,7 +32,7 @@ export class SceneComponent implements AfterViewInit {
       .data(this.sceneService.SOLAR_SYSTEM)
       .join('circle')
         .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-        .attr('r', (body) => body.radius / this.sceneService.KM_TO_PX)
+        .attr('r', (body) => body.radius / KM_TO_PX)
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);
 
@@ -48,23 +48,6 @@ export class SceneComponent implements AfterViewInit {
         .attr('r', 0.01 / this.scale) //TODO 
         .attr('cx', (orbit) => orbit.position.x)
         .attr('cy', (orbit) => orbit.position.y);
-
-    // g.selectAll('.orbit')
-    //   .data(this.sceneService.getOrbit(this.sceneService.MERCURY))
-    //   .join('circle')
-    //     .attr('class', 'orbit')
-    //     .attr('r', 0.01 / this.scale) //TODO 
-    //     .attr('cx', (position) => position.x)
-    //     .attr('cy', (position) => position.y);
-
-    // g.selectAll('.orbit')
-    //   .data(this.sceneService.getOrbit(this.sceneService.EARTH))
-    //   .enter()
-    //   .append('circle')
-    //     .attr('class', 'orbit')
-    //     .attr('r', 1 / this.scale) //TODO 
-    //     .attr('cx', (position) => position.x)
-    //     .attr('cy', (position) => position.y);
   }
 
   private initZoom(svg, g) {
@@ -76,7 +59,7 @@ export class SceneComponent implements AfterViewInit {
 
     const defaultZoom = d3.zoomIdentity
                           .translate(this.center.x, this.center.y)
-                          .scale(Math.min(this.width, this.height) / (this.sceneService.SOLAR_SYSTEM_SIZE / this.sceneService.KM_TO_PX));
+                          .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     svg.call(zoom.transform, defaultZoom);
   }
 

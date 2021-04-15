@@ -2,38 +2,38 @@ import { Injectable } from '@angular/core';
 import { CelestialBody, CELESTIAL_BODY_TYPE, OrbitPoint, Point } from './scene.model';
 import * as d3 from 'd3';
 
+/**
+ * degrees to radian
+ */
+export const DEG_TO_RAD = Math.PI / 180;
+
+/**
+ * Astronomical units to kilometers
+ */
+export const AU_TO_KM = 1.496e8;
+
+/**
+ * Gravitational constant in m^3.kg^−1.s^−2
+ */
+export const G = 6.6743e-11;
+
+/**
+ * in km
+ */
+export const SOLAR_SYSTEM_SIZE = 80 * AU_TO_KM;
+
+/**
+ * SVG does not work well with big number so we have to divide each value
+ * (in km) by this ratio before drawing. This does NOT take into account
+ * the scale applied by the current zoom !
+ * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
+ */
+export const KM_TO_PX = 1e5;
+
 @Injectable({
   providedIn: 'root'
 })
 export class SceneService {
-
-  /**
-   * degrees to radian
-   */
-  public readonly DEG_TO_RAD = Math.PI / 180;
-
-  /**
-   * Astronomical units to kilometers
-   */
-  public readonly AU_TO_KM = 1.496e8;
-
-  /**
-   * Gravitational constant in m^3.kg^−1.s^−2
-   */
-  public readonly G = 6.6743e-11;
-  
-  /**
-   * in km
-   */
-  public readonly SOLAR_SYSTEM_SIZE = 80 * this.AU_TO_KM;
-
-  /**
-   * SVG does not work well with big number so we have to divide each value
-   * (in km) by this ratio before drawing. This does NOT take into account
-   * the scale applied by the current zoom !
-   * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
-   */
-  public readonly KM_TO_PX = 1e5;
 
   public readonly SUN: CelestialBody = {
     id: 'sun',
@@ -56,7 +56,7 @@ export class SceneService {
     id: 'mercury',
     position: {
       x: 0,
-      y: 57909050 / this.KM_TO_PX // TODO
+      y: 57909050 / KM_TO_PX // TODO
     },
     speed: 47.36,
     mass: 3.3011e23,
@@ -73,7 +73,7 @@ export class SceneService {
     id: 'earth',
     position: {
       x: 0,
-      y: 147095000 / this.KM_TO_PX // TODO
+      y: 147095000 / KM_TO_PX // TODO
     },
     speed: 29.78,
     mass: 5.97237e24,
@@ -111,8 +111,8 @@ export class SceneService {
   public getPositionFromTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
     return {
-      x: d * Math.cos(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX,
-      y: d * Math.sin(trueAnomaly * this.DEG_TO_RAD) / this.KM_TO_PX
+      x: d * Math.cos(trueAnomaly * DEG_TO_RAD) / KM_TO_PX,
+      y: d * Math.sin(trueAnomaly * DEG_TO_RAD) / KM_TO_PX
     };
   }
 
@@ -122,7 +122,7 @@ export class SceneService {
    * @returns km
    */
   public getDistanceToFocusPoint(body: CelestialBody, trueAnomaly: number): number {
-    return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(trueAnomaly * this.DEG_TO_RAD)));
+    return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(trueAnomaly * DEG_TO_RAD)));
   }
 
   /**
@@ -133,7 +133,7 @@ export class SceneService {
   public getOrbitalPeriod(body: CelestialBody): number {
     if (body.orbitBody) {
       // TODO > max_int
-      return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (this.G * body.orbitBody.mass)) / (60 * 60);
+      return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (G * body.orbitBody.mass)) / (60 * 60);
     } else {
       return 0;
     }
