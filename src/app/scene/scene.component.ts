@@ -37,17 +37,27 @@ export class SceneComponent implements AfterViewInit {
         .attr('cx', (body) => body.position.x)
         .attr('cy', (body) => body.position.y);
 
-    const orbitData = SOLAR_SYSTEM.filter((body) => body.id !== 'sun')
-                                  .map((body) => this.sceneService.getOrbit(body))
-                                  .flat();
+    const orbitsData = SOLAR_SYSTEM.filter((body) => body.id !== 'sun')
+                                    .map((body) => {
+                                      return {
+                                        body,
+                                        path: this.sceneService.getOrbit(body, 8)
+                                      }
+                                    });
 
     g.selectAll('.orbit')
-      .data(orbitData)
-      .join('circle')
+      .data(orbitsData)
+      .join('path')
         .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-        .attr('r', 0.01 / this.scale) //TODO 
-        .attr('cx', (orbit) => orbit.position.x)
-        .attr('cy', (orbit) => orbit.position.y);
+        .attr('d', (orbit) => d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y)(orbit.path));
+
+    // g.selectAll('.orbit')
+    //   .data(orbitData)
+    //   .join('circle')
+    //     .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
+    //     .attr('r', 0.1 / this.scale) //TODO 
+    //     .attr('cx', (orbit) => orbit.position.x)
+    //     .attr('cy', (orbit) => orbit.position.y);
   }
 
   private initZoom(svg, g) {

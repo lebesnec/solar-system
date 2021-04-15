@@ -13,12 +13,13 @@ export class SceneService {
   /** 
    * position in px
    */
-  public getOrbit(body: CelestialBody): OrbitPoint[] {
-    return d3.range(360).map((trueAnomaly) => {
+  public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
+    return d3.range(0, 360, 360 / nbPoints).map((trueAnomaly) => {
+      const point = this.getPositionFromTrueAnomaly(body, trueAnomaly)
       return {
-        body,
         trueAnomaly,
-        position: this.getPositionFromTrueAnomaly(body, trueAnomaly)
+        x: point.x,
+        y: point.y
       };
     });
   }
