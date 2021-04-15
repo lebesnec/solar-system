@@ -62,6 +62,23 @@ export const SUN: CelestialBody = {
     orbitBody: SUN
   };
 
+  export const VENUS: CelestialBody = {
+    id: 'venus',
+    position: {
+      x: 0,
+      y: 108208000 / KM_TO_PX // TODO
+    },
+    speed: 35.02,
+    mass: 4.8675e24,
+    radius: 6051.8,
+    semiMajorAxis: 108208000,
+    eccentricity: 0.006772,
+    trueAnomaly: 0,
+    type: CELESTIAL_BODY_TYPE.PLANET,
+    satellites: [],
+    orbitBody: SUN
+  };
+
   export const EARTH: CelestialBody = {
     id: 'earth',
     position: {
@@ -79,6 +96,40 @@ export const SUN: CelestialBody = {
     orbitBody: SUN
   };
 
-  SUN.satellites = [ MERCURY, EARTH ];
+  export const MARS: CelestialBody = {
+    id: 'mars',
+    position: {
+      x: 0,
+      y: 227939200 / KM_TO_PX // TODO
+    },
+    speed: 24.007,
+    mass: 6.4171e23,
+    radius: 3389.5,
+    semiMajorAxis: 227939200,
+    eccentricity: 0.0934,
+    trueAnomaly: 0,
+    type: CELESTIAL_BODY_TYPE.PLANET,
+    satellites: [],
+    orbitBody: SUN
+  };
 
-  export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, EARTH ];
+  export const JUPITER: CelestialBody = {
+    id: 'jupiter',
+    position: {
+      x: 0,
+      y: 778570000 / KM_TO_PX // TODO
+    },
+    speed: 13.07,
+    mass: 1.8982e27,
+    radius: 69911,
+    semiMajorAxis: 778570000,
+    eccentricity: 0.0489,
+    trueAnomaly: 0,
+    type: CELESTIAL_BODY_TYPE.PLANET,
+    satellites: [],
+    orbitBody: SUN
+  };
+
+  SUN.satellites = [ MERCURY, VENUS, EARTH, MARS, JUPITER ];
+
+  export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MARS, JUPITER ];
