@@ -168,7 +168,7 @@ export const NEPTUNE: CelestialBody = {
   id: 'neptune',
   position: {
     x: 0,
-    y: 2875040000 / KM_TO_PX // TODO
+    y: 4500000000 / KM_TO_PX // TODO
   },
   speed: 5.43,
   mass: 1.02413e26,

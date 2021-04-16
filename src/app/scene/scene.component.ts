@@ -61,10 +61,10 @@ export class SceneComponent implements AfterViewInit {
                         .map((body) => {
                           return {
                             body,
-                            path: this.sceneService.getOrbit(body, 8)
+                            path: this.sceneService.getOrbit(body, 15)
                           }
                         });
-    const lineFn = d3.line().curve(d3.curveBasisClosed).x(p => p.x).y(p => p.y);
+    const lineFn = d3.line().curve(d3.curveCardinalClosed).x(p => p.x).y(p => p.y);
 
     g.selectAll('.orbit')
       .data(orbitsData)
