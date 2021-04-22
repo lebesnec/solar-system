@@ -96,6 +96,23 @@ export const EARTH: CelestialBody = {
   orbitBody: SUN
 };
 
+export const MOON: CelestialBody = {
+  id: 'moon',
+  position: {
+    x: 0,
+    y: (147095000 + 384399) / KM_TO_PX // TODO
+  },
+  speed: 1.022,
+  mass: 7.342e22,
+  radius: 1737.4,
+  semiMajorAxis: 384399,
+  eccentricity: 0.0549,
+  trueAnomaly: 0,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: EARTH
+};
+
 export const MARS: CelestialBody = {
   id: 'mars',
   position: {
@@ -181,6 +198,7 @@ export const NEPTUNE: CelestialBody = {
   orbitBody: SUN
 };
 
+EARTH.satellites = [ MOON ];
 SUN.satellites = [ MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE ];
 
-export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE ];
+export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MOON, MARS, JUPITER, SATURN, URANUS, NEPTUNE ];

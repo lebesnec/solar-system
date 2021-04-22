@@ -4,6 +4,8 @@ import * as d3 from 'd3';
 import { SceneService } from './scene.service';
 import { KM_TO_PX, SOLAR_SYSTEM, SOLAR_SYSTEM_SIZE } from './scene.data';
 
+const NB_POINTS_ORBIT = 36;
+
 @Component({
   selector: 'app-scene',
   templateUrl: './scene.component.html',
@@ -61,7 +63,7 @@ export class SceneComponent implements AfterViewInit {
                         .map((body) => {
                           return {
                             body,
-                            path: this.sceneService.getOrbit(body, 15)
+                            path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
                           }
                         });
     const lineFn = d3.line().curve(d3.curveCardinalClosed).x(p => p.x).y(p => p.y);

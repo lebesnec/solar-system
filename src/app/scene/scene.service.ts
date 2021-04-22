@@ -15,7 +15,7 @@ export class SceneService {
    */
   public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
     return d3.range(0, 360, 360 / nbPoints).map((trueAnomaly) => {
-      const point = this.getPositionFromTrueAnomaly(body, trueAnomaly)
+      const point = this.getPositionForTrueAnomaly(body, trueAnomaly)
       return {
         trueAnomaly,
         x: point.x,
@@ -27,11 +27,16 @@ export class SceneService {
   /**
    * in px
    */
-  public getPositionFromTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
+  public getPositionForTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
+    const yKm = d * Math.cos(trueAnomaly * DEG_TO_RAD);
+    const xKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
+
+    // we have the position relative to the orbited body, so we add its 
+    // position to have the absolute postion of the orbiting body :
     return {
-      x: d * Math.cos(trueAnomaly * DEG_TO_RAD) / KM_TO_PX,
-      y: d * Math.sin(trueAnomaly * DEG_TO_RAD) / KM_TO_PX
+      x: (xKm / KM_TO_PX) + body.orbitBody.position.x,
+      y: (yKm / KM_TO_PX) + body.orbitBody.position.y
     };
   }
 
