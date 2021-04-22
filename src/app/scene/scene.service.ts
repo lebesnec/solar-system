@@ -29,6 +29,7 @@ export class SceneService {
    */
   public getPositionForTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
+    // we convert the distance to a position using basic trigonometry :
     const yKm = d * Math.cos(trueAnomaly * DEG_TO_RAD);
     const xKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
 
@@ -42,6 +43,7 @@ export class SceneService {
 
   /**
    * https://en.wikipedia.org/wiki/Kepler_orbit#Development_of_the_laws
+   * Focus point = the orbited body
    * @param body 
    * @returns km
    */
