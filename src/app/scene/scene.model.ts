@@ -21,6 +21,7 @@ export enum CELESTIAL_BODY_TYPE {
  * semiMajorAxis: km
  * eccentricity: dimensionless, between 0 & 1
  * trueAnomaly: degrees, between 0 & 360
+ * meanAnomaly: degrees, between 0 & 360
  */
 export interface CelestialBody {
     id: string,
@@ -31,6 +32,7 @@ export interface CelestialBody {
     semiMajorAxis: number;
     eccentricity: number;
     trueAnomaly: number;
+    meanAnomaly: number;
     type: CELESTIAL_BODY_TYPE;
     satellites: CelestialBody[];
     orbitBody: CelestialBody | null

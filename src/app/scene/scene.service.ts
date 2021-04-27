@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CelestialBody, OrbitPoint, Point } from './scene.model';
 import * as d3 from 'd3';
-import { DEG_TO_RAD, G, KM_TO_PX } from './scene.data';
+import { DEG_TO_RAD, G, KM_TO_PX, SOLAR_SYSTEM } from './scene.data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SceneService {
 
-  constructor() { }
+  constructor() {
+    SOLAR_SYSTEM
+      .filter((body) => body.id !== 'sun')
+      .forEach(body => {
+        body.trueAnomaly = body.meanAnomaly;
+        body.position = this.getPositionForTrueAnomaly(body, body.trueAnomaly);
+      });
+  }
 
   /** 
    * position in px
