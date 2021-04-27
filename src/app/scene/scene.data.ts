@@ -136,6 +136,42 @@ export const MARS: CelestialBody = {
   orbitBody: SUN
 };
 
+export const PHOBOS: CelestialBody = {
+  id: 'phobos',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 2.138,
+  mass: 1.0659e16,
+  radius: 11.2667,
+  semiMajorAxis: 9376,
+  eccentricity: 0.0151,
+  trueAnomaly: 0,
+  meanAnomaly: 0, // TODO
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: MARS
+};
+
+export const DEIMOS: CelestialBody = {
+  id: 'deimos',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 1.3513,
+  mass: 1.4762e15,
+  radius: 6.2,
+  semiMajorAxis: 23463.2,
+  eccentricity: 0.00033,
+  trueAnomaly: 0,
+  meanAnomaly: 90, // TODO
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: MARS
+};
+
 export const JUPITER: CelestialBody = {
   id: 'jupiter',
   position: {
@@ -210,5 +246,6 @@ export const NEPTUNE: CelestialBody = {
 
 SUN.satellites = [ MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE ];
 EARTH.satellites = [ MOON ];
+MARS.satellites = [ PHOBOS, DEIMOS ];
 
-export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MOON, MARS, JUPITER, SATURN, URANUS, NEPTUNE ];
+export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MOON, MARS, PHOBOS, DEIMOS, JUPITER, SATURN, URANUS, NEPTUNE ];
