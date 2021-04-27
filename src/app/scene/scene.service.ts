@@ -12,7 +12,7 @@ export class SceneService {
     SOLAR_SYSTEM
       .filter((body) => body.id !== 'sun')
       .forEach(body => {
-        body.trueAnomaly = body.meanAnomaly;
+        body.trueAnomaly = body.meanAnomaly; // TODO
         body.position = this.getPositionForTrueAnomaly(body, body.trueAnomaly);
       });
   }

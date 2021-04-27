@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import { SceneService } from './scene.service';
 import { KM_TO_PX, SOLAR_SYSTEM, SOLAR_SYSTEM_SIZE } from './scene.data';
 
-const NB_POINTS_ORBIT = 36;
+const NB_POINTS_ORBIT = 90;
 
 @Component({
   selector: 'app-scene',
