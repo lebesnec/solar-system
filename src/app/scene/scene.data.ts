@@ -2,11 +2,12 @@ import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
 
 /**
  * SVG does not work well with big number so we have to divide each value
- * (in km) by this ratio before drawing. This does NOT take into account
- * the scale applied by the current zoom !
+ * (in km) by this ratio before drawing. SCG also doesn't have much decimal
+ * precision so we can't have a to big ratio or small bodies won't render well.
+ * This does NOT take into account the scale applied by the current zoom!
  * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
  */
-export const KM_TO_PX = 1e5;
+export const KM_TO_PX = 1e2;
 
 /**
  * degrees to radian
