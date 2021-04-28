@@ -1,6 +1,6 @@
 export interface Point {
     x: number;
-    y: number; 
+    y: number;
 }
 
 export interface OrbitPoint extends Point {
@@ -24,8 +24,8 @@ export enum CELESTIAL_BODY_TYPE {
  * meanAnomaly: degrees, between 0 & 360
  */
 export interface CelestialBody {
-    id: string,
-    position: Point,
+    id: string;
+    position: Point;
     speed: number;
     mass: number;
     radius: number;
@@ -35,5 +35,5 @@ export interface CelestialBody {
     meanAnomaly: number;
     type: CELESTIAL_BODY_TYPE;
     satellites: CelestialBody[];
-    orbitBody: CelestialBody | null
+    orbitBody: CelestialBody | null;
 }

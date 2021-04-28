@@ -25,7 +25,7 @@ export class SceneComponent implements AfterViewInit {
     private sceneService: SceneService
   ) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     const svg = d3.select('svg');
     const g = svg.append('g');
 
@@ -34,7 +34,7 @@ export class SceneComponent implements AfterViewInit {
     this.initOrbits(g);
   }
 
-  private initZoom(svg, g) {
+  private initZoom(svg, g): void {
     const zoom = d3.zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
       g.attr('transform', e.transform);
@@ -47,7 +47,7 @@ export class SceneComponent implements AfterViewInit {
     svg.call(zoom.transform, defaultZoom);
   }
 
-  private initCelestialBodies(g) {
+  private initCelestialBodies(g): void {
     g.selectAll('.celestial-body')
       .data(SOLAR_SYSTEM)
       .join('circle')
@@ -57,14 +57,14 @@ export class SceneComponent implements AfterViewInit {
         .attr('cy', (body) => body.position.y);
   }
 
-  private initOrbits(g) {
+  private initOrbits(g): void {
     const orbitsData = SOLAR_SYSTEM
                         .filter((body) => body.id !== 'sun')
                         .map((body) => {
                           return {
                             body,
                             path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
-                          }
+                          };
                         });
     const lineFn = d3.line().curve(d3.curveCardinalClosed).x(p => p.x).y(p => p.y);
 

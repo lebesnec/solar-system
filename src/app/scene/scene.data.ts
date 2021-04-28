@@ -1,4 +1,4 @@
-import { CelestialBody, CELESTIAL_BODY_TYPE } from "./scene.model";
+import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
 
 /**
  * SVG does not work well with big number so we have to divide each value
@@ -17,12 +17,12 @@ export const DEG_TO_RAD = Math.PI / 180;
   * Astronomical units to kilometers
   */
 export const AU_TO_KM = 1.496e8;
- 
+
  /**
   * Gravitational constant in m^3.kg^−1.s^−2
   */
 export const G = 6.6743e-11;
- 
+
  /**
   * in km
   */
