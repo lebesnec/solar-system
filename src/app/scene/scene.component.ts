@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Point } from './scene.model';
-import * as d3 from 'd3';
+import {OrbitPoint, Point} from './scene.model';
+import { select } from 'd3-selection';
+import { line, curveCardinalClosed } from 'd3-shape';
+import { zoom, zoomIdentity } from 'd3-zoom';
 import { SceneService } from './scene.service';
 import { KM_TO_PX, SOLAR_SYSTEM, SOLAR_SYSTEM_SIZE } from './scene.data';
 
@@ -25,8 +27,8 @@ export class SceneComponent implements AfterViewInit {
     private sceneService: SceneService
   ) { }
 
-  ngAfterViewInit(): void {
-    const svg = d3.select('svg');
+  public ngAfterViewInit(): void {
+    const svg = select('svg');
     const g = svg.append('g');
 
     this.initZoom(svg, g);
@@ -35,16 +37,16 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initZoom(svg, g): void {
-    const zoom = d3.zoom().on('zoom', (e) => {
+    const d3Zoom = zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
       g.attr('transform', e.transform);
     });
-    svg.call(zoom);
+    svg.call(d3Zoom);
 
-    const defaultZoom = d3.zoomIdentity
+    const defaultZoom = zoomIdentity
                           .translate(this.center.x, this.center.y)
                           .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
-    svg.call(zoom.transform, defaultZoom);
+    svg.call(d3Zoom.transform, defaultZoom);
   }
 
   private initCelestialBodies(g): void {
@@ -66,7 +68,7 @@ export class SceneComponent implements AfterViewInit {
                             path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
                           };
                         });
-    const lineFn = d3.line().curve(d3.curveCardinalClosed).x(p => p.x).y(p => p.y);
+    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed).x(p => p.x).y(p => p.y);
 
     g.selectAll('.orbit')
       .data(orbitsData)
