@@ -16,11 +16,14 @@ svg {
 
 :host ::ng-deep .celestial-body.sun {
     stroke: rgb(168, 160, 114);
+    stroke-width: 1;
     fill: rgb(185, 167, 0);
 }
 
 :host ::ng-deep .orbit {
     stroke: rgb(255, 255, 255);
-    stroke-width: 10;
+    stroke-width: 0.5;
+    shape-rendering: auto;
+    vector-effect: non-scaling-stroke;
     fill: none;
 }
