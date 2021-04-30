@@ -1,8 +1,8 @@
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 import {MERCURY} from './Mercury.data';
 import {VENUS} from './Venus.data';
-import {EARTH, MOON} from './Earth.data';
-import {DEIMOS, MARS, PHOBOS} from './Mars.data';
+import {EARTH} from './Earth.data';
+import {MARS} from './Mars.data';
 import {JUPITER} from './Jupiter.data';
 import {SATURN} from './Saturn.data';
 import {URANUS} from './Uranus.data';
@@ -26,6 +26,12 @@ export const SUN: CelestialBody = {
   orbitBody: null
 };
 
-SUN.satellites.forEach(satellite => satellite.orbitBody = SUN);
+export const SOLAR_SYSTEM: CelestialBody[] = [ SUN ];
 
-export const SOLAR_SYSTEM: CelestialBody[] = [ SUN, MERCURY, VENUS, EARTH, MOON, MARS, PHOBOS, DEIMOS, JUPITER, SATURN, URANUS, NEPTUNE ];
+SUN.satellites.forEach(satellite => {
+  satellite.orbitBody = SUN;
+  SOLAR_SYSTEM.push(satellite);
+  satellite.satellites.forEach(moon => {
+    SOLAR_SYSTEM.push(moon);
+  });
+});
