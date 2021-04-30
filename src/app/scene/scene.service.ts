@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CelestialBody, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
-import {SOLAR_SYSTEM} from './data/scene.data';
+import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
 /**
  * SVG does not work well with big number so we have to divide each value
