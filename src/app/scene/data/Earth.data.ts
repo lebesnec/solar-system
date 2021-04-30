@@ -1,5 +1,4 @@
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
-import {MARS} from './Mars.data';
 
 export const MOON: CelestialBody = {
   id: 'moon',

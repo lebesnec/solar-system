@@ -1,5 +1,4 @@
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
-import {SUN} from './SolarSystem.data';
 
 export const PHOBOS: CelestialBody = {
   id: 'phobos',
