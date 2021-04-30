@@ -1,7 +1,32 @@
-import { Injectable } from '@angular/core';
-import { CelestialBody, OrbitPoint, Point } from './scene.model';
+import {Injectable} from '@angular/core';
+import {CelestialBody, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
-import { DEG_TO_RAD, G, KM_TO_PX, SOLAR_SYSTEM } from './scene.data';
+import {SOLAR_SYSTEM} from './data/scene.data';
+
+/**
+ * SVG does not work well with big number so we have to divide each value
+ * (in km) by this ratio before drawing. SCG also doesn't have much decimal
+ * precision so we can't have a to big ratio or small bodies won't render well.
+ * This does NOT take into account the scale applied by the current zoom!
+ * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
+ */
+export const KM_TO_PX = 1e2;
+/**
+ * degrees to radian
+ */
+export const DEG_TO_RAD = Math.PI / 180;
+/**
+ * Astronomical units to kilometers
+ */
+export const AU_TO_KM = 1.496e8;
+/**
+ * Gravitational constant in m^3.kg^−1.s^−2
+ */
+export const G = 6.6743e-11;
+/**
+ * in km
+ */
+export const SOLAR_SYSTEM_SIZE = 80 * AU_TO_KM;
 
 @Injectable({
   providedIn: 'root'

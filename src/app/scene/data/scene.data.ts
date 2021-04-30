@@ -1,33 +1,4 @@
-import { CelestialBody, CELESTIAL_BODY_TYPE } from './scene.model';
-
-/**
- * SVG does not work well with big number so we have to divide each value
- * (in km) by this ratio before drawing. SCG also doesn't have much decimal
- * precision so we can't have a to big ratio or small bodies won't render well.
- * This does NOT take into account the scale applied by the current zoom!
- * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
- */
-export const KM_TO_PX = 1e2;
-
-/**
- * degrees to radian
- */
-export const DEG_TO_RAD = Math.PI / 180;
-
- /**
-  * Astronomical units to kilometers
-  */
-export const AU_TO_KM = 1.496e8;
-
- /**
-  * Gravitational constant in m^3.kg^−1.s^−2
-  */
-export const G = 6.6743e-11;
-
- /**
-  * in km
-  */
-export const SOLAR_SYSTEM_SIZE = 80 * AU_TO_KM;
+import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 export const SUN: CelestialBody = {
   id: 'sun',

@@ -3,8 +3,8 @@ import {OrbitPoint, Point} from './scene.model';
 import { select } from 'd3-selection';
 import { line, curveCardinalClosed } from 'd3-shape';
 import { zoom, zoomIdentity } from 'd3-zoom';
-import { SceneService } from './scene.service';
-import { KM_TO_PX, SOLAR_SYSTEM, SOLAR_SYSTEM_SIZE } from './scene.data';
+import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import { SOLAR_SYSTEM} from './data/scene.data';
 
 const NB_POINTS_ORBIT = 90;
 
