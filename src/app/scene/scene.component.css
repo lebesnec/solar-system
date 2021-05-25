@@ -27,3 +27,7 @@ svg {
     vector-effect: non-scaling-stroke;
     fill: none;
 }
+
+:host ::ng-deep .scale-solar-system .orbit.satellite {
+    display: none;
+}

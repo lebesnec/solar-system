@@ -6,7 +6,8 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import { SOLAR_SYSTEM} from './data/SolarSystem.data';
 
-const NB_POINTS_ORBIT = 90;
+const NB_POINTS_ORBIT: number = 90;
+const SCALE_PLANET: number = 0.0007;
 
 @Component({
   selector: 'app-scene',
@@ -39,6 +40,9 @@ export class SceneComponent implements AfterViewInit {
   private initZoom(svg, g): void {
     const d3Zoom = zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
+
+      g.classed('scale-planet', this.scale >= SCALE_PLANET);
+      g.classed('scale-solar-system', this.scale < SCALE_PLANET);
       g.attr('transform', e.transform);
     });
     svg.call(d3Zoom);
