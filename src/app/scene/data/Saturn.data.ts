@@ -1,7 +1,7 @@
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 export const S_2009_S_1: CelestialBody = {
-  id: 's/2009-s-1',
+  id: 's_2009-s-1',
   position: {
     x: 0,
     y: 0
@@ -523,7 +523,7 @@ export const SKATHI: CelestialBody = {
 };
 
 export const S_2004_S_37: CelestialBody = {
-  id: 's/2004-s-37',
+  id: 's_2004-s-37',
   position: {
     x: 0,
     y: 0
@@ -541,7 +541,7 @@ export const S_2004_S_37: CelestialBody = {
 };
 
 export const S_2007_S_2: CelestialBody = {
-  id: 's/2007-s-2',
+  id: 's_2007-s-2',
   position: {
     x: 0,
     y: 0
@@ -595,7 +595,7 @@ export const BEBHIONN: CelestialBody = {
 };
 
 export const S_2004_S_29: CelestialBody = {
-  id: 's/2004-s-29',
+  id: 's_2004-s-29',
   position: {
     x: 0,
     y: 0
@@ -631,7 +631,7 @@ export const SKOLL: CelestialBody = {
 };
 
 export const S_2004_S_31: CelestialBody = {
-  id: 's/2004-s-31',
+  id: 's_2004-s-31',
   position: {
     x: 0,
     y: 0
@@ -775,7 +775,7 @@ export const MUNDILFARI: CelestialBody = {
 };
 
 export const S_2004_S_13: CelestialBody = {
-  id: 's/2004-s-13',
+  id: 's_2004-s-13',
   position: {
     x: 0,
     y: 0
@@ -793,7 +793,7 @@ export const S_2004_S_13: CelestialBody = {
 };
 
 export const S_2006_S_1: CelestialBody = {
-  id: 's/2006-s-1',
+  id: 's_2006-s-1',
   position: {
     x: 0,
     y: 0
@@ -811,7 +811,7 @@ export const S_2006_S_1: CelestialBody = {
 };
 
 export const S_2007_S_3: CelestialBody = {
-  id: 's/2007-s-3',
+  id: 's_2007-s-3',
   position: {
     x: 0,
     y: 0
@@ -847,7 +847,7 @@ export const SUTTUNGR: CelestialBody = {
 };
 
 export const S_2004_S_20: CelestialBody = {
-  id: 's/2004-s-20',
+  id: 's_2004-s-20',
   position: {
     x: 0,
     y: 0
@@ -937,7 +937,7 @@ export const HATI: CelestialBody = {
 };
 
 export const S_2004_S_17: CelestialBody = {
-  id: 's/2004-s-17',
+  id: 's_2004-s-17',
   position: {
     x: 0,
     y: 0
@@ -955,7 +955,7 @@ export const S_2004_S_17: CelestialBody = {
 };
 
 export const S_2004_S_12: CelestialBody = {
-  id: 's/2004-s-12',
+  id: 's_2004-s-12',
   position: {
     x: 0,
     y: 0
@@ -973,7 +973,7 @@ export const S_2004_S_12: CelestialBody = {
 };
 
 export const S_2004_S_27: CelestialBody = {
-  id: 's/2004-s-27',
+  id: 's_2004-s-27',
   position: {
     x: 0,
     y: 0
@@ -1045,7 +1045,7 @@ export const BESTLA: CelestialBody = {
 };
 
 export const S_2004_S_7: CelestialBody = {
-  id: 's/2004-s-7',
+  id: 's_2004-s-7',
   position: {
     x: 0,
     y: 0
@@ -1081,7 +1081,7 @@ export const AEGIR: CelestialBody = {
 };
 
 export const S_2004_S_30: CelestialBody = {
-  id: 's/2004-s-30',
+  id: 's_2004-s-30',
   position: {
     x: 0,
     y: 0
@@ -1099,7 +1099,7 @@ export const S_2004_S_30: CelestialBody = {
 };
 
 export const S_2004_S_22: CelestialBody = {
-  id: 's/2004-s-22',
+  id: 's_2004-s-22',
   position: {
     x: 0,
     y: 0
@@ -1117,7 +1117,7 @@ export const S_2004_S_22: CelestialBody = {
 };
 
 export const S_2004_S_25: CelestialBody = {
-  id: 's/2004-s-25',
+  id: 's_2004-s-25',
   position: {
     x: 0,
     y: 0
@@ -1135,7 +1135,7 @@ export const S_2004_S_25: CelestialBody = {
 };
 
 export const S_2004_S_32: CelestialBody = {
-  id: 's/2004-s-32',
+  id: 's_2004-s-32',
   position: {
     x: 0,
     y: 0
@@ -1153,7 +1153,7 @@ export const S_2004_S_32: CelestialBody = {
 };
 
 export const S_2004_S_23: CelestialBody = {
-  id: 's/2004-s-23',
+  id: 's_2004-s-23',
   position: {
     x: 0,
     y: 0
@@ -1171,7 +1171,7 @@ export const S_2004_S_23: CelestialBody = {
 };
 
 export const S_2006_S_3: CelestialBody = {
-  id: 's/2006-s-3',
+  id: 's_2006-s-3',
   position: {
     x: 0,
     y: 0
@@ -1189,7 +1189,7 @@ export const S_2006_S_3: CelestialBody = {
 };
 
 export const S_2004_S_35: CelestialBody = {
-  id: 's/2004-s-35',
+  id: 's_2004-s-35',
   position: {
     x: 0,
     y: 0
@@ -1225,7 +1225,7 @@ export const KARI: CelestialBody = {
 };
 
 export const S_2004_S_28: CelestialBody = {
-  id: 's/2004-s-28',
+  id: 's_2004-s-28',
   position: {
     x: 0,
     y: 0
@@ -1261,7 +1261,7 @@ export const LOGE: CelestialBody = {
 };
 
 export const S_2004_S_38: CelestialBody = {
-  id: 's/2004-s-38',
+  id: 's_2004-s-38',
   position: {
     x: 0,
     y: 0
@@ -1333,7 +1333,7 @@ export const SURTUR: CelestialBody = {
 };
 
 export const S_2004_S_33: CelestialBody = {
-  id: 's/2004-s-33',
+  id: 's_2004-s-33',
   position: {
     x: 0,
     y: 0
@@ -1351,7 +1351,7 @@ export const S_2004_S_33: CelestialBody = {
 };
 
 export const S_2004_S_24: CelestialBody = {
-  id: 's/2004-s-24',
+  id: 's_2004-s-24',
   position: {
     x: 0,
     y: 0
@@ -1369,7 +1369,7 @@ export const S_2004_S_24: CelestialBody = {
 };
 
 export const S_2004_S_21: CelestialBody = {
-  id: 's/2004-s-21',
+  id: 's_2004-s-21',
   position: {
     x: 0,
     y: 0
@@ -1387,7 +1387,7 @@ export const S_2004_S_21: CelestialBody = {
 };
 
 export const S_2004_S_39: CelestialBody = {
-  id: 's/2004-s-39',
+  id: 's_2004-s-39',
   position: {
     x: 0,
     y: 0
@@ -1405,7 +1405,7 @@ export const S_2004_S_39: CelestialBody = {
 };
 
 export const S_2004_S_36: CelestialBody = {
-  id: 's/2004-s-36',
+  id: 's_2004-s-36',
   position: {
     x: 0,
     y: 0
@@ -1441,7 +1441,7 @@ export const FORNJOT: CelestialBody = {
 };
 
 export const S_2004_S_34: CelestialBody = {
-  id: 's/2004-s-34',
+  id: 's_2004-s-34',
   position: {
     x: 0,
     y: 0
@@ -1459,7 +1459,7 @@ export const S_2004_S_34: CelestialBody = {
 };
 
 export const S_2004_S_26: CelestialBody = {
-  id: 's/2004-s-26',
+  id: 's_2004-s-26',
   position: {
     x: 0,
     y: 0

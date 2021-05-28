@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {OrbitPoint, Point} from './scene.model';
-import { select } from 'd3-selection';
+import { select, Selection } from 'd3-selection';
 import { line, curveCardinalClosed } from 'd3-shape';
 import { zoom, zoomIdentity } from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
@@ -16,6 +16,9 @@ const SCALE_PLANET: number = 0.0007;
 })
 export class SceneComponent implements AfterViewInit {
 
+  private svgSelection: any;
+  private gZoomableSelection: any;
+  private gStaticSelection: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
   private center: Point = {
@@ -29,41 +32,45 @@ export class SceneComponent implements AfterViewInit {
   ) { }
 
   public ngAfterViewInit(): void {
-    const svg = select('svg');
-    const g = svg.append('g');
+    this.svgSelection = select('svg');
+    this.gZoomableSelection = this.svgSelection.append('g');
+    this.gStaticSelection = this.svgSelection.append('g');
 
-    this.initZoom(svg, g);
-    this.initCelestialBodies(g);
-    this.initOrbits(g);
+    this.initCelestialBodies();
+    this.initOrbits();
+    this.initZoom();
   }
 
-  private initZoom(svg, g): void {
+  private initZoom(): void {
     const d3Zoom = zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
 
-      g.classed('scale-planet', this.scale >= SCALE_PLANET);
-      g.classed('scale-solar-system', this.scale < SCALE_PLANET);
-      g.attr('transform', e.transform);
+      this.gZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
+      this.gZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
+      this.gZoomableSelection.attr('transform', e.transform);
+
+      // this.initTooltips();
     });
-    svg.call(d3Zoom);
+    this.svgSelection.call(d3Zoom);
 
     const defaultZoom = zoomIdentity
                           .translate(this.center.x, this.center.y)
                           .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
-    svg.call(d3Zoom.transform, defaultZoom);
+    this.svgSelection.call(d3Zoom.transform, defaultZoom);
   }
 
-  private initCelestialBodies(g): void {
-    g.selectAll('.celestial-body')
-      .data(SOLAR_SYSTEM)
-      .join('circle')
-        .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-        .attr('r', (body) => body.radius / KM_TO_PX)
-        .attr('cx', (body) => body.position.x)
-        .attr('cy', (body) => body.position.y);
+  private initCelestialBodies(): void {
+    this.gZoomableSelection.selectAll('.celestial-body')
+                            .data(SOLAR_SYSTEM)
+                            .join('circle')
+                              .attr('id', (body) => body.id)
+                              .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
+                              .attr('r', (body) => body.radius / KM_TO_PX)
+                              .attr('cx', (body) => body.position.x)
+                              .attr('cy', (body) => body.position.y);
   }
 
-  private initOrbits(g): void {
+  private initOrbits(): void {
     const orbitsData = SOLAR_SYSTEM
                         .filter((body) => body.id !== 'sun')
                         .map((body) => {
@@ -74,11 +81,21 @@ export class SceneComponent implements AfterViewInit {
                         });
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed).x(p => p.x).y(p => p.y);
 
-    g.selectAll('.orbit')
-      .data(orbitsData)
-      .join('path')
-        .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-        .attr('d', (orbit) => lineFn(orbit.path));
+    this.gZoomableSelection.selectAll('.orbit')
+                            .data(orbitsData)
+                            .join('path')
+                              .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
+                              .attr('d', (orbit) => lineFn(orbit.path));
+  }
+
+  private initTooltips(): void {
+    this.gStaticSelection.selectAll('.celestial-body-tooltip')
+                          .data(SOLAR_SYSTEM)
+                          .join('text')
+                            .attr('class', (body) => 'celestial-body-tooltip ' + body.type + ' ' + body.id)
+                            .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
+                            .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
+                            .text((body) => body.id);    
   }
 
 }

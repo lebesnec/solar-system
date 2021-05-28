@@ -361,7 +361,7 @@ export const EUPHEME: CelestialBody = {
 };
 
 export const S_2003_J_18: CelestialBody = {
-  id: 's/2003-j-18',
+  id: 's_2003-j-18',
   position: {
     x: 0,
     y: 0
@@ -379,7 +379,7 @@ export const S_2003_J_18: CelestialBody = {
 };
 
 export const S_2010_J_2: CelestialBody = {
-  id: 's/2010-j-2',
+  id: 's_2010-j-2',
   position: {
     x: 0,
     y: 0
@@ -415,7 +415,7 @@ export const HELIKE: CelestialBody = {
 };
 
 export const S_2003_J_16: CelestialBody = {
-  id: 's/2003-j-16',
+  id: 's_2003-j-16',
   position: {
     x: 0,
     y: 0
@@ -433,7 +433,7 @@ export const S_2003_J_16: CelestialBody = {
 };
 
 export const S_2003_J_2: CelestialBody = {
-  id: 's/2003-j-2',
+  id: 's_2003-j-2',
   position: {
     x: 0,
     y: 0
@@ -469,7 +469,7 @@ export const EUANTHE: CelestialBody = {
 };
 
 export const S_2017_J_7: CelestialBody = {
-  id: 's/2017-j-7',
+  id: 's_2017-j-7',
   position: {
     x: 0,
     y: 0
@@ -559,7 +559,7 @@ export const THELXINOE: CelestialBody = {
 };
 
 export const S_2017_J_3: CelestialBody = {
-  id: 's/2017-j-3',
+  id: 's_2017-j-3',
   position: {
     x: 0,
     y: 0
@@ -613,7 +613,7 @@ export const MNEME: CelestialBody = {
 };
 
 export const S_2016_J_1: CelestialBody = {
-  id: 's/2016-j-1',
+  id: 's_2016-j-1',
   position: {
     x: 0,
     y: 0
@@ -685,7 +685,7 @@ export const IOCASTE: CelestialBody = {
 };
 
 export const S_2017_J_9: CelestialBody = {
-  id: 's/2017-j-9',
+  id: 's_2017-j-9',
   position: {
     x: 0,
     y: 0
@@ -703,7 +703,7 @@ export const S_2017_J_9: CelestialBody = {
 };
 
 export const S_2003_J_12: CelestialBody = {
-  id: 's/2003-j-12',
+  id: 's_2003-j-12',
   position: {
     x: 0,
     y: 0
@@ -721,7 +721,7 @@ export const S_2003_J_12: CelestialBody = {
 };
 
 export const S_2003_J_4: CelestialBody = {
-  id: 's/2003-j-4',
+  id: 's_2003-j-4',
   position: {
     x: 0,
     y: 0
@@ -811,7 +811,7 @@ export const TAYGETE: CelestialBody = {
 };
 
 export const S_2017_J_2: CelestialBody = {
-  id: 's/2017-j-2',
+  id: 's_2017-j-2',
   position: {
     x: 0,
     y: 0
@@ -829,7 +829,7 @@ export const S_2017_J_2: CelestialBody = {
 };
 
 export const S_2017_J_6: CelestialBody = {
-  id: 's/2017-j-6',
+  id: 's_2017-j-6',
   position: {
     x: 0,
     y: 0
@@ -883,7 +883,7 @@ export const CARME: CelestialBody = {
 };
 
 export const S_2003_J_19: CelestialBody = {
-  id: 's/2003-j-19',
+  id: 's_2003-j-19',
   position: {
     x: 0,
     y: 0
@@ -919,7 +919,7 @@ export const ISONOE: CelestialBody = {
 };
 
 export const S_2003_J_10: CelestialBody = {
-  id: 's/2003-j-10',
+  id: 's_2003-j-10',
   position: {
     x: 0,
     y: 0
@@ -1009,7 +1009,7 @@ export const PASITHEE: CelestialBody = {
 };
 
 export const S_2010_J_1: CelestialBody = {
-  id: 's/2010-j-1',
+  id: 's_2010-j-1',
   position: {
     x: 0,
     y: 0
@@ -1063,7 +1063,7 @@ export const SPONDE: CelestialBody = {
 };
 
 export const S_2017_J_8: CelestialBody = {
-  id: 's/2017-j-8',
+  id: 's_2017-j-8',
   position: {
     x: 0,
     y: 0
@@ -1099,7 +1099,7 @@ export const EURYDOME: CelestialBody = {
 };
 
 export const S_2017_J_5: CelestialBody = {
-  id: 's/2017-j-5',
+  id: 's_2017-j-5',
   position: {
     x: 0,
     y: 0
@@ -1189,7 +1189,7 @@ export const KALLICHORE: CelestialBody = {
 };
 
 export const S_2011_J_1: CelestialBody = {
-  id: 's/2011-j-1',
+  id: 's_2011-j-1',
   position: {
     x: 0,
     y: 0
@@ -1207,7 +1207,7 @@ export const S_2011_J_1: CelestialBody = {
 };
 
 export const S_2017_J_1: CelestialBody = {
-  id: 's/2017-j-1',
+  id: 's_2017-j-1',
   position: {
     x: 0,
     y: 0
@@ -1297,7 +1297,7 @@ export const KORE: CelestialBody = {
 };
 
 export const S_2011_J_2: CelestialBody = {
-  id: 's/2011-j-2',
+  id: 's_2011-j-2',
   position: {
     x: 0,
     y: 0
@@ -1315,7 +1315,7 @@ export const S_2011_J_2: CelestialBody = {
 };
 
 export const S_2003_J_9: CelestialBody = {
-  id: 's/2003-j-9',
+  id: 's_2003-j-9',
   position: {
     x: 0,
     y: 0
@@ -1369,7 +1369,7 @@ export const AOEDE: CelestialBody = {
 };
 
 export const S_2003_J_23: CelestialBody = {
-  id: 's/2003-j-23',
+  id: 's_2003-j-23',
   position: {
     x: 0,
     y: 0

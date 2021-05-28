@@ -20,6 +20,10 @@ svg {
     fill: rgb(185, 167, 0);
 }
 
+:host ::ng-deep .celestial-body-tooltip {
+    fill: white;
+}
+
 :host ::ng-deep .orbit {
     stroke: rgb(255, 255, 255);
     stroke-width: 0.5;
