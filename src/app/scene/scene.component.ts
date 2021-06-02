@@ -42,15 +42,20 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initZoom(): void {
-    const d3Zoom = zoom().on('zoom', (e) => {
-      this.scale = e.transform.k;
+    const d3Zoom = zoom()
+      .on('zoom', (e) => {
+        this.scale = e.transform.k;
 
-      this.gZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
-      this.gZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
-      this.gZoomableSelection.attr('transform', e.transform);
-
-      // this.initTooltips();
-    });
+        this.gZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
+        this.gZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
+        this.gZoomableSelection.attr('transform', e.transform);
+      })
+      .on('start', () => {
+        this.clearTooltips();
+      })
+      .on('end', () => {
+        this.initTooltips();
+      });
     this.svgSelection.call(d3Zoom);
 
     const defaultZoom = zoomIdentity
@@ -96,6 +101,10 @@ export class SceneComponent implements AfterViewInit {
                             .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
                             .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
                             .text((body) => body.id);    
+  }
+
+  private clearTooltips(): void {
+    this.gStaticSelection.selectAll('.celestial-body-tooltip').remove();
   }
 
 }
