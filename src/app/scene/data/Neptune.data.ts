@@ -261,7 +261,7 @@ export const NEPTUNE: CelestialBody = {
   speed: 5.43,
   mass: 1.02413e26,
   radius: 24622,
-  semiMajorAxis: 4500000000,
+  semiMajorAxis: 4495.060e6,
   eccentricity: 0.008678,
   trueAnomaly: 0,
   meanAnomaly: 256.228,
