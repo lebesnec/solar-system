@@ -1,12 +1,18 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {OrbitPoint, Point} from './scene.model';
-import { select, Selection } from 'd3-selection';
+import { select } from 'd3-selection';
 import { line, curveCardinalClosed } from 'd3-shape';
 import { zoom, zoomIdentity } from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import { SOLAR_SYSTEM} from './data/SolarSystem.data';
 
 const NB_POINTS_ORBIT: number = 90;
+
+enum ZoomLevel {
+  SOLAR_SYSTEM = 'zoom-level-solar-system',
+  PLANET = 'zoom-level-planet'
+};
+
 const SCALE_PLANET: number = 0.0007;
 
 @Component({
@@ -26,6 +32,7 @@ export class SceneComponent implements AfterViewInit {
     y: window.innerHeight / 2 // px
   };
   private scale: number;
+  private zoomLevel: ZoomLevel;
 
   constructor(
     private sceneService: SceneService
@@ -45,9 +52,11 @@ export class SceneComponent implements AfterViewInit {
     const d3Zoom = zoom()
       .on('zoom', (e) => {
         this.scale = e.transform.k;
+        this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
 
-        this.groupZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
-        this.groupZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
+        for (const level in ZoomLevel) {
+          this.groupZoomableSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
+        }
         this.groupZoomableSelection.attr('transform', e.transform);
       })
       .on('start', () => {

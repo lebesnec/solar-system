@@ -32,6 +32,6 @@ svg {
     fill: none;
 }
 
-:host ::ng-deep .scale-solar-system .orbit.satellite {
+:host ::ng-deep .zoom-level-solar-system .orbit.satellite {
     display: none;
 }
