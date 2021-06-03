@@ -17,8 +17,8 @@ const SCALE_PLANET: number = 0.0007;
 export class SceneComponent implements AfterViewInit {
 
   private svgSelection: any;
-  private gZoomableSelection: any;
-  private gStaticSelection: any;
+  private groupZoomableSelection: any;
+  private groupStaticSelection: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
   private center: Point = {
@@ -33,8 +33,8 @@ export class SceneComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.svgSelection = select('svg');
-    this.gZoomableSelection = this.svgSelection.append('g');
-    this.gStaticSelection = this.svgSelection.append('g');
+    this.groupZoomableSelection = this.svgSelection.append('g');
+    this.groupStaticSelection = this.svgSelection.append('g');
 
     this.initCelestialBodies();
     this.initOrbits();
@@ -46,9 +46,9 @@ export class SceneComponent implements AfterViewInit {
       .on('zoom', (e) => {
         this.scale = e.transform.k;
 
-        this.gZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
-        this.gZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
-        this.gZoomableSelection.attr('transform', e.transform);
+        this.groupZoomableSelection.classed('scale-planet', this.scale >= SCALE_PLANET);
+        this.groupZoomableSelection.classed('scale-solar-system', this.scale < SCALE_PLANET);
+        this.groupZoomableSelection.attr('transform', e.transform);
       })
       .on('start', () => {
         this.clearTooltips();
@@ -65,7 +65,7 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initCelestialBodies(): void {
-    this.gZoomableSelection.selectAll('.celestial-body')
+    this.groupZoomableSelection.selectAll('.celestial-body')
                             .data(SOLAR_SYSTEM)
                             .join('circle')
                               .attr('id', (body) => body.id)
@@ -86,7 +86,7 @@ export class SceneComponent implements AfterViewInit {
                         });
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed).x(p => p.x).y(p => p.y);
 
-    this.gZoomableSelection.selectAll('.orbit')
+    this.groupZoomableSelection.selectAll('.orbit')
                             .data(orbitsData)
                             .join('path')
                               .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
@@ -94,7 +94,7 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initTooltips(): void {
-    this.gStaticSelection.selectAll('.celestial-body-tooltip')
+    this.groupStaticSelection.selectAll('.celestial-body-tooltip')
                           .data(SOLAR_SYSTEM)
                           .join('text')
                             .attr('class', (body) => 'celestial-body-tooltip ' + body.type + ' ' + body.id)
@@ -104,7 +104,7 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private clearTooltips(): void {
-    this.gStaticSelection.selectAll('.celestial-body-tooltip').remove();
+    this.groupStaticSelection.selectAll('.celestial-body-tooltip').remove();
   }
 
 }
