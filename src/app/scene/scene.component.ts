@@ -58,12 +58,13 @@ export class SceneComponent implements AfterViewInit {
           this.svgSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
         }
         this.groupZoomableSelection.attr('transform', e.transform);
+        this.initTooltips();
       })
       .on('start', () => {
-        this.clearTooltips();
+       // this.clearTooltips();
       })
       .on('end', () => {
-        this.initTooltips();
+       // this.initTooltips();
       });
     this.svgSelection.call(d3Zoom);
 
@@ -75,13 +76,15 @@ export class SceneComponent implements AfterViewInit {
 
   private initCelestialBodies(): void {
     this.groupZoomableSelection.selectAll('.celestial-body')
-                            .data(SOLAR_SYSTEM)
-                            .join('circle')
-                              .attr('id', (body) => body.id)
-                              .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-                              .attr('r', (body) => body.radius / KM_TO_PX)
-                              .attr('cx', (body) => body.position.x)
-                              .attr('cy', (body) => body.position.y);
+                                .data(SOLAR_SYSTEM, (d) => d.id)
+                                .join(
+                                  enter => enter.append('circle')
+                                                .attr('id', (body) => body.id)
+                                                .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
+                                                .attr('r', (body) => body.radius / KM_TO_PX)
+                                                .attr('cx', (body) => body.position.x)
+                                                .attr('cy', (body) => body.position.y)
+                                );
   }
 
   private initOrbits(): void {
@@ -96,20 +99,26 @@ export class SceneComponent implements AfterViewInit {
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed).x(p => p.x).y(p => p.y);
 
     this.groupZoomableSelection.selectAll('.orbit')
-                            .data(orbitsData)
-                            .join('path')
-                              .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-                              .attr('d', (orbit) => lineFn(orbit.path));
+                               .data(orbitsData, (d) => d.body.id)
+                               .join(
+                                 enter => enter.append('path')
+                                               .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
+                                               .attr('d', (orbit) => lineFn(orbit.path))
+                               );
   }
 
   private initTooltips(): void {
     this.groupStaticSelection.selectAll('.tooltip')
-                          .data(SOLAR_SYSTEM)
-                          .join('text')
-                            .attr('class', (body) => 'tooltip ' + body.type + ' ' + body.id)
-                            .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
-                            .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
-                            .text((body) => body.id);    
+                             .data(SOLAR_SYSTEM, (d) => d.id)
+                             .join(
+                              enter => enter.append('text')
+                                            .attr('class', (body) => 'tooltip ' + body.type + ' ' + body.id)
+                                            .text((body) => body.id)
+                                            .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
+                                            .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y),
+                              update => update.attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
+                                              .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
+                            );
   }
 
   private clearTooltips(): void {
