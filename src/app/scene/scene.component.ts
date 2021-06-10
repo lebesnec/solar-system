@@ -55,7 +55,7 @@ export class SceneComponent implements AfterViewInit {
         this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
 
         for (const level in ZoomLevel) {
-          this.groupZoomableSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
+          this.svgSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
         }
         this.groupZoomableSelection.attr('transform', e.transform);
       })
@@ -103,17 +103,17 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initTooltips(): void {
-    this.groupStaticSelection.selectAll('.celestial-body-tooltip')
+    this.groupStaticSelection.selectAll('.tooltip')
                           .data(SOLAR_SYSTEM)
                           .join('text')
-                            .attr('class', (body) => 'celestial-body-tooltip ' + body.type + ' ' + body.id)
+                            .attr('class', (body) => 'tooltip ' + body.type + ' ' + body.id)
                             .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
                             .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
                             .text((body) => body.id);    
   }
 
   private clearTooltips(): void {
-    this.groupStaticSelection.selectAll('.celestial-body-tooltip').remove();
+    this.groupStaticSelection.selectAll('.tooltip').remove();
   }
 
 }

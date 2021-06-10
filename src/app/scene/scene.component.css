@@ -20,7 +20,7 @@ svg {
     fill: rgb(185, 167, 0);
 }
 
-:host ::ng-deep .celestial-body-tooltip {
+:host ::ng-deep .tooltip {
     fill: white;
 }
 
@@ -33,5 +33,9 @@ svg {
 }
 
 :host ::ng-deep .zoom-level-solar-system .orbit.satellite {
+    display: none;
+}
+
+:host ::ng-deep .zoom-level-solar-system .tooltip.satellite {
     display: none;
 }
