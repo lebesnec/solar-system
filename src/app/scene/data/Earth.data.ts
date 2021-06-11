@@ -12,7 +12,7 @@ export const MOON: CelestialBody = {
   semiMajorAxis: 384399,
   eccentricity: 0.0549,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 135.27,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null

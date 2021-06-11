@@ -12,7 +12,7 @@ export const PHOBOS: CelestialBody = {
   semiMajorAxis: 9376,
   eccentricity: 0.0151,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 91.059,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -30,7 +30,7 @@ export const DEIMOS: CelestialBody = {
   semiMajorAxis: 23463.2,
   eccentricity: 0.00033,
   trueAnomaly: 0,
-  meanAnomaly: 90, // TODO
+  meanAnomaly: 325.329,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
