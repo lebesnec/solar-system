@@ -59,12 +59,6 @@ export class SceneComponent implements AfterViewInit {
         }
         this.groupZoomableSelection.attr('transform', e.transform);
         this.initTooltips();
-      })
-      .on('start', () => {
-       // this.clearTooltips();
-      })
-      .on('end', () => {
-       // this.initTooltips();
       });
     this.svgSelection.call(d3Zoom);
 
@@ -108,21 +102,24 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initTooltips(): void {
+    const tooltipsData = SOLAR_SYSTEM.map((body) => {
+      return {
+        body,
+        boundingBox: (<any>select('#' + body.id).node()).getBoundingClientRect()
+      };
+    });
+
     this.groupStaticSelection.selectAll('.tooltip')
-                             .data(SOLAR_SYSTEM, (d) => d.id)
+                             .data(tooltipsData, (d) => d.body.id)
                              .join(
                               enter => enter.append('text')
-                                            .attr('class', (body) => 'tooltip ' + body.type + ' ' + body.id)
-                                            .text((body) => body.id)
-                                            .attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
-                                            .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y),
-                              update => update.attr('x', (body) => (<any>select('#' + body.id).node()).getBoundingClientRect().x)
-                                              .attr('y', (body) =>  (<any>select('#' + body.id).node()).getBoundingClientRect().y)
+                                            .attr('class', (d) => 'tooltip ' + d.body.type + ' ' + d.body.id)
+                                            .text((d) => d.body.id)
+                                            .attr('x', (d) => d.boundingBox.x)
+                                            .attr('y', (d) =>  d.boundingBox.y),
+                              update => update.attr('x', (d) => d.boundingBox.x)
+                                              .attr('y', (d) =>  d.boundingBox.y)
                             );
-  }
-
-  private clearTooltips(): void {
-    this.groupStaticSelection.selectAll('.tooltip').remove();
   }
 
 }
