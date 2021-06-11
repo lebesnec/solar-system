@@ -105,7 +105,7 @@ export class SceneComponent implements AfterViewInit {
     const tooltipsData = SOLAR_SYSTEM.map((body) => {
       return {
         body,
-        boundingBox: (<any>select('#' + body.id).node()).getBoundingClientRect()
+        boundingBox: (<any>select('#' + body.id).node()).getBoundingClientRect() // TODO store node
       };
     });
 
