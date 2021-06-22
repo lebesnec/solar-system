@@ -12,7 +12,7 @@ export const NAIAD: CelestialBody = {
   semiMajorAxis: 48224,
   eccentricity: 0.0047,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 334.9,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -30,7 +30,7 @@ export const THALASSA: CelestialBody = {
   semiMajorAxis: 50074,
   eccentricity: 0.0018,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 193.6,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -48,7 +48,7 @@ export const DESPINA: CelestialBody = {
   semiMajorAxis: 52526,
   eccentricity: 0.0004,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 319.6,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -66,7 +66,7 @@ export const GALATEA: CelestialBody = {
   semiMajorAxis: 61953,
   eccentricity: 0.0001,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 187.1,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -84,7 +84,7 @@ export const LARISSA: CelestialBody = {
   semiMajorAxis: 73548,
   eccentricity: 0.0012,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 34.9,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -102,7 +102,7 @@ export const HIPPOCAMP: CelestialBody = {
   semiMajorAxis: 105283,
   eccentricity: 0.0005,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 0,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -120,7 +120,7 @@ export const PROTEUS: CelestialBody = {
   semiMajorAxis: 117646,
   eccentricity: 0.0005,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 114.2,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -138,7 +138,7 @@ export const TRITON: CelestialBody = {
   semiMajorAxis: 354759,
   eccentricity: 0.0000,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 264.8,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -156,7 +156,7 @@ export const NEREID: CelestialBody = {
   semiMajorAxis: 5513800,
   eccentricity: 0.7507,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 359.3,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -174,7 +174,7 @@ export const HALIMEDE: CelestialBody = {
   semiMajorAxis: 16681000,
   eccentricity: 0.2909,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 96.8,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -192,7 +192,7 @@ export const SAO: CelestialBody = {
   semiMajorAxis: 22619000,
   eccentricity: 0.2827,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 129.4,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -210,7 +210,7 @@ export const LAOMEDEIA: CelestialBody = {
   semiMajorAxis: 23613000,
   eccentricity: 0.4339,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 321.1,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -228,7 +228,7 @@ export const PSAMATHE: CelestialBody = {
   semiMajorAxis: 46705000,
   eccentricity: 0.4617,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 206.2,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
@@ -246,7 +246,7 @@ export const NESO: CelestialBody = {
   semiMajorAxis: 50258000,
   eccentricity: 0.4243,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO
+  meanAnomaly: 269.8,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
   orbitBody: null
