@@ -10,12 +10,13 @@ export interface OrbitPoint extends Point {
 export enum CELESTIAL_BODY_TYPE {
     STAR = 'star',
     PLANET = 'planet',
-    SATELLITE = 'satellite'
+    SATELLITE = 'satellite',
+    DWARF_PLANET = 'dwarf_planet'
 }
 
 /**
  * position: km
- * speed: TODO
+ * speed: km/s
  * mass: kg
  * radius: km
  * semiMajorAxis: km

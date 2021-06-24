@@ -7,6 +7,7 @@ import {JUPITER} from './Jupiter.data';
 import {SATURN} from './Saturn.data';
 import {URANUS} from './Uranus.data';
 import {NEPTUNE} from './Neptune.data';
+import { DWARF_PLANETS } from './DwarfPlanets.data';
 
 export const SUN: CelestialBody = {
   id: 'sun',
@@ -32,6 +33,14 @@ SUN.satellites.forEach(satellite => {
   satellite.orbitBody = SUN;
   SOLAR_SYSTEM.push(satellite);
   satellite.satellites.forEach(moon => {
+    SOLAR_SYSTEM.push(moon);
+  });
+});
+
+DWARF_PLANETS.forEach(dwarfPlanet => {
+  dwarfPlanet.orbitBody = SUN;
+  SOLAR_SYSTEM.push(dwarfPlanet);
+  dwarfPlanet.satellites.forEach(moon => {
     SOLAR_SYSTEM.push(moon);
   });
 });
