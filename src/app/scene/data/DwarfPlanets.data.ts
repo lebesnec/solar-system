@@ -324,7 +324,43 @@ export const QUAOAR: CelestialBody = {
   orbitBody: null
 };
 
-export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR ];
+export const XIANGLIU: CelestialBody = {
+  id: 'xiangliu',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 5e15, // TODO unknown
+  radius: 100 / 2,
+  semiMajorAxis: 24021,
+  eccentricity: 0.2908,
+  trueAnomaly: 0,
+  meanAnomaly: 0, // TODO unknown
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const GONGGONG: CelestialBody = {
+  id: 'gonggong',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 4.531, // TODO unknown
+  mass: 1.75e21,
+  radius: 1230 / 2,
+  semiMajorAxis: 67.485 * 1.496e8,
+  eccentricity: 0.49943,
+  trueAnomaly: 0,
+  meanAnomaly: 106.496,
+  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  satellites: [ XIANGLIU ], 
+  orbitBody: null
+};
+
+export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR, GONGGONG ];
 
 DWARF_PLANETS.forEach(dwarfPlanet => {
   dwarfPlanet.satellites.forEach(satellite => satellite.orbitBody = dwarfPlanet);
