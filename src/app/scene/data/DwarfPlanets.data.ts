@@ -360,7 +360,25 @@ export const GONGGONG: CelestialBody = {
   orbitBody: null
 };
 
-export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR, GONGGONG ];
+export const SEDNA: CelestialBody = {
+  id: 'sedna',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 4.531, // TODO unknown
+  mass: 1.8e21,
+  radius: 1060 / 2,
+  semiMajorAxis: 506 * 1.496e8,
+  eccentricity: 0.8496,
+  trueAnomaly: 0,
+  meanAnomaly: 358.117,
+  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  satellites: [ XIANGLIU ], 
+  orbitBody: null
+};
+
+export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR, GONGGONG, SEDNA ];
 
 DWARF_PLANETS.forEach(dwarfPlanet => {
   dwarfPlanet.satellites.forEach(satellite => satellite.orbitBody = dwarfPlanet);
