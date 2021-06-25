@@ -162,6 +162,24 @@ export const ERIS: CelestialBody = {
   orbitBody: null
 };
 
+export const S_2015_1: CelestialBody = {
+  id: 'S_2015_1',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 5e15, // TODO unknown
+  radius: 87.5,
+  semiMajorAxis: 21000,
+  eccentricity: 0, // TODO unknown
+  trueAnomaly: 0,
+  meanAnomaly: 0, // TODO unknown
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const MAKEMAKE: CelestialBody = {
   id: 'makemake',
   position: {
@@ -176,7 +194,7 @@ export const MAKEMAKE: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 165.514,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [], 
+  satellites: [ S_2015_1 ], 
   orbitBody: null
 };
 
