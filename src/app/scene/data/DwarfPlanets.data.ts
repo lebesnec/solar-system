@@ -1,5 +1,95 @@
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
+export const CHARON: CelestialBody = {
+  id: 'charon',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21,
+  mass: 1.586e21,
+  radius: 606,
+  semiMajorAxis: 19591.4,
+  eccentricity: 0.0002,
+  trueAnomaly: 0,
+  meanAnomaly: 131.070,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const STYX: CelestialBody = {
+  id: 'styx',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 7.5e15,
+  radius: 16 / 2,
+  semiMajorAxis: 42656,
+  eccentricity: 0.005787,
+  trueAnomaly: 0,
+  meanAnomaly: 194.546,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const NIX: CelestialBody = {
+  id: 'nix',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 4.5e16,
+  radius: 49.8 / 2,
+  semiMajorAxis: 48694,
+  eccentricity: 0.002036,
+  trueAnomaly: 0,
+  meanAnomaly: 284.405,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const KERBEROS: CelestialBody = {
+  id: 'kerberos',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 4.65e16,
+  radius: 19 / 2,
+  semiMajorAxis: 57783,
+  eccentricity: 0.00328,
+  trueAnomaly: 0,
+  meanAnomaly: 161.061,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const HYDRA: CelestialBody = {
+  id: 'hydra',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 4.8e16,
+  radius: 50.9 / 2,
+  semiMajorAxis: 64738,
+  eccentricity: 0.005862,
+  trueAnomaly: 0,
+  meanAnomaly: 326.678,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const PLUTO: CelestialBody = {
   id: 'pluto',
   position: {
@@ -14,7 +104,7 @@ export const PLUTO: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 14.53,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [], // TODO
+  satellites: [ CHARON, STYX, NIX, KERBEROS, HYDRA ],
   orbitBody: null
 };
 
@@ -91,3 +181,7 @@ export const HAUMEA: CelestialBody = {
 };
 
 export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA ];
+
+DWARF_PLANETS.forEach(dwarfPlanet => {
+  dwarfPlanet.satellites.forEach(satellite => satellite.orbitBody = dwarfPlanet);
+});
