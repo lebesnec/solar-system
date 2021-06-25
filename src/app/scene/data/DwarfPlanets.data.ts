@@ -252,7 +252,43 @@ export const HAUMEA: CelestialBody = {
   orbitBody: null
 };
 
-export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA ];
+export const VANTH: CelestialBody = {
+  id: 'vanth',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 3.6e19,
+  radius: 475 / 2,
+  semiMajorAxis: 8999.8,
+  eccentricity: 0.00091,
+  trueAnomaly: 0,
+  meanAnomaly: 188.52,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const ORCUS: CelestialBody = {
+  id: 'orcus',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 4.531, // TODO unknown
+  mass: 6.348e20,
+  radius: 917 / 2,
+  semiMajorAxis: 39.174 * 1.496e8,
+  eccentricity: 0.22701,
+  trueAnomaly: 0,
+  meanAnomaly: 181.735,
+  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  satellites: [ VANTH ], 
+  orbitBody: null
+};
+
+export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS ];
 
 DWARF_PLANETS.forEach(dwarfPlanet => {
   dwarfPlanet.satellites.forEach(satellite => satellite.orbitBody = dwarfPlanet);
