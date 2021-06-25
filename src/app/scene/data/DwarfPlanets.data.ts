@@ -126,6 +126,24 @@ export const CERES: CelestialBody = {
   orbitBody: null
 };
 
+export const DYSNOMIA: CelestialBody = {
+  id: 'dysnomia',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 1.27 * 1.303e22,
+  radius: 700,
+  semiMajorAxis: 37273,
+  eccentricity: 0.0062,
+  trueAnomaly: 0,
+  meanAnomaly: 328.6,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const ERIS: CelestialBody = {
   id: 'eris',
   position: {
@@ -140,7 +158,7 @@ export const ERIS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 205.989,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [], 
+  satellites: [ DYSNOMIA ], 
   orbitBody: null
 };
 
