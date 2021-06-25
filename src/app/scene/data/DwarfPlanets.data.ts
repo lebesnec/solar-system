@@ -198,6 +198,42 @@ export const MAKEMAKE: CelestialBody = {
   orbitBody: null
 };
 
+export const HIIAKA: CelestialBody = {
+  id: 'hiiaka',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 1.79e19,
+  radius: 160,
+  semiMajorAxis: 49880,
+  eccentricity: 0.0513,
+  trueAnomaly: 0,
+  meanAnomaly: 152.8,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const NAMAKA: CelestialBody = {
+  id: 'namaka',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0.21, // TODO unknown
+  mass: 1.79e18,
+  radius: 85,
+  semiMajorAxis: 25657,
+  eccentricity: 0.249,
+  trueAnomaly: 0,
+  meanAnomaly: 178.5,
+  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const HAUMEA: CelestialBody = {
   id: 'haumea',
   position: {
@@ -212,7 +248,7 @@ export const HAUMEA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 218.205,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [], 
+  satellites: [ HIIAKA, NAMAKA ], 
   orbitBody: null
 };
 
