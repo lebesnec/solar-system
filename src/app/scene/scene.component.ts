@@ -14,6 +14,8 @@ enum ZoomLevel {
 };
 
 const SCALE_PLANET: number = 0.0007;
+const DELTA_TOOLTIP: Point = { x: 10, y: 10 };
+const TRANSITION_TOOLTIP_MS: number = 100;
 
 @Component({
   selector: 'app-scene',
@@ -109,16 +111,32 @@ export class SceneComponent implements AfterViewInit {
       };
     });
 
+    const tooltipPath = this.groupStaticSelection.append('path')
+                                                  .attr('class', 'tooltip-path')
+                                                  .style('opacity', 0);
+
     this.groupStaticSelection.selectAll('.tooltip')
                              .data(tooltipsData, (d) => d.body.id)
                              .join(
                               enter => enter.append('text')
                                             .attr('class', (d) => 'tooltip ' + d.body.type + ' ' + d.body.id)
+                                            .attr('dominant-baseline', 'middle')
                                             .text((d) => d.body.id)
-                                            .attr('x', (d) => d.boundingBox.x)
-                                            .attr('y', (d) =>  d.boundingBox.y),
-                              update => update.attr('x', (d) => d.boundingBox.x)
-                                              .attr('y', (d) =>  d.boundingBox.y)
+                                            .attr('x', (d) => d.boundingBox.right + DELTA_TOOLTIP.x)
+                                            .attr('y', (d) => d.boundingBox.bottom + DELTA_TOOLTIP.y)
+                                            .on('mouseover', (event, d) => {
+                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)} L ${d.boundingBox.right + DELTA_TOOLTIP.x} ${d.boundingBox.bottom + DELTA_TOOLTIP.y}`)
+                                                          .transition()
+                                                          .duration(TRANSITION_TOOLTIP_MS)
+                                                          .style('opacity', 1);
+                                            })
+                                            .on('mouseout', () => {
+                                              tooltipPath.transition()
+                                                          .duration(TRANSITION_TOOLTIP_MS)
+                                                          .style('opacity', 0);
+                                            }),
+                              update => update.attr('x', (d) => d.boundingBox.right + DELTA_TOOLTIP.x)
+                                              .attr('y', (d) =>  d.boundingBox.bottom + DELTA_TOOLTIP.y)
                             );
   }
 

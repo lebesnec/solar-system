@@ -24,6 +24,11 @@ svg {
     fill: white;
 }
 
+:host ::ng-deep .tooltip-path {
+    stroke: rgb(0, 132, 255);
+    stroke-width: 2;
+}
+
 :host ::ng-deep .orbit {
     stroke: rgb(255, 255, 255);
     stroke-width: 0.5;
