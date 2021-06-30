@@ -23,11 +23,16 @@ svg {
 
     .tooltip {
         fill: white;
+        cursor: pointer;
+    }
+    .tooltip:hover {
+        fill: rgb(91, 148, 255);
     }
 
     .tooltip-path {
         stroke: rgb(0, 132, 255);
         stroke-width: 2;
+        fill: transparent;
     }
 
     .orbit {

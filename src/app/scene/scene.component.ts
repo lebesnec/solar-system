@@ -14,8 +14,9 @@ enum ZoomLevel {
 };
 
 const SCALE_PLANET: number = 0.0007;
-const DELTA_TOOLTIP: Point = { x: 10, y: 10 };
-const TRANSITION_TOOLTIP_MS: number = 100;
+const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 };
+const TOOLTIP_TRANSITION_MS: number = 50;
+const TOOLTIP_PATH_MARGIN: number = 5;
 
 @Component({
   selector: 'app-scene',
@@ -119,24 +120,27 @@ export class SceneComponent implements AfterViewInit {
                              .data(tooltipsData, (d) => d.body.id)
                              .join(
                               enter => enter.append('text')
+                                            .attr('id', (d) => 'tooltiptext_' + d.body.id)
                                             .attr('class', (d) => 'tooltip ' + d.body.type + ' ' + d.body.id)
-                                            .attr('dominant-baseline', 'middle')
                                             .text((d) => d.body.id)
-                                            .attr('x', (d) => d.boundingBox.right + DELTA_TOOLTIP.x)
-                                            .attr('y', (d) => d.boundingBox.bottom + DELTA_TOOLTIP.y)
+                                            .attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
+                                            .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                                             .on('mouseover', (event, d) => {
-                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)} L ${d.boundingBox.right + DELTA_TOOLTIP.x} ${d.boundingBox.bottom + DELTA_TOOLTIP.y}`)
+                                              const textBoundingBox = (<any>select('#' + 'tooltiptext_' + d.body.id).node()).getBoundingClientRect();                                              
+                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)} 
+                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN} 
+                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x + textBoundingBox.width + TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}`)
                                                           .transition()
-                                                          .duration(TRANSITION_TOOLTIP_MS)
+                                                          .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 1);
                                             })
                                             .on('mouseout', () => {
                                               tooltipPath.transition()
-                                                          .duration(TRANSITION_TOOLTIP_MS)
+                                                          .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 0);
                                             }),
-                              update => update.attr('x', (d) => d.boundingBox.right + DELTA_TOOLTIP.x)
-                                              .attr('y', (d) =>  d.boundingBox.bottom + DELTA_TOOLTIP.y)
+                              update => update.attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
+                                              .attr('y', (d) =>  d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                             );
   }
 
