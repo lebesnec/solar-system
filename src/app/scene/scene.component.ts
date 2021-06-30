@@ -20,7 +20,7 @@ const TRANSITION_TOOLTIP_MS: number = 100;
 @Component({
   selector: 'app-scene',
   templateUrl: './scene.component.html',
-  styleUrls: ['./scene.component.css']
+  styleUrls: ['./scene.component.scss']
 })
 export class SceneComponent implements AfterViewInit {
 

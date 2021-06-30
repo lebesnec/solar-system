@@ -122,5 +122,10 @@
       }
     }
   },
-  "defaultProject": "solar-system"
+  "defaultProject": "solar-system",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }
