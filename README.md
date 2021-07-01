@@ -1,3 +1,5 @@
+[![Build and Deploy](https://github.com/lebesnec/solar-system/actions/workflows/main.yml/badge.svg)](https://github.com/lebesnec/solar-system/actions/workflows/main.yml)
+
 # SolarSystem
 
 ## sources
