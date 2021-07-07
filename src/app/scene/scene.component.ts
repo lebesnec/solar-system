@@ -57,6 +57,7 @@ export class SceneComponent implements AfterViewInit {
         this.scale = e.transform.k;
         this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
 
+        // tslint:disable-next-line:forin
         for (const level in ZoomLevel) {
           this.svgSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
         }

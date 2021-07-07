@@ -122,7 +122,7 @@ export const CERES: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 77.37209589,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [], 
+  satellites: [],
   orbitBody: null
 };
 
@@ -158,7 +158,7 @@ export const ERIS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 205.989,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ DYSNOMIA ], 
+  satellites: [ DYSNOMIA ],
   orbitBody: null
 };
 
@@ -194,7 +194,7 @@ export const MAKEMAKE: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 165.514,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ S_2015_1 ], 
+  satellites: [ S_2015_1 ],
   orbitBody: null
 };
 
@@ -248,7 +248,7 @@ export const HAUMEA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 218.205,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ HIIAKA, NAMAKA ], 
+  satellites: [ HIIAKA, NAMAKA ],
   orbitBody: null
 };
 
@@ -284,7 +284,7 @@ export const ORCUS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 181.735,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ VANTH ], 
+  satellites: [ VANTH ],
   orbitBody: null
 };
 
@@ -320,7 +320,7 @@ export const QUAOAR: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 301.104,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ WEYWOT ], 
+  satellites: [ WEYWOT ],
   orbitBody: null
 };
 
@@ -356,7 +356,7 @@ export const GONGGONG: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 106.496,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ XIANGLIU ], 
+  satellites: [ XIANGLIU ],
   orbitBody: null
 };
 
@@ -374,7 +374,7 @@ export const SEDNA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 358.117,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ XIANGLIU ], 
+  satellites: [ XIANGLIU ],
   orbitBody: null
 };
 
