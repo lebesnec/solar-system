@@ -6,17 +6,17 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import { SOLAR_SYSTEM} from './data/SolarSystem.data';
 
-const NB_POINTS_ORBIT: number = 90;
+const NB_POINTS_ORBIT = 90;
 
 enum ZoomLevel {
   SOLAR_SYSTEM = 'zoom-level-solar-system',
   PLANET = 'zoom-level-planet'
-};
+}
 
-const SCALE_PLANET: number = 0.0007;
+const SCALE_PLANET = 0.0007;
 const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 };
-const TOOLTIP_TRANSITION_MS: number = 50;
-const TOOLTIP_PATH_MARGIN: number = 5;
+const TOOLTIP_TRANSITION_MS = 50;
+const TOOLTIP_PATH_MARGIN = 5;
 
 @Component({
   selector: 'app-scene',
@@ -108,7 +108,7 @@ export class SceneComponent implements AfterViewInit {
     const tooltipsData = SOLAR_SYSTEM.map((body) => {
       return {
         body,
-        boundingBox: (<any>select('#' + body.id).node()).getBoundingClientRect() // TODO store node
+        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect() // TODO store node
       };
     });
 
@@ -126,9 +126,9 @@ export class SceneComponent implements AfterViewInit {
                                             .attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
                                             .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                                             .on('mouseover', (event, d) => {
-                                              const textBoundingBox = (<any>select('#' + 'tooltiptext_' + d.body.id).node()).getBoundingClientRect();                                              
-                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)} 
-                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN} 
+                                              const textBoundingBox = (select('#' + 'tooltiptext_' + d.body.id).node() as any).getBoundingClientRect();
+                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x + textBoundingBox.width + TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}`)
                                                           .transition()
                                                           .duration(TOOLTIP_TRANSITION_MS)
