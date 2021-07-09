@@ -1,4 +1,5 @@
 [![Build and Deploy](https://github.com/lebesnec/solar-system/actions/workflows/main.yml/badge.svg)](https://github.com/lebesnec/solar-system/actions/workflows/main.yml)
+[![CodeQL](https://github.com/lebesnec/solar-system/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/lebesnec/solar-system/actions/workflows/codeql-analysis.yml)
 
 # SolarSystem
 
