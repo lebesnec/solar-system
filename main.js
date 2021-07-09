@@ -44,7 +44,9 @@ var CELESTIAL_BODY_TYPE;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShellComponent", function() { return ShellComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _scene_scene_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scene/scene.component */ "PEKV");
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/toolbar */ "/t3+");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
@@ -52,9 +54,14 @@ class ShellComponent {
     constructor() { }
 }
 ShellComponent.ɵfac = function ShellComponent_Factory(t) { return new (t || ShellComponent)(); };
-ShellComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ShellComponent, selectors: [["app-shell"]], decls: 1, vars: 0, template: function ShellComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-scene");
-    } }, directives: [_scene_scene_component__WEBPACK_IMPORTED_MODULE_1__["SceneComponent"]], styles: ["[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\napp-scene[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hlbGwvc2hlbGwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUFDRjs7QUFFQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9zaGVsbC9zaGVsbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbmFwcC1zY2VuZSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG4iXX0= */"] });
+ShellComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ShellComponent, selectors: [["app-shell"]], decls: 4, vars: 0, consts: [[1, "content"]], template: function ShellComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-toolbar");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Solar system");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_1__["MatToolbar"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterOutlet"]], styles: ["[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.content[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\nmat-toolbar[_ngcontent-%COMP%] {\n  -webkit-backdrop-filter: blur(10px);\n          backdrop-filter: blur(10px);\n  background: rgba(255, 255, 255, 0.3);\n  position: fixed;\n  top: 0;\n  left: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hlbGwvc2hlbGwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUFDRjs7QUFFQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQ0FBQTtVQUFBLDJCQUFBO0VBQ0Esb0NBQUE7RUFDQSxlQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7QUFDRiIsImZpbGUiOiJzcmMvYXBwL3NoZWxsL3NoZWxsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLmNvbnRlbnQge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG5tYXQtdG9vbGJhciB7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cigxMHB4KTtcbiAgYmFja2dyb3VuZDogaHNsYSgwLCAwJSwgMTAwJSwgLjMpO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbn1cbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ShellComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -177,7 +184,6 @@ var ZoomLevel;
     ZoomLevel["SOLAR_SYSTEM"] = "zoom-level-solar-system";
     ZoomLevel["PLANET"] = "zoom-level-planet";
 })(ZoomLevel || (ZoomLevel = {}));
-;
 const SCALE_PLANET = 0.0007;
 const TOOLTIP_DISTANCE = { x: 20, y: 20 };
 const TOOLTIP_TRANSITION_MS = 50;
@@ -205,6 +211,7 @@ class SceneComponent {
             .on('zoom', (e) => {
             this.scale = e.transform.k;
             this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
+            // tslint:disable-next-line:forin
             for (const level in ZoomLevel) {
                 this.svgSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
             }
@@ -263,8 +270,8 @@ class SceneComponent {
             .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
             .on('mouseover', (event, d) => {
             const textBoundingBox = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])('#' + 'tooltiptext_' + d.body.id).node().getBoundingClientRect();
-            tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)} 
-                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN} 
+            tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                                                     L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x + textBoundingBox.width + TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}`)
                 .transition()
                 .duration(TOOLTIP_TRANSITION_MS)
@@ -282,7 +289,7 @@ SceneComponent.ɵfac = function SceneComponent_Factory(t) { return new (t || Sce
 SceneComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SceneComponent, selectors: [["app-scene"]], decls: 1, vars: 0, template: function SceneComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceSVG"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "svg");
-    } }, styles: ["[_nghost-%COMP%] {\n  display: block;\n  background-color: #1f1f1f;\n}\n\nsvg[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\n[_nghost-%COMP%]     .celestial-body {\n  stroke: #5a5a5a;\n  stroke-width: 1;\n  fill: #2b2b2b;\n}\n\n[_nghost-%COMP%]     .celestial-body.sun {\n  stroke: #a8a072;\n  stroke-width: 1;\n  fill: #b9a700;\n}\n\n[_nghost-%COMP%]     .tooltip {\n  fill: white;\n  cursor: pointer;\n}\n\n[_nghost-%COMP%]     .tooltip:hover {\n  fill: #5b94ff;\n}\n\n[_nghost-%COMP%]     .tooltip-path {\n  stroke: #0084ff;\n  stroke-width: 2;\n  fill: transparent;\n}\n\n[_nghost-%COMP%]     .orbit {\n  stroke: white;\n  stroke-width: 0.5;\n  shape-rendering: auto;\n  vector-effect: non-scaling-stroke;\n  fill: none;\n}\n\n[_nghost-%COMP%]     .zoom-level-solar-system .orbit.satellite {\n  display: none;\n}\n\n[_nghost-%COMP%]     .zoom-level-solar-system .tooltip.satellite {\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2NlbmUvc2NlbmUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFQTtFQUNJLFdBQUE7RUFDQSxZQUFBO0FBQ0o7O0FBR0k7RUFDSSxlQUFBO0VBQ0EsZUFBQTtFQUNBLGFBQUE7QUFBUjs7QUFHSTtFQUNJLGVBQUE7RUFDQSxlQUFBO0VBQ0EsYUFBQTtBQURSOztBQUlJO0VBQ0ksV0FBQTtFQUNBLGVBQUE7QUFGUjs7QUFJSTtFQUNJLGFBQUE7QUFGUjs7QUFLSTtFQUNJLGVBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUFIUjs7QUFNSTtFQUNJLGFBQUE7RUFDQSxpQkFBQTtFQUNBLHFCQUFBO0VBQ0EsaUNBQUE7RUFDQSxVQUFBO0FBSlI7O0FBT0k7RUFDSSxhQUFBO0FBTFI7O0FBUUk7RUFDSSxhQUFBO0FBTlIiLCJmaWxlIjoic3JjL2FwcC9zY2VuZS9zY2VuZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMzEsIDMxLCAzMSk7XG59XG5cbnN2ZyB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xufVxuXG46aG9zdCA6Om5nLWRlZXAge1xuICAgIC5jZWxlc3RpYWwtYm9keSB7XG4gICAgICAgIHN0cm9rZTogcmdiKDkwLCA5MCwgOTApO1xuICAgICAgICBzdHJva2Utd2lkdGg6IDE7XG4gICAgICAgIGZpbGw6IHJnYig0MywgNDMsIDQzKTtcbiAgICB9XG5cbiAgICAuY2VsZXN0aWFsLWJvZHkuc3VuIHtcbiAgICAgICAgc3Ryb2tlOiByZ2IoMTY4LCAxNjAsIDExNCk7XG4gICAgICAgIHN0cm9rZS13aWR0aDogMTtcbiAgICAgICAgZmlsbDogcmdiKDE4NSwgMTY3LCAwKTtcbiAgICB9XG5cbiAgICAudG9vbHRpcCB7XG4gICAgICAgIGZpbGw6IHdoaXRlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICAgIC50b29sdGlwOmhvdmVyIHtcbiAgICAgICAgZmlsbDogcmdiKDkxLCAxNDgsIDI1NSk7XG4gICAgfVxuXG4gICAgLnRvb2x0aXAtcGF0aCB7XG4gICAgICAgIHN0cm9rZTogcmdiKDAsIDEzMiwgMjU1KTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiAyO1xuICAgICAgICBmaWxsOiB0cmFuc3BhcmVudDtcbiAgICB9XG5cbiAgICAub3JiaXQge1xuICAgICAgICBzdHJva2U6IHJnYigyNTUsIDI1NSwgMjU1KTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwLjU7XG4gICAgICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcbiAgICAgICAgdmVjdG9yLWVmZmVjdDogbm9uLXNjYWxpbmctc3Ryb2tlO1xuICAgICAgICBmaWxsOiBub25lO1xuICAgIH1cblxuICAgIC56b29tLWxldmVsLXNvbGFyLXN5c3RlbSAub3JiaXQuc2F0ZWxsaXRlIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG5cbiAgICAuem9vbS1sZXZlbC1zb2xhci1zeXN0ZW0gLnRvb2x0aXAuc2F0ZWxsaXRlIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG59XG4iXX0= */"] });
+    } }, styles: ["[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n  height: 100%;\n  background-color: #1f1f1f;\n}\n\nsvg[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\n[_nghost-%COMP%]     .celestial-body {\n  stroke: #5a5a5a;\n  stroke-width: 1;\n  fill: #2b2b2b;\n}\n\n[_nghost-%COMP%]     .celestial-body.sun {\n  stroke: #a8a072;\n  stroke-width: 1;\n  fill: #b9a700;\n}\n\n[_nghost-%COMP%]     .tooltip {\n  fill: white;\n  cursor: pointer;\n}\n\n[_nghost-%COMP%]     .tooltip:hover {\n  fill: #5b94ff;\n}\n\n[_nghost-%COMP%]     .tooltip-path {\n  stroke: #0084ff;\n  stroke-width: 2;\n  fill: transparent;\n}\n\n[_nghost-%COMP%]     .orbit {\n  stroke: white;\n  stroke-width: 0.5;\n  shape-rendering: auto;\n  vector-effect: non-scaling-stroke;\n  fill: none;\n}\n\n[_nghost-%COMP%]     .zoom-level-solar-system .orbit.satellite {\n  display: none;\n}\n\n[_nghost-%COMP%]     .zoom-level-solar-system .tooltip.satellite {\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2NlbmUvc2NlbmUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSx5QkFBQTtBQUNKOztBQUVBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7QUFDSjs7QUFHSTtFQUNJLGVBQUE7RUFDQSxlQUFBO0VBQ0EsYUFBQTtBQUFSOztBQUdJO0VBQ0ksZUFBQTtFQUNBLGVBQUE7RUFDQSxhQUFBO0FBRFI7O0FBSUk7RUFDSSxXQUFBO0VBQ0EsZUFBQTtBQUZSOztBQUlJO0VBQ0ksYUFBQTtBQUZSOztBQUtJO0VBQ0ksZUFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtBQUhSOztBQU1JO0VBQ0ksYUFBQTtFQUNBLGlCQUFBO0VBQ0EscUJBQUE7RUFDQSxpQ0FBQTtFQUNBLFVBQUE7QUFKUjs7QUFPSTtFQUNJLGFBQUE7QUFMUjs7QUFRSTtFQUNJLGFBQUE7QUFOUiIsImZpbGUiOiJzcmMvYXBwL3NjZW5lL3NjZW5lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMzEsIDMxLCAzMSk7XG59XG5cbnN2ZyB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xufVxuXG46aG9zdCA6Om5nLWRlZXAge1xuICAgIC5jZWxlc3RpYWwtYm9keSB7XG4gICAgICAgIHN0cm9rZTogcmdiKDkwLCA5MCwgOTApO1xuICAgICAgICBzdHJva2Utd2lkdGg6IDE7XG4gICAgICAgIGZpbGw6IHJnYig0MywgNDMsIDQzKTtcbiAgICB9XG5cbiAgICAuY2VsZXN0aWFsLWJvZHkuc3VuIHtcbiAgICAgICAgc3Ryb2tlOiByZ2IoMTY4LCAxNjAsIDExNCk7XG4gICAgICAgIHN0cm9rZS13aWR0aDogMTtcbiAgICAgICAgZmlsbDogcmdiKDE4NSwgMTY3LCAwKTtcbiAgICB9XG5cbiAgICAudG9vbHRpcCB7XG4gICAgICAgIGZpbGw6IHdoaXRlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICAgIC50b29sdGlwOmhvdmVyIHtcbiAgICAgICAgZmlsbDogcmdiKDkxLCAxNDgsIDI1NSk7XG4gICAgfVxuXG4gICAgLnRvb2x0aXAtcGF0aCB7XG4gICAgICAgIHN0cm9rZTogcmdiKDAsIDEzMiwgMjU1KTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiAyO1xuICAgICAgICBmaWxsOiB0cmFuc3BhcmVudDtcbiAgICB9XG5cbiAgICAub3JiaXQge1xuICAgICAgICBzdHJva2U6IHJnYigyNTUsIDI1NSwgMjU1KTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwLjU7XG4gICAgICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcbiAgICAgICAgdmVjdG9yLWVmZmVjdDogbm9uLXNjYWxpbmctc3Ryb2tlO1xuICAgICAgICBmaWxsOiBub25lO1xuICAgIH1cblxuICAgIC56b29tLWxldmVsLXNvbGFyLXN5c3RlbSAub3JiaXQuc2F0ZWxsaXRlIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG5cbiAgICAuem9vbS1sZXZlbC1zb2xhci1zeXN0ZW0gLnRvb2x0aXAuc2F0ZWxsaXRlIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG59XG4iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SceneComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -5128,11 +5135,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _scene_scene_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scene/scene.component */ "PEKV");
 
 
 
 
-const routes = [];
+
+const routes = [
+    { path: '**', component: _scene_scene_component__WEBPACK_IMPORTED_MODULE_2__["SceneComponent"] }
+];
 class AppRoutingModule {
 }
 AppRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
