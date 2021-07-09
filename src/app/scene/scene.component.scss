@@ -1,3 +1,5 @@
+@import '~src/custom-theme';
+
 :host {
     display: block;
     width: 100%;
@@ -28,11 +30,11 @@ svg {
         cursor: pointer;
     }
     .tooltip:hover {
-        fill: rgb(91, 148, 255);
+        fill: mat-color($solar-system-primary);
     }
 
     .tooltip-path {
-        stroke: rgb(0, 132, 255);
+        stroke: mat-color($solar-system-primary);
         stroke-width: 2;
         fill: transparent;
     }
