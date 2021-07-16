@@ -184,10 +184,11 @@ var ZoomLevel;
     ZoomLevel["SOLAR_SYSTEM"] = "zoom-level-solar-system";
     ZoomLevel["PLANET"] = "zoom-level-planet";
 })(ZoomLevel || (ZoomLevel = {}));
-const SCALE_PLANET = 0.0007;
+const SCALE_PLANET = 3;
 const TOOLTIP_DISTANCE = { x: 20, y: 20 };
 const TOOLTIP_TRANSITION_MS = 50;
-const TOOLTIP_PATH_MARGIN = 5;
+const TOOLTIP_PATH_MARGIN = 4;
+const ZOOM_TRANSITION_MS = 500;
 class SceneComponent {
     constructor(sceneService) {
         this.sceneService = sceneService;
@@ -207,8 +208,7 @@ class SceneComponent {
         this.initZoom();
     }
     initZoom() {
-        const d3Zoom = Object(d3_zoom__WEBPACK_IMPORTED_MODULE_3__["zoom"])()
-            .on('zoom', (e) => {
+        this.d3Zoom = Object(d3_zoom__WEBPACK_IMPORTED_MODULE_3__["zoom"])().on('zoom', (e) => {
             this.scale = e.transform.k;
             this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
             // tslint:disable-next-line:forin
@@ -218,11 +218,11 @@ class SceneComponent {
             this.groupZoomableSelection.attr('transform', e.transform);
             this.initTooltips();
         });
-        this.svgSelection.call(d3Zoom);
+        this.svgSelection.call(this.d3Zoom);
         const defaultZoom = d3_zoom__WEBPACK_IMPORTED_MODULE_3__["zoomIdentity"]
             .translate(this.center.x, this.center.y)
             .scale(Math.min(this.width, this.height) / (_scene_service__WEBPACK_IMPORTED_MODULE_4__["SOLAR_SYSTEM_SIZE"] / _scene_service__WEBPACK_IMPORTED_MODULE_4__["KM_TO_PX"]));
-        this.svgSelection.call(d3Zoom.transform, defaultZoom);
+        this.svgSelection.call(this.d3Zoom.transform, defaultZoom);
     }
     initCelestialBodies() {
         this.groupZoomableSelection.selectAll('.celestial-body')
@@ -281,6 +281,15 @@ class SceneComponent {
             tooltipPath.transition()
                 .duration(TOOLTIP_TRANSITION_MS)
                 .style('opacity', 0);
+        })
+            .on('click', (event, d) => {
+            const bbox = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])('#' + d.body.id).node().getBBox();
+            const zoomTo = d3_zoom__WEBPACK_IMPORTED_MODULE_3__["zoomIdentity"]
+                .translate(this.center.x + ((-bbox.x - bbox.width / 2) * SCALE_PLANET), this.center.y + ((-bbox.y - bbox.height / 2) * SCALE_PLANET))
+                .scale(SCALE_PLANET);
+            this.svgSelection.transition()
+                .duration(ZOOM_TRANSITION_MS)
+                .call(this.d3Zoom.transform, zoomTo);
         }), update => update.attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
             .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y));
     }
