@@ -13,10 +13,11 @@ enum ZoomLevel {
   PLANET = 'zoom-level-planet'
 }
 
-const SCALE_PLANET = 0.0007;
+const SCALE_PLANET = 3;
 const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 };
 const TOOLTIP_TRANSITION_MS = 50;
-const TOOLTIP_PATH_MARGIN = 5;
+const TOOLTIP_PATH_MARGIN = 4;
+const ZOOM_TRANSITION_MS = 500;
 
 @Component({
   selector: 'app-scene',
@@ -28,6 +29,7 @@ export class SceneComponent implements AfterViewInit {
   private svgSelection: any;
   private groupZoomableSelection: any;
   private groupStaticSelection: any;
+  private d3Zoom: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
   private center: Point = {
@@ -52,24 +54,23 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private initZoom(): void {
-    const d3Zoom = zoom()
-      .on('zoom', (e) => {
-        this.scale = e.transform.k;
-        this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
+    this.d3Zoom = zoom().on('zoom', (e) => {
+      this.scale = e.transform.k;
+      this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
 
-        // tslint:disable-next-line:forin
-        for (const level in ZoomLevel) {
-          this.svgSelection.classed(ZoomLevel[level], this.zoomLevel === ZoomLevel[level]);
-        }
-        this.groupZoomableSelection.attr('transform', e.transform);
-        this.initTooltips();
-      });
-    this.svgSelection.call(d3Zoom);
+      // tslint:disable-next-line:forin
+      for (const level in ZoomLevel) {
+        this.svgSelection.classed(ZoomLevel[ level ], this.zoomLevel === ZoomLevel[ level ]);
+      }
+      this.groupZoomableSelection.attr('transform', e.transform);
+      this.initTooltips();
+    });
+    this.svgSelection.call(this.d3Zoom);
 
     const defaultZoom = zoomIdentity
                           .translate(this.center.x, this.center.y)
                           .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
-    this.svgSelection.call(d3Zoom.transform, defaultZoom);
+    this.svgSelection.call(this.d3Zoom.transform, defaultZoom);
   }
 
   private initCelestialBodies(): void {
@@ -139,6 +140,16 @@ export class SceneComponent implements AfterViewInit {
                                               tooltipPath.transition()
                                                           .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 0);
+                                            })
+                                            .on('click', (event, d) => {
+                                              const bbox = (select('#' + d.body.id).node() as any).getBBox();
+                                              const zoomTo = zoomIdentity
+                                                              .translate(this.center.x + ((-bbox.x - bbox.width / 2) * SCALE_PLANET), this.center.y + ((-bbox.y - bbox.height / 2) * SCALE_PLANET))
+                                                              .scale(SCALE_PLANET);
+                                              this.svgSelection.transition()
+                                                                .duration(ZOOM_TRANSITION_MS)
+                                                                .call(this.d3Zoom.transform, zoomTo);
+
                                             }),
                               update => update.attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
                                               .attr('y', (d) =>  d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
