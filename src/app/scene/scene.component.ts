@@ -1,19 +1,23 @@
-import { Component, AfterViewInit } from '@angular/core';
-import {OrbitPoint, Point} from './scene.model';
-import { select } from 'd3-selection';
-import { line, curveCardinalClosed } from 'd3-shape';
-import { zoom, zoomIdentity } from 'd3-zoom';
+import {AfterViewInit, Component} from '@angular/core';
+import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
+import {select} from 'd3-selection';
+import {curveCardinalClosed, line} from 'd3-shape';
+import {zoom, zoomIdentity} from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
-import { SOLAR_SYSTEM} from './data/SolarSystem.data';
+import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
 const NB_POINTS_ORBIT = 90;
 
 enum ZoomLevel {
   SOLAR_SYSTEM = 'zoom-level-solar-system',
-  PLANET = 'zoom-level-planet'
+  PLANET = 'zoom-level-planet',
+  SMALL_BODY = 'zoom-level-small-body'
 }
 
-const SCALE_PLANET = 3;
+const SCALE_STAR = 0.5;
+const SCALE_PLANET = 3.0;
+const SCALE_SMALL_BODY = 6.0;
+
 const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 };
 const TOOLTIP_TRANSITION_MS = 50;
 const TOOLTIP_PATH_MARGIN = 4;
@@ -32,12 +36,15 @@ export class SceneComponent implements AfterViewInit {
   private d3Zoom: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
-  private center: Point = {
-    x: window.innerWidth / 2, // px
-    y: window.innerHeight / 2 // px
-  };
   private scale: number;
   private zoomLevel: ZoomLevel;
+
+  private get center(): Point {
+    return {
+      x: window.innerWidth / 2, // px
+      y: window.innerHeight / 2 // px
+    };
+  }
 
   constructor(
     private sceneService: SceneService
@@ -56,7 +63,9 @@ export class SceneComponent implements AfterViewInit {
   private initZoom(): void {
     this.d3Zoom = zoom().on('zoom', (e) => {
       this.scale = e.transform.k;
-      this.zoomLevel = (this.scale >= SCALE_PLANET) ? ZoomLevel.PLANET : ZoomLevel.SOLAR_SYSTEM;
+      this.zoomLevel = (this.scale >= SCALE_SMALL_BODY ? ZoomLevel.SMALL_BODY :
+                        this.scale >= SCALE_PLANET ? ZoomLevel.PLANET :
+                          ZoomLevel.SOLAR_SYSTEM);
 
       // tslint:disable-next-line:forin
       for (const level in ZoomLevel) {
@@ -143,9 +152,10 @@ export class SceneComponent implements AfterViewInit {
                                             })
                                             .on('click', (event, d) => {
                                               const bbox = (select('#' + d.body.id).node() as any).getBBox();
+                                              const scale = this.getScale(d.body);
                                               const zoomTo = zoomIdentity
-                                                              .translate(this.center.x + ((-bbox.x - bbox.width / 2) * SCALE_PLANET), this.center.y + ((-bbox.y - bbox.height / 2) * SCALE_PLANET))
-                                                              .scale(SCALE_PLANET);
+                                                              .translate(this.center.x + ((-bbox.x - bbox.width / 2) * scale), this.center.y + ((-bbox.y - bbox.height / 2) * scale))
+                                                              .scale(scale);
                                               this.svgSelection.transition()
                                                                 .duration(ZOOM_TRANSITION_MS)
                                                                 .call(this.d3Zoom.transform, zoomTo);
@@ -154,6 +164,17 @@ export class SceneComponent implements AfterViewInit {
                               update => update.attr('x', (d) => d.boundingBox.right + TOOLTIP_DISTANCE.x)
                                               .attr('y', (d) =>  d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                             );
+  }
+
+  private getScale(body: CelestialBody): number {
+    switch (body.type) {
+      case CELESTIAL_BODY_TYPE.STAR:
+        return SCALE_STAR;
+      case CELESTIAL_BODY_TYPE.SATELLITE:
+        return SCALE_SMALL_BODY;
+      default:
+        return SCALE_PLANET;
+    }
   }
 
 }
