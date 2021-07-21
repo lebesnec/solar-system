@@ -1,61 +1,62 @@
 @import '~src/custom-theme';
 
 :host {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(31, 31, 31);
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(31, 31, 31);
 }
 
 svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 :host ::ng-deep {
-    .celestial-body {
-        stroke: rgb(90, 90, 90);
-        stroke-width: 1;
-        fill: rgb(43, 43, 43);
-    }
+  .celestial-body {
+    stroke: rgb(90, 90, 90);
+    stroke-width: 1;
+    fill: rgb(43, 43, 43);
+  }
 
-    .celestial-body.sun {
-        stroke: rgb(168, 160, 114);
-        stroke-width: 1;
-        fill: rgb(185, 167, 0);
-    }
+  .celestial-body.sun {
+    stroke: rgb(168, 160, 114);
+    stroke-width: 1;
+    fill: rgb(185, 167, 0);
+  }
 
-    .tooltip {
-        fill: white;
-        cursor: pointer;
-    }
-    .tooltip:hover {
-        fill: mat-color($solar-system-primary);
-    }
+  .tooltip {
+    fill: white;
+    cursor: pointer;
+  }
 
-    .tooltip-path {
-        stroke: mat-color($solar-system-primary);
-        stroke-width: 1;
-        fill: transparent;
-    }
+  .tooltip:hover {
+    fill: mat-color($solar-system-primary);
+  }
 
-    .orbit {
-        stroke: rgb(255, 255, 255);
-        stroke-width: 0.5;
-        shape-rendering: auto;
-        vector-effect: non-scaling-stroke;
-        fill: none;
-    }
+  .tooltip-path {
+    stroke: mat-color($solar-system-primary);
+    stroke-width: 1;
+    fill: transparent;
+  }
 
-    .zoom-level-solar-system .orbit.satellite {
-        display: none;
-    }
+  .orbit {
+    stroke: rgb(255, 255, 255);
+    stroke-width: 0.5;
+    shape-rendering: auto;
+    vector-effect: non-scaling-stroke;
+    fill: none;
+  }
 
-    .zoom-level-solar-system .tooltip.satellite {
-        display: none;
-    }
+  .zoom-level-solar-system .orbit.satellite {
+    display: none;
+  }
 
-    .zoom-level-small-body .orbit.planet, .zoom-level-small-body .orbit.dwarf_planet {
-        display: none;
-    }
+  .zoom-level-solar-system .tooltip.satellite {
+    display: none;
+  }
+
+  .zoom-level-small-body .orbit.planet, .zoom-level-small-body .orbit.dwarf_planet {
+    display: none;
+  }
 }
