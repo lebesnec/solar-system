@@ -18,10 +18,11 @@ const SCALE_STAR = 0.5;
 const SCALE_PLANET = 3.0;
 const SCALE_SMALL_BODY = 6.0;
 
-const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 };
-const TOOLTIP_TRANSITION_MS = 50;
-const TOOLTIP_PATH_MARGIN = 4;
-const ZOOM_TRANSITION_MS = 500;
+const MIN_BODY_RADIUS = 4; // km
+const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 }; // px
+const TOOLTIP_TRANSITION_MS = 50; // ms
+const TOOLTIP_PATH_MARGIN = 4; // px
+const ZOOM_TRANSITION_MS = 500; // ms
 
 @Component({
   selector: 'app-scene',
@@ -89,7 +90,8 @@ export class SceneComponent implements AfterViewInit {
                                   enter => enter.append('circle')
                                                 .attr('id', (body) => body.id)
                                                 .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-                                                .attr('r', (body) => body.radius / KM_TO_PX)
+                                                // nothing will show below a MIN_BODY_RADIUS radius :
+                                                .attr('r', (body) => Math.max(body.radius, MIN_BODY_RADIUS) / KM_TO_PX)
                                                 .attr('cx', (body) => body.position.x)
                                                 .attr('cy', (body) => body.position.y)
                                 );

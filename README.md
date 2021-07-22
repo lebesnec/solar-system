@@ -6,9 +6,25 @@
 ## sources
 
 wikipedia
+
 https://ssd.jpl.nasa.gov/?sat_elem
+
 https://sites.google.com/carnegiescience.edu/sheppard/moons/jupitermoons
 
 ## TODO
+
 rings
+
 rovers & probe
+
+stars field
+
+stroke width body
+
+tooltip not overriding
+
+orbit matching body position
+
+remove tooltip on clic
+
+MIN_BODY_RADIUS 
