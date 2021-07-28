@@ -1,4 +1,10 @@
-<mat-toolbar>Solar system</mat-toolbar>
+<mat-toolbar>
+  <span>Solar system</span>
+  <mat-form-field appearance="fill" class="search-field">
+    <mat-icon aria-hidden="false" matPrefix>search</mat-icon>
+    <input matInput placeholder="Search Jupiter" autocomplete="off">
+  </mat-form-field>
+</mat-toolbar>
 
 <div class="content">
   <router-outlet></router-outlet>
