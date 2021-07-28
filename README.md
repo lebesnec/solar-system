@@ -22,5 +22,3 @@ stars field
 tooltip not overriding
 
 orbit matching body position
-
-remove tooltip on clic

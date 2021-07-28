@@ -73,7 +73,7 @@ export class SceneComponent implements AfterViewInit {
         this.svgSelection.classed(ZoomLevel[ level ], this.zoomLevel === ZoomLevel[ level ]);
       }
       this.groupZoomableSelection.attr('transform', e.transform);
-      this.initTooltips();
+      this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
 
@@ -117,20 +117,20 @@ export class SceneComponent implements AfterViewInit {
                                );
   }
 
-  private initTooltips(): void {
-    const tooltipsData = SOLAR_SYSTEM.map((body) => {
+  private initLabels(): void {
+    const labelsData = SOLAR_SYSTEM.map((body) => {
       return {
         body,
         boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect() // TODO store node
       };
     });
 
-    const tooltipPath = this.groupStaticSelection.append('path')
+    const labelsPath = this.groupStaticSelection.append('path')
                                                   .attr('class', 'tooltip-path')
                                                   .style('opacity', 0);
 
     this.groupStaticSelection.selectAll('.tooltip')
-                             .data(tooltipsData, (d) => d.body.id)
+                             .data(labelsData, (d) => d.body.id)
                              .join(
                               enter => enter.append('text')
                                             .attr('id', (d) => 'tooltiptext_' + d.body.id)
@@ -140,7 +140,7 @@ export class SceneComponent implements AfterViewInit {
                                             .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                                             .on('mouseover', (event, d) => {
                                               const textBoundingBox = (select('#' + 'tooltiptext_' + d.body.id).node() as any).getBoundingClientRect();
-                                              tooltipPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                              labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x + textBoundingBox.width + TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}`)
                                                           .transition()
@@ -148,11 +148,12 @@ export class SceneComponent implements AfterViewInit {
                                                           .style('opacity', 1);
                                             })
                                             .on('mouseout', () => {
-                                              tooltipPath.transition()
+                                              labelsPath.transition()
                                                           .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 0);
                                             })
                                             .on('click', (event, d) => {
+                                              labelsPath.style('opacity', 0);
                                               const bbox = (select('#' + d.body.id).node() as any).getBBox();
                                               const scale = this.getScale(d.body);
                                               const zoomTo = zoomIdentity
