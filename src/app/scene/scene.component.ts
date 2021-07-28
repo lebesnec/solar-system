@@ -152,8 +152,10 @@ export class SceneComponent implements AfterViewInit {
                                                           .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 0);
                                             })
-                                            .on('click', (event, d) => {
+                                            .on('mousedown', () => {
                                               labelsPath.style('opacity', 0);
+                                            })
+                                            .on('click', (event, d) => {
                                               const bbox = (select('#' + d.body.id).node() as any).getBBox();
                                               const scale = this.getScale(d.body);
                                               const zoomTo = zoomIdentity
