@@ -19,12 +19,8 @@ rovers & probe
 
 stars field
 
-stroke width body
-
 tooltip not overriding
 
 orbit matching body position
 
 remove tooltip on clic
-
-MIN_BODY_RADIUS 

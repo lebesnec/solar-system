@@ -18,7 +18,7 @@ const SCALE_STAR = 0.5;
 const SCALE_PLANET = 3.0;
 const SCALE_SMALL_BODY = 6.0;
 
-const MIN_BODY_RADIUS = 4; // km
+const MIN_BODY_RADIUS = 50; // km
 const TOOLTIP_DISTANCE: Point = { x: 20, y: 20 }; // px
 const TOOLTIP_TRANSITION_MS = 50; // ms
 const TOOLTIP_PATH_MARGIN = 4; // px
@@ -56,8 +56,8 @@ export class SceneComponent implements AfterViewInit {
     this.groupZoomableSelection = this.svgSelection.append('g');
     this.groupStaticSelection = this.svgSelection.append('g');
 
-    this.initCelestialBodies();
     this.initOrbits();
+    this.initCelestialBodies();
     this.initZoom();
   }
 

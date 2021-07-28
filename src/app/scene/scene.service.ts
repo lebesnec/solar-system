@@ -10,7 +10,7 @@ import {SOLAR_SYSTEM} from './data/SolarSystem.data';
  * This does NOT take into account the scale applied by the current zoom!
  * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
  */
-export const KM_TO_PX = 1e3;
+export const KM_TO_PX = 1e5;
 /**
  * degrees to radian
  */
