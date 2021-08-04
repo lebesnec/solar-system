@@ -35,6 +35,7 @@ export class SceneComponent implements AfterViewInit {
   private groupZoomableSelection: any;
   private groupStaticSelection: any;
   private d3Zoom: any;
+  private labelsPath: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
   private scale: number;
@@ -55,6 +56,10 @@ export class SceneComponent implements AfterViewInit {
     this.svgSelection = select('svg');
     this.groupZoomableSelection = this.svgSelection.append('g');
     this.groupStaticSelection = this.svgSelection.append('g');
+
+    this.labelsPath = this.groupStaticSelection.append('path')
+                                                  .attr('class', 'tooltip-path')
+                                                  .style('opacity', 0);
 
     this.initOrbits();
     this.initCelestialBodies();
@@ -125,9 +130,7 @@ export class SceneComponent implements AfterViewInit {
       };
     });
 
-    const labelsPath = this.groupStaticSelection.append('path')
-                                                  .attr('class', 'tooltip-path')
-                                                  .style('opacity', 0);
+    this.labelsPath.style('opacity', 0);
 
     this.groupStaticSelection.selectAll('.tooltip')
                              .data(labelsData, (d) => d.body.id)
@@ -140,7 +143,7 @@ export class SceneComponent implements AfterViewInit {
                                             .attr('y', (d) => d.boundingBox.bottom + TOOLTIP_DISTANCE.y)
                                             .on('mouseover', (event, d) => {
                                               const textBoundingBox = (select('#' + 'tooltiptext_' + d.body.id).node() as any).getBoundingClientRect();
-                                              labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                              this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x - TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}
                                                                      L ${d.boundingBox.right + TOOLTIP_DISTANCE.x + textBoundingBox.width + TOOLTIP_PATH_MARGIN} ${d.boundingBox.bottom + TOOLTIP_DISTANCE.y + TOOLTIP_PATH_MARGIN}`)
                                                           .transition()
@@ -148,12 +151,12 @@ export class SceneComponent implements AfterViewInit {
                                                           .style('opacity', 1);
                                             })
                                             .on('mouseout', () => {
-                                              labelsPath.transition()
+                                              this.labelsPath.transition()
                                                           .duration(TOOLTIP_TRANSITION_MS)
                                                           .style('opacity', 0);
                                             })
                                             .on('mousedown', () => {
-                                              labelsPath.style('opacity', 0);
+                                              this.labelsPath.style('opacity', 0);
                                             })
                                             .on('click', (event, d) => {
                                               const bbox = (select('#' + d.body.id).node() as any).getBBox();
