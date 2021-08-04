@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SceneComponent } from './scene/scene.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     LayoutModule,
     MatToolbarModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,10 +20,9 @@ mat-toolbar {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    mat-icon {
-      padding-right: 10px;
-      font-size: 25px;
-      color: rgba(0, 0, 0, 0.5);
+    .material-icons {
+      vertical-align: bottom;
+      color: rgba(0, 0, 0, 0.4);
     }
   }
 }
