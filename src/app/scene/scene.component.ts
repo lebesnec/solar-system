@@ -142,7 +142,7 @@ export class SceneComponent implements AfterViewInit {
                                             .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE.x)
                                             .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE.y)
                                             .on('mouseover', (event, d) => {
-                                              const textBoundingBox = (select('#' + 'labeltext_' + d.body.id).node() as any).getBoundingClientRect();
+                                              const textBoundingBox = event.currentTarget.getBoundingClientRect();
                                               this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
                                                                          L ${d.boundingBox.right + LABEL_DISTANCE.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}
                                                                          L ${d.boundingBox.right + LABEL_DISTANCE.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}`)
@@ -172,7 +172,7 @@ export class SceneComponent implements AfterViewInit {
                               update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE.x)
                                               .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE.y)
                             );
-    //this.arrangeLabels();
+    this.arrangeLabels();
   }
 
   private arrangeLabels(): void {
@@ -182,12 +182,12 @@ export class SceneComponent implements AfterViewInit {
     while (move > 0) {
       move = 0;
 
-      labels.each(function(): void {
-        const label1 = this;
+      labels.each((d1, i1, nodes1) => {
+        const label1 = nodes1[i1];
         let bb1 = label1.getBoundingClientRect();
 
-        labels.each(function(): void {
-          const label2 = this;
+        labels.each((d2, i2, nodes2) => {
+          const label2 = nodes2[i2];
           if (label1 !== label2) {
             const bb2 = label2.getBoundingClientRect();
             if ((Math.abs(bb1.left - bb2.left) * 2 < (bb1.width + bb2.width)) && (Math.abs(bb1.top - bb2.top) * 2 < (bb1.height + bb2.height))) {
