@@ -203,7 +203,8 @@ const SCALE_STAR = 0.5;
 const SCALE_PLANET = 3.0;
 const SCALE_SMALL_BODY = 6.0;
 const MIN_BODY_RADIUS = 50; // km
-const LABEL_DISTANCE = { x: 20, y: 20 }; // px
+const LABEL_DISTANCE_TO_BODY = { x: 20, y: 20 }; // px
+const LABEL_SPACING = 5; // px
 const LABEL_TRANSITION_MS = 50; // ms
 const LABEL_PATH_MARGIN = 4; // px
 const ZOOM_TRANSITION_MS = 500; // ms
@@ -290,13 +291,13 @@ class SceneComponent {
             .attr('id', (d) => 'labeltext_' + d.body.id)
             .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
             .text((d) => d.body.id)
-            .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE.x)
-            .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE.y)
+            .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+            .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
             .on('mouseover', (event, d) => {
-            const textBoundingBox = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])('#' + 'labeltext_' + d.body.id).node().getBoundingClientRect();
+            const textBoundingBox = event.currentTarget.getBoundingClientRect();
             this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                         L ${d.boundingBox.right + LABEL_DISTANCE.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}
-                                                                         L ${d.boundingBox.right + LABEL_DISTANCE.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}`)
+                                                                         L ${d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y + LABEL_PATH_MARGIN}
+                                                                         L ${d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y + LABEL_PATH_MARGIN}`)
                 .transition()
                 .duration(LABEL_TRANSITION_MS)
                 .style('opacity', 1);
@@ -318,26 +319,36 @@ class SceneComponent {
             this.svgSelection.transition()
                 .duration(ZOOM_TRANSITION_MS)
                 .call(this.d3Zoom.transform, zoomTo);
-        }), update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE.x)
-            .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE.y));
-        //this.arrangeLabels();
+        }), update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+            .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y));
+        this.arrangeLabels();
     }
     arrangeLabels() {
         const labels = this.groupStaticSelection.selectAll('.label');
         let move = 1;
         while (move > 0) {
             move = 0;
-            labels.each(function () {
-                const label1 = this;
+            labels.each((d1, i1, nodes1) => {
+                const label1 = nodes1[i1];
                 let bb1 = label1.getBoundingClientRect();
-                labels.each(function () {
-                    const label2 = this;
+                labels.each((d2, i2, nodes2) => {
+                    const label2 = nodes2[i2];
                     if (label1 !== label2) {
                         const bb2 = label2.getBoundingClientRect();
-                        if ((Math.abs(bb1.left - bb2.left) * 2 < (bb1.width + bb2.width)) && (Math.abs(bb1.top - bb2.top) * 2 < (bb1.height + bb2.height))) {
+                        // if (d1.body.id === 'earth' && d2.body.id === 'mars') {
+                        //   console.log(bb1, bb2);
+                        //   // console.log(bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING);
+                        //   // console.log(bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING);
+                        //   console.log(bb1.top, bb2.bottom, bb1.top - LABEL_SPACING, bb2.bottom + LABEL_SPACING, bb1.top - LABEL_SPACING > bb2.bottom + LABEL_SPACING);
+                        //   // console.log(bb1.bottom - LABEL_SPACING < bb2.top + LABEL_SPACING);
+                        // }
+                        if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
+                            bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
+                            bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
+                            bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
                             // overlap, move labels
-                            const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.01;
-                            const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.02;
+                            const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.05;
+                            const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.05;
                             move += Math.abs(dx) + Math.abs(dy);
                             Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label1).attr('x', +Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label1).attr('x') + dx).attr('y', +Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label1).attr('y') + dy);
                             Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label2).attr('x', +Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label2).attr('x') - dx).attr('y', +Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(label2).attr('y') - dy);
