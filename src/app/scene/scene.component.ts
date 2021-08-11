@@ -144,8 +144,8 @@ export class SceneComponent implements AfterViewInit {
                                             .on('mouseover', (event, d) => {
                                               const textBoundingBox = (select('#' + 'labeltext_' + d.body.id).node() as any).getBoundingClientRect();
                                               this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                     L ${d.boundingBox.right + LABEL_DISTANCE.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}
-                                                                     L ${d.boundingBox.right + LABEL_DISTANCE.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}`)
+                                                                         L ${d.boundingBox.right + LABEL_DISTANCE.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}
+                                                                         L ${d.boundingBox.right + LABEL_DISTANCE.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE.y + LABEL_PATH_MARGIN}`)
                                                           .transition()
                                                           .duration(LABEL_TRANSITION_MS)
                                                           .style('opacity', 1);
@@ -172,6 +172,38 @@ export class SceneComponent implements AfterViewInit {
                               update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE.x)
                                               .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE.y)
                             );
+    //this.arrangeLabels();
+  }
+
+  private arrangeLabels(): void {
+    const labels = this.groupStaticSelection.selectAll('.label');
+    let move = 1;
+
+    while (move > 0) {
+      move = 0;
+
+      labels.each(function(): void {
+        const label1 = this;
+        let bb1 = label1.getBoundingClientRect();
+
+        labels.each(function(): void {
+          const label2 = this;
+          if (label1 !== label2) {
+            const bb2 = label2.getBoundingClientRect();
+            if ((Math.abs(bb1.left - bb2.left) * 2 < (bb1.width + bb2.width)) && (Math.abs(bb1.top - bb2.top) * 2 < (bb1.height + bb2.height))) {
+              // overlap, move labels
+              const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.01;
+              const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.02;
+              move += Math.abs(dx) + Math.abs(dy);
+
+              select(label1).attr('x', +select(label1).attr('x') + dx).attr('y', +select(label1).attr('y') + dy);
+              select(label2).attr('x', +select(label2).attr('x') - dx).attr('y', +select(label2).attr('y') - dy);
+              bb1 = label1.getBoundingClientRect();
+            }
+          }
+        });
+      });
+    }
   }
 
   private getScale(body: CelestialBody): number {
