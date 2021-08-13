@@ -54,15 +54,8 @@ svg {
     fill: none;
   }
 
-  .zoom-level-solar-system .orbit.satellite {
+  .hidden {
     display: none;
   }
 
-  .zoom-level-solar-system .label.satellite {
-    display: none;
-  }
-
-  .zoom-level-small-body .orbit.planet, .zoom-level-small-body .orbit.dwarf_planet {
-    display: none;
-  }
 }
