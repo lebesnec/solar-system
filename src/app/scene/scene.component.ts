@@ -137,8 +137,8 @@ export class SceneComponent implements AfterViewInit {
                                             .on('mouseover', (event, d) => {
                                               const textBoundingBox = event.currentTarget.getBoundingClientRect();
                                               this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                         L ${d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x - LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y + LABEL_PATH_MARGIN}
-                                                                         L ${d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y + LABEL_PATH_MARGIN}`)
+                                                                         L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
+                                                                         L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
                                                           .transition()
                                                           .duration(LABEL_TRANSITION_MS)
                                                           .style('opacity', 1);
