@@ -7,9 +7,14 @@
 .content {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
+$toolbar-height: 64px;
+
 mat-toolbar {
+  z-index: 1;
+  height: $toolbar-height;
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, .3) !important;
   position: fixed;
@@ -25,5 +30,17 @@ mat-toolbar {
       padding-right: 10px;
       color: rgba(0, 0, 0, 0.5);
     }
+    button {
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
+}
+
+app-search-panel {
+  width: 100%;
+  height: calc(100% - #{$toolbar-height});
+  z-index: 2;
+  position: absolute;
+  top: $toolbar-height;
+  left: 0;
 }

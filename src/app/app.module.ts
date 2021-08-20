@@ -10,12 +10,14 @@ import { SceneComponent } from './scene/scene.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SearchPanelComponent } from './shell/search-panel/search-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShellComponent,
-    SceneComponent
+    SceneComponent,
+    SearchPanelComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ShellComponent {
 
+  public showSearchPanel = false;
+
   constructor() {  }
 
 }
