@@ -36,6 +36,10 @@ mat-toolbar {
   }
 }
 
+:host ::ng-deep .search-field .mat-form-field-flex {
+  padding-right: 5px;
+}
+
 app-search-panel {
   width: 100%;
   height: calc(100% - #{$toolbar-height});
