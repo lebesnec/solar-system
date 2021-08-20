@@ -10,6 +10,8 @@ import { SceneComponent } from './scene/scene.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { SearchPanelComponent } from './shell/search-panel/search-panel.component';
 
 @NgModule({
@@ -27,7 +29,9 @@ import { SearchPanelComponent } from './shell/search-panel/search-panel.componen
     MatToolbarModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

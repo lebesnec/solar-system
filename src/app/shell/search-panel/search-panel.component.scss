@@ -3,3 +3,13 @@
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, .3) !important;
 }
+
+mat-divider {
+  padding-bottom: 10px;
+}
+
+mat-expansion-panel {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

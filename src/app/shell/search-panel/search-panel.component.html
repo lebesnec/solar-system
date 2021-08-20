@@ -1,1 +1,30 @@
-<p>search-panel works!</p>
+<mat-divider></mat-divider>
+
+<mat-accordion multi>
+    <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+            <mat-panel-title>The sun</mat-panel-title>
+            <mat-panel-description>TODO</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        2
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngFor="let planet of SUN.satellites">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ planet.id }}</mat-panel-title>
+            <mat-panel-description>TODO</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        1
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Dwarf planets</mat-panel-title>
+            <mat-panel-description>TODO</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        2
+    </mat-expansion-panel>
+</mat-accordion>

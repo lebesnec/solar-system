@@ -17,9 +17,18 @@ mat-toolbar {
   height: $toolbar-height;
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, .3) !important;
+  padding: 0;
   position: fixed;
   top: 0;
   left: 0;
+
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: $toolbar-height;
+  }
 
   .search-field {
     margin-left: auto;
@@ -43,7 +52,8 @@ mat-toolbar {
 app-search-panel {
   width: 100%;
   height: calc(100% - #{$toolbar-height});
-  z-index: 2;
+  overflow-y: auto;
+  z-index: 3;
   position: absolute;
   top: $toolbar-height;
   left: 0;
