@@ -26,6 +26,7 @@ export enum CELESTIAL_BODY_TYPE {
  */
 export interface CelestialBody {
     id: string;
+    symbol?: string;
     position: Point;
     speed: number;
     mass: number;

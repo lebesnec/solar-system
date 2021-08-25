@@ -2,6 +2,7 @@ import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 export const MERCURY: CelestialBody = {
   id: 'mercury',
+  symbol: '☿',
   position: {
     x: 0,
     y: 0

@@ -92,6 +92,7 @@ export const HYDRA: CelestialBody = {
 
 export const PLUTO: CelestialBody = {
   id: 'pluto',
+  symbol: '♇',
   position: {
     x: 0,
     y: 0
@@ -110,6 +111,7 @@ export const PLUTO: CelestialBody = {
 
 export const CERES: CelestialBody = {
   id: 'ceres',
+  symbol: '⚳',
   position: {
     x: 0,
     y: 0

@@ -1424,6 +1424,7 @@ export const SINOPE: CelestialBody = {
 
 export const JUPITER: CelestialBody = {
   id: 'jupiter',
+  symbol: '♃',
   position: {
     x: 0,
     y: 0

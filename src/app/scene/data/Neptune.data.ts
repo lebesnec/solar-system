@@ -254,6 +254,7 @@ export const NESO: CelestialBody = {
 
 export const NEPTUNE: CelestialBody = {
   id: 'neptune',
+  symbol: '♆',
   position: {
     x: 0,
     y: 0

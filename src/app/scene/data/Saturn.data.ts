@@ -1478,6 +1478,7 @@ export const S_2004_S_26: CelestialBody = {
 
 export const SATURN: CelestialBody = {
   id: 'saturn',
+  symbol: '♄',
   position: {
     x: 0,
     y: 0

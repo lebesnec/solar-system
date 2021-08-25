@@ -12,4 +12,30 @@ mat-expansion-panel {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  background: transparent;
+  color: white;
+
+  mat-panel-title {
+    color: white;
+  }
+  mat-panel-description {
+    color: #c5c5c5;
+    display: block;
+    text-align: end;
+  }
 }
+
+:host ::ng-deep .mat-expansion-indicator::after {
+  color: white;
+}
+
+.celestial-body {
+  border: 3px solid #b9b9b9;
+  cursor: pointer;
+  font-size: 40px;
+}
+.celestial-body:hover {
+  border: 3px solid white;
+  background: hsla(0, 0%, 100%, .3);
+}
+

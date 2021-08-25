@@ -488,6 +488,7 @@ export const FERDINAND: CelestialBody = {
 
 export const URANUS: CelestialBody = {
   id: 'uranus',
+  symbol: '⛢',
   position: {
     x: 0,
     y: 0

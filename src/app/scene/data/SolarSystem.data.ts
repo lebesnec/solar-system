@@ -11,6 +11,7 @@ import { DWARF_PLANETS } from './DwarfPlanets.data';
 
 export const SUN: CelestialBody = {
   id: 'sun',
+  symbol: '☉',
   position: {
     x: 0,
     y: 0

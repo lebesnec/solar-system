@@ -2,6 +2,7 @@ import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 export const VENUS: CelestialBody = {
   id: 'venus',
+  symbol: '♀',
   position: {
     x: 0,
     y: 0
