@@ -170,38 +170,61 @@ export class SceneComponent implements AfterViewInit {
 
   private arrangeLabels(): void {
     const labels = this.groupStaticSelection.selectAll('.label:not(.hidden)');
-    let move = 1;
+    // let move = 1;
+    //
+    // while (move > 0) {
+    //   move = 0;
+    //
+    //   labels.each((d1, i1, nodes1) => {
+    //     const label1 = nodes1[i1];
+    //     let bb1 = label1.getBoundingClientRect();
+    //
+    //     labels.each((d2, i2, nodes2) => {
+    //       const label2 = nodes2[i2];
+    //       if (label1 !== label2) {
+    //         const bb2 = label2.getBoundingClientRect();
+    //         if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
+    //             bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
+    //             bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
+    //             bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
+    //           // overlap, move labels
+    //           const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.2;
+    //           const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.2;
+    //           move += Math.abs(dx) + Math.abs(dy);
+    //
+    //           const selectionLabel1 = select(label1);
+    //           selectionLabel1.attr('x', +selectionLabel1.attr('x') + dx).attr('y', +selectionLabel1.attr('y') + dy);
+    //           const selectionLabel2 = select(label2);
+    //           selectionLabel2.attr('x', +selectionLabel2.attr('x') - dx).attr('y', +selectionLabel2.attr('y') - dy);
+    //           bb1 = label1.getBoundingClientRect();
+    //         }
+    //       }
+    //     });
+    //   });
+    // }
 
-    while (move > 0) {
-      move = 0;
+    labels.each((d1, i1, nodes1) => {
+      const label1 = nodes1[i1];
+      const bb1 = label1.getBoundingClientRect();
 
-      labels.each((d1, i1, nodes1) => {
-        const label1 = nodes1[i1];
-        let bb1 = label1.getBoundingClientRect();
-
-        labels.each((d2, i2, nodes2) => {
-          const label2 = nodes2[i2];
-          if (label1 !== label2) {
-            const bb2 = label2.getBoundingClientRect();
-            if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
-                bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
-                bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
-                bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
-              // overlap, move labels
-              const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.2;
-              const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.2;
-              move += Math.abs(dx) + Math.abs(dy);
-
-              const selectionLabel1 = select(label1);
-              selectionLabel1.attr('x', +selectionLabel1.attr('x') + dx).attr('y', +selectionLabel1.attr('y') + dy);
-              const selectionLabel2 = select(label2);
-              selectionLabel2.attr('x', +selectionLabel2.attr('x') - dx).attr('y', +selectionLabel2.attr('y') - dy);
-              bb1 = label1.getBoundingClientRect();
+      labels.each((d2, i2, nodes2) => {
+        const label2 = nodes2[i2];
+        if (label1 !== label2) {
+          const bb2 = label2.getBoundingClientRect();
+          if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
+              bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
+              bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
+              bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
+            // overlap, move labels
+            if (d1.body.radius > d2.body.radius) {
+              select(label2).classed('hidden', true);
+            } else {
+              select(label1).classed('hidden', true);
             }
           }
-        });
+        }
       });
-    }
+    });
   }
 
   // private arrangeLabels(): any[] {
