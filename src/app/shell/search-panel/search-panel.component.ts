@@ -17,7 +17,7 @@ export class SearchPanelComponent {
   public readonly DWARF_PLANETS = DWARF_PLANETS;
 
   public get searchResult(): CelestialBody[] {
-    // TODO called to often
+    // TODO called to often + empty result
     return this.searchService.filter<CelestialBody>(SOLAR_SYSTEM, [ 'id' ], this.search);
   }
 
