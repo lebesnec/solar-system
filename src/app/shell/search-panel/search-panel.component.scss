@@ -30,12 +30,31 @@ mat-expansion-panel {
 }
 
 .celestial-body {
-  border: 3px solid #b9b9b9;
+  border: 3px solid white;
+  color: white;
   cursor: pointer;
-  font-size: 40px;
+  .symbol {
+    font-size: 40px;
+    padding-right: 10px;
+  }
 }
 .celestial-body:hover {
   border: 3px solid white;
   background: hsla(0, 0%, 100%, .3);
+}
+
+.celestial-body.star {
+  border-color: rgb(185, 167, 0);
+  color: rgb(185, 167, 0);
+}
+.celestial-body.star:hover {
+  border-color: rgb(232, 210, 0);
+}
+
+.celestial-body.satellite {
+  border-color: #620002;
+}
+.celestial-body.satellite:hover {
+  border-color: #910003;
 }
 

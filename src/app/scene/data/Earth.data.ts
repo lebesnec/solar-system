@@ -21,7 +21,7 @@ export const MOON: CelestialBody = {
 
 export const EARTH: CelestialBody = {
   id: 'earth',
-  symbol: '🜨',
+  symbol: '⨁',
   position: {
     x: 0,
     y: 0
