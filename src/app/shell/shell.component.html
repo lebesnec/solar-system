@@ -3,7 +3,7 @@
 
   <mat-form-field appearance="fill" class="search-field">
     <span matPrefix>🚀&#xFE0E;</span>
-    <input matInput placeholder="Navigate" autocomplete="off" (click)="showSearchPanel = true">
+    <input #search matInput placeholder="Navigate" autocomplete="off" (click)="showSearchPanel = true">
     <button mat-icon-button matSuffix *ngIf="showSearchPanel" (click)="showSearchPanel = false">✖&#xFE0E;</button>
   </mat-form-field>
 </mat-toolbar>
@@ -11,5 +11,5 @@
 <div class="content">
   <router-outlet></router-outlet>
 
-  <app-search-panel *ngIf="showSearchPanel"></app-search-panel>
+  <app-search-panel *ngIf="showSearchPanel" [search]="search.value"></app-search-panel>
 </div>

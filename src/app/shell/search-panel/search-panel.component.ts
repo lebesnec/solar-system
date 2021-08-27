@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
-import { SUN } from 'src/app/scene/data/SolarSystem.data';
+import {SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
+import {CelestialBody} from '../../scene/scene.model';
+import {SearchService} from './search.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -9,9 +11,18 @@ import { SUN } from 'src/app/scene/data/SolarSystem.data';
 })
 export class SearchPanelComponent {
 
+  @Input() public search = '';
+
   public readonly SUN = SUN;
   public readonly DWARF_PLANETS = DWARF_PLANETS;
 
-  constructor() { }
+  public get searchResult(): CelestialBody[] {
+    // TODO called to often
+    return this.searchService.filter<CelestialBody>(SOLAR_SYSTEM, [ 'id' ], this.search);
+  }
+
+  constructor(
+    private searchService: SearchService
+  ) { }
 
 }

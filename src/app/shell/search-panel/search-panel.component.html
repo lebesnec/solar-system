@@ -1,6 +1,8 @@
 <mat-divider></mat-divider>
 
-<mat-accordion multi>
+<mat-accordion *ngIf="search === ''; else searchResultTpl" multi>
+
+  <!-- Sun -->
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>The sun</mat-panel-title>
@@ -17,6 +19,7 @@
     </mat-grid-list>
   </mat-expansion-panel>
 
+  <!-- Planets -->
   <mat-expansion-panel *ngFor="let planet of SUN.satellites" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id }}</mat-panel-title>
@@ -30,13 +33,14 @@
         <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
         <span class="name">{{ planet.id }}</span>
       </mat-grid-tile>
-      <mat-grid-tile [class]="'celestial-body ' + moon.type" *ngFor="let moon of planet.satellites">
+      <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type">
         <span *ngIf="moon.symbol" class="symbol">{{ moon.symbol }}&#xFE0E;</span>
         <span class="name">{{ moon.id }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
 
+  <!-- Dwarf planets -->
   <mat-expansion-panel class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>Dwarf planets</mat-panel-title>
@@ -46,10 +50,31 @@
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
-      <mat-grid-tile [class]="'celestial-body ' + planet.type" *ngFor="let planet of DWARF_PLANETS">
+      <mat-grid-tile *ngFor="let planet of DWARF_PLANETS" [class]="'celestial-body ' + planet.type">
         <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
         <span class="name">{{ planet.id }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
 </mat-accordion>
+
+<ng-template #searchResultTpl>
+  <!-- Search result -->
+  <mat-accordion multi>
+    <mat-expansion-panel expanded class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Result</mat-panel-title>
+        <mat-panel-description>
+          {{ searchResult.length }} results
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
+        <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type">
+          <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
+          <span class="name">{{ body.id }}</span>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
