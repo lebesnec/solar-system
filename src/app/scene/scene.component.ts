@@ -1,10 +1,11 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity} from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {SOLAR_SYSTEM} from './data/SolarSystem.data';
+import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 
 const NB_POINTS_ORBIT = 90;
 
@@ -25,7 +26,7 @@ const ZOOM_TRANSITION_MS = 500; // ms
   templateUrl: './scene.component.html',
   styleUrls: ['./scene.component.scss']
 })
-export class SceneComponent implements AfterViewInit {
+export class SceneComponent implements OnInit, AfterViewInit {
 
   private svgSelection: any;
   private groupZoomableSelection: any;
@@ -44,8 +45,15 @@ export class SceneComponent implements AfterViewInit {
   }
 
   constructor(
-    private sceneService: SceneService
+    private sceneService: SceneService,
+    private searchPanelService: SearchPanelService
   ) { }
+
+  public ngOnInit(): void {
+      this.searchPanelService.onBodySelected.subscribe((body) => {
+        this.zoomTo(body);
+      });
+  }
 
   public ngAfterViewInit(): void {
     this.svgSelection = select('svg');
@@ -152,20 +160,25 @@ export class SceneComponent implements AfterViewInit {
                                               this.labelsPath.style('opacity', 0);
                                             })
                                             .on('click', (event, d) => {
-                                              const bbox = (select('#' + d.body.id).node() as any).getBBox();
-                                              const scale = this.getScale(d.body);
-                                              const zoomTo = zoomIdentity
-                                                              .translate(this.center.x + ((-bbox.x - bbox.width / 2) * scale), this.center.y + ((-bbox.y - bbox.height / 2) * scale))
-                                                              .scale(scale);
-                                              this.svgSelection.transition()
-                                                                .duration(ZOOM_TRANSITION_MS)
-                                                                .call(this.d3Zoom.transform, zoomTo);
-
+                                              this.zoomTo(d.body);
                                             }),
                               update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                               .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                             );
     this.arrangeLabels();
+  }
+
+  private zoomTo(body: CelestialBody): void {
+    const bbox = (select('#' + body.id).node() as any).getBBox();
+    const scale = this.getScale(body);
+    const zoomTo = zoomIdentity.translate(
+                      this.center.x + ((-bbox.x - bbox.width / 2) * scale),
+                      this.center.y + ((-bbox.y - bbox.height / 2) * scale)
+                    )
+                    .scale(scale);
+    this.svgSelection.transition()
+                      .duration(ZOOM_TRANSITION_MS)
+                      .call(this.d3Zoom.transform, zoomTo);
   }
 
   private arrangeLabels(): void {
