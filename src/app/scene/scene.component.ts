@@ -169,6 +169,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private zoomTo(body: CelestialBody): void {
+    // TODO marche pas la 1ere fois
     const bbox = (select('#' + body.id).node() as any).getBBox();
     const scale = this.getScale(body);
     const zoomTo = zoomIdentity.translate(
