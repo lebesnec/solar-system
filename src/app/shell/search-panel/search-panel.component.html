@@ -70,7 +70,7 @@
       </mat-expansion-panel-header>
 
       <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
-        <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type">
+        <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
           <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
           <span class="name">{{ body.id }}</span>
         </mat-grid-tile>
