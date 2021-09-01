@@ -25,6 +25,21 @@ mat-expansion-panel {
   }
 }
 
+.empty-search {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 30px;
+  text-align: center;
+  img {
+    width: 100%;
+    max-width: 150px;
+    margin: auto;
+    display: block;
+    padding-bottom: 10px;
+  }
+}
+
 :host ::ng-deep .mat-expansion-indicator::after {
   color: white;
 }

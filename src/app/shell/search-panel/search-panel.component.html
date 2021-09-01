@@ -60,7 +60,7 @@
 
 <ng-template #searchResultTpl>
   <!-- Search result -->
-  <mat-accordion multi>
+  <mat-accordion multi *ngIf="searchResult.length > 0; else emptySearch">
     <mat-expansion-panel expanded class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-panel-title>Result</mat-panel-title>
@@ -77,4 +77,17 @@
       </mat-grid-list>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <ng-template #emptySearch>
+    <div class="empty-search">
+      <img src="/assets/empty-search.svg">
+      <h2>No results</h2>
+      <h4>
+        Try
+        <a routerLink="" (click)="onBodySelected(JUPITER)">Jupiter</a>,
+        <a routerLink="" (click)="onBodySelected(MOON)">the Moon</a> or
+        <a routerLink="" (click)="onBodySelected(GANYMEDE)">Ganymede</a>
+      </h4>
+    </div>
+  </ng-template>
 </ng-template>
