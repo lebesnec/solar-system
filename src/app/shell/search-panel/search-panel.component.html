@@ -1,6 +1,36 @@
 <mat-divider></mat-divider>
 
-<mat-accordion *ngIf="search === ''; else searchResultTpl" multi>
+<!-- Search result -->
+<mat-accordion multi *ngIf="searchResult && searchResult.length > 0">
+  <mat-expansion-panel expanded class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Result</mat-panel-title>
+      <mat-panel-description>{{ searchResult.length }} results</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
+      <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
+        <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
+        <span class="name">{{ body.id }}</span>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<!-- No search result -->
+<div class="empty-search" *ngIf="searchResult && searchResult.length === 0">
+  <img src="/assets/empty-search.svg">
+  <h2>No results</h2>
+  <h4>
+    Try
+    <a routerLink="" (click)="onBodySelected(JUPITER)">Jupiter</a>,
+    <a routerLink="" (click)="onBodySelected(MOON)">the Moon</a> or
+    <a routerLink="" (click)="onBodySelected(GANYMEDE)">Ganymede</a>
+  </h4>
+</div>
+
+<!-- Empty search -->
+<mat-accordion *ngIf="!searchResult" multi>
 
   <!-- Sun -->
   <mat-expansion-panel expanded class="mat-elevation-z0">
@@ -60,35 +90,3 @@
 
   </mat-expansion-panel>
 </mat-accordion>
-
-<ng-template #searchResultTpl>
-  <!-- Search result -->
-  <mat-accordion multi *ngIf="searchResult.length > 0; else emptySearch">
-    <mat-expansion-panel expanded class="mat-elevation-z0">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Result</mat-panel-title>
-        <mat-panel-description>{{ searchResult.length }} results</mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
-        <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
-          <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
-          <span class="name">{{ body.id }}</span>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <ng-template #emptySearch>
-    <div class="empty-search">
-      <img src="/assets/empty-search.svg">
-      <h2>No results</h2>
-      <h4>
-        Try
-        <a routerLink="" (click)="onBodySelected(JUPITER)">Jupiter</a>,
-        <a routerLink="" (click)="onBodySelected(MOON)">the Moon</a> or
-        <a routerLink="" (click)="onBodySelected(GANYMEDE)">Ganymede</a>
-      </h4>
-    </div>
-  </ng-template>
-</ng-template>
