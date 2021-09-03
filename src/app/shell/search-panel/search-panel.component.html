@@ -6,9 +6,7 @@
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>The sun</mat-panel-title>
-      <mat-panel-description>
-        {{ SUN.satellites.length }} planets
-      </mat-panel-description>
+      <mat-panel-description>{{ SUN.satellites.length }} planets</mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
@@ -23,9 +21,7 @@
   <mat-expansion-panel *ngFor="let planet of SUN.satellites" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id }}</mat-panel-title>
-      <mat-panel-description *ngIf="planet.satellites.length">
-        {{ planet.satellites.length }} moons
-      </mat-panel-description>
+      <mat-panel-description *ngIf="planet.satellites.length">{{ planet.satellites.length }} moons</mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
@@ -44,17 +40,24 @@
   <mat-expansion-panel class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>Dwarf planets</mat-panel-title>
-      <mat-panel-description>
-        {{ DWARF_PLANETS.length }} planets
-      </mat-panel-description>
+      <mat-panel-description>{{ DWARF_PLANETS.length }} planets</mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
-      <mat-grid-tile *ngFor="let planet of DWARF_PLANETS" [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
-        <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
-        <span class="name">{{ planet.id }}</span>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <ng-template ngFor let-planet [ngForOf]="DWARF_PLANETS">
+      <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px" class="dwarf-planet-grid">
+        <!-- The dwarf planet -->
+        <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
+          <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
+          <span class="name">{{ planet.id }}</span>
+        </mat-grid-tile>
+        <!-- The dwarf planet moon's -->
+        <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
+          <span *ngIf="moon.symbol" class="symbol">{{ moon.symbol }}&#xFE0E;</span>
+          <span class="name">{{ moon.id }}</span>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+
   </mat-expansion-panel>
 </mat-accordion>
 
@@ -64,9 +67,7 @@
     <mat-expansion-panel expanded class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-panel-title>Result</mat-panel-title>
-        <mat-panel-description>
-          {{ searchResult.length }} results
-        </mat-panel-description>
+        <mat-panel-description>{{ searchResult.length }} results</mat-panel-description>
       </mat-expansion-panel-header>
 
       <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
