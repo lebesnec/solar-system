@@ -4,15 +4,18 @@ import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity} from 'd3-zoom';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
-import {SOLAR_SYSTEM} from './data/SolarSystem.data';
+import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
+import {MERCURY} from './data/Mercury.data';
+import {VENUS} from './data/Venus.data';
+import {EARTH} from './data/Earth.data';
+import {MARS} from './data/Mars.data';
+import {JUPITER} from './data/Jupiter.data';
+import {SATURN} from './data/Saturn.data';
+import {URANUS} from './data/Uranus.data';
+import {NEPTUNE} from './data/Neptune.data';
 
 const NB_POINTS_ORBIT = 90;
-
-const SCALE_STAR = 0.5;
-const SCALE_PLANET = 3.0;
-const SCALE_SMALL_BODY = 6.0;
-
 const HIDDEN_THRESHOLD = 10.0;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 20 }; // px
@@ -290,14 +293,29 @@ export class SceneComponent implements OnInit, AfterViewInit {
   //   return labelsData;
   // }
 
-  private getScale(body: CelestialBody): number { // TODO
-    switch (body.type) {
-      case CELESTIAL_BODY_TYPE.STAR:
-        return SCALE_STAR;
-      case CELESTIAL_BODY_TYPE.SATELLITE:
-        return SCALE_SMALL_BODY;
+  private getScale(body: CelestialBody): number {
+    switch (body) {
+      case SUN:
+        return 5.0;
+      case MERCURY:
+      case VENUS:
+      case EARTH:
+      case MARS:
+        return 500.0;
+      case JUPITER:
+        return 1.3;
+      case SATURN:
+        return 1.5;
+      case URANUS:
+        return 2.0;
+      case NEPTUNE:
+        return 0.6;
       default:
-        return SCALE_PLANET;
+        if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
+          return 500.0;
+        } else {
+          return this.getScale(body.orbitBody);
+        }
     }
   }
 
