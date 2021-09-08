@@ -431,8 +431,9 @@ class SceneComponent {
         this.arrangeLabels();
     }
     zoomTo(body) {
-        // TODO marche pas la 1ere fois
-        const bbox = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])('#' + body.id).node().getBBox();
+        const bodySelection = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])('#' + body.id);
+        bodySelection.classed('hidden', false);
+        const bbox = bodySelection.node().getBBox();
         const scale = this.getScale(body);
         const zoomTo = d3_zoom__WEBPACK_IMPORTED_MODULE_4__["zoomIdentity"].translate(this.center.x + ((-bbox.x - bbox.width / 2) * scale), this.center.y + ((-bbox.y - bbox.height / 2) * scale))
             .scale(scale);
