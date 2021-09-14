@@ -24,7 +24,3 @@ tooltip not overriding
 orbit matching body position
 
 over orbit
-
-red  small body
-
-mobil : no zoom
