@@ -17,6 +17,7 @@ import {NEPTUNE} from './data/Neptune.data';
 
 const NB_POINTS_ORBIT = 90;
 const MIN_BODY_RADIUS = 50; // km
+const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 20 }; // px
 const LABEL_TRANSITION_MS = 50; // ms
 const LABEL_PATH_MARGIN = 4; // px
@@ -120,47 +121,62 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initLabels(): void {
-    const labelsData = SOLAR_SYSTEM.map((body) => {
+    const allLabelsData = SOLAR_SYSTEM.map(body => {
       return {
         body,
-        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect() // TODO store node
+        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect(), // TODO store node ?
+        visible: true
       };
     });
+    // only show label of the biggest body if body are near each other:
+    allLabelsData.forEach(data => {
+      data.visible = allLabelsData.every(otherData => {
+        if (otherData.visible && data.body !== otherData.body && data.body.radius < otherData.body.radius) {
+          return !(data.boundingBox.left - LABEL_SPACING < otherData.boundingBox.right + LABEL_SPACING &&
+                  data.boundingBox.right + LABEL_SPACING > otherData.boundingBox.left - LABEL_SPACING &&
+                  data.boundingBox.top - LABEL_SPACING < otherData.boundingBox.bottom + LABEL_SPACING &&
+                  data.boundingBox.bottom + LABEL_SPACING > otherData.boundingBox.top - LABEL_SPACING);
+        } else {
+          return true;
+        }
+      });
+    });
+    const labelsData = allLabelsData.filter(data => data.visible);
 
     this.labelsPath.style('opacity', 0);
 
-    this.groupStaticSelection.selectAll('.label')
-                             .data(labelsData, (d) => d.body.id)
-                             .join(
-                              enter => enter.append('text')
-                                            .attr('id', (d) => 'labeltext_' + d.body.id)
-                                            .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
-                                            .text((d) => d.body.id)
-                                            .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                            .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                                            .on('mouseover', (event, d) => {
-                                              const textBoundingBox = event.currentTarget.getBoundingClientRect();
-                                              this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                         L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
-                                                                         L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
-                                                          .transition()
-                                                          .duration(LABEL_TRANSITION_MS)
-                                                          .style('opacity', 1);
-                                            })
-                                            .on('mouseout', () => {
-                                              this.labelsPath.transition()
-                                                          .duration(LABEL_TRANSITION_MS)
-                                                          .style('opacity', 0);
-                                            })
-                                            .on('mousedown', () => {
-                                              this.labelsPath.style('opacity', 0);
-                                            })
-                                            .on('click', (event, d) => {
-                                              this.zoomTo(d.body);
-                                            }),
-                              update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                              .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                            );
+    const labels = this.groupStaticSelection.selectAll('.label')
+                       .data(labelsData, (d) => d.body.id)
+                       .join(
+                        enter => enter.append('text')
+                                      .attr('id', (d) => 'labeltext_' + d.body.id)
+                                      .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                                      .text((d) => d.body.id)
+                                      .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                      .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                                      .on('mouseover', (event, d) => {
+                                        const textBoundingBox = event.currentTarget.getBoundingClientRect();
+                                        this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                                                   L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
+                                                                   L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
+                                                    .transition()
+                                                    .duration(LABEL_TRANSITION_MS)
+                                                    .style('opacity', 1);
+                                      })
+                                      .on('mouseout', () => {
+                                        this.labelsPath.transition()
+                                                    .duration(LABEL_TRANSITION_MS)
+                                                    .style('opacity', 0);
+                                      })
+                                      .on('mousedown', () => {
+                                        this.labelsPath.style('opacity', 0);
+                                      })
+                                      .on('click', (event, d) => {
+                                        this.zoomTo(d.body);
+                                      }),
+                        update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                        .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                      );
   }
 
   private zoomTo(body: CelestialBody): void {
@@ -177,112 +193,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
   }
-  //
-  // private arrangeLabels(): void {
-  //   const labels = this.groupStaticSelection.selectAll('.label:not(.hidden)');
-  //   // let move = 1;
-  //   //
-  //   // while (move > 0) {
-  //   //   move = 0;
-  //   //
-  //   //   labels.each((d1, i1, nodes1) => {
-  //   //     const label1 = nodes1[i1];
-  //   //     let bb1 = label1.getBoundingClientRect();
-  //   //
-  //   //     labels.each((d2, i2, nodes2) => {
-  //   //       const label2 = nodes2[i2];
-  //   //       if (label1 !== label2) {
-  //   //         const bb2 = label2.getBoundingClientRect();
-  //   //         if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
-  //   //             bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
-  //   //             bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
-  //   //             bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
-  //   //           // overlap, move labels
-  //   //           const dx = (Math.max(0, bb1.right - bb2.left) + Math.min(0, bb1.left - bb2.right)) * 0.2;
-  //   //           const dy = (Math.max(0, bb1.bottom - bb2.top) + Math.min(0, bb1.top - bb2.bottom)) * 0.2;
-  //   //           move += Math.abs(dx) + Math.abs(dy);
-  //   //
-  //   //           const selectionLabel1 = select(label1);
-  //   //           selectionLabel1.attr('x', +selectionLabel1.attr('x') + dx).attr('y', +selectionLabel1.attr('y') + dy);
-  //   //           const selectionLabel2 = select(label2);
-  //   //           selectionLabel2.attr('x', +selectionLabel2.attr('x') - dx).attr('y', +selectionLabel2.attr('y') - dy);
-  //   //           bb1 = label1.getBoundingClientRect();
-  //   //         }
-  //   //       }
-  //   //     });
-  //   //   });
-  //   // }
-  //
-  //   labels.each((d1, i1, nodes1) => {
-  //     const label1 = nodes1[i1];
-  //     const bb1 = label1.getBoundingClientRect();
-  //
-  //     labels.each((d2, i2, nodes2) => {
-  //       const label2 = nodes2[i2];
-  //       if (label1 !== label2) {
-  //         const bb2 = label2.getBoundingClientRect();
-  //         if (bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING &&
-  //             bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING &&
-  //             bb1.top - LABEL_SPACING < bb2.bottom + LABEL_SPACING &&
-  //             bb1.bottom + LABEL_SPACING > bb2.top - LABEL_SPACING) {
-  //           // overlap, move labels
-  //           if (d1.body.radius > d2.body.radius) {
-  //             select(label2).classed('hidden', true);
-  //           } else {
-  //             select(label1).classed('hidden', true);
-  //           }
-  //         }
-  //       }
-  //     });
-  //   });
-  // }
-  //
-  // // private arrangeLabels(): any[] {
-  // //   const labelsData = SOLAR_SYSTEM.map((body) => {
-  // //     const boundingBox = (select('#' + body.id).node() as any).getBoundingClientRect(); // TODO store node
-  // //     return {
-  // //       body,
-  // //       x: boundingBox.right + LABEL_DISTANCE_TO_BODY.x,
-  // //       y: boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y,
-  // //       boundingBox
-  // //     };
-  // //   });
-  // //
-  // //   let move = 1;
-  // //
-  // //   while (move > 0) {
-  // //     move = 0;
-  // //
-  // //     labelsData.forEach(label1 => {
-  // //       labelsData.forEach(label2 => {
-  // //         if (label1 !== label2) {
-  // //           // if (d1.body.id === 'earth' && d2.body.id === 'mars') {
-  // //           //   console.log(bb1, bb2);
-  // //           //   // console.log(bb1.left - LABEL_SPACING < bb2.right + LABEL_SPACING);
-  // //           //   // console.log(bb1.right + LABEL_SPACING > bb2.left - LABEL_SPACING);
-  // //           //   console.log(bb1.top, bb2.bottom, bb1.top - LABEL_SPACING, bb2.bottom + LABEL_SPACING, bb1.top - LABEL_SPACING > bb2.bottom + LABEL_SPACING);
-  // //           //   // console.log(bb1.bottom - LABEL_SPACING < bb2.top + LABEL_SPACING);
-  // //           // }
-  // //           if (label1.x - LABEL_SPACING < label2.x + LABEL_MAX_WIDTH + LABEL_SPACING &&
-  // //             label1.x + LABEL_MAX_WIDTH + LABEL_SPACING > label2.x - LABEL_SPACING &&
-  // //             label1.y - LABEL_SPACING < label2.y + LABEL_HEIGHT + LABEL_SPACING &&
-  // //             label1.y + LABEL_HEIGHT + LABEL_SPACING > label2.y - LABEL_SPACING) {
-  // //             // overlap, move labels
-  // //             const dy = (Math.max(0, label1.y + LABEL_HEIGHT - label2.y) + Math.min(0, label1.y - label2.y - LABEL_HEIGHT)) * 0.05;
-  // //             move += Math.abs(dy);
-  // //
-  // //             // select(label1).attr('x', +select(label1).attr('x') + dx).attr('y', +select(label1).attr('y') + dy);
-  // //             // select(label2).attr('x', +select(label2).attr('x') - dx).attr('y', +select(label2).attr('y') - dy);
-  // //             label1.y = label1.y + dy;
-  // //             label2.y = label2.y - dy;
-  // //           }
-  // //         }
-  // //       });
-  // //     });
-  // //   }
-  // //
-  // //   return labelsData;
-  // // }
 
   private getScale(body: CelestialBody): number {
     switch (body) {
