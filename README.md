@@ -15,7 +15,11 @@ https://sites.google.com/carnegiescience.edu/sheppard/moons/jupitermoons
 
 rings
 
+asteroids
+
 rovers & probe
+
+half-lite planet
 
 stars field
 
