@@ -324,7 +324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const NB_POINTS_ORBIT = 90;
+const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY = { x: 20, y: 20 }; // px
@@ -392,7 +392,7 @@ class SceneComponent {
                 path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
             };
         });
-        const lineFn = Object(d3_shape__WEBPACK_IMPORTED_MODULE_3__["line"])().curve(d3_shape__WEBPACK_IMPORTED_MODULE_3__["curveCardinalClosed"]).x(p => p.x).y(p => p.y);
+        const lineFn = Object(d3_shape__WEBPACK_IMPORTED_MODULE_3__["line"])().curve(d3_shape__WEBPACK_IMPORTED_MODULE_3__["curveCardinalClosed"].tension(1)).x(p => p.x).y(p => p.y);
         this.groupZoomableSelection.selectAll('.orbit')
             .data(orbitsData, (d) => d.body.id)
             .join(enter => enter.append('path')
@@ -5193,7 +5193,13 @@ class SceneService {
      * position in px
      */
     getOrbit(body, nbPoints = 360) {
-        return d3__WEBPACK_IMPORTED_MODULE_1__["range"](0, 360, 360 / nbPoints).map((trueAnomaly) => {
+        let bodyAnomalyAdded = false;
+        return d3__WEBPACK_IMPORTED_MODULE_1__["range"](0, 360, 360 / nbPoints).map(trueAnomaly => {
+            if (!bodyAnomalyAdded && trueAnomaly >= body.trueAnomaly) {
+                bodyAnomalyAdded = true;
+                // add the body position to the orbit to ensure the orbit path will pass trough the body:
+                trueAnomaly = body.trueAnomaly;
+            }
             const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
             return {
                 trueAnomaly,
