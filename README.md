@@ -25,6 +25,4 @@ stars field
 
 tooltip not overriding
 
-orbit matching body position
-
 over orbit

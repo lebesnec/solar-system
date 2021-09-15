@@ -46,7 +46,14 @@ export class SceneService {
    * position in px
    */
   public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
-    return d3.range(0, 360, 360 / nbPoints).map((trueAnomaly) => {
+    let bodyAnomalyAdded = false;
+
+    return d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
+      if (!bodyAnomalyAdded && trueAnomaly >= body.trueAnomaly) {
+        bodyAnomalyAdded = true;
+        // add the body position to the orbit to ensure the orbit path will pass trough the body:
+        trueAnomaly = body.trueAnomaly;
+      }
       const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
       return {
         trueAnomaly,

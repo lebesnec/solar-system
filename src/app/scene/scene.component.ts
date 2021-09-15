@@ -15,7 +15,7 @@ import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 
-const NB_POINTS_ORBIT = 90;
+const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 20 }; // px
@@ -109,7 +109,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
                           };
                         });
-    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed).x(p => p.x).y(p => p.y);
+    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
 
     this.groupZoomableSelection.selectAll('.orbit')
                                .data(orbitsData, (d) => d.body.id)
