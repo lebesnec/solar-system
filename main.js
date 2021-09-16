@@ -351,19 +351,29 @@ class SceneComponent {
     }
     ngAfterViewInit() {
         this.svgSelection = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])('svg');
+        this.groupMilkyWaySelection = this.svgSelection.append('g');
         this.groupZoomableSelection = this.svgSelection.append('g');
         this.groupStaticSelection = this.svgSelection.append('g');
         this.labelsPath = this.groupStaticSelection.append('path')
             .attr('class', 'label-path')
             .style('opacity', 0);
+        this.initMilkyWay();
         this.initOrbits();
         this.initCelestialBodies();
         this.initZoom();
+    }
+    initMilkyWay() {
+        this.groupMilkyWaySelection.append('image')
+            .attr('href', '/assets/milky_way.jpg')
+            .attr('width', _scene_service__WEBPACK_IMPORTED_MODULE_5__["SOLAR_SYSTEM_SIZE"])
+            .attr('height', _scene_service__WEBPACK_IMPORTED_MODULE_5__["SOLAR_SYSTEM_SIZE"])
+            .attr('preserveAspectRatio', 'xMidYMid slice');
     }
     initZoom() {
         this.d3Zoom = Object(d3_zoom__WEBPACK_IMPORTED_MODULE_4__["zoom"])().on('zoom', (e) => {
             this.scale = e.transform.k;
             this.groupZoomableSelection.attr('transform', e.transform);
+            this.groupMilkyWaySelection.attr('transform', e.transform);
             this.initLabels();
         });
         this.svgSelection.call(this.d3Zoom);
