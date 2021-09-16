@@ -5193,13 +5193,7 @@ class SceneService {
      * position in px
      */
     getOrbit(body, nbPoints = 360) {
-        let bodyAnomalyAdded = false;
-        return d3__WEBPACK_IMPORTED_MODULE_1__["range"](0, 360, 360 / nbPoints).map(trueAnomaly => {
-            if (!bodyAnomalyAdded && trueAnomaly >= body.trueAnomaly) {
-                bodyAnomalyAdded = true;
-                // add the body position to the orbit to ensure the orbit path will pass trough the body:
-                trueAnomaly = body.trueAnomaly;
-            }
+        const result = d3__WEBPACK_IMPORTED_MODULE_1__["range"](0, 360, 360 / nbPoints).map(trueAnomaly => {
             const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
             return {
                 trueAnomaly,
@@ -5207,6 +5201,13 @@ class SceneService {
                 y: point.y
             };
         });
+        // add the body position to the orbit to ensure the orbit path will pass trough the body:
+        result.push({
+            trueAnomaly: body.trueAnomaly,
+            x: body.position.x,
+            y: body.position.y
+        });
+        return result.sort((p1, p2) => p1.trueAnomaly - p2.trueAnomaly);
     }
     /**
      * in px
