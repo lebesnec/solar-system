@@ -2,6 +2,7 @@
 
 html, body {
   height: 100%;
+  background-color: rgb(31, 31, 31);
 }
 body {
   margin: 0;
