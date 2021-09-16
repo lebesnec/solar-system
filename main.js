@@ -324,10 +324,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const MILKY_WAY_SIZE = 200 * _scene_service__WEBPACK_IMPORTED_MODULE_5__["AU_TO_KM"] / _scene_service__WEBPACK_IMPORTED_MODULE_5__["KM_TO_PX"]; // px
+const MILKY_WAY_ANGLE = -8; // degree
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
-const LABEL_DISTANCE_TO_BODY = { x: 20, y: 20 }; // px
+const LABEL_DISTANCE_TO_BODY = { x: 20, y: 10 }; // px
 const LABEL_TRANSITION_MS = 50; // ms
 const LABEL_PATH_MARGIN = 4; // px
 const ZOOM_TRANSITION_MS = 500; // ms
@@ -365,9 +367,12 @@ class SceneComponent {
     initMilkyWay() {
         this.groupMilkyWaySelection.append('image')
             .attr('href', '/assets/milky_way.jpg')
-            .attr('width', _scene_service__WEBPACK_IMPORTED_MODULE_5__["SOLAR_SYSTEM_SIZE"])
-            .attr('height', _scene_service__WEBPACK_IMPORTED_MODULE_5__["SOLAR_SYSTEM_SIZE"])
-            .attr('preserveAspectRatio', 'xMidYMid slice');
+            .attr('width', MILKY_WAY_SIZE)
+            .attr('height', MILKY_WAY_SIZE)
+            .attr('x', -MILKY_WAY_SIZE / 2)
+            .attr('y', -MILKY_WAY_SIZE / 2)
+            .attr('preserveAspectRatio', 'xMidYMid slice')
+            .attr('transform', `rotate(${MILKY_WAY_ANGLE} 0 0)`);
     }
     initZoom() {
         this.d3Zoom = Object(d3_zoom__WEBPACK_IMPORTED_MODULE_4__["zoom"])().on('zoom', (e) => {
