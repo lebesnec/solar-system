@@ -31,6 +31,7 @@ const ZOOM_TRANSITION_MS = 500; // ms
 export class SceneComponent implements OnInit, AfterViewInit {
 
   private svgSelection: any;
+  private groupMilkyWaySelection: any;
   private groupZoomableSelection: any;
   private groupStaticSelection: any;
   private d3Zoom: any;
@@ -59,6 +60,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.svgSelection = select('svg');
+    this.groupMilkyWaySelection = this.svgSelection.append('g');
     this.groupZoomableSelection = this.svgSelection.append('g');
     this.groupStaticSelection = this.svgSelection.append('g');
 
@@ -66,9 +68,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   .attr('class', 'label-path')
                                                   .style('opacity', 0);
 
+    this.initMilkyWay();
     this.initOrbits();
     this.initCelestialBodies();
     this.initZoom();
+  }
+
+  private initMilkyWay(): void {
+    this.groupMilkyWaySelection.append('image')
+                                .attr('href', '/assets/milky_way.jpg')
+                                .attr('width', SOLAR_SYSTEM_SIZE)
+                                .attr('height', SOLAR_SYSTEM_SIZE)
+                                .attr('preserveAspectRatio', 'xMidYMid slice');
   }
 
   private initZoom(): void {
@@ -76,6 +87,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.scale = e.transform.k;
 
       this.groupZoomableSelection.attr('transform', e.transform);
+      this.groupMilkyWaySelection.attr('transform', e.transform);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
