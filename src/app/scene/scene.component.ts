@@ -3,7 +3,7 @@ import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.mod
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity} from 'd3-zoom';
-import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {AU_TO_KM, KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -15,10 +15,12 @@ import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 
+const MILKY_WAY_SIZE = 200 * AU_TO_KM / KM_TO_PX; // px
+const MILKY_WAY_ANGLE = -8; // degree
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
-const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 20 }; // px
+const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 10 }; // px
 const LABEL_TRANSITION_MS = 50; // ms
 const LABEL_PATH_MARGIN = 4; // px
 const ZOOM_TRANSITION_MS = 500; // ms
@@ -77,9 +79,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private initMilkyWay(): void {
     this.groupMilkyWaySelection.append('image')
                                 .attr('href', '/assets/milky_way.jpg')
-                                .attr('width', SOLAR_SYSTEM_SIZE)
-                                .attr('height', SOLAR_SYSTEM_SIZE)
-                                .attr('preserveAspectRatio', 'xMidYMid slice');
+                                .attr('width', MILKY_WAY_SIZE)
+                                .attr('height', MILKY_WAY_SIZE)
+                                .attr('x', - MILKY_WAY_SIZE / 2)
+                                .attr('y', - MILKY_WAY_SIZE / 2)
+                                .attr('preserveAspectRatio', 'xMidYMid slice')
+                                .attr('transform', `rotate(${MILKY_WAY_ANGLE} 0 0)`);
   }
 
   private initZoom(): void {
