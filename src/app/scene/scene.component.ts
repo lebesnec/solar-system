@@ -14,10 +14,7 @@ import {JUPITER} from './data/Jupiter.data';
 import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
-import * as d3 from 'd3';
 
-const NB_STARS = 1000;
-const STAR_MAX_RADIUS = 0.3; // px
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -71,32 +68,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   .attr('class', 'label-path')
                                                   .style('opacity', 0);
 
-    this.initMilkyWay();
     this.initOrbits();
     this.initCelestialBodies();
     this.initZoom();
-  }
-
-  private initMilkyWay(): void {
-    // const starsData = d3.range(0, NB_STARS).map(i => {
-    //   return {
-    //     x: Math.random() * window.innerWidth,
-    //     y: Math.random() * window.innerHeight,
-    //     radius: Math.random() * STAR_MAX_RADIUS,
-    //     opacity: Math.random()
-    //   };
-    // });
-    //
-    // this.groupMilkyWaySelection.selectAll('.star')
-    //                             .data(starsData)
-    //                             .join(
-    //                               enter => enter.append('circle')
-    //                                 .attr('class', 'star')
-    //                                 .attr('r', (star) => star.radius)
-    //                                 .attr('cx', (star) => star.x)
-    //                                 .attr('cy', (star) => star.y)
-    //                                 .style('opacity', (star) => star.opacity)
-    //                             );
   }
 
   private initZoom(): void {

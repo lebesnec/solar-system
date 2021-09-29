@@ -21,7 +21,7 @@ rovers & probe
 
 half-lite planet
 
-stars field
+stars field paralax
 
 tooltip not overriding
 
