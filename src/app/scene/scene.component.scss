@@ -57,6 +57,10 @@ svg {
     vector-effect: non-scaling-stroke;
     fill: none;
   }
+  .orbit.over {
+    stroke: mat-color($solar-system-warn);
+    stroke-width: 1;
+  }
 
   .hidden {
     display: none;

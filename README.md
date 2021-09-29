@@ -25,6 +25,4 @@ stars field paralax
 
 tooltip not overriding
 
-over orbit
-
 selection

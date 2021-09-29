@@ -117,6 +117,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                .data(orbitsData, (d) => d.body.id)
                                .join(
                                  enter => enter.append('path')
+                                               .attr('id', (orbit) => 'orbit_' + orbit.body.id)
                                                .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
                                                .attr('d', (orbit) => lineFn(orbit.path))
                                );
@@ -164,11 +165,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                     .transition()
                                                     .duration(LABEL_TRANSITION_MS)
                                                     .style('opacity', 1);
+                                        select('#orbit_' + d.body.id).classed('over', true);
                                       })
-                                      .on('mouseout', () => {
+                                      .on('mouseout', (event, d) => {
                                         this.labelsPath.transition()
-                                                    .duration(LABEL_TRANSITION_MS)
-                                                    .style('opacity', 0);
+                                                        .duration(LABEL_TRANSITION_MS)
+                                                        .style('opacity', 0);
+                                        select('#orbit_' + d.body.id).classed('over', false);
                                       })
                                       .on('mousedown', () => {
                                         this.labelsPath.style('opacity', 0);
