@@ -14,9 +14,10 @@ import {JUPITER} from './data/Jupiter.data';
 import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
+import * as d3 from 'd3';
 
-const MILKY_WAY_SIZE = 200 * AU_TO_KM / KM_TO_PX; // px
-const MILKY_WAY_ANGLE = -8; // degree
+const NB_STARS = 1000;
+const STAR_MAX_RADIUS = 0.3; // px
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -77,14 +78,25 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initMilkyWay(): void {
-    this.groupMilkyWaySelection.append('image')
-                                .attr('href', '/assets/milky_way.jpg')
-                                .attr('width', MILKY_WAY_SIZE)
-                                .attr('height', MILKY_WAY_SIZE)
-                                .attr('x', - MILKY_WAY_SIZE / 2)
-                                .attr('y', - MILKY_WAY_SIZE / 2)
-                                .attr('preserveAspectRatio', 'xMidYMid slice')
-                                .attr('transform', `rotate(${MILKY_WAY_ANGLE} 0 0)`);
+    // const starsData = d3.range(0, NB_STARS).map(i => {
+    //   return {
+    //     x: Math.random() * window.innerWidth,
+    //     y: Math.random() * window.innerHeight,
+    //     radius: Math.random() * STAR_MAX_RADIUS,
+    //     opacity: Math.random()
+    //   };
+    // });
+    //
+    // this.groupMilkyWaySelection.selectAll('.star')
+    //                             .data(starsData)
+    //                             .join(
+    //                               enter => enter.append('circle')
+    //                                 .attr('class', 'star')
+    //                                 .attr('r', (star) => star.radius)
+    //                                 .attr('cx', (star) => star.x)
+    //                                 .attr('cy', (star) => star.y)
+    //                                 .style('opacity', (star) => star.opacity)
+    //                             );
   }
 
   private initZoom(): void {
@@ -92,7 +104,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.scale = e.transform.k;
 
       this.groupZoomableSelection.attr('transform', e.transform);
-      this.groupMilkyWaySelection.attr('transform', e.transform);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
