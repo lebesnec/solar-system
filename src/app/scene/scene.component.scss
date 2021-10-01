@@ -40,6 +40,10 @@ svg {
     cursor: pointer;
   }
 
+  .label.selected {
+    stroke: mat-color($solar-system-primary);
+  }
+
   .label:hover {
     fill: mat-color($solar-system-primary);
   }
@@ -57,8 +61,14 @@ svg {
     vector-effect: non-scaling-stroke;
     fill: none;
   }
-  .orbit.over {
+
+  .orbit.hovered {
     stroke: mat-color($solar-system-warn);
+    stroke-width: 1;
+  }
+
+  .orbit.selected {
+    stroke: mat-color($solar-system-accent);
     stroke-width: 1;
   }
 

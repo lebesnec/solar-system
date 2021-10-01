@@ -14,6 +14,7 @@ import {JUPITER} from './data/Jupiter.data';
 import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
+import {selectAll} from 'd3';
 
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
@@ -59,7 +60,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.svgSelection = select('svg');
+    this.svgSelection = select('svg').on('click', () => {
+      selectAll('.selected').classed('selected', false);
+    });
     this.groupMilkyWaySelection = this.svgSelection.append('g');
     this.groupZoomableSelection = this.svgSelection.append('g');
     this.groupStaticSelection = this.svgSelection.append('g');
@@ -165,19 +168,23 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                     .transition()
                                                     .duration(LABEL_TRANSITION_MS)
                                                     .style('opacity', 1);
-                                        select('#orbit_' + d.body.id).classed('over', true);
+                                        select('#orbit_' + d.body.id).classed('hovered', true);
                                       })
                                       .on('mouseout', (event, d) => {
                                         this.labelsPath.transition()
                                                         .duration(LABEL_TRANSITION_MS)
                                                         .style('opacity', 0);
-                                        select('#orbit_' + d.body.id).classed('over', false);
+                                        select('#orbit_' + d.body.id).classed('hovered', false);
                                       })
                                       .on('mousedown', () => {
                                         this.labelsPath.style('opacity', 0);
                                       })
                                       .on('click', (event, d) => {
                                         this.zoomTo(d.body);
+                                        selectAll('.selected').classed('selected', false);
+                                        select('#labeltext_' + d.body.id).classed('selected', true);
+                                        select('#orbit_' + d.body.id).classed('selected', true);
+                                        event.stopPropagation();
                                       }),
                         update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                         .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
