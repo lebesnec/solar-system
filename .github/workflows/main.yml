@@ -12,11 +12,11 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run build -- --base-href=https://lebesnec.github.io/solar-system/
+          npm run build -- --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
           folder: dist/solar-system
-          
+
