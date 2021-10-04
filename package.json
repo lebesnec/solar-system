@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port 4203 --open",
     "build": "ng build",
+    "buildProd": "ng build --prod --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

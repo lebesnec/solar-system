@@ -12,7 +12,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          ng build --prod --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/
+          npm run buildProd
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
