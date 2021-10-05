@@ -55,13 +55,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
       this.searchPanelService.onBodySelected.subscribe((body) => {
+        this.select(body);
         this.zoomTo(body);
       });
   }
 
   public ngAfterViewInit(): void {
     this.svgSelection = select('svg').on('click', () => {
-      selectAll('.selected').classed('selected', false);
+      this.deselectAll();
     });
     this.groupMilkyWaySelection = this.svgSelection.append('g');
     this.groupZoomableSelection = this.svgSelection.append('g');
@@ -180,10 +181,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                         this.labelsPath.style('opacity', 0);
                                       })
                                       .on('click', (event, d) => {
+                                        this.select(d.body);
                                         this.zoomTo(d.body);
-                                        selectAll('.selected').classed('selected', false);
-                                        select('#labeltext_' + d.body.id).classed('selected', true);
-                                        select('#orbit_' + d.body.id).classed('selected', true);
                                         event.stopPropagation();
                                       }),
                         update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
@@ -230,6 +229,16 @@ export class SceneComponent implements OnInit, AfterViewInit {
           return this.getScale(body.orbitBody);
         }
     }
+  }
+
+  private deselectAll(): void {
+    selectAll('.selected').classed('selected', false);
+  }
+
+  private select(body: CelestialBody): void {
+    this.deselectAll();
+    select('#labeltext_' + body.id).classed('selected', true);
+    select('#orbit_' + body.id).classed('selected', true);
   }
 
 }

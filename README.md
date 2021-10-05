@@ -28,3 +28,9 @@ tooltip not overriding
 mobile
 
 img asset path
+
+logo
+
+options
+
+info panel
