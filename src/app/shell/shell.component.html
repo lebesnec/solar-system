@@ -16,5 +16,6 @@
 <div class="content">
   <router-outlet></router-outlet>
 
-  <app-search-panel *ngIf="showSearchPanel" [search]="search.value"></app-search-panel>
+  <app-search-panel *ngIf="showSearchPanel" @searchPanelAnimation [search]="search.value">
+  </app-search-panel>
 </div>

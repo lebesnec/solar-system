@@ -25,8 +25,6 @@ stars field paralax
 
 tooltip not overriding
 
-animation menu search
-
 mobile
 
 img asset path
