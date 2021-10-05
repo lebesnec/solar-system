@@ -103,6 +103,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .attr('r', (body) => Math.max(body.radius, MIN_BODY_RADIUS) / KM_TO_PX)
                                                 .attr('cx', (body) => body.position.x)
                                                 .attr('cy', (body) => body.position.y)
+                                                .on('click', (event, d) => {
+                                                  this.select(d);
+                                                  event.stopPropagation();
+                                                }),
                                 );
   }
 
