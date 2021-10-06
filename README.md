@@ -29,6 +29,8 @@ mobile
 
 img asset path
 
+traduction
+
 logo
 
 options
