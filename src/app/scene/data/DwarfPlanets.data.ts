@@ -376,7 +376,7 @@ export const SEDNA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 358.117,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
-  satellites: [ XIANGLIU ],
+  satellites: [ ],
   orbitBody: null
 };
 

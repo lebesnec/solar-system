@@ -27,9 +27,9 @@ tooltip not overriding
 
 mobile
 
-img asset path
-
 traduction
+
+orbit not straight
 
 logo
 

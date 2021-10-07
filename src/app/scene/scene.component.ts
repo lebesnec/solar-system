@@ -15,6 +15,7 @@ import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 import {selectAll} from 'd3';
+import {TranslateService} from '@ngx-translate/core';
 
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
@@ -40,6 +41,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
   private scale: number;
+  private bodiesLabels = {};
 
   private get center(): Point {
     return {
@@ -49,15 +51,16 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
+    private translate: TranslateService,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService
   ) { }
 
   public ngOnInit(): void {
-      this.searchPanelService.onBodySelected.subscribe((body) => {
-        this.select(body);
-        this.zoomTo(body);
-      });
+    this.searchPanelService.onBodySelected.subscribe((body) => {
+      this.select(body);
+      this.zoomTo(body);
+    });
   }
 
   public ngAfterViewInit(): void {
@@ -74,7 +77,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     this.initOrbits();
     this.initCelestialBodies();
-    this.initZoom();
+
+    this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((trad) => {
+      this.bodiesLabels = trad;
+      this.initZoom();
+    });
   }
 
   private initZoom(): void {
@@ -162,7 +169,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         enter => enter.append('text')
                                       .attr('id', (d) => 'labeltext_' + d.body.id)
                                       .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
-                                      .text((d) => d.body.id)
+                                      .text((d) => this.bodiesLabels[d.body.id])
                                       .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                       .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                                       .on('mouseover', (event, d) => {
