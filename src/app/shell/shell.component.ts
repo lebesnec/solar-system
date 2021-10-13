@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {TranslateService} from '@ngx-translate/core';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shell',
@@ -25,6 +26,7 @@ export class ShellComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
+    private dialog: MatDialog,
     private searchPanelService: SearchPanelService
   ) {  }
 
@@ -32,6 +34,11 @@ export class ShellComponent implements OnInit {
     this.searchPanelService.onBodySelected.subscribe(() => {
       this.showSearchPanel = false;
     });
+  }
+
+  public openSearchPanel(): void {
+    this.dialog.closeAll();
+    this.showSearchPanel = true;
   }
 
 }

@@ -3,7 +3,7 @@ import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.mod
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity} from 'd3-zoom';
-import {AU_TO_KM, KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -16,6 +16,8 @@ import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 import {selectAll} from 'd3';
 import {TranslateService} from '@ngx-translate/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
@@ -42,6 +44,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private height: number = window.innerHeight; // px
   private scale: number;
   private bodiesLabels = {};
+  private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }>;
 
   private get center(): Point {
     return {
@@ -52,6 +55,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   constructor(
     private translate: TranslateService,
+    private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService
   ) { }
@@ -250,6 +254,26 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.deselectAll();
     select('#labeltext_' + body.id).classed('selected', true);
     select('#orbit_' + body.id).classed('selected', true);
+
+    if (this.celestialBodyDialogRef) {
+      this.celestialBodyDialogRef.close();
+    }
+
+    this.celestialBodyDialogRef = this.dialog.open(CelestialBodyDialogComponent, {
+      width: '350px',
+      maxHeight: '50%',
+      panelClass: 'celestial-body-dialog-panel',
+      closeOnNavigation: true,
+      autoFocus: false,
+      position: {
+        bottom: '50px',
+        right: '50px'
+      },
+      hasBackdrop: false,
+      data: {
+        body
+      }
+    });
   }
 
 }

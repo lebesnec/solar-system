@@ -3,7 +3,7 @@
 
   <mat-form-field appearance="fill" class="search-field">
     <span matPrefix>🚀&#xFE0E;</span>
-    <input #search matInput [placeholder]="translate.get('Navigate')|async" autocomplete="off" (click)="showSearchPanel = true">
+    <input #search matInput [placeholder]="translate.get('Navigate')|async" autocomplete="off" (click)="openSearchPanel()">
     <button mat-icon-button
             matSuffix
             *ngIf="showSearchPanel"
