@@ -27,7 +27,7 @@ tooltip not overriding
 
 mobile
 
-traduction
+translation fr
 
 orbit not straight
 
