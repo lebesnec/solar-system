@@ -4,14 +4,15 @@
 <mat-accordion multi *ngIf="searchResult && searchResult.length > 0">
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
-      <mat-panel-title>Result</mat-panel-title>
-      <mat-panel-description>{{ searchResult.length }} results</mat-panel-description>
+      <mat-panel-title>
+        {{ searchResult.length | i18nPlural: { '=1': 'NB result', 'other': 'NB results' } | translate: { NB: searchResult.length } }}
+      </mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
         <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
-        <span class="name">{{ body.id }}</span>
+        <span class="name">{{ body.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
@@ -19,12 +20,12 @@
 
 <!-- No search result -->
 <div class="empty-search" *ngIf="searchResult && searchResult.length === 0">
-  <h2>No results</h2>
+  <h2>{{ 'No results' | translate }}</h2>
   <h4>
-    Try
-    <a routerLink="" (click)="onBodySelected(JUPITER)">Jupiter</a>,
-    <a routerLink="" (click)="onBodySelected(MOON)">the Moon</a> or
-    <a routerLink="" (click)="onBodySelected(GANYMEDE)">Ganymede</a>
+    {{ 'Try' | translate }}
+    <a routerLink="" (click)="onBodySelected(JUPITER)">{{ JUPITER.id | translate }}</a>{{ ', ' | translate }}
+    <a routerLink="" (click)="onBodySelected(MOON)">{{ 'the Moon' | translate }}</a>{{ ' or ' | translate }}
+    <a routerLink="" (click)="onBodySelected(GANYMEDE)">{{ GANYMEDE.id | translate }}</a>
   </h4>
 </div>
 
@@ -34,7 +35,7 @@
   <!-- Sun -->
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
-      <mat-panel-title>The sun</mat-panel-title>
+      <mat-panel-title>{{ SUN.id | translate }}</mat-panel-title>
       <mat-panel-description>{{ SUN.satellites.length }} planets</mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -49,8 +50,10 @@
   <!-- Planets -->
   <mat-expansion-panel *ngFor="let planet of SUN.satellites" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
     <mat-expansion-panel-header>
-      <mat-panel-title>{{ planet.id }}</mat-panel-title>
-      <mat-panel-description *ngIf="planet.satellites.length">{{ planet.satellites.length }} moons</mat-panel-description>
+      <mat-panel-title>{{ planet.id | translate }}</mat-panel-title>
+      <mat-panel-description *ngIf="planet.satellites.length">
+        {{ planet.satellites.length | i18nPlural: { '=1': 'NB moon', 'other': 'NB moons' } | translate: { NB: planet.satellites.length } }}
+      </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
@@ -68,8 +71,8 @@
   <!-- Dwarf planets -->
   <mat-expansion-panel class="mat-elevation-z0">
     <mat-expansion-panel-header>
-      <mat-panel-title>Dwarf planets</mat-panel-title>
-      <mat-panel-description>{{ DWARF_PLANETS.length }} planets</mat-panel-description>
+      <mat-panel-title>{{ 'Dwarf planets' | translate }}</mat-panel-title>
+      <mat-panel-description>{{ 'NB planets' | translate:{ NB: DWARF_PLANETS.length } }}</mat-panel-description>
     </mat-expansion-panel-header>
 
     <ng-template ngFor let-planet [ngForOf]="DWARF_PLANETS">
