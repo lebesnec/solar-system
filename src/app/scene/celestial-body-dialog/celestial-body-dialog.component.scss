@@ -2,20 +2,31 @@
   color: white;
 }
 
-::ng-deep .celestial-body-dialog-panel {
-  mat-dialog-container {
-    backdrop-filter: blur(10px);
-    background: hsla(0, 0%, 100%, 0.15);
-  }
+::ng-deep .celestial-body-dialog-panel mat-dialog-container {
+  padding-top: 20px;
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, 0.15);
 }
 
-h2 {
-  display: flex;
+[mat-dialog-title] {
+  margin: -24px -24px 0px -24px !important;
+  padding: 12px 20px 10px 20px;
+  color: #fff;
+  cursor: move;
 }
 
 .close-button {
-  margin-left: auto;
-  margin-right: 0;
+  float: right;
+  top: -44px;
+  right: -14px;
   font-size: 20px;
-  color: rgba(136, 136, 136, 0.5);
+  color: rgba(196, 196, 196, 0.5);
+}
+
+mat-dialog-content {
+  padding-left: 0;
+  padding-right: 0;
+  table {
+    width: 100%;
+  }
 }

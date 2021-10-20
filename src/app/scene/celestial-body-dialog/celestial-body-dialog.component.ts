@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {CelestialBody} from '../scene.model';
+import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 @Component({
   selector: 'app-celestial-body-dialog',
@@ -10,6 +10,7 @@ import {CelestialBody} from '../scene.model';
 export class CelestialBodyDialogComponent implements OnInit {
 
   public body: CelestialBody;
+  public CELESTIAL_BODY_TYPE = CELESTIAL_BODY_TYPE;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: { body: CelestialBody }
