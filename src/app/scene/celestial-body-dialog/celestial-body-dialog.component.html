@@ -13,7 +13,7 @@
 </button>
 
 <mat-dialog-content>
-  <ng-container [ngSwitch]="body.type">
+  <ng-container *ngIf="!MISSING_PICTURES.includes(body)" [ngSwitch]="body.type">
     <img *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" src="/assets/celestial_bodies/{{ body.id }}.jpg" width="300">
     <img *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" src="/assets/celestial_bodies/{{ body.id }}/{{ body.id }}.jpg" width="300">
     <img *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" src="/assets/celestial_bodies/{{ body.id }}/{{ body.id }}.jpg" width="300">

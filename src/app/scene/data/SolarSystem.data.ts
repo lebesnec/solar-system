@@ -3,7 +3,7 @@ import {MERCURY} from './Mercury.data';
 import {VENUS} from './Venus.data';
 import {EARTH} from './Earth.data';
 import {MARS} from './Mars.data';
-import {JUPITER} from './Jupiter.data';
+import {DIA, JUPITER, LYSITHEA, PANDIA, THEMISTO} from './Jupiter.data';
 import {SATURN} from './Saturn.data';
 import {URANUS} from './Uranus.data';
 import {NEPTUNE} from './Neptune.data';
@@ -45,3 +45,7 @@ DWARF_PLANETS.forEach(dwarfPlanet => {
     SOLAR_SYSTEM.push(moon);
   });
 });
+
+export const MISSING_PICTURES = [
+  THEMISTO, PANDIA, LYSITHEA, DIA
+];
