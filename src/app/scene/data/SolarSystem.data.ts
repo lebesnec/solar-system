@@ -3,7 +3,21 @@ import {MERCURY} from './Mercury.data';
 import {VENUS} from './Venus.data';
 import {EARTH} from './Earth.data';
 import {MARS} from './Mars.data';
-import {DIA, JUPITER, LYSITHEA, PANDIA, THEMISTO} from './Jupiter.data';
+import {
+  CARPO,
+  DIA, EUANTHE,
+  EUPHEME,
+  EUPORIE, HARPALYKE,
+  HELIKE, HERMIPPE, IOCASTE,
+  JUPITER,
+  LYSITHEA, MNEME, ORTHOSIE,
+  PANDIA, PRAXIDIKE, S_2003_J_12,
+  S_2003_J_16,
+  S_2003_J_18, S_2003_J_2,
+  S_2010_J_2, S_2016_J_1, S_2017_J_3, S_2017_J_7, S_2017_J_9, THELXINOE,
+  THEMISTO, THYONE,
+  VALETUDO
+} from './Jupiter.data';
 import {SATURN} from './Saturn.data';
 import {URANUS} from './Uranus.data';
 import {NEPTUNE} from './Neptune.data';
@@ -47,5 +61,7 @@ DWARF_PLANETS.forEach(dwarfPlanet => {
 });
 
 export const MISSING_PICTURES = [
-  THEMISTO, PANDIA, LYSITHEA, DIA
+  THEMISTO, PANDIA, LYSITHEA, DIA, CARPO, VALETUDO, EUPORIE, EUPHEME, S_2003_J_18, S_2010_J_2, HELIKE, S_2003_J_16, S_2003_J_2,
+  EUANTHE, S_2017_J_7, HERMIPPE, PRAXIDIKE, THYONE, THELXINOE, S_2017_J_3, MNEME, S_2016_J_1, ORTHOSIE, HARPALYKE, IOCASTE, S_2017_J_9,
+  S_2003_J_12
 ];
