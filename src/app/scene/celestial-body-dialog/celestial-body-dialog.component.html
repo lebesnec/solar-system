@@ -8,40 +8,40 @@
 
 <mat-dialog-content>
   <ng-container [ngSwitch]="body.type">
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ "Star" | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET">{{ "Planet" | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET">{{ "Dwarf planet" | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE">Moon of {{ body.orbitBody.id | translate }}</p>
+    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ 'Star' | translate }}</p>
+    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET">{{ 'Planet' | translate }}</p>
+    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET">{{ 'Dwarf planet' | translate }}</p>
+    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE">{{ 'Moon of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</p>
   </ng-container>
 
   <table>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Mass" target="_blank">Mass</a></td>
-      <td>{{ body.mass | number: '1.0-0' }} kg</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">{{ 'Mass' | translate }}</a></td>
+      <td>{{ 'NB kg' | translate: { NB: body.mass | number: '1.0-0' } }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Radius" target="_blank">Mean radius</a></td>
-      <td>{{ body.radius | number: '1.0-0' }} km</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Radius' | translate" target="_blank">{{ 'Mean radius' | translate }}</a></td>
+      <td>{{ 'NB km' | translate: { NB: body.radius | number: '1.0-0' } }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Mean_anomaly" target="_blank">True anomaly</a></td>
-      <td>{{ body.trueAnomaly | number: '1.0-0' }}°</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Mean_anomaly' | translate" target="_blank">{{ 'True anomaly' | translate }}</a></td>
+      <td>{{ 'NB°' | translate: { NB: body.trueAnomaly | number: '1.0-0' } }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/True_anomaly" target="_blank">Mean anomaly</a></td>
-      <td>{{ body.meanAnomaly | number: '1.0-0' }}°</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/True_anomaly' | translate" target="_blank">{{ 'Mean anomaly' | translate }}</a></td>
+      <td>{{ 'NB°' | translate: { NB: body.meanAnomaly | number: '1.0-0' } }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Orbital_eccentricity" target="_blank">Eccentricity</a></td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Orbital_eccentricity' | translate" target="_blank">{{ 'Eccentricity' | translate }}</a></td>
       <td>{{ body.eccentricity | number: '1.1-10' }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes" target="_blank">Semi-major axis</a></td>
-      <td>{{ body.semiMajorAxis | number: '1.0-0' }} km</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes' | translate" target="_blank">{{ 'Semi-major axis' | translate }}</a></td>
+      <td>{{ 'NB km' | translate: { NB: body.semiMajorAxis | number: '1.0-0' } }}</td>
     </tr>
     <tr>
-      <td><a href="https://en.wikipedia.org/wiki/Orbital_speed" target="_blank">Average orbital speed</a></td>
-      <td>{{ body.speed | number: '1.0-0' }} km/s</td>
+      <td><a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a></td>
+      <td>{{ 'NB km/s' | translate: { NB: body.speed | number: '1.0-0' } }}</td>
     </tr>
   </table>
 </mat-dialog-content>
