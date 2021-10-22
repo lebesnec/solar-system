@@ -256,24 +256,24 @@ export class SceneComponent implements OnInit, AfterViewInit {
     select('#orbit_' + body.id).classed('selected', true);
 
     if (this.celestialBodyDialogRef) {
-      this.celestialBodyDialogRef.close();
+      this.celestialBodyDialogRef.componentInstance.body = body;
+    } else {
+      this.celestialBodyDialogRef = this.dialog.open(CelestialBodyDialogComponent, {
+        width: '400px',
+        maxHeight: '50%',
+        panelClass: 'celestial-body-dialog-panel',
+        closeOnNavigation: true,
+        autoFocus: false,
+        position: {
+          bottom: '50px',
+          right: '50px'
+        },
+        hasBackdrop: false,
+        data: {
+          body
+        }
+      });
     }
-
-    this.celestialBodyDialogRef = this.dialog.open(CelestialBodyDialogComponent, {
-      width: '400px',
-      maxHeight: '50%',
-      panelClass: 'celestial-body-dialog-panel',
-      closeOnNavigation: true,
-      autoFocus: false,
-      position: {
-        bottom: '50px',
-        right: '50px'
-      },
-      hasBackdrop: false,
-      data: {
-        body
-      }
-    });
   }
 
 }
