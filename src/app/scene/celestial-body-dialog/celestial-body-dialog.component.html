@@ -1,5 +1,11 @@
 <h3 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  {{ body.id | translate }}
+  {{ body.id | translate }},
+  <ng-container [ngSwitch]="body.type">
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" class="subtitle">{{ 'star' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" class="subtitle">{{ 'planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" class="subtitle">{{ 'dwarf planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" class="subtitle">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
+  </ng-container>
 </h3>
 
 <button mat-icon-button mat-dialog-close class="close-button">
@@ -7,13 +13,6 @@
 </button>
 
 <mat-dialog-content>
-  <ng-container [ngSwitch]="body.type">
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ 'Star' | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET">{{ 'Planet' | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET">{{ 'Dwarf planet' | translate }}</p>
-    <p *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE">{{ 'Moon of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</p>
-  </ng-container>
-
   <table>
     <tr>
       <td><a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">{{ 'Mass' | translate }}</a></td>
