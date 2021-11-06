@@ -20,6 +20,7 @@
 
 <!-- No search result -->
 <div class="empty-search" *ngIf="searchResult && searchResult.length === 0">
+  <img src="assets/empty_search.svg">
   <h2>{{ 'No results' | translate }}</h2>
   <h4>
     {{ 'Try' | translate }}
