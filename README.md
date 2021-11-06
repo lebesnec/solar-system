@@ -35,4 +35,4 @@ logo
 
 options
 
-info panel
+expand img
