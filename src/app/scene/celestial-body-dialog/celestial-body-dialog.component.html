@@ -1,4 +1,4 @@
-<h3 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   {{ body.id | translate }},
   <ng-container [ngSwitch]="body.type">
     <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" class="subtitle">{{ 'star' | translate }}</ng-container>
@@ -6,7 +6,7 @@
     <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" class="subtitle">{{ 'dwarf planet' | translate }}</ng-container>
     <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" class="subtitle">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
   </ng-container>
-</h3>
+</h2>
 
 <button mat-icon-button mat-dialog-close class="close-button">
   <mat-icon>✖&#xFE0E;</mat-icon>
