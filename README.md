@@ -35,4 +35,7 @@ logo
 
 options
 
+mass scientific notation
+dnd dialog
+
 expand img
