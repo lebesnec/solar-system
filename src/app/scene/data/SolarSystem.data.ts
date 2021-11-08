@@ -139,7 +139,6 @@ export const SUN: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0,
   mass: 1.9885e30,
   radius: 696342,
   semiMajorAxis: 0,

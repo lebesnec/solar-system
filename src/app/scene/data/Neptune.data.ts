@@ -6,7 +6,6 @@ export const NAIAD: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 19e15,
   radius: 30.2,
   semiMajorAxis: 48224,
@@ -24,7 +23,6 @@ export const THALASSA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 35e15,
   radius: 40.7,
   semiMajorAxis: 50074,
@@ -42,7 +40,6 @@ export const DESPINA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 220e15,
   radius: 78,
   semiMajorAxis: 52526,
@@ -60,7 +57,6 @@ export const GALATEA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 212e15,
   radius: 87.4,
   semiMajorAxis: 61953,
@@ -78,7 +74,6 @@ export const LARISSA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 420e15,
   radius: 97,
   semiMajorAxis: 73548,
@@ -96,7 +91,6 @@ export const HIPPOCAMP: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 3e15,
   radius: 17.4,
   semiMajorAxis: 105283,
@@ -114,7 +108,6 @@ export const PROTEUS: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 4400e15,
   radius: 210,
   semiMajorAxis: 117646,
@@ -132,7 +125,6 @@ export const TRITON: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 2139000e15,
   radius: 1352.6,
   semiMajorAxis: 354759,
@@ -150,7 +142,6 @@ export const NEREID: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 2700e15,
   radius: 178.5,
   semiMajorAxis: 5513800,
@@ -168,7 +159,6 @@ export const HALIMEDE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 16e15,
   radius: 31,
   semiMajorAxis: 16681000,
@@ -186,7 +176,6 @@ export const SAO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 6e15,
   radius: 22,
   semiMajorAxis: 22619000,
@@ -204,7 +193,6 @@ export const LAOMEDEIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 5e15,
   radius: 21,
   semiMajorAxis: 23613000,
@@ -222,7 +210,6 @@ export const PSAMATHE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 4e15,
   radius: 20,
   semiMajorAxis: 46705000,
@@ -240,7 +227,6 @@ export const NESO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 15e15,
   radius: 30,
   semiMajorAxis: 50258000,

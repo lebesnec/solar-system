@@ -6,7 +6,6 @@ export const CORDELIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 4.4e16,
   radius: 20,
   semiMajorAxis: 49770,
@@ -24,7 +23,6 @@ export const OPHELIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 5.3e16,
   radius: 21.5,
   semiMajorAxis: 53790,
@@ -42,7 +40,6 @@ export const BIANCA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 9.2e16,
   radius: 25.5,
   semiMajorAxis: 59170,
@@ -60,7 +57,6 @@ export const CRESSIDA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 34e16,
   radius: 40,
   semiMajorAxis: 61780,
@@ -78,7 +74,6 @@ export const DESDEMONA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 18e16,
   radius: 32,
   semiMajorAxis: 62680,
@@ -96,7 +91,6 @@ export const JULIET: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 56e16,
   radius: 47,
   semiMajorAxis: 64350,
@@ -114,7 +108,6 @@ export const PORTIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 170e16,
   radius: 67.5,
   semiMajorAxis: 66090,
@@ -132,7 +125,6 @@ export const ROSALIND: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 25e16,
   radius: 36,
   semiMajorAxis: 69940,
@@ -150,7 +142,6 @@ export const CUPID: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.38e16,
   radius: 9,
   semiMajorAxis: 74800,
@@ -168,7 +159,6 @@ export const BELINDA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 49e16,
   radius: 45,
   semiMajorAxis: 75260,
@@ -186,7 +176,6 @@ export const PERDITA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 1.8e16,
   radius: 15,
   semiMajorAxis: 76400,
@@ -204,7 +193,6 @@ export const PUCK: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 290e16,
   radius: 81,
   semiMajorAxis: 86010,
@@ -222,7 +210,6 @@ export const MAB: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 1.0e16,
   radius: 12.5,
   semiMajorAxis: 97700,
@@ -240,7 +227,6 @@ export const MIRANDA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 6590e16,
   radius: 235.8,
   semiMajorAxis: 129390,
@@ -258,7 +244,6 @@ export const ARIEL: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 135300e16,
   radius: 578.9,
   semiMajorAxis: 191020,
@@ -276,7 +261,6 @@ export const UMBRIEL: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 117200e16,
   radius: 584.7,
   semiMajorAxis: 266300,
@@ -294,7 +278,6 @@ export const TITANIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 352700e16,
   radius: 788.4,
   semiMajorAxis: 435910,
@@ -312,7 +295,6 @@ export const OBERON: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 301400e16,
   radius: 761.4,
   semiMajorAxis: 583520,
@@ -330,7 +312,6 @@ export const FRANCISCO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.72e16,
   radius: 11,
   semiMajorAxis: 4282900,
@@ -348,7 +329,6 @@ export const CALIBAN: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 7.0e16,
   radius: 21,
   semiMajorAxis: 7231100,
@@ -366,7 +346,6 @@ export const STEPHANO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 2.2e16,
   radius: 16,
   semiMajorAxis: 8007400,
@@ -384,7 +363,6 @@ export const TRINCULO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.39e16,
   radius: 9,
   semiMajorAxis: 8505200,
@@ -402,7 +380,6 @@ export const SYCORAX: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 230e16,
   radius: 78.5,
   semiMajorAxis: 12179400,
@@ -420,7 +397,6 @@ export const MARGARET: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.54e16,
   radius: 10,
   semiMajorAxis: 14146700,
@@ -438,7 +414,6 @@ export const PROSPERO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 8.5e16,
   radius: 25,
   semiMajorAxis: 16276800,
@@ -456,7 +431,6 @@ export const SETEBOS: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 7.5e16,
   radius: 24,
   semiMajorAxis: 17420400,
@@ -474,7 +448,6 @@ export const FERDINAND: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.54e16,
   radius: 10,
   semiMajorAxis: 20430000,

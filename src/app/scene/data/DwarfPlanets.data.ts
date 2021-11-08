@@ -24,7 +24,6 @@ export const STYX: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 7.5e15,
   radius: 16 / 2,
   semiMajorAxis: 42656,
@@ -42,7 +41,6 @@ export const NIX: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 4.5e16,
   radius: 49.8 / 2,
   semiMajorAxis: 48694,
@@ -60,7 +58,6 @@ export const KERBEROS: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 4.65e16,
   radius: 19 / 2,
   semiMajorAxis: 57783,
@@ -78,7 +75,6 @@ export const HYDRA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 4.8e16,
   radius: 50.9 / 2,
   semiMajorAxis: 64738,
@@ -134,7 +130,6 @@ export const DYSNOMIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 1.27 * 1.303e22,
   radius: 700,
   semiMajorAxis: 37273,
@@ -170,7 +165,6 @@ export const S_2015_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 5e15, // TODO unknown
   radius: 87.5,
   semiMajorAxis: 21000,
@@ -206,7 +200,6 @@ export const HIIAKA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 1.79e19,
   radius: 160,
   semiMajorAxis: 49880,
@@ -224,7 +217,6 @@ export const NAMAKA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 1.79e18,
   radius: 85,
   semiMajorAxis: 25657,
@@ -260,7 +252,6 @@ export const VANTH: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 3.6e19,
   radius: 475 / 2,
   semiMajorAxis: 8999.8,
@@ -278,7 +269,6 @@ export const ORCUS: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 4.531, // TODO unknown
   mass: 6.348e20,
   radius: 917 / 2,
   semiMajorAxis: 39.174 * 1.496e8,
@@ -296,7 +286,6 @@ export const WEYWOT: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 1.40e21 / 2000,
   radius: 170 / 2,
   semiMajorAxis: 14500,
@@ -314,7 +303,6 @@ export const QUAOAR: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 4.531, // TODO unknown
   mass: 1.40e21,
   radius: 1110 / 2,
   semiMajorAxis: 43.694 * 1.496e8,
@@ -332,7 +320,6 @@ export const XIANGLIU: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0.21, // TODO unknown
   mass: 5e15, // TODO unknown
   radius: 100 / 2,
   semiMajorAxis: 24021,
@@ -350,7 +337,6 @@ export const GONGGONG: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 4.531, // TODO unknown
   mass: 1.75e21,
   radius: 1230 / 2,
   semiMajorAxis: 67.485 * 1.496e8,
@@ -368,7 +354,6 @@ export const SEDNA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 4.531, // TODO unknown
   mass: 1.8e21,
   radius: 1060 / 2,
   semiMajorAxis: 506 * 1.496e8,

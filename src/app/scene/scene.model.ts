@@ -28,7 +28,7 @@ export interface CelestialBody {
     id: string;
     symbol?: string;
     position: Point;
-    speed: number;
+    speed?: number;
     mass: number;
     radius: number;
     semiMajorAxis: number;

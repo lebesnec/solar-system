@@ -6,7 +6,6 @@ export const METIS: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 3.6e16,
   radius: 21.5,
   semiMajorAxis: 128852,
@@ -24,7 +23,6 @@ export const ADRASTEA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.2e16,
   radius: 8.2,
   semiMajorAxis: 129000,
@@ -42,7 +40,6 @@ export const AMALTHEA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 208e16,
   radius: 83.5,
   semiMajorAxis: 181366,
@@ -60,7 +57,6 @@ export const THEBE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 43e16,
   radius: 49.3,
   semiMajorAxis: 222452,
@@ -78,7 +74,6 @@ export const IO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 8931900e16,
   radius: 1821.6,
   semiMajorAxis: 421700,
@@ -96,7 +91,6 @@ export const EUROPA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 4800000e16,
   radius: 1560.8,
   semiMajorAxis: 671034,
@@ -114,7 +108,6 @@ export const GANYMEDE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 14819000e16,
   radius: 2631.2,
   semiMajorAxis: 1070412,
@@ -132,7 +125,6 @@ export const CALLISTO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 10759000e16,
   radius: 2410.3,
   semiMajorAxis: 1882709,
@@ -150,7 +142,6 @@ export const THEMISTO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.069e16,
   radius: 4.5,
   semiMajorAxis: 7405000,
@@ -168,7 +159,6 @@ export const LEDA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.6e16,
   radius: 10.75,
   semiMajorAxis: 11196000,
@@ -186,7 +176,6 @@ export const ERSA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 11348700,
@@ -204,7 +193,6 @@ export const PANDIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 11462300,
@@ -222,7 +210,6 @@ export const HIMALIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 420e16,
   radius: 69.8,
   semiMajorAxis: 11497400,
@@ -240,7 +227,6 @@ export const LYSITHEA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 6.3e16,
   radius: 21.1,
   semiMajorAxis: 11628300,
@@ -258,7 +244,6 @@ export const ELARA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 87e16,
   radius: 39.95,
   semiMajorAxis: 11671600,
@@ -276,7 +261,6 @@ export const DIA: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 12304900,
@@ -294,7 +278,6 @@ export const CARPO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 17151800,
@@ -312,7 +295,6 @@ export const VALETUDO: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 18819000,
@@ -330,7 +312,6 @@ export const EUPORIE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 19593900,
@@ -348,7 +329,6 @@ export const EUPHEME: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20126300,
@@ -366,7 +346,6 @@ export const S_2003_J_18: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20348800,
@@ -384,7 +363,6 @@ export const S_2010_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 20436700,
@@ -402,7 +380,6 @@ export const HELIKE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 20479500,
@@ -420,7 +397,6 @@ export const S_2003_J_16: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20512500,
@@ -438,7 +414,6 @@ export const S_2003_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20554400,
@@ -456,7 +431,6 @@ export const EUANTHE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 20583300,
@@ -474,7 +448,6 @@ export const S_2017_J_7: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20600100,
@@ -492,7 +465,6 @@ export const HERMIPPE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 20666200,
@@ -510,7 +482,6 @@ export const PRAXIDIKE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.043e16,
   radius: 3.5,
   semiMajorAxis: 20682900,
@@ -528,7 +499,6 @@ export const THYONE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 20712800,
@@ -546,7 +516,6 @@ export const THELXINOE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20893300,
@@ -564,7 +533,6 @@ export const S_2017_J_3: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 20976900,
@@ -582,7 +550,6 @@ export const ANANKE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 3.0e16,
   radius: 14.55,
   semiMajorAxis: 21042500,
@@ -600,7 +567,6 @@ export const MNEME: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 21064100,
@@ -618,7 +584,6 @@ export const S_2016_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 21154000,
@@ -636,7 +601,6 @@ export const ORTHOSIE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 21171000,
@@ -654,7 +618,6 @@ export const HARPALYKE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 21280200,
@@ -672,7 +635,6 @@ export const IOCASTE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.019e16,
   radius: 2.5,
   semiMajorAxis: 21431800,
@@ -690,7 +652,6 @@ export const S_2017_J_9: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 21492900,
@@ -708,7 +669,6 @@ export const S_2003_J_12: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 21557700,
@@ -726,7 +686,6 @@ export const S_2003_J_4: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22048600,
@@ -744,7 +703,6 @@ export const ERINOME: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 22354300,
@@ -762,7 +720,6 @@ export const AITNE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 22386500,
@@ -780,7 +737,6 @@ export const HERSE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22408800,
@@ -798,7 +754,6 @@ export const TAYGETE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.016e16,
   radius: 2.5,
   semiMajorAxis: 22433500,
@@ -816,7 +771,6 @@ export const S_2017_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22472900,
@@ -834,7 +788,6 @@ export const S_2017_J_6: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22543800,
@@ -852,7 +805,6 @@ export const EUKELADE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 22576700,
@@ -870,7 +822,6 @@ export const CARME: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 13e16,
   radius: 23.35,
   semiMajorAxis: 22579900,
@@ -888,7 +839,6 @@ export const S_2003_J_19: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22752500,
@@ -906,7 +856,6 @@ export const ISONOE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 22776700,
@@ -924,7 +873,6 @@ export const S_2003_J_10: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22896200,
@@ -942,7 +890,6 @@ export const AUTONOE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 22933400,
@@ -960,7 +907,6 @@ export const PHILOPHROSYNE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22939900,
@@ -978,7 +924,6 @@ export const CYLLENE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22965200,
@@ -996,7 +941,6 @@ export const PASITHEE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22967800,
@@ -1014,7 +958,6 @@ export const S_2010_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 22986900,
@@ -1032,7 +975,6 @@ export const PASIPHAE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 30e16,
   radius: 28.9,
   semiMajorAxis: 23119300,
@@ -1050,7 +992,6 @@ export const SPONDE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23146500,
@@ -1068,7 +1009,6 @@ export const S_2017_J_8: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 23173700,
@@ -1086,7 +1026,6 @@ export const EURYDOME: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 23214500,
@@ -1104,7 +1043,6 @@ export const S_2017_J_5: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23352500,
@@ -1122,7 +1060,6 @@ export const KALYKE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.04e16,
   radius: 3.45,
   semiMajorAxis: 23377400,
@@ -1140,7 +1077,6 @@ export const HEGEMONE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 23422300,
@@ -1158,7 +1094,6 @@ export const KALE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23512200,
@@ -1176,7 +1111,6 @@ export const KALLICHORE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23552900,
@@ -1194,7 +1128,6 @@ export const S_2011_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23714400,
@@ -1212,7 +1145,6 @@ export const S_2017_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23753600,
@@ -1230,7 +1162,6 @@ export const CHALDENE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 23848300,
@@ -1248,7 +1179,6 @@ export const ARCHE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0045e16,
   radius: 1.5,
   semiMajorAxis: 23926500,
@@ -1266,7 +1196,6 @@ export const EIRENE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 23934500,
@@ -1284,7 +1213,6 @@ export const KORE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 23999700,
@@ -1302,7 +1230,6 @@ export const S_2011_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 24114700,
@@ -1320,7 +1247,6 @@ export const S_2003_J_9: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00015e16,
   radius: 0.5,
   semiMajorAxis: 24168700,
@@ -1338,7 +1264,6 @@ export const MEGACLITE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.021e16,
   radius: 2.5,
   semiMajorAxis: 24212300,
@@ -1356,7 +1281,6 @@ export const AOEDE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.009e16,
   radius: 2,
   semiMajorAxis: 24283000,
@@ -1374,7 +1298,6 @@ export const S_2003_J_23: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.0015e16,
   radius: 1,
   semiMajorAxis: 24678200,
@@ -1392,7 +1315,6 @@ export const CALLIRRHOE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.087e16,
   radius: 4.8,
   semiMajorAxis: 24692400,
@@ -1410,7 +1332,6 @@ export const SINOPE: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 7.5e16,
   radius: 17.5,
   semiMajorAxis: 24864100,
