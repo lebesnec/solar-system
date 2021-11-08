@@ -23,7 +23,7 @@
   <table>
     <tr>
       <td><a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">{{ 'Mass' | translate }}</a></td>
-      <td>{{ 'NB kg' | translate: { NB: body.mass | number: '1.0-0' } }}</td>
+      <td>{{ 'NB kg' | translate: { NB: body.mass.toPrecision(3) } }}</td>
     </tr>
     <tr>
       <td><a [href]="'https://en.wikipedia.org/wiki/Radius' | translate" target="_blank">{{ 'Mean radius' | translate }}</a></td>
