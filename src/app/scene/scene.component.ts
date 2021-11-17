@@ -3,6 +3,8 @@ import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.mod
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity} from 'd3-zoom';
+import {range} from 'd3-array';
+import {randomNormal} from 'd3-random';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
@@ -19,6 +21,11 @@ import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 
+const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
+const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
+const MILKY_WAY_ANGLE = -10; // degrees
+const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
+const STAR_MAX_RADIUS = 0.3; // px
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -71,7 +78,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection = select('svg').on('click', () => {
       this.deselectAll();
     });
-    this.groupMilkyWaySelection = this.svgSelection.append('g');
+    this.groupMilkyWaySelection = this.svgSelection.append('g')
+                                                   .attr('class', 'milky-way')
+                                                   .attr('transform', 'rotate(' + MILKY_WAY_ANGLE + ', ' + this.center.x + ', ' + this.center.y + ')');
     this.groupZoomableSelection = this.svgSelection.append('g');
     this.groupStaticSelection = this.svgSelection.append('g');
 
@@ -79,6 +88,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   .attr('class', 'label-path')
                                                   .style('opacity', 0);
 
+    this.initMilkyWay();
     this.initOrbits();
     this.initCelestialBodies();
 
@@ -101,6 +111,30 @@ export class SceneComponent implements OnInit, AfterViewInit {
                           .translate(this.center.x, this.center.y)
                           .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.call(this.d3Zoom.transform, defaultZoom);
+  }
+
+  private initMilkyWay(): void {
+    const randomNormalX = randomNormal(window.innerWidth / 2, MILKY_WAY_RADIUS_X);
+    const randomNormalY = randomNormal(window.innerHeight / 2, MILKY_WAY_RADIUS_Y);
+    const starsData = range(0, NB_STARS).map(i => {
+      return {
+        x: randomNormalX(),
+        y: randomNormalY(),
+        radius: Math.random() * STAR_MAX_RADIUS,
+        opacity: Math.random()
+      };
+    });
+
+    this.groupMilkyWaySelection.selectAll('.star')
+                                .data(starsData)
+                                .join(
+                                  enter => enter.append('circle')
+                                    .attr('class', 'star')
+                                    .attr('r', (star) => star.radius)
+                                    .attr('cx', (star) => star.x)
+                                    .attr('cy', (star) => star.y)
+                                    .style('opacity', (star) => star.opacity)
+                                );
   }
 
   private initCelestialBodies(): void {
