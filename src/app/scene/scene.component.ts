@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
-import {zoom, zoomIdentity} from 'd3-zoom';
+import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
 import {randomNormal} from 'd3-random';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
@@ -25,7 +25,7 @@ const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
 const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
 const MILKY_WAY_ANGLE = -10; // degrees
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
-const STAR_MAX_RADIUS = 0.3; // px
+const STAR_MAX_RADIUS = 0.5; // px
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -92,8 +92,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initOrbits();
     this.initCelestialBodies();
 
-    this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((trad) => {
-      this.bodiesLabels = trad;
+    this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
+      this.bodiesLabels = bodiesLabels;
       this.initZoom();
     });
   }
@@ -103,6 +103,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.scale = e.transform.k;
 
       this.groupZoomableSelection.attr('transform', e.transform);
+      const milkyWayTransform = new ZoomTransform(1, e.transform.x / 2, e.transform.y / 2);
+      this.groupMilkyWaySelection.attr('transform', milkyWayTransform);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
@@ -114,8 +116,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initMilkyWay(): void {
-    const randomNormalX = randomNormal(window.innerWidth / 2, MILKY_WAY_RADIUS_X);
-    const randomNormalY = randomNormal(window.innerHeight / 2, MILKY_WAY_RADIUS_Y);
+    const randomNormalX = randomNormal(0, MILKY_WAY_RADIUS_X);
+    const randomNormalY = randomNormal(0, MILKY_WAY_RADIUS_Y);
     const starsData = range(0, NB_STARS).map(i => {
       return {
         x: randomNormalX(),

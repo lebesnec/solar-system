@@ -43,7 +43,7 @@ export class SceneService {
   }
 
   /**
-   * position in px
+   * positions in px, relative to the sun at (0, 0)
    */
   public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
     const result = d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
@@ -66,7 +66,7 @@ export class SceneService {
   }
 
   /**
-   * in px
+   * in px, relative to the sun at (0, 0)
    */
   public getPositionForTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
@@ -75,7 +75,7 @@ export class SceneService {
     const xKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
 
     // we have the position relative to the orbited body, so we add its
-    // position to have the absolute postion of the orbiting body :
+    // position to have the absolute position of the orbiting body :
     return {
       x: (xKm / KM_TO_PX) + body.orbitBody.position.x,
       y: (yKm / KM_TO_PX) + body.orbitBody.position.y
@@ -85,7 +85,7 @@ export class SceneService {
   /**
    * https://en.wikipedia.org/wiki/Kepler_orbit#Development_of_the_laws
    * Focus point = the orbited body
-   * @returns km
+   * @returns number distance the orbited body in km
    */
   public getDistanceToFocusPoint(body: CelestialBody, trueAnomaly: number): number {
     return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(trueAnomaly * DEG_TO_RAD)));
@@ -93,7 +93,7 @@ export class SceneService {
 
   /**
    * https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes#Orbital_period
-   * @returns hours
+   * @returns number in hours
    */
   public getOrbitalPeriod(body: CelestialBody): number {
     if (body.orbitBody) {
