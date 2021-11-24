@@ -24,6 +24,7 @@ import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-bo
 const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
 const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
 const MILKY_WAY_ANGLE = -10; // degrees
+const MILKY_PARALLAX_RATIO = 10; // move x px in the solar system -> move the milky way x/MILKY_PARALLAX_RATIO px
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
 const NB_POINTS_ORBIT = 180;
@@ -49,7 +50,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private labelsPath: any;
   private width: number = window.innerWidth; // px
   private height: number = window.innerHeight; // px
-  private scale: number;
+  private transform: ZoomTransform;
+  private milkyWayTransform: ZoomTransform;
   private bodiesLabels = {};
   private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }>;
 
@@ -100,19 +102,23 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initZoom(): void {
     this.d3Zoom = zoom().on('zoom', (e) => {
-      this.scale = e.transform.k;
+      this.milkyWayTransform = new ZoomTransform(
+        1,
+        this.milkyWayTransform.x + (e.transform.x - this.transform.x) / MILKY_PARALLAX_RATIO,
+        this.milkyWayTransform.y + (e.transform.y - this.transform.y) / MILKY_PARALLAX_RATIO
+      );
+      this.transform = e.transform;
 
       this.groupZoomableSelection.attr('transform', e.transform);
-      const milkyWayTransform = new ZoomTransform(1, e.transform.x / 2, e.transform.y / 2);
-      this.groupMilkyWaySelection.attr('transform', milkyWayTransform);
+      this.groupMilkyWaySelection.attr('transform', this.milkyWayTransform);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
 
-    const defaultZoom = zoomIdentity
-                          .translate(this.center.x, this.center.y)
-                          .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
-    this.svgSelection.call(this.d3Zoom.transform, defaultZoom);
+    this.transform = zoomIdentity.translate(this.center.x, this.center.y)
+                                 .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+    this.milkyWayTransform = new ZoomTransform(1, this.transform.x, this.transform.y);
+    this.svgSelection.call(this.d3Zoom.transform, this.transform);
   }
 
   private initMilkyWay(): void {
