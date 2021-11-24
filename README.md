@@ -13,13 +13,11 @@ https://sites.google.com/carnegiescience.edu/sheppard/moons/jupitermoons
 
 ## TODO
 
-rings
-
 asteroids
 
 rovers & probe
 
-half-lite planet
+half-lite planet, rings
 
 stars field paralax
 

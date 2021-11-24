@@ -36,6 +36,72 @@ svg {
     fill: rgb(185, 167, 0);
   }
 
+  .celestial-body.venus {
+    stroke: #D7B170;
+    stroke-width: 1;
+    fill: #EBD6A7;
+  }
+
+  .celestial-body.earth {
+    stroke: #213e70;
+    stroke-width: 1;
+    fill: #3B74D6;
+  }
+
+  .celestial-body.mars {
+    stroke: #633725;
+    stroke-width: 1;
+    fill: #DB7755;
+  }
+
+  .celestial-body.jupiter {
+    stroke: #BF8936;
+    stroke-width: 1;
+    fill: #CDC095;
+  }
+
+  .celestial-body.saturn {
+    stroke: #BF8936;
+    stroke-width: 1;
+    fill: #CDC095;
+  }
+
+  .celestial-body.uranus {
+    stroke: #628288;
+    stroke-width: 1;
+    fill: #A3D9E2;
+  }
+
+  .celestial-body.neptune {
+    stroke: #02334b;
+    stroke-width: 1;
+    fill: #0276A5;
+  }
+
+  .celestial-body.pluto {
+    stroke: #6e6054;
+    stroke-width: 1;
+    fill: #d5b89f;
+  }
+
+  .celestial-body.io {
+    stroke: #8f8237;
+    stroke-width: 1;
+    fill: #D6C251;
+  }
+
+  .celestial-body.europa {
+    stroke: #654E2E;
+    stroke-width: 1;
+    fill: #E5C36C;
+  }
+
+  .celestial-body.titan {
+    stroke: #8c7e3d;
+    stroke-width: 1;
+    fill: #DEC863;
+  }
+
   .label {
     fill: white;
     cursor: pointer;
