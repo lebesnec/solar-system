@@ -71,8 +71,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe((body) => {
-      this.select(body);
-      this.zoomTo(body);
+      if (body) {
+        this.select(body);
+        this.zoomTo(body);
+      } else {
+        this.deselectAll();
+        this.deZoom();
+      }
     });
   }
 
@@ -257,6 +262,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
                       this.center.y + ((-bbox.y - bbox.height / 2) * scale)
                     )
                     .scale(scale);
+    this.svgSelection.transition()
+                      .duration(ZOOM_TRANSITION_MS)
+                      .call(this.d3Zoom.transform, zoomTo);
+  }
+
+  private deZoom(): void {
+    const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
+                .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);

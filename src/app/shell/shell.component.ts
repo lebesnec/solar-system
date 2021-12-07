@@ -36,6 +36,15 @@ export class ShellComponent implements OnInit {
     });
   }
 
+  public onLogoClick(): void {
+    if (this.showSearchPanel) {
+      this.showSearchPanel = false;
+    } else {
+      this.dialog.closeAll();
+      this.searchPanelService.onBodySelected.next(null);
+    }
+  }
+
   public openSearchPanel(): void {
     this.dialog.closeAll();
     this.showSearchPanel = true;

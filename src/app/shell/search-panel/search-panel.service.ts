@@ -7,7 +7,7 @@ import {CelestialBody} from '../../scene/scene.model';
 })
 export class SearchPanelService {
 
-  public onBodySelected: Subject<CelestialBody> = new Subject();
+  public onBodySelected: Subject<CelestialBody | null> = new Subject();
 
   constructor() { }
 

@@ -28,6 +28,7 @@ mat-toolbar {
     left: 0;
     z-index: 2;
     height: $toolbar-height;
+    cursor: pointer;
   }
 
   .search-field {
