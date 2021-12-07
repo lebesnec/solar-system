@@ -87,8 +87,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupStaticSelection = this.svgSelection.append('g');
 
     this.labelsPath = this.groupStaticSelection.append('path')
-                                                  .attr('class', 'label-path')
-                                                  .style('opacity', 0);
+                                                .attr('class', 'label-path')
+                                                .style('opacity', 0);
 
     this.initMilkyWay();
     this.initOrbits();
@@ -110,7 +110,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.transform = e.transform;
 
       this.groupZoomableSelection.attr('transform', e.transform);
-      this.groupMilkyWaySelection.attr('transform', this.milkyWayTransform);
+      this.groupMilkyWaySelection.attr('transform', `${this.milkyWayTransform} rotate(${MILKY_WAY_ANGLE})`);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
