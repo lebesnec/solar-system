@@ -5,10 +5,7 @@
         svg {
           stroke: #c5c5c5;
           fill: #c5c5c5;
-        }
-        svg:hover {
-          stroke: green;
-          fill: green;
+          cursor: pointer;
         }
       </style>
     </defs>
