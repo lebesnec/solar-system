@@ -82,7 +82,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.svgSelection = select('svg').on('click', () => {
+    this.svgSelection = select('.scene').on('click', () => {
       this.deselectAll();
     });
     this.groupMilkyWaySelection = this.svgSelection.append('g')

@@ -28,7 +28,14 @@ mat-toolbar {
     left: 0;
     z-index: 2;
     height: $toolbar-height;
+    width: $toolbar-height;
     cursor: pointer;
+    stroke: #c5c5c5;
+    fill: #c5c5c5;
+  }
+  .logo:hover {
+    stroke: #838383;
+    fill: #838383;
   }
 
   .search-field {
