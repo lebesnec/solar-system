@@ -1,3 +1,5 @@
+@import '~src/custom-theme';
+
 :host {
   display: block;
   width: 100%;
@@ -27,15 +29,30 @@ mat-toolbar {
     top: 0;
     left: 0;
     z-index: 2;
+    cursor: pointer;
+    height: $toolbar-height;
+  }
+  .logo svg {
     height: $toolbar-height;
     width: $toolbar-height;
-    cursor: pointer;
     stroke: #c5c5c5;
     fill: #c5c5c5;
   }
+  .logo h1 {
+    display: inline-block;
+    line-height: $toolbar-height;
+    vertical-align: top;
+    color: white;
+    font-weight: lighter;
+  }
   .logo:hover {
-    stroke: #838383;
-    fill: #838383;
+    svg {
+      stroke: mat-color($solar-system-primary);
+      fill: mat-color($solar-system-primary);
+    }
+    h1 {
+      color: mat-color($solar-system-primary);
+    }
   }
 
   .search-field {
