@@ -19,7 +19,7 @@ rovers & probe
 
 half-lite planet, rings
 
-stars field paralax
+cloudy milky way
 
 tooltip not overriding
 
