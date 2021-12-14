@@ -29,8 +29,6 @@ translation fr
 
 orbit not straight
 
-logo
-
 options
 
 dnd dialog
