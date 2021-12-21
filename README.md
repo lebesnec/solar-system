@@ -34,3 +34,5 @@ options
 dnd dialog
 
 expand img
+
+favicon
