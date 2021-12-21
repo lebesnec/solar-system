@@ -20,6 +20,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CelestialBodyDialogComponent } from './scene/celestial-body-dialog/celestial-body-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SettingsPanelComponent } from './shell/settings-panel/settings-panel.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ShellComponent,
     SceneComponent,
     SearchPanelComponent,
-    CelestialBodyDialogComponent
+    CelestialBodyDialogComponent,
+    SettingsPanelComponent
   ],
   imports: [
     BrowserModule,

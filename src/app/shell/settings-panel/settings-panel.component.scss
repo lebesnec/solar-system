@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, .3) !important;
+}
+
+mat-divider {
+  padding-bottom: 10px;
+}

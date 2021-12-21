@@ -13,16 +13,26 @@
     <input #search matInput [placeholder]="translate.get('Navigate')|async" autocomplete="off" (click)="openSearchPanel()">
     <button mat-icon-button
             matSuffix
-            *ngIf="showSearchPanel"
-            (click)="search.value ? search.value = '' : showSearchPanel = false">
+            *ngIf="showSearchPanel && search.value && search.value !== ''"
+            (click)="search.value = ''">
       ✖&#xFE0E;
     </button>
   </mat-form-field>
+
+  <button *ngIf="showSettingsPanel || showSearchPanel" mat-icon-button class="close-button" (click)="onCloseClick()">
+    ✖&#xFE0E;
+  </button>
+  <button  *ngIf="!showSettingsPanel && !showSearchPanel" mat-icon-button class="setting-button" (click)="openSettingsPanel()">
+    &equiv;
+  </button>
 </mat-toolbar>
 
 <div class="content">
   <router-outlet></router-outlet>
 
-  <app-search-panel *ngIf="showSearchPanel" @searchPanelAnimation [search]="search.value">
+  <app-search-panel *ngIf="showSearchPanel" @panelAnimation [search]="search.value">
   </app-search-panel>
+
+  <app-settings-panel *ngIf="showSettingsPanel" @panelAnimation>
+  </app-settings-panel>
 </div>

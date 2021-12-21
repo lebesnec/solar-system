@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   animations: [
-    trigger('searchPanelAnimation', [
+    trigger('panelAnimation', [
       transition( ':enter', [
         style({ opacity: 0 }),
         animate(100, style({ opacity: 1 }))
@@ -23,6 +23,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class ShellComponent implements OnInit {
 
   public showSearchPanel = false;
+  public showSettingsPanel = false;
 
   constructor(
     public translate: TranslateService,
@@ -47,7 +48,20 @@ export class ShellComponent implements OnInit {
 
   public openSearchPanel(): void {
     this.dialog.closeAll();
+    this.showSettingsPanel = false;
     this.showSearchPanel = true;
+  }
+
+  public onCloseClick(): void {
+    this.dialog.closeAll();
+    this.showSettingsPanel = false;
+    this.showSearchPanel = false;
+  }
+
+  public openSettingsPanel(): void {
+    this.dialog.closeAll();
+    this.showSearchPanel = false;
+    this.showSettingsPanel = true;
   }
 
 }
