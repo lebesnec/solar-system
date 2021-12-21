@@ -4,6 +4,11 @@
   background: hsla(0, 0%, 100%, .3) !important;
 }
 
-mat-divider {
-  padding-bottom: 10px;
+mat-drawer-container, mat-drawer {
+  background-color: transparent;
+  height: 100%;
+}
+
+mat-drawer {
+  min-width: 200px;
 }

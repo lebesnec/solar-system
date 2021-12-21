@@ -1,6 +1,16 @@
 <mat-divider></mat-divider>
 
-settings
-contact
-about
-credits
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <mat-list role="list">
+      <mat-list-item role="listitem">settings</mat-list-item>
+      <mat-list-item role="listitem">contact</mat-list-item>
+      <mat-list-item role="listitem">about</mat-list-item>
+      <mat-list-item role="listitem">credits</mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    Main content
+  </mat-drawer-content>
+</mat-drawer-container>
