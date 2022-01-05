@@ -40,6 +40,8 @@ export class ShellComponent implements OnInit {
   public onLogoClick(): void {
     if (this.showSearchPanel) {
       this.showSearchPanel = false;
+    } else if (this.showSettingsPanel) {
+      this.showSettingsPanel = false;
     } else {
       this.dialog.closeAll();
       this.searchPanelService.onBodySelected.next(null);

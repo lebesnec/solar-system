@@ -5,8 +5,13 @@
 }
 
 mat-drawer-container, mat-drawer {
+  color: white;
   background-color: transparent;
   height: 100%;
+}
+
+mat-nav-list a {
+  color: white;
 }
 
 mat-drawer {
