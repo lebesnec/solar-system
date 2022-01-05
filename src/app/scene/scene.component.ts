@@ -26,6 +26,10 @@ const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
 const MILKY_WAY_ANGLE = -10; // degrees
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
+
+const GRID_MARKER_SIZE = 10; // px
+const GRID_MARKER_SPACING = 300; // px
+
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -94,6 +98,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .style('opacity', 0);
 
     this.initMilkyWay();
+    this.initGrid();
     this.initOrbits();
     this.initCelestialBodies();
 
@@ -133,12 +138,46 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 .data(starsData)
                                 .join(
                                   enter => enter.append('circle')
-                                    .attr('class', 'star')
-                                    .attr('r', (star) => star.radius)
-                                    .attr('cx', (star) => star.x)
-                                    .attr('cy', (star) => star.y)
-                                    .style('opacity', (star) => star.opacity)
+                                                .attr('class', 'star')
+                                                .attr('r', (star) => star.radius)
+                                                .attr('cx', (star) => star.x)
+                                                .attr('cy', (star) => star.y)
+                                                .style('opacity', (star) => star.opacity)
                                 );
+  }
+
+  private initGrid(): void {
+    const rangeX = range(0, window.innerWidth, GRID_MARKER_SPACING);
+    const rangeY = range(0, window.innerHeight, GRID_MARKER_SPACING);
+
+    const data: Point[] = [];
+    rangeX.forEach((x) => {
+      rangeY.forEach((y) => {
+        data.push({ x, y });
+      });
+    });
+
+    this.groupStaticSelection.selectAll('.gridV')
+                              .data(data, (d) => 'gridV_' + d.x + '_' + d.y)
+                              .join(
+                                enter => enter.append('path')
+                                                .attr('id', (d) => 'gridV_' + d.x + '_' + d.y)
+                                                .attr('class', 'gridV')
+                                                .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2)} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
+                                update => update.attr('x', (d) => d.x)
+                                                .attr('y', (d) => d.y)
+                              );
+
+    this.groupStaticSelection.selectAll('.gridH')
+                              .data(data, (d) => 'gridH_' + d.x + '_' + d.y)
+                              .join(
+                                enter => enter.append('path')
+                                              .attr('id', (d) => 'gridH_' + d.x + '_' + d.y)
+                                              .attr('class', 'gridH')
+                                              .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2)} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
+                                update => update.attr('x', (d) => d.x)
+                                                .attr('y', (d) => d.y)
+                              );
   }
 
   private initCelestialBodies(): void {
@@ -155,7 +194,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .on('click', (event, d) => {
                                                   this.select(d);
                                                   event.stopPropagation();
-                                                }),
+                                                })
                                 );
   }
 
