@@ -163,7 +163,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 enter => enter.append('path')
                                                 .attr('id', (d) => 'gridV_' + d.x + '_' + d.y)
                                                 .attr('class', 'gridV')
-                                                .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2)} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
+                                                .attr('shape-rendering', 'crispEdges')
+                                                .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2) - 1} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
                                 update => update.attr('x', (d) => d.x)
                                                 .attr('y', (d) => d.y)
                               );
@@ -174,7 +175,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 enter => enter.append('path')
                                               .attr('id', (d) => 'gridH_' + d.x + '_' + d.y)
                                               .attr('class', 'gridH')
-                                              .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2)} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
+                                              .attr('shape-rendering', 'crispEdges')
+                                              .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2) - 1} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
                                 update => update.attr('x', (d) => d.x)
                                                 .attr('y', (d) => d.y)
                               );
