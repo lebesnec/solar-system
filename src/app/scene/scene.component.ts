@@ -27,7 +27,7 @@ const MILKY_WAY_ANGLE = -10; // degrees
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
 
-const GRID_MARKER_SIZE = 10; // px
+const GRID_MARKER_SIZE = 30; // px
 const GRID_MARKER_SPACING = 300; // px
 
 const NB_POINTS_ORBIT = 180;
@@ -147,8 +147,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initGrid(): void {
-    const rangeX = range(0, window.innerWidth, GRID_MARKER_SPACING);
-    const rangeY = range(0, window.innerHeight, GRID_MARKER_SPACING);
+    const rangeX = range(GRID_MARKER_SPACING / 2, window.innerWidth + GRID_MARKER_SPACING / 2, GRID_MARKER_SPACING);
+    const rangeY = range(GRID_MARKER_SPACING / 2, window.innerHeight + GRID_MARKER_SPACING / 2, GRID_MARKER_SPACING);
 
     const data: Point[] = [];
     rangeX.forEach((x) => {
