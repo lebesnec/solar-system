@@ -3,14 +3,29 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened>
     <mat-nav-list>
-      <a mat-list-item routerLink="route" routerLinkActive="active">settings</a>
-      <a mat-list-item routerLink="route" routerLinkActive="active">contact</a>
-      <a mat-list-item routerLink="route" routerLinkActive="active">about</a>
-      <a mat-list-item routerLink="route" routerLinkActive="active">credits</a>
+      <a mat-list-item (click)="currrentSection = Section.SETTINGS"
+                       [ngClass]="{ active: currrentSection === Section.SETTINGS }">
+        {{ 'Settings' | translate }}
+      </a>
+      <a mat-list-item (click)="currrentSection = Section.CONTACT"
+                       [ngClass]="{ active: currrentSection === Section.CONTACT }">
+        {{ 'Contact' | translate }}
+      </a>
+      <a mat-list-item (click)="currrentSection = Section.ABOUT"
+                       [ngClass]="{ active: currrentSection === Section.ABOUT }">
+        {{ 'About' | translate }}
+      </a>
+      <a mat-list-item (click)="currrentSection = Section.CREDITS"
+                       [ngClass]="{ active: currrentSection === Section.CREDITS }">
+        {{ 'Credits' | translate }}
+      </a>
     </mat-nav-list>
   </mat-drawer>
 
-  <mat-drawer-content>
-    Main content
+  <mat-drawer-content [ngSwitch]="currrentSection">
+    <app-settings *ngSwitchCase="Section.SETTINGS"></app-settings>
+    <app-contact *ngSwitchCase="Section.CONTACT"></app-contact>
+    <app-about *ngSwitchCase="Section.ABOUT"></app-about>
+    <app-credits *ngSwitchCase="Section.CREDITS"></app-credits>
   </mat-drawer-content>
 </mat-drawer-container>

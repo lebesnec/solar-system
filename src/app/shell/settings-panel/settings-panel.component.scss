@@ -13,6 +13,9 @@ mat-drawer-container, mat-drawer {
 mat-nav-list a {
   color: white;
 }
+mat-nav-list a.active {
+  background-color: #868686;
+}
 
 mat-drawer {
   min-width: 200px;

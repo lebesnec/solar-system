@@ -23,6 +23,10 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CelestialBodyDialogComponent } from './scene/celestial-body-dialog/celestial-body-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SettingsPanelComponent } from './shell/settings-panel/settings-panel.component';
+import { SettingsComponent } from './shell/settings-panel/settings/settings.component';
+import { ContactComponent } from './shell/settings-panel/contact/contact.component';
+import { AboutComponent } from './shell/settings-panel/about/about.component';
+import { CreditsComponent } from './shell/settings-panel/credits/credits.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,7 +39,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SceneComponent,
     SearchPanelComponent,
     CelestialBodyDialogComponent,
-    SettingsPanelComponent
+    SettingsPanelComponent,
+    SettingsComponent,
+    ContactComponent,
+    AboutComponent,
+    CreditsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        deps: [ HttpClient ]
       }
     }),
     LayoutModule,
@@ -64,6 +72,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatListModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
