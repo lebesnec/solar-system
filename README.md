@@ -40,5 +40,3 @@ expand img
 favicon
 
 resize windows -> redraw
-
-disable text selection ?
