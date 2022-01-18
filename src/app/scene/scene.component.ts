@@ -46,9 +46,9 @@ const ZOOM_TRANSITION_MS = 500; // ms
 export class SceneComponent implements OnInit, AfterViewInit {
 
   private svgSelection: any;
-  private groupMilkyWaySelection: any;
-  private groupZoomableSelection: any;
-  private groupStaticSelection: any;
+  private groupBackgroundSelection: any;
+  private groupZoomSelection: any;
+  private groupForegroundSelection: any;
   private d3Zoom: any;
   private labelsPath: any;
   private width: number = window.innerWidth; // px
@@ -87,15 +87,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection = select('.scene').on('click', () => {
       this.deselectAll();
     });
-    this.groupMilkyWaySelection = this.svgSelection.append('g')
-                                                   .attr('class', 'milky-way')
-                                                   .attr('transform', 'rotate(' + MILKY_WAY_ANGLE + ', ' + this.center.x + ', ' + this.center.y + ')');
-    this.groupZoomableSelection = this.svgSelection.append('g');
-    this.groupStaticSelection = this.svgSelection.append('g');
+    this.groupBackgroundSelection = this.svgSelection.append('g');
+    this.groupZoomSelection = this.svgSelection.append('g');
+    this.groupForegroundSelection = this.svgSelection.append('g');
 
-    this.labelsPath = this.groupStaticSelection.append('path')
-                                                .attr('class', 'label-path')
-                                                .style('opacity', 0);
+    this.labelsPath = this.groupForegroundSelection.append('path')
+                                                    .attr('class', 'label-path')
+                                                    .style('opacity', 0);
 
     this.initMilkyWay();
     this.initGrid();
@@ -112,7 +110,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.d3Zoom = zoom().on('zoom', (e) => {
       this.transform = e.transform;
 
-      this.groupZoomableSelection.attr('transform', e.transform);
+      this.groupZoomSelection.attr('transform', e.transform);
       this.initLabels();
     });
     this.svgSelection.call(this.d3Zoom);
@@ -134,7 +132,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
       };
     });
 
-    this.groupMilkyWaySelection.selectAll('.star')
+    const groupMilkyWaySelection = this.groupBackgroundSelection.append('g')
+                                                                .attr('class', 'milky-way')
+                                                                .attr('transform', 'rotate(' + MILKY_WAY_ANGLE + ', ' + this.center.x + ', ' + this.center.y + ')');
+
+    groupMilkyWaySelection.selectAll('.star')
                                 .data(starsData)
                                 .join(
                                   enter => enter.append('circle')
@@ -157,33 +159,33 @@ export class SceneComponent implements OnInit, AfterViewInit {
       });
     });
 
-    this.groupStaticSelection.selectAll('.gridV')
-                              .data(data, (d) => 'gridV_' + d.x + '_' + d.y)
-                              .join(
-                                enter => enter.append('path')
-                                                .attr('id', (d) => 'gridV_' + d.x + '_' + d.y)
-                                                .attr('class', 'gridV')
-                                                .attr('shape-rendering', 'crispEdges')
-                                                .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2) - 1} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
-                                update => update.attr('x', (d) => d.x)
-                                                .attr('y', (d) => d.y)
-                              );
+    this.groupBackgroundSelection.selectAll('.gridV')
+                                .data(data, (d) => 'gridV_' + d.x + '_' + d.y)
+                                .join(
+                                  enter => enter.append('path')
+                                                  .attr('id', (d) => 'gridV_' + d.x + '_' + d.y)
+                                                  .attr('class', 'gridV')
+                                                  .attr('shape-rendering', 'crispEdges')
+                                                  .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2) - 1} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
+                                  update => update.attr('x', (d) => d.x)
+                                                  .attr('y', (d) => d.y)
+                                );
 
-    this.groupStaticSelection.selectAll('.gridH')
-                              .data(data, (d) => 'gridH_' + d.x + '_' + d.y)
-                              .join(
-                                enter => enter.append('path')
-                                              .attr('id', (d) => 'gridH_' + d.x + '_' + d.y)
-                                              .attr('class', 'gridH')
-                                              .attr('shape-rendering', 'crispEdges')
-                                              .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2) - 1} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
-                                update => update.attr('x', (d) => d.x)
-                                                .attr('y', (d) => d.y)
-                              );
+    this.groupBackgroundSelection.selectAll('.gridH')
+                                .data(data, (d) => 'gridH_' + d.x + '_' + d.y)
+                                .join(
+                                  enter => enter.append('path')
+                                                .attr('id', (d) => 'gridH_' + d.x + '_' + d.y)
+                                                .attr('class', 'gridH')
+                                                .attr('shape-rendering', 'crispEdges')
+                                                .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2) - 1} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
+                                  update => update.attr('x', (d) => d.x)
+                                                  .attr('y', (d) => d.y)
+                                );
   }
 
   private initCelestialBodies(): void {
-    this.groupZoomableSelection.selectAll('.celestial-body')
+    this.groupZoomSelection.selectAll('.celestial-body')
                                 .data(SOLAR_SYSTEM, (d) => d.id)
                                 .join(
                                   enter => enter.append('circle')
@@ -211,7 +213,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         });
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
 
-    this.groupZoomableSelection.selectAll('.orbit')
+    this.groupZoomSelection.selectAll('.orbit')
                                .data(orbitsData, (d) => d.body.id)
                                .join(
                                  enter => enter.append('path')
@@ -246,7 +248,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     this.labelsPath.style('opacity', 0);
 
-    const labels = this.groupStaticSelection.selectAll('.label')
+    const labels = this.groupForegroundSelection.selectAll('.label')
                        .data(labelsData, (d) => d.body.id)
                        .join(
                         enter => enter.append('text')
