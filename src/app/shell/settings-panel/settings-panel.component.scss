@@ -10,6 +10,10 @@ mat-drawer-container, mat-drawer {
   height: 100%;
 }
 
+mat-nav-list {
+  padding-top: 0;
+}
+
 mat-nav-list a {
   color: white;
 }
@@ -19,4 +23,8 @@ mat-nav-list a.active {
 
 mat-drawer {
   min-width: 200px;
+}
+
+mat-drawer-content {
+  padding: 20px;
 }
