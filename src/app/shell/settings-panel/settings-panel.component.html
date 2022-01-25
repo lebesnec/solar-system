@@ -19,6 +19,10 @@
                        [ngClass]="{ active: currrentSection === Section.CREDITS }">
         {{ 'Credits' | translate }}
       </a>
+      <a mat-list-item (click)="currrentSection = Section.LEGALS"
+         [ngClass]="{ active: currrentSection === Section.LEGALS }">
+        {{ 'Legals' | translate }}
+      </a>
     </mat-nav-list>
   </mat-drawer>
 
@@ -27,5 +31,6 @@
     <app-contact *ngSwitchCase="Section.CONTACT"></app-contact>
     <app-about *ngSwitchCase="Section.ABOUT"></app-about>
     <app-credits *ngSwitchCase="Section.CREDITS"></app-credits>
+    <app-legals *ngSwitchCase="Section.LEGALS"></app-legals>
   </mat-drawer-content>
 </mat-drawer-container>

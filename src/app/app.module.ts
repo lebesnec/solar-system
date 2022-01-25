@@ -27,6 +27,7 @@ import { SettingsComponent } from './shell/settings-panel/settings/settings.comp
 import { ContactComponent } from './shell/settings-panel/contact/contact.component';
 import { AboutComponent } from './shell/settings-panel/about/about.component';
 import { CreditsComponent } from './shell/settings-panel/credits/credits.component';
+import { LegalsComponent } from './shell/settings-panel/legals/legals.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,7 +44,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SettingsComponent,
     ContactComponent,
     AboutComponent,
-    CreditsComponent
+    CreditsComponent,
+    LegalsComponent
   ],
   imports: [
     BrowserModule,
