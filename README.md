@@ -37,8 +37,6 @@ dnd dialog
 
 expand img
 
-favicon
-
 resize windows -> redraw
 
 faq / legals
