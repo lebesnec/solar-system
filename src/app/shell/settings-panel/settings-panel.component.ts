@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 enum Section {
  ABOUT, CONTACT, SETTINGS, LEGALS
@@ -9,14 +9,11 @@ enum Section {
   templateUrl: './settings-panel.component.html',
   styleUrls: ['./settings-panel.component.scss']
 })
-export class SettingsPanelComponent implements OnInit {
+export class SettingsPanelComponent {
 
   public Section = Section;
   public currrentSection: Section = Section.SETTINGS;
 
   constructor() { }
-
-  public ngOnInit(): void {
-  }
 
 }
