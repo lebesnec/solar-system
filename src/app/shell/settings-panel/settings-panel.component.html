@@ -3,20 +3,16 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened>
     <mat-nav-list>
-      <a mat-list-item (click)="currrentSection = Section.SETTINGS"
-                       [ngClass]="{ active: currrentSection === Section.SETTINGS }">
+      <a mat-list-item (click)="currrentSection = Section.SETTINGS" [ngClass]="{ active: currrentSection === Section.SETTINGS }">
         {{ 'Settings' | translate }}
       </a>
-      <a mat-list-item (click)="currrentSection = Section.CONTACT"
-                       [ngClass]="{ active: currrentSection === Section.CONTACT }">
+      <a mat-list-item (click)="currrentSection = Section.CONTACT" [ngClass]="{ active: currrentSection === Section.CONTACT }">
         {{ 'Contact' | translate }}
       </a>
-      <a mat-list-item (click)="currrentSection = Section.ABOUT"
-                       [ngClass]="{ active: currrentSection === Section.ABOUT }">
+      <a mat-list-item (click)="currrentSection = Section.ABOUT" [ngClass]="{ active: currrentSection === Section.ABOUT }">
         {{ 'About' | translate }}
       </a>
-      <a mat-list-item (click)="currrentSection = Section.LEGALS"
-         [ngClass]="{ active: currrentSection === Section.LEGALS }">
+      <a mat-list-item (click)="currrentSection = Section.LEGALS" [ngClass]="{ active: currrentSection === Section.LEGALS }">
         {{ 'Legals' | translate }}
       </a>
     </mat-nav-list>
