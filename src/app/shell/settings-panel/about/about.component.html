@@ -1,24 +1,20 @@
-<p>Made with ❤ by <a href="https://github.com/lebesnec" target="_blank">Christophe Le Besnerais</a> in <a href="https://goo.gl/maps/LYnctkZZYqTdrsfCA" target="_blank">Grenoble, France</a>.</p>
+<p [innerHTML]="'ABOUT_CONTENT_1' | translate"></p>
 
-<h1>Method of calculation</h1>
-<p><a href="https://en.wikipedia.org/wiki/Kepler_orbit" target="_blank">Kepler's first law of planetary motion</a> is used to calculate the orbit of the celestial bodies around their orbited object.</p>
-<p>This mean that we do not take into account things like gravitational interactions with other objects, effects of general relativity…</p>
-<p>All orbits and celestial bodies are also displayed on the same plane which is not the case in the real world!</p>
+<h1>{{ 'Method of calculation' | translate }}</h1>
+<p [innerHTML]="'ABOUT_CONTENT_2' | translate"></p>
+<p [innerHTML]="'ABOUT_CONTENT_3' | translate"></p>
+<p [innerHTML]="'ABOUT_CONTENT_4' | translate"></p>
 
-<h1>Credits</h1>
-<p>This product was made possible thanks to the in-depth articles about celestial mechanics from <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>.</p>
-<p>The data for the orbits of the planets and moons come from:</p>
+<h1>{{ 'Credits' | translate }}</h1>
+<p [innerHTML]="'ABOUT_CONTENT_5' | translate"></p>
+<p [innerHTML]="'ABOUT_CONTENT_6' | translate"></p>
 <ul>
-  <li>
-    <a href="https://ssd.jpl.nasa.gov" target="_blank">Solar System Dynamics from the Jet Propulsion Laboratory at NASA</a>
-  </li>
-  <li>
-    <a href="https://sites.google.com/carnegiescience.edu/sheppard/moons" target="_blank">Scott S. Sheppard from the Earth & Planets Laboratory at Carnegie Science</a>
-  </li>
+  <li [innerHTML]="'ABOUT_CONTENT_7' | translate"></li>
+  <li [innerHTML]="'ABOUT_CONTENT_8' | translate"></li>
 </ul>
-<p>Images of celestial bodies courtesy of <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>.</p>
+<p [innerHTML]="'ABOUT_CONTENT_8' | translate">Images of celestial bodies courtesy of <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>.</p>
 
-<h1>Built with</h1>
+<h1>{{ 'Built with' | translate }}</h1>
 <a href="https://angular.io" target="_blank">
   <img alt="logo angular" height="100" src="assets/angular.png">
 </a>
