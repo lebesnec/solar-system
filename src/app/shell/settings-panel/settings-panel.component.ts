@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 enum Section {
- ABOUT, CONTACT, CREDITS, SETTINGS, LEGALS
+ ABOUT, CONTACT, SETTINGS, LEGALS
 }
 
 @Component({

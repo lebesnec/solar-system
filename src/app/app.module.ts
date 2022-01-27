@@ -26,7 +26,6 @@ import { SettingsPanelComponent } from './shell/settings-panel/settings-panel.co
 import { SettingsComponent } from './shell/settings-panel/settings/settings.component';
 import { ContactComponent } from './shell/settings-panel/contact/contact.component';
 import { AboutComponent } from './shell/settings-panel/about/about.component';
-import { CreditsComponent } from './shell/settings-panel/credits/credits.component';
 import { LegalsComponent } from './shell/settings-panel/legals/legals.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -44,7 +43,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SettingsComponent,
     ContactComponent,
     AboutComponent,
-    CreditsComponent,
     LegalsComponent
   ],
   imports: [
