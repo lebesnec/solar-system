@@ -1,3 +1,36 @@
+@import '~src/custom-theme';
+
 :host {
   display: block;
+}
+
+:host ::ng-deep mat-button-toggle button {
+  width: 150px;
+  height: 100px;
+}
+
+.mat-button-toggle {
+  background-color: transparent;
+}
+
+.mat-button-toggle-checked {
+  background-color: mat-color($solar-system-primary, 0.2);
+}
+
+:host ::ng-deep .mat-button-toggle .mat-button-toggle-label-content {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.check {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+  line-height: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color:  mat-color($solar-system-primary);
 }

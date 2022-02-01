@@ -7,6 +7,13 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
+  public isGridOn = true;
+
   constructor() { }
+
+  public onGridChange(on: boolean): void {
+    this.isGridOn = on;
+    console.log(on);
+  }
 
 }

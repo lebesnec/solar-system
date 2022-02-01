@@ -1,5 +1,21 @@
-show grid
+<h1>Grid reticule</h1>
+<mat-button-toggle-group [value]="isGridOn" (change)="onGridChange($event.value)">
+  <mat-button-toggle [value]="true">
 
+    <div *ngIf="isGridOn" class="check">✔</div>
+  </mat-button-toggle>
+  <mat-button-toggle [value]="false">
+    
+    <div *ngIf="!isGridOn" class="check">✔</div>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+
+<br>
+<br>
+<br>
+<br>
+<p>
 show orbit
-
 theme
+</p>
