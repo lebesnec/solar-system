@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SettingsService} from '../settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,13 +8,22 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
-  public isGridOn = true;
-
-  constructor() { }
-
-  public onGridChange(on: boolean): void {
-    this.isGridOn = on;
-    console.log(on);
+  get gridOn(): boolean {
+    return this.settingsService.gridOn;
   }
+  set gridOn(value: boolean) {
+    this.settingsService.gridOn = value;
+  }
+
+  get orbitOn(): boolean {
+    return this.settingsService.orbitOn;
+  }
+  set orbitOn(value: boolean) {
+    this.settingsService.orbitOn = value;
+  }
+
+  constructor(
+    private settingsService: SettingsService
+  ) { }
 
 }

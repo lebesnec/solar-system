@@ -17,4 +17,6 @@
 - dnd dialog
 - expand img
 - resize windows -> redraw
-- legals
+- clic on body -> do not dezoom
+- legals + header on source code files + licence file
+- private repo + angular deploy
