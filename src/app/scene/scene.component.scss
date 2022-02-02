@@ -18,6 +18,19 @@
 }
 
 :host ::ng-deep {
+
+  .hide-grid .gridV, .hide-grid .gridH {
+    display: none;
+  }
+
+  .hide-labels .label-path, .hide-labels .label {
+    display: none;
+  }
+
+  .hide-orbits .orbit {
+    display: none;
+  }
+
   .milky-way .star {
     fill: rgb(255, 255, 255);
   }

@@ -20,6 +20,7 @@ import {selectAll} from 'd3';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
+import {SettingsPanelService} from '../shell/settings-panel/settings-panel.service';
 
 const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
 const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
@@ -45,6 +46,16 @@ const ZOOM_TRANSITION_MS = 500; // ms
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
+  get gridOn(): boolean {
+    return this.settingsService.gridOn;
+  }
+  get orbitsOn(): boolean {
+    return this.settingsService.orbitsOn;
+  }
+  get labelsOn(): boolean {
+    return this.settingsService.labelsOn;
+  }
+
   private svgSelection: any;
   private groupBackgroundSelection: any;
   private groupZoomSelection: any;
@@ -68,7 +79,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private sceneService: SceneService,
-    private searchPanelService: SearchPanelService
+    private searchPanelService: SearchPanelService,
+    private settingsService: SettingsPanelService
   ) { }
 
   public ngOnInit(): void {

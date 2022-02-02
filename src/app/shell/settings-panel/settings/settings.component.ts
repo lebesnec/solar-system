@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {SettingsService} from '../settings.service';
+import {SettingsPanelService} from '../settings-panel.service';
 
 @Component({
   selector: 'app-settings',
@@ -30,7 +30,7 @@ export class SettingsComponent {
   }
 
   constructor(
-    private settingsService: SettingsService
+    private settingsService: SettingsPanelService
   ) { }
 
 }
