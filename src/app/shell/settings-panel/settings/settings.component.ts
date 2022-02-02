@@ -29,6 +29,13 @@ export class SettingsComponent {
     this.settingsService.labelsOn = value;
   }
 
+  get milkyWayOn(): boolean {
+    return this.settingsService.milkyWayOn;
+  }
+  set milkyWayOn(value: boolean) {
+    this.settingsService.milkyWayOn = value;
+  }
+
   constructor(
     private settingsService: SettingsPanelService
   ) { }

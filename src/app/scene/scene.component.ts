@@ -55,6 +55,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   get labelsOn(): boolean {
     return this.settingsService.labelsOn;
   }
+  get milkyWayOn(): boolean {
+    return this.settingsService.milkyWayOn;
+  }
 
   private svgSelection: any;
   private groupBackgroundSelection: any;

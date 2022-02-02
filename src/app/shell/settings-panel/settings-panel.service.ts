@@ -26,6 +26,13 @@ export class SettingsPanelService {
     localStorage.setItem('labels', value ? 'true' : 'false');
   }
 
+  get milkyWayOn(): boolean {
+    return localStorage.getItem('milkyWay') !== 'false';
+  }
+  set milkyWayOn(value: boolean) {
+    localStorage.setItem('milkyWay', value ? 'true' : 'false');
+  }
+
   constructor() { }
 
 }
