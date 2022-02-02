@@ -12,11 +12,18 @@ export class SettingsService {
     localStorage.setItem('grid', value ? 'true' : 'false');
   }
 
-  get orbitOn(): boolean {
-    return localStorage.getItem('orbit') !== 'false';
+  get orbitsOn(): boolean {
+    return localStorage.getItem('orbits') !== 'false';
   }
-  set orbitOn(value: boolean) {
-    localStorage.setItem('orbit', value ? 'true' : 'false');
+  set orbitsOn(value: boolean) {
+    localStorage.setItem('orbits', value ? 'true' : 'false');
+  }
+
+  get labelsOn(): boolean {
+    return localStorage.getItem('labels') !== 'false';
+  }
+  set labelsOn(value: boolean) {
+    localStorage.setItem('labels', value ? 'true' : 'false');
   }
 
   constructor() { }

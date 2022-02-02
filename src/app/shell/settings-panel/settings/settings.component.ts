@@ -15,11 +15,18 @@ export class SettingsComponent {
     this.settingsService.gridOn = value;
   }
 
-  get orbitOn(): boolean {
-    return this.settingsService.orbitOn;
+  get orbitsOn(): boolean {
+    return this.settingsService.orbitsOn;
   }
-  set orbitOn(value: boolean) {
-    this.settingsService.orbitOn = value;
+  set orbitsOn(value: boolean) {
+    this.settingsService.orbitsOn = value;
+  }
+
+  get labelsOn(): boolean {
+    return this.settingsService.labelsOn;
+  }
+  set labelsOn(value: boolean) {
+    this.settingsService.labelsOn = value;
   }
 
   constructor(

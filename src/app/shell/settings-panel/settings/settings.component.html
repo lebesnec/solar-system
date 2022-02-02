@@ -1,14 +1,14 @@
-<h2>Grid reticule</h2>
+<h2>{{ 'Grid reticule' | translate }}</h2>
 
 <mat-button-toggle-group [value]="gridOn" (change)="gridOn = $event.value">
   <mat-button-toggle [value]="true">
     <img src="/assets/grid-on.jpg" alt="grid on" width="150" height="100">
-    <div class="text">On</div>
+    <div class="text">{{ 'On' | translate }}</div>
     <div *ngIf="gridOn" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
     <img src="/assets/grid-off.jpg" alt="grid off" width="150" height="100">
-    <div class="text">Off</div>
+    <div class="text">{{ 'Off' | translate }}</div>
     <div *ngIf="!gridOn" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
@@ -16,17 +16,36 @@
 <br>
 <br>
 
-<h2>Orbits</h2>
+<h2>{{ 'Orbits' | translate }}</h2>
 
-<mat-button-toggle-group [value]="orbitOn" (change)="orbitOn = $event.value">
+<mat-button-toggle-group [value]="orbitsOn" (change)="orbitsOn = $event.value">
   <mat-button-toggle [value]="true">
-    <img src="/assets/orbit-on.jpg" alt="grid on" width="150" height="100">
-    <div class="text">On</div>
-    <div *ngIf="orbitOn" class="check">✔</div>
+    <img src="/assets/orbits-on.jpg" alt="grid on" width="150" height="100">
+    <div class="text">{{ 'On' | translate }}</div>
+    <div *ngIf="orbitsOn" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
-    <img src="/assets/orbit-off.jpg" alt="grid off" width="150" height="100">
-    <div class="text">Off</div>
-    <div *ngIf="!orbitOn" class="check">✔</div>
+    <img src="/assets/orbits-off.jpg" alt="grid off" width="150" height="100">
+    <div class="text">{{ 'Off' | translate }}</div>
+    <div *ngIf="!orbitsOn" class="check">✔</div>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<br>
+<br>
+<br>
+
+<h2>{{ 'Labels' | translate }}</h2>
+
+<mat-button-toggle-group [value]="labelsOn" (change)="labelsOn = $event.value">
+  <mat-button-toggle [value]="true">
+    <img src="/assets/labels-on.jpg" alt="grid on" width="150" height="100">
+    <div class="text">{{ 'On' | translate }}</div>
+    <div *ngIf="labelsOn" class="check">✔</div>
+  </mat-button-toggle>
+  <mat-button-toggle [value]="false">
+    <img src="/assets/labels-off.jpg" alt="grid off" width="150" height="100">
+    <div class="text">{{ 'Off' | translate }}</div>
+    <div *ngIf="!labelsOn" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>

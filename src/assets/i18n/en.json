@@ -14,7 +14,12 @@
   ", ": ", ",
 
   "Settings": "Settings",
+  "Grid reticule": "Grid reticule",
+  "Orbits": "Orbits",
+  "Labels": "Labels",
   "Contact": "Contact",
+  "On": "On",
+  "Off": "Off",
   "CONTACT_CONTENT_1": "✉&#xFE0E; Mail: <a href=\"mailto:todo@aaa.com\">todo@aaa.com</a>",
   "CONTACT_CONTENT_2": "💬&#xFE0E; Post ideas, suggestions, bug report… on GitHub: <a href=\"https://github.com/lebesnec/solar-system/discussions\" target=\"_blank\">github.com/lebesnec/solar-system</a>",
   "CONTACT_CONTENT_3": "🐦&#xFE0E; Follow us on Twitter: <a href=\"https://twitter.com/TODO\" target=\"_blank\">twitter.com/TODO</a>",
