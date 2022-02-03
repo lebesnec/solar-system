@@ -1,35 +1,43 @@
 import { Injectable } from '@angular/core';
 
+export enum ORBITS_SETTING {
+  ALL = 'all',
+  PLANET = 'planet',
+  NONE = 'none'
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsPanelService {
 
-  get gridOn(): boolean {
+  public get grid(): boolean {
     return localStorage.getItem('grid') !== 'false';
   }
-  set gridOn(value: boolean) {
+  public set grid(value: boolean) {
     localStorage.setItem('grid', value ? 'true' : 'false');
   }
 
-  get orbitsOn(): boolean {
-    return localStorage.getItem('orbits') !== 'false';
+  public get orbits(): ORBITS_SETTING {
+    const val = localStorage.getItem('orbits');
+    console.log(val, val as ORBITS_SETTING);
+    return val ? val as ORBITS_SETTING : ORBITS_SETTING.ALL;
   }
-  set orbitsOn(value: boolean) {
-    localStorage.setItem('orbits', value ? 'true' : 'false');
+  public set orbits(value: ORBITS_SETTING) {
+    localStorage.setItem('orbits', value);
   }
 
-  get labelsOn(): boolean {
+  public get labels(): boolean {
     return localStorage.getItem('labels') !== 'false';
   }
-  set labelsOn(value: boolean) {
+  public set labels(value: boolean) {
     localStorage.setItem('labels', value ? 'true' : 'false');
   }
 
-  get milkyWayOn(): boolean {
+  public get milkyWay(): boolean {
     return localStorage.getItem('milkyWay') !== 'false';
   }
-  set milkyWayOn(value: boolean) {
+  public set milkyWay(value: boolean) {
     localStorage.setItem('milkyWay', value ? 'true' : 'false');
   }
 

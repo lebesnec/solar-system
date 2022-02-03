@@ -20,3 +20,7 @@
 - clic on body -> do not dezoom
 - legals + header on source code files + licence file
 - private repo + angular deploy
+
+## bug
+
+- click on rocket does not trigger search panel

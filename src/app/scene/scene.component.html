@@ -1,8 +1,9 @@
 <svg [ngClass]="{
                   'scene': true,
-                  'hide-grid': !gridOn,
-                  'hide-orbits': !orbitsOn,
-                  'hide-labels': !labelsOn,
-                  'hide-mikyway': !milkyWayOn
+                  'hide-grid': !gridSetting,
+                  'hide-orbits': orbitsSetting === ORBITS_SETTING.NONE,
+                  'hide-orbits-satellites': orbitsSetting === ORBITS_SETTING.PLANET,
+                  'hide-labels': !labelsSetting,
+                  'hide-mikyway': !milkyWaySetting
                  }">
 </svg>

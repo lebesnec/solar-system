@@ -1,15 +1,20 @@
 <h2>{{ 'Orbits' | translate }}</h2>
 
-<mat-button-toggle-group [value]="orbitsOn" (change)="orbitsOn = $event.value">
-  <mat-button-toggle [value]="true">
-    <img src="assets/orbits-on.jpg" alt="orbits on" width="150" height="100">
-    <div class="text">{{ 'On' | translate }}</div>
-    <div *ngIf="orbitsOn" class="check">✔</div>
+<mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
+  <mat-button-toggle [value]="ORBITS_SETTING.ALL">
+    <img src="assets/orbits-all.jpg" alt="orbits all" width="150" height="100">
+    <div class="text">{{ 'All' | translate }}</div>
+    <div *ngIf="orbits === ORBITS_SETTING.ALL" class="check">✔</div>
   </mat-button-toggle>
-  <mat-button-toggle [value]="false">
+  <mat-button-toggle [value]="ORBITS_SETTING.PLANET">
+    <img src="assets/orbits-planet.jpg" alt="orbits planet only" width="150" height="100">
+    <div class="text">{{ 'Planets only' | translate }}</div>
+    <div *ngIf="orbits === ORBITS_SETTING.PLANET" class="check">✔</div>
+  </mat-button-toggle>
+  <mat-button-toggle [value]="ORBITS_SETTING.NONE">
     <img src="assets/orbits-off.jpg" alt="orbits off" width="150" height="100">
     <div class="text">{{ 'Off' | translate }}</div>
-    <div *ngIf="!orbitsOn" class="check">✔</div>
+    <div *ngIf="orbits === ORBITS_SETTING.NONE" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
@@ -19,16 +24,16 @@
 
 <h2>{{ 'Labels' | translate }}</h2>
 
-<mat-button-toggle-group [value]="labelsOn" (change)="labelsOn = $event.value">
+<mat-button-toggle-group [value]="labels" (change)="labels = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/labels-on.jpg" alt="labels on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
-    <div *ngIf="labelsOn" class="check">✔</div>
+    <div *ngIf="labels" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
     <img src="assets/labels-off.jpg" alt="labels off" width="150" height="100">
     <div class="text">{{ 'Off' | translate }}</div>
-    <div *ngIf="!labelsOn" class="check">✔</div>
+    <div *ngIf="!labels" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
@@ -38,16 +43,16 @@
 
 <h2>{{ 'Grid reticule' | translate }}</h2>
 
-<mat-button-toggle-group [value]="gridOn" (change)="gridOn = $event.value">
+<mat-button-toggle-group [value]="grid" (change)="grid = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/grid-on.jpg" alt="grid on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
-    <div *ngIf="gridOn" class="check">✔</div>
+    <div *ngIf="grid" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
     <img src="assets/grid-off.jpg" alt="grid off" width="150" height="100">
     <div class="text">{{ 'Off' | translate }}</div>
-    <div *ngIf="!gridOn" class="check">✔</div>
+    <div *ngIf="!grid" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
@@ -57,15 +62,15 @@
 
 <h2>{{ 'Milky way' | translate }}</h2>
 
-<mat-button-toggle-group [value]="milkyWayOn" (change)="milkyWayOn = $event.value">
+<mat-button-toggle-group [value]="milkyWay" (change)="milkyWay = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/milkyway-on.jpg" alt="milky way on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
-    <div *ngIf="milkyWayOn" class="check">✔</div>
+    <div *ngIf="milkyWay" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
     <img src="assets/milkyway-off.jpg" alt="milky way off" width="150" height="100">
     <div class="text">{{ 'Off' | translate }}</div>
-    <div *ngIf="!milkyWayOn" class="check">✔</div>
+    <div *ngIf="!milkyWay" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>

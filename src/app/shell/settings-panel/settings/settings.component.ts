@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {SettingsPanelService} from '../settings-panel.service';
+import {ORBITS_SETTING, SettingsPanelService} from '../settings-panel.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,32 +8,34 @@ import {SettingsPanelService} from '../settings-panel.service';
 })
 export class SettingsComponent {
 
-  get gridOn(): boolean {
-    return this.settingsService.gridOn;
+  public ORBITS_SETTING = ORBITS_SETTING;
+
+  public get grid(): boolean {
+    return this.settingsService.grid;
   }
-  set gridOn(value: boolean) {
-    this.settingsService.gridOn = value;
+  public set grid(value: boolean) {
+    this.settingsService.grid = value;
   }
 
-  get orbitsOn(): boolean {
-    return this.settingsService.orbitsOn;
+  public get orbits(): ORBITS_SETTING {
+    return this.settingsService.orbits;
   }
-  set orbitsOn(value: boolean) {
-    this.settingsService.orbitsOn = value;
-  }
-
-  get labelsOn(): boolean {
-    return this.settingsService.labelsOn;
-  }
-  set labelsOn(value: boolean) {
-    this.settingsService.labelsOn = value;
+  public set orbits(value: ORBITS_SETTING) {
+    this.settingsService.orbits = value;
   }
 
-  get milkyWayOn(): boolean {
-    return this.settingsService.milkyWayOn;
+  public get labels(): boolean {
+    return this.settingsService.labels;
   }
-  set milkyWayOn(value: boolean) {
-    this.settingsService.milkyWayOn = value;
+  public set labels(value: boolean) {
+    this.settingsService.labels = value;
+  }
+
+  public get milkyWay(): boolean {
+    return this.settingsService.milkyWay;
+  }
+  public set milkyWay(value: boolean) {
+    this.settingsService.milkyWay = value;
   }
 
   constructor(
