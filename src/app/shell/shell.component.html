@@ -8,9 +8,9 @@
     <h1>{{ 'APP_TITLE' | translate }}</h1>
   </div>
 
-  <mat-form-field appearance="fill" class="search-field">
+  <mat-form-field appearance="fill" class="search-field" (click)="openSearchPanel()">
     <span matPrefix>🚀&#xFE0E;</span>
-    <input #search matInput [placeholder]="translate.get('Navigate') | async" autocomplete="off" (click)="openSearchPanel()">
+    <input #search matInput [placeholder]="translate.get('Navigate') | async" autocomplete="off">
     <button mat-icon-button
             matSuffix
             *ngIf="showSearchPanel && search.value && search.value !== ''"

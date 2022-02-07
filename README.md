@@ -22,5 +22,3 @@
 - private repo + angular deploy
 
 ## bug
-
-- click on rocket does not trigger search panel
