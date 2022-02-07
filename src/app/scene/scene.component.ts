@@ -28,6 +28,7 @@ const MILKY_WAY_ANGLE = -10; // degrees
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
 
+const TOOLBAR_HEIGHT = 65;
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
 
@@ -166,8 +167,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initReticule(): void {
-    const rangeX = range(RETICULE_SPACING / 2, window.innerWidth + RETICULE_SPACING / 2, RETICULE_SPACING);
-    const rangeY = range(RETICULE_SPACING / 2, window.innerHeight + RETICULE_SPACING / 2, RETICULE_SPACING);
+    const rangeX = range(0, window.innerWidth, RETICULE_SPACING);
+    const rangeY = range(TOOLBAR_HEIGHT, window.innerHeight + TOOLBAR_HEIGHT, RETICULE_SPACING);
 
     const data: Point[] = [];
     rangeX.forEach((x) => {
