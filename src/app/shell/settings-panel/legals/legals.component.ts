@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class LegalsComponent {
 
+  public currentYear = new Date().getFullYear();
+
   constructor() { }
 
 }

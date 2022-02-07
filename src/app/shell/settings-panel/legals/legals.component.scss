@@ -1,3 +1,11 @@
 :host {
   display: block;
 }
+
+h1 {
+  padding-top: 30px;
+}
+
+h1:first-of-type {
+  padding-top: 0;
+}
