@@ -48,8 +48,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   public ORBITS_SETTING = ORBITS_SETTING;
 
-  public get gridSetting(): boolean {
-    return this.settingsService.grid;
+  public get reticuleSetting(): boolean {
+    return this.settingsService.reticule;
   }
   public get orbitsSetting(): ORBITS_SETTING {
     return this.settingsService.orbits;

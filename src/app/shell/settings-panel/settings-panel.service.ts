@@ -11,11 +11,11 @@ export enum ORBITS_SETTING {
 })
 export class SettingsPanelService {
 
-  public get grid(): boolean {
-    return localStorage.getItem('grid') !== 'false';
+  public get reticule(): boolean {
+    return localStorage.getItem('reticule') !== 'false';
   }
-  public set grid(value: boolean) {
-    localStorage.setItem('grid', value ? 'true' : 'false');
+  public set reticule(value: boolean) {
+    localStorage.setItem('reticule', value ? 'true' : 'false');
   }
 
   public get orbits(): ORBITS_SETTING {

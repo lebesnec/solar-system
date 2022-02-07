@@ -10,11 +10,11 @@ export class SettingsComponent {
 
   public ORBITS_SETTING = ORBITS_SETTING;
 
-  public get grid(): boolean {
-    return this.settingsService.grid;
+  public get reticule(): boolean {
+    return this.settingsService.reticule;
   }
-  public set grid(value: boolean) {
-    this.settingsService.grid = value;
+  public set reticule(value: boolean) {
+    this.settingsService.reticule = value;
   }
 
   public get orbits(): ORBITS_SETTING {

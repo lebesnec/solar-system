@@ -43,16 +43,16 @@
 
 <h2>{{ 'Reticule' | translate }}</h2>
 
-<mat-button-toggle-group [value]="grid" (change)="grid = $event.value">
+<mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">
   <mat-button-toggle [value]="true">
-    <img src="assets/grid-on.jpg" alt="grid on" width="150" height="100">
+    <img src="assets/reticule-on.jpg" alt="grid on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
-    <div *ngIf="grid" class="check">✔</div>
+    <div *ngIf="reticule" class="check">✔</div>
   </mat-button-toggle>
   <mat-button-toggle [value]="false">
-    <img src="assets/grid-off.jpg" alt="grid off" width="150" height="100">
+    <img src="assets/reticule-off.jpg" alt="grid off" width="150" height="100">
     <div class="text">{{ 'Off' | translate }}</div>
-    <div *ngIf="!grid" class="check">✔</div>
+    <div *ngIf="!reticule" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
