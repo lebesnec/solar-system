@@ -19,7 +19,7 @@
 
 :host ::ng-deep {
 
-  .hide-reticule .gridV, .hide-reticule .gridH {
+  .hide-reticule .reticuleV, .hide-reticule .reticuleH {
     display: none;
   }
 
@@ -43,7 +43,7 @@
     fill: rgb(255, 255, 255);
   }
 
-  .gridV, .gridH {
+  .reticuleV, .reticuleH {
     stroke: #383838;
     stroke-width: 1px;
     fill: transparent;

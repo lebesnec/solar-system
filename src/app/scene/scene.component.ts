@@ -28,8 +28,8 @@ const MILKY_WAY_ANGLE = -10; // degrees
 const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
 
-const GRID_MARKER_SIZE = 30; // px
-const GRID_MARKER_SPACING = 300; // px
+const RETICULE_SIZE = 30; // px
+const RETICULE_SPACING = 300; // px
 
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
@@ -113,7 +113,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                     .style('opacity', 0);
 
     this.initMilkyWay();
-    this.initGrid();
+    this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
 
@@ -165,9 +165,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 );
   }
 
-  private initGrid(): void {
-    const rangeX = range(GRID_MARKER_SPACING / 2, window.innerWidth + GRID_MARKER_SPACING / 2, GRID_MARKER_SPACING);
-    const rangeY = range(GRID_MARKER_SPACING / 2, window.innerHeight + GRID_MARKER_SPACING / 2, GRID_MARKER_SPACING);
+  private initReticule(): void {
+    const rangeX = range(RETICULE_SPACING / 2, window.innerWidth + RETICULE_SPACING / 2, RETICULE_SPACING);
+    const rangeY = range(RETICULE_SPACING / 2, window.innerHeight + RETICULE_SPACING / 2, RETICULE_SPACING);
 
     const data: Point[] = [];
     rangeX.forEach((x) => {
@@ -176,26 +176,26 @@ export class SceneComponent implements OnInit, AfterViewInit {
       });
     });
 
-    this.groupBackgroundSelection.selectAll('.gridV')
-                                .data(data, (d) => 'gridV_' + d.x + '_' + d.y)
+    this.groupBackgroundSelection.selectAll('.reticuleV')
+                                .data(data, (d) => 'reticuleV_' + d.x + '_' + d.y)
                                 .join(
                                   enter => enter.append('path')
-                                                  .attr('id', (d) => 'gridV_' + d.x + '_' + d.y)
-                                                  .attr('class', 'gridV')
+                                                  .attr('id', (d) => 'reticuleV_' + d.x + '_' + d.y)
+                                                  .attr('class', 'reticuleV')
                                                   .attr('shape-rendering', 'crispEdges')
-                                                  .attr('d', (d) => `M ${d.x} ${d.y - (GRID_MARKER_SIZE / 2) - 1} L ${d.x} ${d.y + (GRID_MARKER_SIZE / 2)}`),
+                                                  .attr('d', (d) => `M ${d.x} ${d.y - (RETICULE_SIZE / 2) - 1} L ${d.x} ${d.y + (RETICULE_SIZE / 2)}`),
                                   update => update.attr('x', (d) => d.x)
                                                   .attr('y', (d) => d.y)
                                 );
 
-    this.groupBackgroundSelection.selectAll('.gridH')
-                                .data(data, (d) => 'gridH_' + d.x + '_' + d.y)
+    this.groupBackgroundSelection.selectAll('.reticuleH')
+                                .data(data, (d) => 'reticuleH_' + d.x + '_' + d.y)
                                 .join(
                                   enter => enter.append('path')
-                                                .attr('id', (d) => 'gridH_' + d.x + '_' + d.y)
-                                                .attr('class', 'gridH')
+                                                .attr('id', (d) => 'reticuleH_' + d.x + '_' + d.y)
+                                                .attr('class', 'reticuleH')
                                                 .attr('shape-rendering', 'crispEdges')
-                                                .attr('d', (d) => `M ${d.x - (GRID_MARKER_SIZE / 2) - 1} ${d.y} L ${d.x + (GRID_MARKER_SIZE / 2)} ${d.y}`),
+                                                .attr('d', (d) => `M ${d.x - (RETICULE_SIZE / 2) - 1} ${d.y} L ${d.x + (RETICULE_SIZE / 2)} ${d.y}`),
                                   update => update.attr('x', (d) => d.x)
                                                   .attr('y', (d) => d.y)
                                 );
