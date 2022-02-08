@@ -20,7 +20,6 @@ export class SettingsPanelService {
 
   public get orbits(): ORBITS_SETTING {
     const val = localStorage.getItem('orbits');
-    console.log(val, val as ORBITS_SETTING);
     return val ? val as ORBITS_SETTING : ORBITS_SETTING.ALL;
   }
   public set orbits(value: ORBITS_SETTING) {

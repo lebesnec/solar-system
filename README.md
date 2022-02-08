@@ -12,12 +12,12 @@
 - cloudy milky way
 - tooltip not overriding
 - mobile
+- firefox
 - translation fr
 - orbit not straight
 - dnd dialog
 - expand img
 - resize windows -> redraw
-- clic on body -> do not dezoom
 - legals + header on source code files + licence file
 - private repo + angular deploy
 

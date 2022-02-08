@@ -93,7 +93,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.searchPanelService.onBodySelected.subscribe((body) => {
       if (body) {
         this.select(body);
-        this.zoomTo(body);
+        this.zoomTo(body, true);
       } else {
         this.deselectAll();
         this.deZoom();
@@ -296,7 +296,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                       })
                                       .on('click', (event, d) => {
                                         this.select(d.body);
-                                        this.zoomTo(d.body);
+                                        this.zoomTo(d.body, false);
                                         event.stopPropagation();
                                       }),
                         update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
@@ -304,16 +304,21 @@ export class SceneComponent implements OnInit, AfterViewInit {
                       );
   }
 
-  private zoomTo(body: CelestialBody): void {
+  private zoomTo(body: CelestialBody, forceZoom: boolean): void {
     const bodySelection = select('#' + body.id);
 
     const bbox = (bodySelection.node() as any).getBBox();
-    const scale = this.getScale(body);
+    let scale = this.getScale(body);
+    // do not dezoom when cliking on a body, only when clicking on a search result :
+    if (!forceZoom && scale < this.transform.k) {
+      scale = this.transform.k;
+    }
     const zoomTo = zoomIdentity.translate(
-                      this.center.x + ((-bbox.x - bbox.width / 2) * scale),
-                      this.center.y + ((-bbox.y - bbox.height / 2) * scale)
-                    )
-                    .scale(scale);
+                                this.center.x + ((-bbox.x - bbox.width / 2) * scale),
+                                this.center.y + ((-bbox.y - bbox.height / 2) * scale)
+                              )
+                              .scale(scale);
+
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
@@ -321,7 +326,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private deZoom(): void {
     const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
-                .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                               .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
