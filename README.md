@@ -17,7 +17,6 @@
 - orbit not straight
 - dnd dialog
 - expand img
-- resize windows -> redraw
 - legals + header on source code files + licence file
 - private repo + angular deploy
 

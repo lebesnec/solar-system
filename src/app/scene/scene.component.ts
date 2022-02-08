@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
@@ -21,6 +21,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsPanelService} from '../shell/settings-panel/settings-panel.service';
+import {fromEvent} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
 const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
@@ -68,8 +70,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private groupForegroundSelection: any;
   private d3Zoom: any;
   private labelsPath: any;
-  private width: number = window.innerWidth; // px
-  private height: number = window.innerHeight; // px
   private transform: ZoomTransform;
   private bodiesLabels = {};
   private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }>;
@@ -99,6 +99,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.deZoom();
       }
     });
+
+    fromEvent(window, 'resize').pipe(debounceTime(500)).subscribe(() => {
+      this.onWindowResize();
+    });
   }
 
   public ngAfterViewInit(): void {
@@ -124,6 +128,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
   }
 
+  private onWindowResize(): void {
+    // redraw reticule and milky way when window size change because they are dependant from the window size
+    this.groupBackgroundSelection.remove();
+    this.groupBackgroundSelection = this.svgSelection.append('g');
+    this.initMilkyWay();
+    this.initReticule();
+  }
+
   private initZoom(): void {
     this.d3Zoom = zoom().on('zoom', (e) => {
       this.transform = e.transform;
@@ -134,7 +146,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection.call(this.d3Zoom);
 
     this.transform = zoomIdentity.translate(this.center.x, this.center.y)
-                                 .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.call(this.d3Zoom.transform, this.transform);
   }
 
@@ -326,7 +338,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private deZoom(): void {
     const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
-                               .scale(Math.min(this.width, this.height) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
