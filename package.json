@@ -8,7 +8,8 @@
     "buildProd": "ng build --prod --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy --base-href=https://lebesnec.github.io/solar-system-map/ --repo=https://github.com/lebesnec/solar-system-map.git --branch=main"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +39,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.0",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
