@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '~src/custom-theme';
 
 :host {
@@ -19,8 +20,8 @@ mat-button-toggle-group {
 }
 
 .mat-button-toggle-checked {
-  background-color: mat-color($solar-system-primary, 0.2);
-  border: solid 1px mat-color($solar-system-primary, 0.5);
+  background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
+  border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
 }
 
 :host ::ng-deep .mat-button-toggle .mat-button-toggle-label-content {
@@ -38,7 +39,7 @@ mat-button-toggle-group .check {
   line-height: 20px;
   font-size: 20px;
   font-weight: bold;
-  color: mat-color($solar-system-primary);
+  color: mat.get-color-from-palette($solar-system-primary);
 }
 
 mat-button-toggle-group .text {
@@ -53,6 +54,6 @@ mat-button-toggle-group .text {
 }
 
 mat-button-toggle-group .mat-button-toggle-checked .text {
-  color: mat-color($solar-system-primary);
+  color: mat.get-color-from-palette($solar-system-primary);
 }
 

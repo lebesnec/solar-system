@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '~src/custom-theme';
 
 :host {
@@ -48,11 +49,11 @@ mat-toolbar {
   }
   .logo:hover {
     svg {
-      stroke: mat-color($solar-system-primary);
-      fill: mat-color($solar-system-primary);
+      stroke: mat.get-color-from-palette($solar-system-primary);
+      fill: mat.get-color-from-palette($solar-system-primary);
     }
     h1 {
-      color: mat-color($solar-system-primary);
+      color: mat.get-color-from-palette($solar-system-primary);
     }
   }
 
