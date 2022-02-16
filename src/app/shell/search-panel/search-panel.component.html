@@ -53,7 +53,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id | translate }}</mat-panel-title>
       <mat-panel-description *ngIf="planet.satellites.length">
-        {{ planet.satellites.length | i18nPlural: { '=1': 'NB moon', 'other': 'NB moons' } | translate: { NB: planet.satellites.length } }}
+        {{ planet.satellites.length | i18nPlural: { '=1': 'NB satellite', 'other': 'NB satellites' } | translate: { NB: planet.satellites.length } }}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
