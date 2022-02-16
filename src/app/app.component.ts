@@ -11,16 +11,16 @@ export class AppComponent {
 
   constructor(
     titleService: Title,
-    translate: TranslateService
+    translateService: TranslateService
   ) {
     // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('en');
+    translateService.setDefaultLang('en');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('en');
+    translateService.use('en');
 
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       // Change page title when user changes language preference
-      translate.get('APP_TITLE').subscribe((res: string) => {
+      translateService.get('APP_TITLE').subscribe((res: string) => {
         titleService.setTitle(res);
       });
     });

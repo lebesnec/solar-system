@@ -37,7 +37,9 @@
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ SUN.id | translate }}</mat-panel-title>
-      <mat-panel-description>{{ SUN.satellites.length }} planets</mat-panel-description>
+      <mat-panel-description>
+        {{ 'NB planets' | translate:{ NB: SUN.satellites.length } }}
+      </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
