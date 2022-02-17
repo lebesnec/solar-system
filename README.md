@@ -1,6 +1,6 @@
 # Solar System
 
-![logo](/assets/logo.svg?raw=true)
+![logo](/src/assets/logo.svg?raw=true)
 
 ## TODO
 
