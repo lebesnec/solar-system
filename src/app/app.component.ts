@@ -27,14 +27,14 @@ export class AppComponent {
   }
 
   private getUserLanguage(): string {
-    let local = 'en-US';
+    let language = 'en-US';
     if (navigator.languages && navigator.languages.length) {
-      local = navigator.languages[0];
+      language = navigator.languages[0];
     } else if (navigator.language) {
-      local = navigator.language;
+      language = navigator.language;
     }
 
-    const result = new Intl.Locale(local).language;
+    const result = language.toLowerCase().substr(0, 2);
     if (AVAILABLE_LANGUAGES.includes(result)) {
       return result;
     } else {
