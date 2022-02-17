@@ -16,7 +16,6 @@
 - tooltip not overriding
 - mobile
 - firefox
-- translation fr
 - dnd dialog
 - expand img
 - legals + header on source code files + licence file

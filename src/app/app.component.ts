@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {Title} from '@angular/platform-browser';
 
+export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,10 +15,8 @@ export class AppComponent {
     titleService: Title,
     translateService: TranslateService
   ) {
-    // this language will be used as a fallback when a translation isn't found in the current language
     translateService.setDefaultLang('en');
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translateService.use('en');
+    translateService.use(this.getUserLanguage());
 
     translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       // Change page title when user changes language preference
@@ -24,6 +24,22 @@ export class AppComponent {
         titleService.setTitle(res);
       });
     });
+  }
+
+  private getUserLanguage(): string {
+    let local = 'en-US';
+    if (navigator.languages && navigator.languages.length) {
+      local = navigator.languages[0];
+    } else if (navigator.language) {
+      local = navigator.language;
+    }
+
+    const result = new Intl.Locale(local).language;
+    if (AVAILABLE_LANGUAGES.includes(result)) {
+      return result;
+    } else {
+      return 'en';
+    }
   }
 
 }

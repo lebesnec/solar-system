@@ -10,7 +10,6 @@ export interface Ellipse {
   ry: number;
 }
 
-
 export interface OrbitPoint extends Point {
     trueAnomaly: number;
 }
