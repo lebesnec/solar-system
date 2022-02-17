@@ -14,6 +14,11 @@
   ", ": ", ",
 
   "Settings": "Settings",
+  "Language": "Language",
+  "LANGUAGE_en": "English",
+  "LANGUAGE_NOT_TRANSLATED_en": "English",
+  "LANGUAGE_fr": "French",
+  "LANGUAGE_NOT_TRANSLATED_fr": "Français",
   "Reticule": "Reticule",
   "Orbits": "Orbits",
   "Labels": "Labels",

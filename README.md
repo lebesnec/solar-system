@@ -13,6 +13,7 @@
 - planet go through orbit
 - orientation orbit ellipse
 - locale selector
+- blur
 - tooltip not overriding
 - mobile
 - firefox
