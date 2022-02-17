@@ -17,7 +17,7 @@ import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 import {curveCardinal, selectAll} from 'd3';
-import {TranslateService} from '@ngx-translate/core';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsPanelService} from '../shell/settings-panel/settings-panel.service';
@@ -34,7 +34,6 @@ const TOOLBAR_HEIGHT = 65;
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
 
-const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 10 }; // px
@@ -86,7 +85,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService,
-    private settingsService: SettingsPanelService
+    private settingsService: SettingsPanelService,
+    private translateService: TranslateService
   ) { }
 
   public ngOnInit(): void {
@@ -102,6 +102,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     fromEvent(window, 'resize').pipe(debounceTime(500)).subscribe(() => {
       this.onWindowResize();
+    });
+
+    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      // TODO
     });
   }
 
