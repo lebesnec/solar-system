@@ -5,55 +5,63 @@
   display: block;
 }
 
-:host ::ng-deep mat-button-toggle button {
+.toggle-language {
+  p:first-of-type {
+    font-weight: bold;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+:host ::ng-deep .large mat-button-toggle button {
   width: 150px;
   height: 100px;
 }
 
-mat-button-toggle-group {
+:host ::ng-deep mat-button-toggle-group.large {
   border: none;
-}
 
-.mat-button-toggle {
-  background-color: transparent;
-  border: solid 1px rgba(0, 0, 0, 0.12);
-}
+  .mat-button-toggle {
+    background-color: transparent;
+    border: solid 1px rgba(0, 0, 0, 0.12);
+  }
 
-.mat-button-toggle-checked {
-  background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
-  border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
-}
+  .mat-button-toggle-checked {
+    background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
+    border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
+  }
 
-:host ::ng-deep .mat-button-toggle .mat-button-toggle-label-content {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-}
+  .mat-button-toggle .mat-button-toggle-label-content {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
 
-mat-button-toggle-group .check {
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 10px;
-  line-height: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: mat.get-color-from-palette($solar-system-primary);
-}
+  .check {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: mat.get-color-from-palette($solar-system-primary);
+  }
 
-mat-button-toggle-group .text {
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  margin: 10px;
-  line-height: 20px;
-  font-size: 15px;
-  color: #bbbbbb;
-}
+  .text {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 10px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #bbbbbb;
+  }
 
-mat-button-toggle-group .mat-button-toggle-checked .text {
-  color: mat.get-color-from-palette($solar-system-primary);
+  .mat-button-toggle-checked .text {
+    color: mat.get-color-from-palette($solar-system-primary);
+  }
 }
-

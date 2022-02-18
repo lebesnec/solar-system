@@ -3,6 +3,13 @@ export interface Point {
     y: number;
 }
 
+export interface Ellipse {
+  cx: number;
+  cy: number;
+  rx: number;
+  ry: number;
+}
+
 export interface OrbitPoint extends Point {
     trueAnomaly: number;
 }
@@ -15,7 +22,7 @@ export enum CELESTIAL_BODY_TYPE {
 }
 
 /**
- * position: km
+ * position: px
  * speed: km/s
  * mass: kg
  * radius: km

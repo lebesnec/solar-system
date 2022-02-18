@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CelestialBody, OrbitPoint, Point} from './scene.model';
+import {CelestialBody, Ellipse, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
 import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
@@ -43,26 +43,17 @@ export class SceneService {
   }
 
   /**
-   * positions in px, relative to the sun at (0, 0)
+   * In px, relative to the sun at (0, 0)
    */
-  public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
-    const result = d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
-      const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
-      return {
-        trueAnomaly,
-        x: point.x,
-        y: point.y
-      };
-    });
-
-    // add the body position to the orbit to ensure the orbit path will pass trough the body:
-    result.push({
-      trueAnomaly: body.trueAnomaly,
-      x: body.position.x,
-      y: body.position.y
-    });
-
-    return result.sort((p1, p2) => p1.trueAnomaly - p2.trueAnomaly);
+  public getOrbit(body: CelestialBody): Ellipse {
+    // convert eccentricity and semi major axis to radius and position using
+    // https://en.wikipedia.org/wiki/Ellipse#Standard_equation
+    return {
+      cx: body.orbitBody.position.x - (body.eccentricity * body.semiMajorAxis / KM_TO_PX),
+      cy: body.orbitBody.position.y,
+      rx: body.semiMajorAxis / KM_TO_PX,
+      ry: Math.sqrt((body.semiMajorAxis ** 2) * (1 - (body.eccentricity ** 2))) / KM_TO_PX
+    };
   }
 
   /**
@@ -71,11 +62,11 @@ export class SceneService {
   public getPositionForTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
     // we convert the distance to a position using basic trigonometry :
-    const yKm = d * Math.cos(trueAnomaly * DEG_TO_RAD);
-    const xKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
+    const yKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
+    const xKm = d * Math.cos(trueAnomaly * DEG_TO_RAD);
 
     // we have the position relative to the orbited body, so we add its
-    // position to have the absolute position of the orbiting body :
+    // position to have the absolute position (to the sun) of the orbiting body :
     return {
       x: (xKm / KM_TO_PX) + body.orbitBody.position.x,
       y: (yKm / KM_TO_PX) + body.orbitBody.position.y

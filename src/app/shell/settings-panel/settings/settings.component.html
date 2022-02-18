@@ -1,6 +1,19 @@
+<h2>{{ 'Language' | translate }}</h2>
+
+<mat-button-toggle-group class="toggle-language" [value]="language" (change)="language = $event.value">
+  <mat-button-toggle *ngFor="let lang of AVAILABLE_LANGUAGES" [value]="lang">
+    <p>{{ 'LANGUAGE_' + lang | translate }}</p>
+    <p>{{ lang === language ? '&nbsp;' : 'LANGUAGE_NOT_TRANSLATED_' + lang | translate }}</p>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<br>
+<br>
+<br>
+
 <h2>{{ 'Orbits' | translate }}</h2>
 
-<mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
+<mat-button-toggle-group class="large" [value]="orbits" (change)="orbits = $event.value">
   <mat-button-toggle [value]="ORBITS_SETTING.ALL">
     <img src="assets/orbits-all.jpg" alt="orbits all" width="150" height="100">
     <div class="text">{{ 'All' | translate }}</div>
@@ -24,7 +37,7 @@
 
 <h2>{{ 'Labels' | translate }}</h2>
 
-<mat-button-toggle-group [value]="labels" (change)="labels = $event.value">
+<mat-button-toggle-group class="large" [value]="labels" (change)="labels = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/labels-on.jpg" alt="labels on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
@@ -43,7 +56,7 @@
 
 <h2>{{ 'Reticule' | translate }}</h2>
 
-<mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">
+<mat-button-toggle-group class="large" [value]="reticule" (change)="reticule = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/reticule-on.jpg" alt="reticule on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>
@@ -62,7 +75,7 @@
 
 <h2>{{ 'Milky way' | translate }}</h2>
 
-<mat-button-toggle-group [value]="milkyWay" (change)="milkyWay = $event.value">
+<mat-button-toggle-group class="large" [value]="milkyWay" (change)="milkyWay = $event.value">
   <mat-button-toggle [value]="true">
     <img src="assets/milkyway-on.jpg" alt="milky way on" width="150" height="100">
     <div class="text">{{ 'On' | translate }}</div>

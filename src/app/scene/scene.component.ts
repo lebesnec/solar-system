@@ -16,8 +16,8 @@ import {JUPITER} from './data/Jupiter.data';
 import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
-import {selectAll} from 'd3';
-import {TranslateService} from '@ngx-translate/core';
+import {curveCardinal, selectAll} from 'd3';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsPanelService} from '../shell/settings-panel/settings-panel.service';
@@ -34,7 +34,6 @@ const TOOLBAR_HEIGHT = 65;
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
 
-const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 10 }; // px
@@ -86,7 +85,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService,
-    private settingsService: SettingsPanelService
+    private settingsService: SettingsPanelService,
+    private translateService: TranslateService
   ) { }
 
   public ngOnInit(): void {
@@ -102,6 +102,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     fromEvent(window, 'resize').pipe(debounceTime(500)).subscribe(() => {
       this.onWindowResize();
+    });
+
+    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      // TODO
     });
   }
 
@@ -238,7 +242,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .map((body) => {
                           return {
                             body,
-                            path: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
+                            orbit: this.sceneService.getOrbit(body)
                           };
                         });
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
@@ -246,10 +250,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupZoomSelection.selectAll('.orbit')
                                .data(orbitsData, (d) => d.body.id)
                                .join(
-                                 enter => enter.append('path')
-                                               .attr('id', (orbit) => 'orbit_' + orbit.body.id)
-                                               .attr('class', (orbit) => 'orbit ' + orbit.body.type + ' ' + orbit.body.id)
-                                               .attr('d', (orbit) => lineFn(orbit.path))
+                                    enter => enter.append('ellipse')
+                                                  .attr('id', (d) => 'orbit_' + d.body.id)
+                                                  .attr('class', (d) => 'orbit ' + d.body.type + ' ' + d.body.id)
+                                                  .attr('cx', (d) => d.orbit.cx)
+                                                  .attr('cy', (d) => d.orbit.cy)
+                                                  .attr('rx', (d) => d.orbit.rx)
+                                                  .attr('ry', (d) => d.orbit.ry)
                                );
   }
 

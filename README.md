@@ -1,23 +1,26 @@
-[![Build and Deploy](https://github.com/lebesnec/solar-system/actions/workflows/main.yml/badge.svg)](https://github.com/lebesnec/solar-system/actions/workflows/main.yml)
-[![CodeQL](https://github.com/lebesnec/solar-system/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/lebesnec/solar-system/actions/workflows/codeql-analysis.yml)
-
 # Solar System
+
+![logo](/src/assets/logo.svg?raw=true)
 
 ## TODO
 
+- sun popup
 - asteroids
 - rovers & probe
 - lagrange points
-- half-lite planet, rings
-- cloudy milky way
+- rings
+- scale
+- planet go through orbit
+- orientation orbit ellipse
+- locale selector
+- blur
 - tooltip not overriding
 - mobile
 - firefox
-- translation fr
-- orbit not straight
 - dnd dialog
 - expand img
 - legals + header on source code files + licence file
-- private repo + angular deploy
 
-## bug
+## low priority
+- half-lite planet
+- cloudy milky way
