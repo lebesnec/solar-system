@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ORBITS_SETTING, SettingsPanelService} from '../settings-panel.service';
 import {AVAILABLE_LANGUAGES} from '../../../app.component';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -14,10 +13,10 @@ export class SettingsComponent {
   public ORBITS_SETTING = ORBITS_SETTING;
 
   public get language(): string {
-    return this.translateService.currentLang;
+    return this.settingsService.language;
   }
   public set language(value: string) {
-    this.translateService.use(value);
+    this.settingsService.language = value;
   }
 
   public get reticule(): boolean {
@@ -49,8 +48,7 @@ export class SettingsComponent {
   }
 
   constructor(
-    private settingsService: SettingsPanelService,
-    private translateService: TranslateService
+    private settingsService: SettingsPanelService
   ) { }
 
 }
