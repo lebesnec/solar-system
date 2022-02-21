@@ -14,12 +14,7 @@
   }
 }
 
-:host ::ng-deep .large mat-button-toggle button {
-  width: 150px;
-  height: 100px;
-}
-
-:host ::ng-deep mat-button-toggle-group.large {
+:host ::ng-deep mat-button-toggle-group {
   border: none;
 
   .mat-button-toggle {
@@ -30,6 +25,13 @@
   .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
     border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
+  }
+}
+
+:host ::ng-deep mat-button-toggle-group.large {
+  button {
+    width: 150px;
+    height: 100px;
   }
 
   .mat-button-toggle .mat-button-toggle-label-content {

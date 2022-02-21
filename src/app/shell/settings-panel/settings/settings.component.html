@@ -1,9 +1,10 @@
 <h2>{{ 'Language' | translate }}</h2>
 
-<mat-button-toggle-group class="toggle-language" [value]="language" (change)="language = $event.value">
+<mat-button-toggle-group class="large toggle-language" [value]="language" (change)="language = $event.value">
   <mat-button-toggle *ngFor="let lang of AVAILABLE_LANGUAGES" [value]="lang">
     <p>{{ 'LANGUAGE_' + lang | translate }}</p>
     <p>{{ lang === language ? '&nbsp;' : 'LANGUAGE_NOT_TRANSLATED_' + lang | translate }}</p>
+    <div *ngIf="lang === language" class="check">✔</div>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
