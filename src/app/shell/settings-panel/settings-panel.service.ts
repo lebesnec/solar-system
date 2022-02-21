@@ -16,7 +16,7 @@ export class SettingsPanelService {
 
   public get language(): string {
     const result = localStorage.getItem('language');
-    return result ?? this.getUserLanguage();
+    return result ?? this.getDefaultLanguage();
   }
   public set language(value: string) {
     this.translateService.use(value);
@@ -64,7 +64,7 @@ export class SettingsPanelService {
     });
   }
 
-  private getUserLanguage(): string {
+  private getDefaultLanguage(): string {
     let language = 'en-US';
     if (navigator.languages && navigator.languages.length) {
       language = navigator.languages[0];
@@ -72,7 +72,7 @@ export class SettingsPanelService {
       language = navigator.language;
     }
 
-    const result = language.toLowerCase().substr(0, 2);
+    const result = language.toLowerCase().substring(0, 2);
     if (AVAILABLE_LANGUAGES.includes(result)) {
       return result;
     } else {
