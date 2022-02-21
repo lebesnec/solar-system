@@ -6,11 +6,12 @@
 }
 
 .toggle-language {
-  p:first-of-type {
-    font-weight: bold;
-  }
   p {
     margin: 0;
+    color: #bbbbbb;
+  }
+  .mat-button-toggle-checked p {
+    color: mat.get-color-from-palette($solar-system-primary);
   }
 }
 
