@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
@@ -16,7 +16,7 @@ import {JUPITER} from './data/Jupiter.data';
 import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
-import {curveCardinal, selectAll} from 'd3';
+import {selectAll} from 'd3';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
@@ -103,10 +103,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     fromEvent(window, 'resize').pipe(debounceTime(500)).subscribe(() => {
       this.onWindowResize();
     });
-
-    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      // TODO
-    });
   }
 
   public ngAfterViewInit(): void {
@@ -125,10 +121,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
+    this.initZoom();
 
-    this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
-      this.bodiesLabels = bodiesLabels;
-      this.initZoom();
+    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
+        this.groupForegroundSelection.remove();
+        this.groupForegroundSelection = this.svgSelection.append('g');
+        this.bodiesLabels = bodiesLabels;
+        this.initLabels();
+      });
     });
   }
 
@@ -245,7 +246,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             orbit: this.sceneService.getOrbit(body)
                           };
                         });
-    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
+    line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
 
     this.groupZoomSelection.selectAll('.orbit')
                                .data(orbitsData, (d) => d.body.id)
@@ -285,42 +286,42 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     this.labelsPath.style('opacity', 0);
 
-    const labels = this.groupForegroundSelection.selectAll('.label')
-                       .data(labelsData, (d) => d.body.id)
-                       .join(
-                        enter => enter.append('text')
-                                      .attr('id', (d) => 'labeltext_' + d.body.id)
-                                      .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
-                                      .text((d) => this.bodiesLabels[d.body.id])
-                                      .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                      .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                                      .on('mouseover', (event, d) => {
-                                        const textBoundingBox = event.currentTarget.getBoundingClientRect();
-                                        this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                   L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
-                                                                   L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
-                                                    .transition()
-                                                    .duration(LABEL_TRANSITION_MS)
-                                                    .style('opacity', 1);
-                                        select('#orbit_' + d.body.id).classed('hovered', true);
-                                      })
-                                      .on('mouseout', (event, d) => {
-                                        this.labelsPath.transition()
-                                                        .duration(LABEL_TRANSITION_MS)
-                                                        .style('opacity', 0);
-                                        select('#orbit_' + d.body.id).classed('hovered', false);
-                                      })
-                                      .on('mousedown', () => {
-                                        this.labelsPath.style('opacity', 0);
-                                      })
-                                      .on('click', (event, d) => {
-                                        this.select(d.body);
-                                        this.zoomTo(d.body, false);
-                                        event.stopPropagation();
-                                      }),
-                        update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                        .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                      );
+    this.groupForegroundSelection.selectAll('.label')
+                                 .data(labelsData, (d) => d.body.id)
+                                 .join(
+                                    enter => enter.append('text')
+                                                  .attr('id', (d) => 'labeltext_' + d.body.id)
+                                                  .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                                                  .text((d) => this.bodiesLabels[d.body.id])
+                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                                                  .on('mouseover', (event, d) => {
+                                                    const textBoundingBox = event.currentTarget.getBoundingClientRect();
+                                                    this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                                                               L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
+                                                                               L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
+                                                                  .transition()
+                                                                  .duration(LABEL_TRANSITION_MS)
+                                                                  .style('opacity', 1);
+                                                    select('#orbit_' + d.body.id).classed('hovered', true);
+                                                  })
+                                                  .on('mouseout', (event, d) => {
+                                                    this.labelsPath.transition()
+                                                                    .duration(LABEL_TRANSITION_MS)
+                                                                    .style('opacity', 0);
+                                                    select('#orbit_' + d.body.id).classed('hovered', false);
+                                                  })
+                                                  .on('mousedown', () => {
+                                                    this.labelsPath.style('opacity', 0);
+                                                  })
+                                                  .on('click', (event, d) => {
+                                                    this.select(d.body);
+                                                    this.zoomTo(d.body, false);
+                                                    event.stopPropagation();
+                                                  }),
+                                    update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                                    .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                                );
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
