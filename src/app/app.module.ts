@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 import { SearchPanelComponent } from './shell/search-panel/search-panel.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -71,7 +72,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatDialogModule,
     MatSidenavModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

@@ -85,7 +85,15 @@ mat-toolbar {
   padding-right: 5px;
 }
 
-app-search-panel, app-settings-panel {
+::ng-deep .settings-dialog-panel mat-dialog-container,
+::ng-deep .contact-dialog-panel mat-dialog-container,
+::ng-deep .about-dialog-panel mat-dialog-container,
+::ng-deep .legals-dialog-panel mat-dialog-container {
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+app-search-panel {
   width: 100%;
   height: calc(100% - #{$toolbar-height});
   overflow-y: auto;

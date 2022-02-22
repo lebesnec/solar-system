@@ -1,3 +1,11 @@
+<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  {{ 'Settings' | translate }}
+</h2>
+
+<button mat-icon-button mat-dialog-close class="close-button">
+  <mat-icon>✖&#xFE0E;</mat-icon>
+</button>
+
 <h2>{{ 'Language' | translate }}</h2>
 
 <mat-button-toggle-group class="large toggle-language" [value]="language" (change)="language = $event.value">

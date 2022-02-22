@@ -1,3 +1,11 @@
+<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  {{ 'About' | translate }}
+</h2>
+
+<button mat-icon-button mat-dialog-close class="close-button">
+  <mat-icon>✖&#xFE0E;</mat-icon>
+</button>
+
 <p [innerHTML]="'ABOUT_CONTENT_1' | translate"></p>
 
 <h1>{{ 'Method of calculation' | translate }}</h1>
