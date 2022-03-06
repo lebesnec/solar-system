@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ORBITS_SETTING, SettingsPanelService} from '../settings-panel.service';
+import {ORBITS_SETTING, SettingsService} from './settings.service';
 import {AVAILABLE_LANGUAGES} from '../../../app.component';
 
 @Component({
@@ -48,7 +48,7 @@ export class SettingsComponent {
   }
 
   constructor(
-    private settingsService: SettingsPanelService
+    private settingsService: SettingsService
   ) { }
 
 }

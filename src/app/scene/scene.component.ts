@@ -20,7 +20,7 @@ import {selectAll} from 'd3';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
-import {ORBITS_SETTING, SettingsPanelService} from '../shell/settings-panel/settings-panel.service';
+import {ORBITS_SETTING, SettingsService} from '../shell/settings-panel/settings/settings.service';
 import {fromEvent} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
@@ -85,7 +85,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService,
-    private settingsService: SettingsPanelService,
+    private settingsService: SettingsService,
     private translateService: TranslateService
   ) { }
 

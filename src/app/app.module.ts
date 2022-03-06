@@ -24,7 +24,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CelestialBodyDialogComponent } from './scene/celestial-body-dialog/celestial-body-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { SettingsPanelComponent } from './shell/settings-panel/settings-panel.component';
 import { SettingsComponent } from './shell/settings-panel/settings/settings.component';
 import { ContactComponent } from './shell/settings-panel/contact/contact.component';
 import { AboutComponent } from './shell/settings-panel/about/about.component';
@@ -41,7 +40,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SceneComponent,
     SearchPanelComponent,
     CelestialBodyDialogComponent,
-    SettingsPanelComponent,
     SettingsComponent,
     ContactComponent,
     AboutComponent,

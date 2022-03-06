@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AVAILABLE_LANGUAGES} from '../../app.component';
+import {AVAILABLE_LANGUAGES} from '../../../app.component';
 import {Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 
@@ -12,7 +12,7 @@ export enum ORBITS_SETTING {
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsPanelService {
+export class SettingsService {
 
   public get language(): string {
     const result = localStorage.getItem('language');
