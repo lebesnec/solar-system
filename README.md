@@ -4,7 +4,6 @@
 
 ## TODO
 
-- sun popup
 - asteroids
 - rovers & probe
 - lagrange points
