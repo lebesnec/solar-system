@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ORBITS_SETTING, SettingsService} from './settings.service';
-import {AVAILABLE_LANGUAGES} from '../../../app.component';
+import {AVAILABLE_LANGUAGES} from '../../app.component';
 
 @Component({
   selector: 'app-settings',

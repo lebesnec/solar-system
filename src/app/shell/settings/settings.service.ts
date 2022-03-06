@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AVAILABLE_LANGUAGES} from '../../../app.component';
+import {AVAILABLE_LANGUAGES} from '../../app.component';
 import {Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 

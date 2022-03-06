@@ -3,10 +3,10 @@ import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {SettingsComponent} from './settings-panel/settings/settings.component';
-import {ContactComponent} from './settings-panel/contact/contact.component';
-import {AboutComponent} from './settings-panel/about/about.component';
-import {LegalsComponent} from './settings-panel/legals/legals.component';
+import {SettingsComponent} from './settings/settings.component';
+import {ContactComponent} from './contact/contact.component';
+import {AboutComponent} from './about/about.component';
+import {LegalsComponent} from './legals/legals.component';
 
 @Component({
   selector: 'app-shell',

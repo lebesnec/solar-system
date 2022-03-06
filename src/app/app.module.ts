@@ -24,10 +24,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CelestialBodyDialogComponent } from './scene/celestial-body-dialog/celestial-body-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { SettingsComponent } from './shell/settings-panel/settings/settings.component';
-import { ContactComponent } from './shell/settings-panel/contact/contact.component';
-import { AboutComponent } from './shell/settings-panel/about/about.component';
-import { LegalsComponent } from './shell/settings-panel/legals/legals.component';
+import { SettingsComponent } from './shell/settings/settings.component';
+import { ContactComponent } from './shell/contact/contact.component';
+import { AboutComponent } from './shell/about/about.component';
+import { LegalsComponent } from './shell/legals/legals.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

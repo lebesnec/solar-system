@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {SettingsService} from './shell/settings-panel/settings/settings.service';
+import {SettingsService} from './shell/settings/settings.service';
 
 export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
 
