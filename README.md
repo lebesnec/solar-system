@@ -16,7 +16,7 @@
 - tooltip not overriding
 - mobile
 - firefox
-- dnd dialog
+- dnd dialog & common component
 - expand img
 - legals + header on source code files + licence file
 
