@@ -32,3 +32,13 @@ $solar-system-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($solar-system-theme);
 
+// custom global style:
+
+.mat-menu-panel {
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+.mat-menu-item {
+  color: white;
+}
