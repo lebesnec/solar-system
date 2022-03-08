@@ -36,9 +36,15 @@ $solar-system-theme: mat.define-light-theme((
 
 .mat-menu-panel {
   backdrop-filter: blur(10px);
-  background: hsla(0, 0%, 100%, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .mat-menu-item {
   color: white;
+  min-width: 150px;
+  padding-left: 30px;
+}
+
+.mat-menu-item:hover:not([disabled]) {
+  background: rgba(0, 0, 0, 0.09);
 }

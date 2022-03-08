@@ -22,8 +22,10 @@
   <button *ngIf="showSearchPanel" mat-icon-button class="close-button" (click)="onCloseClick()">
     ✖&#xFE0E;
   </button>
-  <button [matMenuTriggerFor]="menu" *ngIf="!showSearchPanel" mat-icon-button class="setting-button">⋮</button>
-  <mat-menu #menu="matMenu">
+  <div [matMenuTriggerFor]="menu">
+    <button *ngIf="!showSearchPanel" mat-icon-button class="menu-button">⋮</button>
+  </div>
+  <mat-menu #menu="matMenu" class="toolbar-menu">
     <button mat-menu-item (click)="openSettings()">{{ 'Settings' | translate }}</button>
     <button mat-menu-item (click)="openContact()">{{ 'Contact' | translate }}</button>
     <button mat-menu-item (click)="openAbout()">{{ 'About' | translate }}</button>

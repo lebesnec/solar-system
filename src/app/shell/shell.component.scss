@@ -71,14 +71,22 @@ mat-toolbar {
     }
   }
 
-  .close-button, .setting-button {
+  .close-button, .menu-button {
     color: rgba(0, 0, 0, 0.5);
     font-size: 25px;
     margin-right: 15px;
   }
-  .setting-button {
-    font-size: 32px;
+  .menu-button {
+    font-weight: bold;
   }
+}
+
+::ng-deep .toolbar-menu {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  margin-top: 12px;
+  box-shadow: none;
 }
 
 :host ::ng-deep .search-field .mat-form-field-flex {
