@@ -9,7 +9,6 @@
 - lagrange points
 - rings
 - scale
-- planet go through orbit
 - orientation orbit ellipse
 - blur
 - tooltip not overriding

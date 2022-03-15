@@ -45,7 +45,7 @@ export class SceneService {
   /**
    * In px, relative to the sun at (0, 0)
    */
-  public getOrbit(body: CelestialBody): Ellipse {
+  public getOrbitEllipse(body: CelestialBody): Ellipse {
     // convert eccentricity and semi major axis to radius and position using
     // https://en.wikipedia.org/wiki/Ellipse#Standard_equation
     return {
@@ -54,6 +54,27 @@ export class SceneService {
       rx: body.semiMajorAxis / KM_TO_PX,
       ry: Math.sqrt((body.semiMajorAxis ** 2) * (1 - (body.eccentricity ** 2))) / KM_TO_PX
     };
+  }
+
+  /**
+   * Positions in px, relative to the sun at (0, 0)
+   */
+  public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
+    const result = d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
+      const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
+      return {
+        trueAnomaly,
+        x: point.x,
+        y: point.y
+      };
+    });
+    // add the body position to the orbit to make sure the orbit path will pass through the body:
+    result.push({
+      trueAnomaly: body.trueAnomaly,
+      x: body.position.x,
+      y: body.position.y
+    });
+    return result.sort((p1, p2) => p1.trueAnomaly - p2.trueAnomaly);
   }
 
   /**
