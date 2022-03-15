@@ -18,10 +18,12 @@
   color: rgba(196, 196, 196, 0.788);
 }
 
-img {
-  padding-right: 20px;
-}
-
 h1 {
   padding-top: 30px;
+}
+
+.build-panel {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }
