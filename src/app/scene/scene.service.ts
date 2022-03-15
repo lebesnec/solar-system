@@ -4,25 +4,29 @@ import * as d3 from 'd3';
 import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
 /**
- * SVG does not work well with big number so we have to divide each value
+ * SVG does not work well with big number, so we have to divide each value
  * (in km) by this ratio before drawing. SCG also doesn't have much decimal
- * precision so we can't have a to big ratio or small bodies won't render well.
- * This does NOT take into account the scale applied by the current zoom!
- * https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
+ * precision, so we can't have a ratio too big, or small bodies won't render
+ * properly. This does NOT take into account the scale applied by the current
+ * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
  */
 export const KM_TO_PX = 1e5;
+
 /**
  * degrees to radian
  */
 export const DEG_TO_RAD = Math.PI / 180;
+
 /**
  * Astronomical units to kilometers
  */
 export const AU_TO_KM = 1.496e8;
+
 /**
  * Gravitational constant in m^3.kg^−1.s^−2
  */
 export const G = 6.6743e-11;
+
 /**
  * in km
  */
@@ -59,7 +63,7 @@ export class SceneService {
   /**
    * Positions in px, relative to the sun at (0, 0)
    */
-  public getOrbit(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
+  public getOrbitPath(body: CelestialBody, nbPoints = 360): OrbitPoint[] {
     const result = d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
       const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
       return {

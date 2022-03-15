@@ -34,6 +34,7 @@ const TOOLBAR_HEIGHT = 65;
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
 
+const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
 const LABEL_SPACING = 15;
@@ -239,24 +240,47 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initOrbits(): void {
-    const orbitsData = SOLAR_SYSTEM
-                        .filter((body) => body.id !== 'sun')
-                        .map((body) => {
-                          return {
-                            body,
-                            orbit: this.sceneService.getOrbit(body, NB_POINTS_ORBIT)
-                          };
-                        });
-    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
+    // "big" orbits does not render well with ellipse, so we use a path instead.
+    // On the contrary "small" orbit does not look good with path, so we use an
+    // ellipse for everything with a semi major axis <= to ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD
 
-    this.groupZoomSelection.selectAll('.orbit')
-                               .data(orbitsData, (d) => d.body.id)
+    // Ellipse:
+    const smallOrbitsData = SOLAR_SYSTEM
+                            .filter((body) => body.id !== 'sun' && body.semiMajorAxis <= ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
+                            .map((body) => ({
+                                body,
+                                orbit: this.sceneService.getOrbitEllipse(body)
+                            }));
+
+    this.groupZoomSelection.selectAll('.orbitEllipse')
+                               .data(smallOrbitsData, (d) => d.body.id)
                                .join(
-                                 enter => enter.append('path')
-                                               .attr('id', (d) => 'orbit_' + d.body.id)
-                                               .attr('class', (d) => 'orbit ' + d.body.type + ' ' + d.body.id)
-                                               .attr('d', (d) => lineFn(d.orbit))
+                                  enter => enter.append('ellipse')
+                                                .attr('id', (d) => 'orbit_' + d.body.id)
+                                                .attr('class', (d) => 'orbitEllipse orbit ' + d.body.type + ' ' + d.body.id)
+                                                .attr('cx', (d) => d.orbit.cx)
+                                                .attr('cy', (d) => d.orbit.cy)
+                                                .attr('rx', (d) => d.orbit.rx)
+                                                .attr('ry', (d) => d.orbit.ry)
                                );
+
+    // Path:
+    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
+    const largeOrbitsData = SOLAR_SYSTEM
+                            .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
+                            .map((body) => ({
+                              body,
+                              orbit: lineFn(this.sceneService.getOrbitPath(body, NB_POINTS_ORBIT))
+                            }));
+
+    this.groupZoomSelection.selectAll('.orbitPath')
+                            .data(largeOrbitsData, (d) => d.body.id)
+                            .join(
+                              enter => enter.append('path')
+                                            .attr('id', (d) => 'orbit_' + d.body.id)
+                                            .attr('class', (d) => 'orbitPath orbit ' + d.body.type + ' ' + d.body.id)
+                                            .attr('d', (d) => d.orbit)
+                            );
   }
 
   private initLabels(): void {
