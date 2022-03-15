@@ -252,12 +252,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 orbit: this.sceneService.getOrbitEllipse(body)
                             }));
 
-    this.groupZoomSelection.selectAll('.orbitEllipse')
+    this.groupZoomSelection.selectAll('.orbit-ellipse')
                                .data(smallOrbitsData, (d) => d.body.id)
                                .join(
                                   enter => enter.append('ellipse')
                                                 .attr('id', (d) => 'orbit_' + d.body.id)
-                                                .attr('class', (d) => 'orbitEllipse orbit ' + d.body.type + ' ' + d.body.id)
+                                                .attr('class', (d) => 'orbit-ellipse orbit ' + d.body.type + ' ' + d.body.id)
                                                 .attr('cx', (d) => d.orbit.cx)
                                                 .attr('cy', (d) => d.orbit.cy)
                                                 .attr('rx', (d) => d.orbit.rx)
@@ -273,12 +273,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               orbit: lineFn(this.sceneService.getOrbitPath(body, NB_POINTS_ORBIT))
                             }));
 
-    this.groupZoomSelection.selectAll('.orbitPath')
+    this.groupZoomSelection.selectAll('.orbit-path')
                             .data(largeOrbitsData, (d) => d.body.id)
                             .join(
                               enter => enter.append('path')
                                             .attr('id', (d) => 'orbit_' + d.body.id)
-                                            .attr('class', (d) => 'orbitPath orbit ' + d.body.type + ' ' + d.body.id)
+                                            .attr('class', (d) => 'orbit-path orbit ' + d.body.type + ' ' + d.body.id)
                                             .attr('d', (d) => d.orbit)
                             );
   }

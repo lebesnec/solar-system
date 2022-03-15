@@ -10,7 +10,6 @@
 - rings
 - scale
 - orientation orbit ellipse
-- blur
 - tooltip not overriding
 - mobile
 - firefox
