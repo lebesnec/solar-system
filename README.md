@@ -10,7 +10,7 @@
 - rings
 - scale
 - symbol dwarf planets
-- orientation orbit ellipse
+- orientation orbit ellipse https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node https://en.wikipedia.org/wiki/First_Point_of_Aries
 - tooltip not overriding
 - mobile
 - firefox
