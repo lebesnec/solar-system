@@ -232,6 +232,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .attr('r', (body) => Math.max(body.radius, MIN_BODY_RADIUS) / KM_TO_PX)
                                                 .attr('cx', (body) => body.position.x)
                                                 .attr('cy', (body) => body.position.y)
+                                                .attr('transform', (body) => this.getRotationForLongitudeOfAscendingNode(body))
                                                 .on('click', (event, d) => {
                                                   this.select(d);
                                                   event.stopPropagation();
@@ -262,6 +263,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .attr('cy', (d) => d.orbit.cy)
                                                 .attr('rx', (d) => d.orbit.rx)
                                                 .attr('ry', (d) => d.orbit.ry)
+                                                .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body))
                                );
 
     // Path:
@@ -280,7 +282,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                             .attr('id', (d) => 'orbit_' + d.body.id)
                                             .attr('class', (d) => 'orbit-path orbit ' + d.body.type + ' ' + d.body.id)
                                             .attr('d', (d) => d.orbit)
+                                            .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body))
                             );
+  }
+
+  private getRotationForLongitudeOfAscendingNode(body: CelestialBody): string|null {
+    if (body.longitudeOfAscendingNode && body.orbitBody) {
+      return `rotate(${body.longitudeOfAscendingNode}, ${body.orbitBody.position.x}, ${body.orbitBody.position.y})`;
+    } else if (body.orbitBody) {
+      return this.getRotationForLongitudeOfAscendingNode(body.orbitBody);
+    } else {
+      return null;
+    }
   }
 
   private initLabels(): void {
@@ -347,11 +360,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
-    const bodySelection = select('#' + body.id);
-
-    const bbox = (bodySelection.node() as any).getBBox();
+    const bbox = (select('#' + body.id).node() as any).getBBox();
     let scale = this.getScale(body);
-    // do not dezoom when cliking on a body, only when clicking on a search result :
+    // do not dezoom when clicking on a body, only when clicking on a search result :
     if (!forceZoom && scale < this.transform.k) {
       scale = this.transform.k;
     }

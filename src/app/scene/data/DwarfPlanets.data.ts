@@ -368,6 +368,7 @@ export const SEDNA: CelestialBody = {
   eccentricity: 0.8496,
   trueAnomaly: 0,
   meanAnomaly: 358.117,
+  longitudeOfAscendingNode: 144.248,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ ],
   orbitBody: null
