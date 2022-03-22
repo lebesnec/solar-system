@@ -50,6 +50,7 @@ export const MARS: CelestialBody = {
   eccentricity: 0.0934,
   trueAnomaly: 0,
   meanAnomaly: 19.412,
+  longitudeOfAscendingNode: 49.558,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [ PHOBOS, DEIMOS ],
   orbitBody: null

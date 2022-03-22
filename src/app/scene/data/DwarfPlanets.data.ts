@@ -100,6 +100,7 @@ export const PLUTO: CelestialBody = {
   eccentricity: 0.2488,
   trueAnomaly: 0,
   meanAnomaly: 14.53,
+  longitudeOfAscendingNode: 110.299,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ CHARON, STYX, NIX, KERBEROS, HYDRA ],
   orbitBody: null
@@ -119,6 +120,7 @@ export const CERES: CelestialBody = {
   eccentricity: 0.07600902910,
   trueAnomaly: 0,
   meanAnomaly: 77.37209589,
+  longitudeOfAscendingNode: 80.3,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [],
   orbitBody: null
@@ -154,6 +156,7 @@ export const ERIS: CelestialBody = {
   eccentricity: 0.43607,
   trueAnomaly: 0,
   meanAnomaly: 205.989,
+  longitudeOfAscendingNode: 35.951,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ DYSNOMIA ],
   orbitBody: null
@@ -189,6 +192,7 @@ export const MAKEMAKE: CelestialBody = {
   eccentricity: 0.16126,
   trueAnomaly: 0,
   meanAnomaly: 165.514,
+  longitudeOfAscendingNode: 79.620,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ S_2015_1 ],
   orbitBody: null
@@ -241,6 +245,7 @@ export const HAUMEA: CelestialBody = {
   eccentricity: 0.19642,
   trueAnomaly: 0,
   meanAnomaly: 218.205,
+  longitudeOfAscendingNode: 122.167,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ HIIAKA, NAMAKA ],
   orbitBody: null
@@ -275,6 +280,7 @@ export const ORCUS: CelestialBody = {
   eccentricity: 0.22701,
   trueAnomaly: 0,
   meanAnomaly: 181.735,
+  longitudeOfAscendingNode: 268.799,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ VANTH ],
   orbitBody: null
@@ -309,6 +315,7 @@ export const QUAOAR: CelestialBody = {
   eccentricity: 0.04106,
   trueAnomaly: 0,
   meanAnomaly: 301.104,
+  longitudeOfAscendingNode: 188.927,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ WEYWOT ],
   orbitBody: null
@@ -343,6 +350,7 @@ export const GONGGONG: CelestialBody = {
   eccentricity: 0.49943,
   trueAnomaly: 0,
   meanAnomaly: 106.496,
+  longitudeOfAscendingNode: 336.8573,
   type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
   satellites: [ XIANGLIU ],
   orbitBody: null

@@ -14,6 +14,7 @@ export const VENUS: CelestialBody = {
   eccentricity: 0.006772,
   trueAnomaly: 0,
   meanAnomaly: 50.115,
+  longitudeOfAscendingNode: 76.680,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [],
   orbitBody: null

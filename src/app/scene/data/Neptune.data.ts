@@ -252,6 +252,7 @@ export const NEPTUNE: CelestialBody = {
   eccentricity: 0.008678,
   trueAnomaly: 0,
   meanAnomaly: 256.228,
+  longitudeOfAscendingNode: 131.783,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [
     NAIAD,

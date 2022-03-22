@@ -1357,6 +1357,7 @@ export const JUPITER: CelestialBody = {
   eccentricity: 0.0489,
   trueAnomaly: 0,
   meanAnomaly: 20.020,
+  longitudeOfAscendingNode: 100.464,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [
     METIS,

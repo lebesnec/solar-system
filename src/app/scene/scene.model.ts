@@ -27,9 +27,10 @@ export enum CELESTIAL_BODY_TYPE {
  * mass: kg
  * radius: km
  * semiMajorAxis: km
- * eccentricity: dimensionless, between 0 & 1
- * trueAnomaly: degrees, between 0 & 360
- * meanAnomaly: degrees, between 0 & 360
+ * eccentricity: dimensionless (between 0 & 1)
+ * trueAnomaly: degrees (between 0 & 360)
+ * meanAnomaly: degrees (between 0 & 360)
+ * longitudeOfAscendingNode: degrees (between 0 & 360). The First Point of Aries is used as the origin of longitude.
  */
 export interface CelestialBody {
     id: string;
@@ -42,6 +43,7 @@ export interface CelestialBody {
     eccentricity: number;
     trueAnomaly: number;
     meanAnomaly: number;
+    longitudeOfAscendingNode?: number;
     type: CELESTIAL_BODY_TYPE;
     satellites: CelestialBody[];
     orbitBody: CelestialBody | null;

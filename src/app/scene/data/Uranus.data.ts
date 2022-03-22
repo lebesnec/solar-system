@@ -473,6 +473,7 @@ export const URANUS: CelestialBody = {
   eccentricity: 0.046381,
   trueAnomaly: 0,
   meanAnomaly: 142.2386,
+  longitudeOfAscendingNode: 74.006,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [
     CORDELIA,

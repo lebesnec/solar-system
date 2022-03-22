@@ -33,6 +33,7 @@ export const EARTH: CelestialBody = {
   eccentricity: 0.0167086,
   trueAnomaly: 0,
   meanAnomaly: 358.617,
+  longitudeOfAscendingNode: 0,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [ MOON ],
   orbitBody: null

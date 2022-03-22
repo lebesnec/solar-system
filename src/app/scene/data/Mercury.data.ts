@@ -14,6 +14,7 @@ export const MERCURY: CelestialBody = {
   eccentricity: 0.20563,
   trueAnomaly: 0,
   meanAnomaly: 174.796,
+  longitudeOfAscendingNode: 48.331,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [],
   orbitBody: null

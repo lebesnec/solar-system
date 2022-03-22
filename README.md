@@ -9,6 +9,7 @@
 - lagrange points
 - rings
 - scale
+- symbol dwarf planets
 - orientation orbit ellipse
 - tooltip not overriding
 - mobile

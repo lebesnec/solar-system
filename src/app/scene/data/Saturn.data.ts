@@ -1408,6 +1408,7 @@ export const SATURN: CelestialBody = {
   eccentricity: 0.0565,
   trueAnomaly: 0,
   meanAnomaly: 317.020,
+  longitudeOfAscendingNode: 113.665,
   type: CELESTIAL_BODY_TYPE.PLANET,
   satellites: [
     S_2009_S_1,
