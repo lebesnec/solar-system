@@ -360,7 +360,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
-    const bbox = (select('#' + body.id).node() as any).getBBox();
+    const bbox = this.getBoundingBox(select('#' + body.id).node());
     let scale = this.getScale(body);
     // do not dezoom when clicking on a body, only when clicking on a search result :
     if (!forceZoom && scale < this.transform.k) {
@@ -375,6 +375,20 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
+  }
+
+  /**
+   * getBBox() does not take into account rotation of the element, so we have to wrapp
+   * the element into a group, get he bbox, and remove the group.
+   */
+  private getBoundingBox(element) {
+    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    element.parentNode.appendChild(group);
+    group.appendChild(element);
+    const bBox = group.getBBox();
+    group.parentNode.appendChild(element);
+    group.remove();
+    return bBox;
   }
 
   private deZoom(): void {
