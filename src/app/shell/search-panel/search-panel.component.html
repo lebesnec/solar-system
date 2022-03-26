@@ -11,7 +11,7 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
-        <span *ngIf="body.symbol" class="symbol">{{ body.symbol }}&#xFE0E;</span>
+        <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'">
         <span class="name">{{ body.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -44,7 +44,7 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile [class]="'celestial-body ' + SUN.type" (click)="onBodySelected(SUN)">
-        <span *ngIf="SUN.symbol" class="symbol">{{ SUN.symbol }}&#xFE0E;</span>
+        <img *ngIf="HAS_SYMBOL.includes(SUN)" [src]="'assets/symbols/' + SUN.id + '.svg'">
         <span class="name">{{ SUN.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -61,11 +61,11 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
-        <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
+        <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'">
         <span class="name">{{ planet.id | translate }}</span>
       </mat-grid-tile>
       <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
-        <span *ngIf="moon.symbol" class="symbol">{{ moon.symbol }}&#xFE0E;</span>
+        <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'">
         <span class="name">{{ moon.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -82,12 +82,12 @@
       <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px" class="dwarf-planet-grid">
         <!-- The dwarf planet -->
         <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
-          <span *ngIf="planet.symbol" class="symbol">{{ planet.symbol }}&#xFE0E;</span>
+          <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'">
           <span class="name">{{ planet.id | translate }}</span>
         </mat-grid-tile>
         <!-- The dwarf planet moon's -->
         <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
-          <span *ngIf="moon.symbol" class="symbol">{{ moon.symbol }}&#xFE0E;</span>
+          <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'">
           <span class="name">{{ moon.id | translate }}</span>
         </mat-grid-tile>
       </mat-grid-list>

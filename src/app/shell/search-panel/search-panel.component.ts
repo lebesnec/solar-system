@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
-import {SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
+import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
 import {CelestialBody} from '../../scene/scene.model';
 import {SearchPanelService} from './search-panel.service';
 import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
@@ -24,6 +24,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   public readonly JUPITER = JUPITER;
   public readonly MOON = MOON;
   public readonly GANYMEDE = GANYMEDE;
+  public readonly HAS_SYMBOL = HAS_SYMBOL;
 
   private searchChanged: Subject<void> = new Subject<void>();
 

@@ -38,7 +38,6 @@ export const DEIMOS: CelestialBody = {
 
 export const MARS: CelestialBody = {
   id: 'mars',
-  symbol: '♂',
   position: {
     x: 0,
     y: 0

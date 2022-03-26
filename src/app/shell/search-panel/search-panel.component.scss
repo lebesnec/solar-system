@@ -53,8 +53,10 @@ mat-expansion-panel {
   border: 3px solid white;
   color: white;
   cursor: pointer;
-  .symbol {
-    font-size: 40px;
+  img {
+    color: white;
+    width: 15px;
+    height: 15px;
     padding-right: 10px;
   }
 }

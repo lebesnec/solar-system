@@ -2,7 +2,6 @@ import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 
 export const MOON: CelestialBody = {
   id: 'moon',
-  symbol: '☾',
   position: {
     x: 0,
     y: 0
@@ -21,7 +20,6 @@ export const MOON: CelestialBody = {
 
 export const EARTH: CelestialBody = {
   id: 'earth',
-  symbol: '⨁',
   position: {
     x: 0,
     y: 0
