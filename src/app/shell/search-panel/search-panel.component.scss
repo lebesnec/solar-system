@@ -33,6 +33,8 @@ mat-expansion-panel {
   padding-top: 130px;
   text-align: center;
   img {
+    // change color of the svg icn to grey:
+    filter: invert(13%) sepia(92%) saturate(3%) hue-rotate(92deg) brightness(95%) contrast(84%);
     width: 100%;
     max-width: 150px;
     margin: auto;
@@ -54,9 +56,10 @@ mat-expansion-panel {
   color: white;
   cursor: pointer;
   img {
-    color: white;
-    width: 15px;
-    height: 15px;
+    // change color of the svg icn to white:
+    filter: invert(100%) sepia(7%) saturate(27%) hue-rotate(321deg) brightness(109%) contrast(107%);
+    width: 30px;
+    height: 30px;
     padding-right: 10px;
   }
 }
