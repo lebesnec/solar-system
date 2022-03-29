@@ -51,6 +51,12 @@ mat-expansion-panel {
   padding-bottom: 20px;
 }
 
+:host ::ng-deep .celestial-body .mat-grid-tile-content {
+  justify-content: flex-start;
+  grid-gap: 20px;
+  padding-left: 20px;
+}
+
 .celestial-body {
   border: 3px solid white;
   color: white;
@@ -60,7 +66,6 @@ mat-expansion-panel {
     filter: invert(100%) sepia(7%) saturate(27%) hue-rotate(321deg) brightness(109%) contrast(107%);
     width: 30px;
     height: 30px;
-    padding-right: 10px;
   }
 }
 .celestial-body:hover {
@@ -70,7 +75,6 @@ mat-expansion-panel {
 
 .celestial-body.star {
   border-color: rgb(185, 167, 0);
-  color: rgb(185, 167, 0);
 }
 .celestial-body.star:hover {
   border-color: rgb(232, 210, 0);
