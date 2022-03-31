@@ -144,7 +144,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.transform = e.transform;
 
       this.groupZoomSelection.attr('transform', e.transform);
-      this.initLabels();
+      this.initLabels(); // TODO debounce ?
     });
     this.svgSelection.call(this.d3Zoom);
 
@@ -315,6 +315,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
     const labelsData = allLabelsData.filter(data => data.visible);
 
+    if (this.labelsPath) {
+      this.labelsPath.remove();
+    }
     this.labelsPath = this.groupForegroundSelection.append('path')
                                                    .attr('class', 'label-path')
                                                    .style('opacity', 0);

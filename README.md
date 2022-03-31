@@ -14,6 +14,7 @@
 - symbol in label
 - orientation orbit ellipse https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node https://en.wikipedia.org/wiki/First_Point_of_Aries
 - tooltip not overriding
+- pwa
 - mobile
 - firefox
 - dnd dialog & common component
