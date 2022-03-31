@@ -6,7 +6,7 @@ import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
 import {randomNormal} from 'd3-random';
 import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
-import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
+import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
 import {VENUS} from './data/Venus.data';
@@ -114,10 +114,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupBackgroundSelection = this.svgSelection.append('g');
     this.groupZoomSelection = this.svgSelection.append('g');
     this.groupForegroundSelection = this.svgSelection.append('g');
-
-    this.labelsPath = this.groupForegroundSelection.append('path')
-                                                    .attr('class', 'label-path')
-                                                    .style('opacity', 0);
 
     this.initMilkyWay();
     this.initReticule();
@@ -300,7 +296,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const allLabelsData = SOLAR_SYSTEM.map(body => {
       return {
         body,
-        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect(), // TODO store node ?
+        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect(),
         visible: true
       };
     });
@@ -319,7 +315,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
     const labelsData = allLabelsData.filter(data => data.visible);
 
-    this.labelsPath.style('opacity', 0);
+    this.labelsPath = this.groupForegroundSelection.append('path')
+                                                   .attr('class', 'label-path')
+                                                   .style('opacity', 0);
 
     this.groupForegroundSelection.selectAll('.label')
                                  .data(labelsData, (d) => d.body.id)
@@ -357,10 +355,24 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                     update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                                     .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                                 );
+
+    const labelsSymbolData = labelsData.filter(d => HAS_SYMBOL.includes(d.body));
+    this.groupForegroundSelection.selectAll('.label-symbol')
+                                 .data(labelsSymbolData, (d) => d.body.id)
+                                 .join(
+                                    enter => enter.append('image')
+                                                  .attr('id', (d) => 'labelsymbol_' + d.body.id)
+                                                  .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
+                                                  .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
+                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
+                                    update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                                    .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                                 );
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
-    const bbox = this.getBoundingBox(select('#' + body.id).node());
+    const bbox = this.getBoundingBox(body);
     let scale = this.getScale(body);
     // do not dezoom when clicking on a body, only when clicking on a search result :
     if (!forceZoom && scale < this.transform.k) {
@@ -379,16 +391,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   /**
    * getBBox() does not take into account rotation of the element, so we have to wrapp
-   * the element into a group, get he bbox, and remove the group.
+   * the element into a group, get the bbox, and remove the group.
    */
-  private getBoundingBox(element) {
+  private getBoundingBox(body: CelestialBody): DOMRect {
+    const element: any = select('#' + body.id).node();
     const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     element.parentNode.appendChild(group);
     group.appendChild(element);
-    const bBox = group.getBBox();
+    const bBox: SVGRect = group.getBBox();
     group.parentNode.appendChild(element);
     group.remove();
-    return bBox;
+    // SVGRect to DOMRect:
+    return new DOMRect(bBox.x, bBox.y, bBox.width, bBox.height);
   }
 
   private deZoom(): void {
