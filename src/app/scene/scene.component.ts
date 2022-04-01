@@ -322,58 +322,57 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                    .attr('class', 'label-path')
                                                    .style('opacity', 0);
 
-    this.groupForegroundSelection.selectAll('.label')
-                                 .data(labelsData, (d) => d.body.id)
-                                 .join(
-                                    enter => enter.append('text')
-                                                  .attr('id', (d) => 'labeltext_' + d.body.id)
-                                                  .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
-                                                  .text((d) => this.bodiesLabels[d.body.id])
-                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
-                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                                                  .on('mouseover', (event, d) => {
-                                                    const textBoundingBox = event.currentTarget.getBoundingClientRect();
-                                                    this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
-                                                                               L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
-                                                                               L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
-                                                                  .transition()
-                                                                  .duration(LABEL_TRANSITION_MS)
-                                                                  .style('opacity', 1);
-                                                    select('#orbit_' + d.body.id).classed('hovered', true);
-                                                  })
-                                                  .on('mouseout', (event, d) => {
-                                                    this.labelsPath.transition()
-                                                                    .duration(LABEL_TRANSITION_MS)
-                                                                    .style('opacity', 0);
-                                                    select('#orbit_' + d.body.id).classed('hovered', false);
-                                                  })
-                                                  .on('mousedown', () => {
-                                                    this.labelsPath.style('opacity', 0);
-                                                  })
-                                                  .on('click', (event, d) => {
-                                                    this.select(d.body);
-                                                    this.zoomTo(d.body, false);
-                                                    event.stopPropagation();
-                                                  }),
-                                    update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                                    .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                                );
+    const groupLabelsSelection = this.groupForegroundSelection
+                                      .selectAll('.group-label')
+                                      .data(labelsData, (d) => d.body.id)
+                                      .join(
+                                        enter => enter.append('g')
+                                                      .attr('class', 'group-label')
+                                                      .on('mouseover', (event, d) => {
+                                                        const textBoundingBox = event.currentTarget.getBoundingClientRect();
+                                                        this.labelsPath.attr('d', `M ${d.boundingBox.x + (d.boundingBox.width / 2)} ${d.boundingBox.y + (d.boundingBox.height / 2)}
+                                                                                   L ${textBoundingBox.x - LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}
+                                                                                   L ${textBoundingBox.x + textBoundingBox.width + LABEL_PATH_MARGIN} ${textBoundingBox.bottom + LABEL_PATH_MARGIN}`)
+                                                                      .transition()
+                                                                      .duration(LABEL_TRANSITION_MS)
+                                                                      .style('opacity', 1);
+                                                        select('#orbit_' + d.body.id).classed('hovered', true);
+                                                      })
+                                                      .on('mouseout', (event, d) => {
+                                                        this.labelsPath.transition()
+                                                                        .duration(LABEL_TRANSITION_MS)
+                                                                        .style('opacity', 0);
+                                                        select('#orbit_' + d.body.id).classed('hovered', false);
+                                                      })
+                                                      .on('mousedown', () => {
+                                                        this.labelsPath.style('opacity', 0);
+                                                      })
+                                                      .on('click', (event, d) => {
+                                                        this.select(d.body);
+                                                        this.zoomTo(d.body, false);
+                                                        event.stopPropagation();
+                                                      })
+                                    );
 
-    const labelsSymbolData = labelsData.filter(d => HAS_SYMBOL.includes(d.body));
-    this.groupForegroundSelection.selectAll('.label-symbol')
-                                 .data(labelsSymbolData, (d) => d.body.id)
-                                 .join(
-                                    enter => enter.append('image')
-                                                  .attr('id', (d) => 'labelsymbol_' + d.body.id)
-                                                  .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
-                                                  .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
-                                                  .attr('width', SYMBOL_SIZE)
-                                                  .attr('height', SYMBOL_SIZE)
-                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2)),
-                                    update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                                    .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
-                                 );
+    // update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+    //   .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+
+    groupLabelsSelection.append('text')
+                        .attr('id', (d) => 'labeltext_' + d.body.id)
+                        .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                        .text((d) => this.bodiesLabels[d.body.id])
+                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
+                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y);
+
+    groupLabelsSelection.filter((d) => HAS_SYMBOL.includes(d.body))
+                        .append('image')
+                        .attr('id', (d) => 'labelsymbol_' + d.body.id)
+                        .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
+                        .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
+                        .attr('width', SYMBOL_SIZE)
+                        .attr('height', SYMBOL_SIZE)
+                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2));
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
