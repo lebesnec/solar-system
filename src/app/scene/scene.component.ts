@@ -33,7 +33,7 @@ const STAR_MAX_RADIUS = 0.5; // px
 const TOOLBAR_HEIGHT = 65;
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
-
+const SYMBOL_SIZE = 18; // px
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
@@ -329,7 +329,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   .attr('id', (d) => 'labeltext_' + d.body.id)
                                                   .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
                                                   .text((d) => this.bodiesLabels[d.body.id])
-                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                                  .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
                                                   .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                                                   .on('mouseover', (event, d) => {
                                                     const textBoundingBox = event.currentTarget.getBoundingClientRect();
@@ -367,8 +367,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   .attr('id', (d) => 'labelsymbol_' + d.body.id)
                                                   .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
                                                   .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
+                                                  .attr('width', SYMBOL_SIZE)
+                                                  .attr('height', SYMBOL_SIZE)
                                                   .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
+                                                  .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2)),
                                     update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                                     .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                                  );
