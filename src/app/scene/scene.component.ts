@@ -315,6 +315,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
     const labelsData = allLabelsData.filter(data => data.visible);
 
+    // the path from the label to the body that show up when you hover a label:
     if (this.labelsPath) {
       this.labelsPath.remove();
     }
@@ -322,6 +323,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                    .attr('class', 'label-path')
                                                    .style('opacity', 0);
 
+    // create a empty group for each label:
     const groupLabelsSelection = this.groupForegroundSelection
                                       .selectAll('.group-label')
                                       .data(labelsData, (d) => d.body.id)
@@ -354,25 +356,37 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                       })
                                     );
 
-    // update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-    //   .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+    // add the text in all the group:
+    groupLabelsSelection.selectAll('.label')
+                        .data(d => [ d ], (d) => d.body.id)
+                        .join(
+                          enter => enter.append('text')
+                                        .attr('id', (d) => 'labeltext_' + d.body.id)
+                                        .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                                        .text((d) => this.bodiesLabels[d.body.id])
+                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
+                                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
+                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                          .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
+                        );
 
-    groupLabelsSelection.append('text')
-                        .attr('id', (d) => 'labeltext_' + d.body.id)
-                        .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
-                        .text((d) => this.bodiesLabels[d.body.id])
-                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
-                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y);
+    // add the image for the symbol in all the group which have a symbol:
+    groupLabelsSelection.selectAll('.label-symbol')
+                        .data(d => HAS_SYMBOL.includes(d.body) ? [ d ] : [], (d) => d.body.id)
+                        .join(
+                          enter => enter.append('image')
+                                        .attr('id', (d) => 'labelsymbol_' + d.body.id)
+                                        .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
+                                        .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
+                                        .attr('width', SYMBOL_SIZE)
+                                        .attr('height', SYMBOL_SIZE)
+                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2)),
+                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                                          .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2))
+                        );
 
-    groupLabelsSelection.filter((d) => HAS_SYMBOL.includes(d.body))
-                        .append('image')
-                        .attr('id', (d) => 'labelsymbol_' + d.body.id)
-                        .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
-                        .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
-                        .attr('width', SYMBOL_SIZE)
-                        .attr('height', SYMBOL_SIZE)
-                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
-                        .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2));
+
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
