@@ -365,9 +365,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                         .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
                                         .attr('dominant-baseline', 'central')
                                         .text((d) => this.bodiesLabels[d.body.id])
-                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
+                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? 1.2 * SYMBOL_SIZE : 0))
                                         .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
-                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
+                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? 1.2 * SYMBOL_SIZE : 0))
                                           .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                         );
 
