@@ -144,10 +144,6 @@
     stroke: mat.get-color-from-palette($solar-system-primary);
   }
 
-  .label:hover {
-    fill: mat.get-color-from-palette($solar-system-primary);
-  }
-
   .label-path {
     stroke: mat.get-color-from-palette($solar-system-primary);
     stroke-width: 1;
@@ -156,8 +152,20 @@
 
   .label-symbol {
     cursor: pointer;
-    // change color of the svg icon to white:
-    filter: invert(100%) sepia(7%) saturate(27%) hue-rotate(321deg) brightness(109%) contrast(107%);
+    @include recolor(#ffffff);
+  }
+
+  .label-symbol.selected {
+    @include recolor(mat.get-color-from-palette($solar-system-primary));
+  }
+
+  .group-label:hover {
+    .label {
+      fill: mat.get-color-from-palette($solar-system-primary);
+    }
+    .label-symbol {
+      @include recolor(mat.get-color-from-palette($solar-system-primary));
+    }
   }
 
   .orbit {

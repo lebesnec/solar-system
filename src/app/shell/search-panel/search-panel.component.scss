@@ -1,3 +1,5 @@
+@import '~src/custom-theme';
+
 :host {
   display: block;
   backdrop-filter: blur(10px);
@@ -12,7 +14,7 @@ mat-expansion-panel {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  background: transparent;
+  background: transparent !important;
   color: white;
 
   mat-panel-title {
@@ -33,8 +35,7 @@ mat-expansion-panel {
   padding-top: 130px;
   text-align: center;
   img {
-    // change color of the svg icon to grey:
-    filter: invert(13%) sepia(92%) saturate(3%) hue-rotate(92deg) brightness(95%) contrast(84%);
+    @include recolor(#333333);
     width: 100%;
     max-width: 150px;
     margin: auto;
@@ -62,8 +63,7 @@ mat-expansion-panel {
   color: white;
   cursor: pointer;
   img {
-    // change color of the svg icon to white:
-    filter: invert(100%) sepia(7%) saturate(27%) hue-rotate(321deg) brightness(109%) contrast(107%);
+    @include recolor(#ffffff);
     width: 30px;
     height: 30px;
   }

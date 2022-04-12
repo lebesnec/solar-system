@@ -323,7 +323,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                    .attr('class', 'label-path')
                                                    .style('opacity', 0);
 
-    // create a empty group for each label:
+    // create an empty group for each label:
     const groupLabelsSelection = this.groupForegroundSelection
                                       .selectAll('.group-label')
                                       .data(labelsData, (d) => d.body.id)
@@ -363,16 +363,17 @@ export class SceneComponent implements OnInit, AfterViewInit {
                           enter => enter.append('text')
                                         .attr('id', (d) => 'labeltext_' + d.body.id)
                                         .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                                        .attr('dominant-baseline', 'central')
                                         .text((d) => this.bodiesLabels[d.body.id])
                                         .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
                                         .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
-                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
+                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? SYMBOL_SIZE : 0))
                                           .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                         );
 
     // add the image for the symbol in all the group which have a symbol:
     groupLabelsSelection.selectAll('.label-symbol')
-                        .data(d => HAS_SYMBOL.includes(d.body) ? [ d ] : [], (d) => d.body.id)
+                        .data(d => d.body !== SUN && HAS_SYMBOL.includes(d.body) ? [ d ] : [], (d) => d.body.id)
                         .join(
                           enter => enter.append('image')
                                         .attr('id', (d) => 'labelsymbol_' + d.body.id)
@@ -464,6 +465,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private select(body: CelestialBody): void {
     this.deselectAll();
     select('#labeltext_' + body.id).classed('selected', true);
+    select('#labelsymbol_' + body.id).classed('selected', true);
     select('#orbit_' + body.id).classed('selected', true);
 
     if (this.celestialBodyDialogRef) {

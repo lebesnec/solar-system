@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Custom Theming for Angular Material
 @use '@angular/material' as mat;
 // For more information: https://material.angular.io/guide/theming
@@ -47,4 +49,32 @@ $solar-system-theme: mat.define-light-theme((
 
 .mat-menu-item:hover:not([disabled]) {
   background: rgba(0, 0, 0, 0.09);
+}
+
+// helper to convert a color to a css filter, to easily change the color af svg element
+// See https://stackoverflow.com/a/68034320/990193
+@mixin recolor($color: #000) {
+  $r: math.div(red($color), 255);
+  $g: math.div(green($color), 255);
+  $b: math.div(blue($color), 255);
+  $a: alpha($color);
+
+  // grayscale fallback if SVG from data url is not supported
+  $lightness: lightness($color);
+  filter: saturate(0%) brightness(0%) invert($lightness) opacity($a);
+
+  // color filter
+  $svg-filter-id: "recolor";
+  filter: url('data:image/svg+xml;utf8,\
+  <svg xmlns="http://www.w3.org/2000/svg">\
+    <filter id="#{$svg-filter-id}" color-interpolation-filters="sRGB">\
+      <feColorMatrix type="matrix" values="\
+       0 0 0 0 #{$r}\
+       0 0 0 0 #{$g}\
+       0 0 0 0 #{$b}\
+       0 0 0 #{$a} 0\
+      "/>\
+    </filter>\
+  </svg>\
+  ##{$svg-filter-id}');
 }
