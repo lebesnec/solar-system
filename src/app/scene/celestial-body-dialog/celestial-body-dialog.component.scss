@@ -1,3 +1,5 @@
+@import '~src/custom-theme';
+
 :host {
   display: block;
   color: white;
@@ -21,6 +23,13 @@
 }
 .close-button:hover {
   color: rgba(196, 196, 196, 0.788);
+}
+
+.symbol {
+  @include recolor(#ffffff);
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 mat-dialog-content {
