@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
-import {Title} from '@angular/platform-browser';
+import {Meta, Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 
 export enum ORBITS_SETTING {
@@ -54,12 +54,16 @@ export class SettingsService {
 
   constructor(
     titleService: Title,
+    metaService: Meta,
     private translateService: TranslateService
   ) {
     // Change page title when user changes language preference
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateService.get('APP_TITLE').subscribe((res: string) => {
         titleService.setTitle(res);
+      });
+      this.translateService.get('APP_DESCRIPTION').subscribe((res: string) => {
+        metaService.addTag({ name: 'description', content: res }, true);
       });
     });
   }

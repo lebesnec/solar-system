@@ -1,5 +1,6 @@
 {
   "APP_TITLE": "Solar system",
+  "APP_DESCRIPTION": "An interactive map of the solar system. Explore the planets and satellites, and visualize their orbit.",
   "Navigate": "Navigate",
   "Dwarf planets": "Dwarf planets",
   "NB planets": "{{NB}} planets",
