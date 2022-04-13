@@ -2,10 +2,10 @@
   <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" class="symbol">
   {{ body.id | translate }},
   <ng-container [ngSwitch]="body.type">
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" class="subtitle">{{ 'star' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" class="subtitle">{{ 'planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" class="subtitle">{{ 'dwarf planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" class="subtitle">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ 'star' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET">{{ 'planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET">{{ 'dwarf planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
   </ng-container>
 </div>
 
