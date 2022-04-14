@@ -1,6 +1,6 @@
 {
   "APP_TITLE": "Système solaire",
-  "APP_DESCRIPTION": "Une carte interactive du système solaire. Explorez les planètes et satellites, et visualisez leur orbite.",
+  "APP_DESCRIPTION": "Une carte interactive du système solaire. Explorez les planètes et leurs satellites, et visualisez leurs orbites.",
   "Navigate": "Navigation",
   "Dwarf planets": "Planètes naines",
   "NB planets": "{{NB}} planètes",
