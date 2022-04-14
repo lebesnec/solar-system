@@ -5,7 +5,7 @@ import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
 import {randomNormal} from 'd3-random';
-import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {AU_TO_KM, KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -144,6 +144,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
       this.groupZoomSelection.attr('transform', e.transform);
       this.initLabels(); // TODO debounce ?
+      this.initScale();
     });
     this.svgSelection.call(this.d3Zoom);
 
@@ -387,6 +388,32 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         );
 
 
+  }
+
+  private initScale(): void {
+    const nbUA = 1;
+    const width = ((nbUA * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+
+    this.groupForegroundSelection.select('.scale').remove();
+    const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
+
+    groupScaleSelection.append('path')
+                        .attr('shape-rendering', 'crispEdges')
+                        .attr('d', `M ${50} ${window.innerHeight - 50 - 3} L ${50} ${window.innerHeight - 50 + 3}`);
+
+    groupScaleSelection.append('path')
+                        .attr('shape-rendering', 'crispEdges')
+                        .attr('d', `M ${50} ${window.innerHeight - 50} L ${50 + width} ${window.innerHeight - 50}`);
+
+    groupScaleSelection.append('path')
+                        .attr('shape-rendering', 'crispEdges')
+                        .attr('d', `M ${50 + width} ${window.innerHeight - 50 - 3} L ${50 + width} ${window.innerHeight - 50 + 3}`);
+
+    groupScaleSelection.append('text')
+                        .text(nbUA + ' UA')
+                        .attr('dominant-baseline', 'central')
+                        .attr('x', 50 + width + 10)
+                        .attr('y', window.innerHeight - 50);
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
