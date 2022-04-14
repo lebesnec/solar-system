@@ -123,8 +123,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
-        this.groupForegroundSelection.remove();
-        this.groupForegroundSelection = this.svgSelection.append('g');
+        this.groupForegroundSelection.selectAll('.group-label').remove();
         this.bodiesLabels = bodiesLabels;
         this.initLabels();
       });
