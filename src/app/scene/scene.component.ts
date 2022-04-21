@@ -386,13 +386,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
                           update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x)
                                           .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y - (SYMBOL_SIZE / 2))
                         );
-
-
   }
 
   private initScale(): void {
+    const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ];
     let nbUA = 200 / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
-    nbUA = nbUA > 7 ? 10 : nbUA > 3 ? 5 : 1;
+    nbUA = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbUA - a) - Math.abs(nbUA - b) )[0];
     const width = ((nbUA * AU_TO_KM) / KM_TO_PX) * this.transform.k;
 
     this.groupForegroundSelection.select('.scale').remove();
