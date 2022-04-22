@@ -31,17 +31,24 @@ const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
 const STAR_MAX_RADIUS = 0.5; // px
 
 const TOOLBAR_HEIGHT = 65;
+
 const RETICULE_SIZE = 30; // px
 const RETICULE_SPACING = 300; // px
-const SYMBOL_SIZE = 18; // px
+
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
 const MIN_BODY_RADIUS = 50; // km
+
+const SYMBOL_SIZE = 18; // px
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 10 }; // px
 const LABEL_TRANSITION_MS = 50; // ms
 const LABEL_PATH_MARGIN = 4; // px
+
 const ZOOM_TRANSITION_MS = 500; // ms
+
+const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ]; // UA
+const SCALE_AVERAGE_WIDTH = 200; // px
 
 @Component({
   selector: 'app-scene',
@@ -389,8 +396,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initScale(): void {
-    const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ];
-    let nbUA = 200 / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
+    let nbUA = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
     nbUA = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbUA - a) - Math.abs(nbUA - b) )[0];
     const width = ((nbUA * AU_TO_KM) / KM_TO_PX) * this.transform.k;
 
