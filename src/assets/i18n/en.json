@@ -1,6 +1,11 @@
 {
   "APP_TITLE": "Solar system",
   "APP_DESCRIPTION": "An interactive map of the solar system. Explore the planets and their satellites, and visualize their orbit.",
+
+  "NB AU": "{{NB_AU}} AU",
+  "NB_AU Astronomical Unit = NB_KM km": "{{NB_AU}} Astronomical Unit = {{NB_KM}} km",
+  "NB_AU Astronomical Units = NB_KM km": "{{NB_AU}} Astronomical Units = {{NB_KM}} km",
+
   "Navigate": "Navigate",
   "Dwarf planets": "Dwarf planets",
   "NB planets": "{{NB}} planets",

@@ -139,6 +139,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.bodiesLabels = bodiesLabels;
         this.initLabels();
       });
+      // TODO reset scale
     });
   }
 
@@ -402,12 +403,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initScale(): void {
     // size of the scale in UA:
-    let nbUA = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
+    let nbAU = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
     // rounded to a nice number:
-    nbUA = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbUA - a) - Math.abs(nbUA - b) )[0];
+    nbAU = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbAU - a) - Math.abs(nbAU - b) )[0];
     // size of the scale in px:
-    const width = ((nbUA * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-    const nbKm = Math.round(nbUA * AU_TO_KM);
+    const width = ((nbAU * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    const nbKm = Math.round(nbAU * AU_TO_KM);
 
     this.groupForegroundSelection.select('.scale').remove();
     const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
@@ -418,23 +419,27 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING}`);
 
     // ticks
-    const step = (nbUA >= 50 ? 10 : 1);
-    for (let i = 0; i <= nbUA; i = i + step) {
+    const step = (nbAU >= 50 ? 10 : 1);
+    for (let i = 0; i <= nbAU; i = i + step) {
       const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-      const height = (i % (SCALE_LARGE_TICK_STEP * step) === 0 || i === nbUA ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
+      const height = (i % (SCALE_LARGE_TICK_STEP * step) === 0 || i === nbAU ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
     }
 
     // text
-    groupScaleSelection.append('text')
-                          .text(nbUA + ' UA') // TODO translate
-                          .attr('dominant-baseline', 'central')
-                          .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + width)
-                          .attr('y', window.innerHeight - SCALE_PADDING)
-                        .append('title')
-                          .html(nbKm + ' km'); // TODO translate
+    this.translate.get([ 'NB AU', 'NB_AU Astronomical Unit = NB_KM km', 'NB_AU Astronomical Units = NB_KM km' ], { NB_AU: nbAU, NB_KM: nbKm }).subscribe((translations) => {
+      
+    
+      groupScaleSelection.append('text')
+                            .text(translations['NB AU'])
+                            .attr('dominant-baseline', 'central')
+                            .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + width)
+                            .attr('y', window.innerHeight - SCALE_PADDING)
+                          .append('title')
+                            .html(nbAU > 1 ? translations['NB_AU Astronomical Units = NB_KM km'] : translations['NB_AU Astronomical Unit = NB_KM km']);
+    });
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
