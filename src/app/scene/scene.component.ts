@@ -411,6 +411,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     nbAU = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbAU - a) - Math.abs(nbAU - b) )[0];
     // size of the scale in px:
     const width = ((nbAU * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    // size of the scale in km:
     const nbKm = Math.round(nbAU * AU_TO_KM);
 
     this.groupForegroundSelection.select('.scale').remove();
