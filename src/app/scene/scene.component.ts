@@ -54,6 +54,9 @@ const SCALE_TEXT_PADDING = 10; // px
 const SCALE_HEIGHT_LARGE_TICK = 10; // px
 const SCALE_HEIGHT_SMALL_TICK = 6; // px
 const SCALE_LARGE_TICK_STEP = 5;
+const SCALE_TEXT_KEY = 'NB AU';
+const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
+const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 
 @Component({
   selector: 'app-scene',
@@ -139,7 +142,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.bodiesLabels = bodiesLabels;
         this.initLabels();
       });
-      // TODO reset scale
+      this.initScale();
     });
   }
 
@@ -429,16 +432,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
     }
 
     // text
-    this.translate.get([ 'NB AU', 'NB_AU Astronomical Unit = NB_KM km', 'NB_AU Astronomical Units = NB_KM km' ], { NB_AU: nbAU, NB_KM: nbKm }).subscribe((translations) => {
-      
-    
+    this.translate.get([ SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY ], { NB_AU: nbAU, NB_KM: nbKm }).subscribe((translations) => {
       groupScaleSelection.append('text')
-                            .text(translations['NB AU'])
+                            .text(translations[SCALE_TEXT_KEY])
                             .attr('dominant-baseline', 'central')
                             .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + width)
                             .attr('y', window.innerHeight - SCALE_PADDING)
                           .append('title')
-                            .html(nbAU > 1 ? translations['NB_AU Astronomical Units = NB_KM km'] : translations['NB_AU Astronomical Unit = NB_KM km']);
+                            .html(nbAU > 1 ? translations[SCALE_TITLE_PLURAL_KEY] : translations[SCALE_TITLE_KEY]);
     });
   }
 
