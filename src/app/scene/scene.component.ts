@@ -47,8 +47,12 @@ const LABEL_PATH_MARGIN = 4; // px
 
 const ZOOM_TRANSITION_MS = 500; // ms
 
-const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ]; // UA
+const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1 ]; // UA
 const SCALE_AVERAGE_WIDTH = 200; // px
+const SCALE_PADDING = 50; // px
+const SCALE_TEXT_PADDING = 10; // px
+const SCALE_HEIGHT_LARGE = 10; // px
+const SCALE_HEIGHT_SMALL = 6; // px
 
 @Component({
   selector: 'app-scene',
@@ -402,27 +406,39 @@ export class SceneComponent implements OnInit, AfterViewInit {
     nbUA = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbUA - a) - Math.abs(nbUA - b) )[0];
     // size of the scale in px:
     const width = ((nbUA * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    const nbKm = Math.round(nbUA * AU_TO_KM);
 
     this.groupForegroundSelection.select('.scale').remove();
     const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
 
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${50} ${window.innerHeight - 50 - 3} L ${50} ${window.innerHeight - 50 + 3}`);
+                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE / 2)} L ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE / 2)}`);
 
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${50} ${window.innerHeight - 50} L ${50 + width} ${window.innerHeight - 50}`);
+                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING}`);
 
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${50 + width} ${window.innerHeight - 50 - 3} L ${50 + width} ${window.innerHeight - 50 + 3}`);
+                        .attr('d', `M ${50 + width} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE / 2)} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE / 2)}`);
+
+    const step = (nbUA >= 50 ? 10 : 1);
+    for (let i = step; i < nbUA; i = i + step) {
+      const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+      const height = (i % (5 * step) === 0 ? SCALE_HEIGHT_LARGE : SCALE_HEIGHT_SMALL);
+      groupScaleSelection.append('path')
+                          .attr('shape-rendering', 'crispEdges')
+                          .attr('d', `M ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
+    }
 
     groupScaleSelection.append('text')
-                        .text(nbUA + ' UA')
-                        .attr('dominant-baseline', 'central')
-                        .attr('x', 50 + width + 10)
-                        .attr('y', window.innerHeight - 50);
+                          .text(nbUA + ' UA') // TODO translate
+                          .attr('dominant-baseline', 'central')
+                          .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + width)
+                          .attr('y', window.innerHeight - SCALE_PADDING)
+                        .append('title')
+                          .html(nbKm + ' km'); // TODO translate
   }
 
   private zoomTo(body: CelestialBody, forceZoom: boolean): void {
