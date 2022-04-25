@@ -47,12 +47,13 @@ const LABEL_PATH_MARGIN = 4; // px
 
 const ZOOM_TRANSITION_MS = 500; // ms
 
-const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1 ]; // UA
+const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ]; // UA
 const SCALE_AVERAGE_WIDTH = 200; // px
 const SCALE_PADDING = 50; // px
 const SCALE_TEXT_PADDING = 10; // px
-const SCALE_HEIGHT_LARGE = 10; // px
-const SCALE_HEIGHT_SMALL = 6; // px
+const SCALE_HEIGHT_LARGE_TICK = 10; // px
+const SCALE_HEIGHT_SMALL_TICK = 6; // px
+const SCALE_LARGE_TICK_STEP = 5;
 
 @Component({
   selector: 'app-scene',
@@ -411,27 +412,22 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupForegroundSelection.select('.scale').remove();
     const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
 
-    groupScaleSelection.append('path')
-                        .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE / 2)} L ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE / 2)}`);
-
+    // horizontal line
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
                         .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING}`);
 
-    groupScaleSelection.append('path')
-                        .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${50 + width} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE / 2)} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE / 2)}`);
-
+    // ticks
     const step = (nbUA >= 50 ? 10 : 1);
-    for (let i = step; i < nbUA; i = i + step) {
+    for (let i = 0; i <= nbUA; i = i + step) {
       const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-      const height = (i % (5 * step) === 0 ? SCALE_HEIGHT_LARGE : SCALE_HEIGHT_SMALL);
+      const height = (i % (SCALE_LARGE_TICK_STEP * step) === 0 || i === nbUA ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
     }
 
+    // text
     groupScaleSelection.append('text')
                           .text(nbUA + ' UA') // TODO translate
                           .attr('dominant-baseline', 'central')
