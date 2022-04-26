@@ -30,6 +30,13 @@
   <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
 </mat-button-toggle-group>
 
+<h3>{{ 'Scale' | translate }}</h3>
+
+<mat-button-toggle-group [value]="scale" (change)="scale = $event.value">
+  <mat-button-toggle [value]="true">{{ 'On' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
+</mat-button-toggle-group>
+
 <h3>{{ 'Reticule' | translate }}</h3>
 
 <mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">

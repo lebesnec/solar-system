@@ -20,6 +20,10 @@
 
 :host ::ng-deep {
 
+  .hide-scale .scale {
+    display: none;
+  }
+
   .hide-reticule .reticuleV, .hide-reticule .reticuleH {
     display: none;
   }

@@ -47,6 +47,13 @@ export class SettingsComponent {
     this.settingsService.milkyWay = value;
   }
 
+  public get scale(): boolean {
+    return this.settingsService.scale;
+  }
+  public set scale(value: boolean) {
+    this.settingsService.scale = value;
+  }
+
   constructor(
     private settingsService: SettingsService
   ) { }

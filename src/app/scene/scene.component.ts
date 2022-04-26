@@ -85,6 +85,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   public ORBITS_SETTING = ORBITS_SETTING;
 
+  public get scaleSetting(): boolean {
+    return this.settingsService.scale;
+  }
   public get reticuleSetting(): boolean {
     return this.settingsService.reticule;
   }

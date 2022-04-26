@@ -52,6 +52,13 @@ export class SettingsService {
     localStorage.setItem('milkyWay', value ? 'true' : 'false');
   }
 
+  public get scale(): boolean {
+    return localStorage.getItem('scale') !== 'false';
+  }
+  public set scale(value: boolean) {
+    localStorage.setItem('scale', value ? 'true' : 'false');
+  }
+
   constructor(
     titleService: Title,
     metaService: Meta,
