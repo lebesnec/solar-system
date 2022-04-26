@@ -48,16 +48,33 @@ const LABEL_PATH_MARGIN = 4; // px
 
 const ZOOM_TRANSITION_MS = 500; // ms
 
-const SCALE_POSSIBLE_VALUES = [ 500, 100, 50, 10, 5, 3, 2, 1, 0.5, 0.1 ]; // UA
-const SCALE_AVERAGE_WIDTH = 200; // px
+// max: max value of the scale in AU, step: draw a tick every tickInterval (in AU)
+const SCALE_POSSIBLE_VALUES = [
+  { max: 500,    tickInterval: 10 },
+  { max: 100,    tickInterval: 10 },
+  { max: 50,     tickInterval: 10 },
+  { max: 10,     tickInterval: 1 },
+  { max: 5,      tickInterval: 1 },
+  { max: 3,      tickInterval: 1 },
+  { max: 2,      tickInterval: 1 },
+  { max: 1,      tickInterval: 1 },
+  { max: 0.5,    tickInterval: 0.1 },
+  { max: 0.1,    tickInterval: 0.01 },
+  { max: 0.01,   tickInterval: 0.001 },
+  { max: 0.001,  tickInterval: 0.0001 },
+  { max: 0.0001, tickInterval: 0.00001 }
+];
+const SCALE_LARGE_TICK_STEP = 5; // there is a large tick every SCALE_LARGE_TICK_STEP small tick
+const SCALE_AVERAGE_SIZE = 200; // px
 const SCALE_PADDING = 50; // px
 const SCALE_TEXT_PADDING = 10; // px
 const SCALE_HEIGHT_LARGE_TICK = 10; // px
 const SCALE_HEIGHT_SMALL_TICK = 6; // px
-const SCALE_LARGE_TICK_STEP = 5;
 const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
+
+const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
 
 @Component({
   selector: 'app-scene',
@@ -156,7 +173,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initZoom(): void {
-    this.d3Zoom = zoom().on('zoom', (e) => {
+    this.d3Zoom = zoom().scaleExtent(ZOOM_EXTENT).on('zoom', (e) => {
       this.transform = e.transform;
 
       this.groupZoomSelection.attr('transform', e.transform);
@@ -406,14 +423,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initScale(): void {
-    // size of the scale in UA:
-    let nbAU = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
-    // rounded to a nice number:
-    nbAU = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(nbAU - a) - Math.abs(nbAU - b) )[0];
-    // size of the scale in px:
-    const width = ((nbAU * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-    // size of the scale in km:
-    const nbKm = Math.round(nbAU * AU_TO_KM);
+    const scaleSizeAU = SCALE_AVERAGE_SIZE / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
+    // find the nearest available scale value:
+    const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max) )[0];
+    const scaleSizePx = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    const scaleSizeKm = Math.round(scale.max * AU_TO_KM);
 
     this.groupForegroundSelection.select('.scale').remove();
     const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
@@ -421,31 +435,35 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // horizontal line
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + width} ${window.innerHeight - SCALE_PADDING}`);
+                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + scaleSizePx} ${window.innerHeight - SCALE_PADDING}`);
 
     // ticks
-    const step = (nbAU >= 50 ? 10 : 1);
-    for (let i = 0; i <= nbAU; i = i + step) {
+    for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
       const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-      const height = (i % (SCALE_LARGE_TICK_STEP * step) === 0 || i === nbAU ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
+      const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
     }
+    // last tick (not included in the previous loop because of float rounding error)
+    const nbPxLastTick = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    groupScaleSelection.append('path')
+                        .attr('shape-rendering', 'crispEdges')
+                        .attr('d', `M ${SCALE_PADDING + nbPxLastTick} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${SCALE_PADDING + nbPxLastTick} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
     // text
     const translationParams = {
-      NB_AU: formatNumber(nbAU, this.translate.currentLang, '1.0-0'),
-      NB_KM: formatNumber(nbKm, this.translate.currentLang, '1.0-0')
+      NB_AU: formatNumber(scale.max, this.translate.currentLang, '1.0-4'),
+      NB_KM: formatNumber(scaleSizeKm, this.translate.currentLang, '1.0-4')
     };
     this.translate.get([ SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY ], translationParams).subscribe((translations) => {
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
                             .attr('dominant-baseline', 'central')
-                            .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + width)
+                            .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + scaleSizePx)
                             .attr('y', window.innerHeight - SCALE_PADDING)
                           .append('title')
-                            .html(nbAU > 1 ? translations[SCALE_TITLE_PLURAL_KEY] : translations[SCALE_TITLE_KEY]);
+                            .html(scale.max > 1 ? translations[SCALE_TITLE_PLURAL_KEY] : translations[SCALE_TITLE_KEY]);
     });
   }
 
