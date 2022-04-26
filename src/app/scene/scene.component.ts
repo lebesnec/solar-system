@@ -23,6 +23,7 @@ import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-bo
 import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
 import {fromEvent} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {formatNumber} from '@angular/common';
 
 const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
 const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
@@ -433,7 +434,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
     }
 
     // text
-    this.translate.get([ SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY ], { NB_AU: nbAU, NB_KM: nbKm }).subscribe((translations) => {
+    const translationParams = {
+      NB_AU: formatNumber(nbAU, this.translate.currentLang, '1.0-0'),
+      NB_KM: formatNumber(nbKm, this.translate.currentLang, '1.0-0')
+    };
+    this.translate.get([ SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY ], translationParams).subscribe((translations) => {
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
                             .attr('dominant-baseline', 'central')

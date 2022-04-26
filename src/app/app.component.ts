@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {SettingsService} from './shell/settings/settings.service';
+import {registerLocaleData} from '@angular/common';
+import localeEn from '@angular/common/locales/en';
+import localeFr from '@angular/common/locales/fr';
 
 export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
 
@@ -17,6 +20,8 @@ export class AppComponent {
   ) {
     translateService.setDefaultLang('en');
     translateService.use(settingsService.language);
+    registerLocaleData(localeEn, 'en');
+    registerLocaleData(localeFr, 'fr');
   }
 
 }
