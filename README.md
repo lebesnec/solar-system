@@ -4,6 +4,7 @@
 
 ## TODO
 
+- bug zindex 
 - opti initLabels
 - open on wikipedia
 - bug: label not selected after click on search result
