@@ -4,11 +4,6 @@
 
 ## TODO
 
-- asteroids
-- rovers & probe
-- lagrange points
-- rings
-- scale
 - open on wikipedia
 - bug: label not selected after click on search result
 - lighthouse
@@ -23,5 +18,9 @@
 - legals + header on source code files + licence file
 
 ## low priority
+- asteroids
+- rovers & probe
+- lagrange points
+- rings
 - half-lite planet
 - cloudy milky way
