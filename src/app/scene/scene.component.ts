@@ -22,7 +22,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
 import {fromEvent} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
+import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
 
 const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
@@ -138,7 +138,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       }
     });
 
-    fromEvent(window, 'resize').pipe(debounceTime(500)).subscribe(() => {
+    fromEvent(window, 'resize').pipe(throttleTime(500)).subscribe(() => {
       this.onWindowResize();
     });
   }
@@ -177,11 +177,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initZoom(): void {
     this.d3Zoom = zoom().scaleExtent(ZOOM_EXTENT).on('zoom', (e) => {
+      const isPan = (this.transform?.k === e.transform.k);
       this.transform = e.transform;
 
       this.groupZoomSelection.attr('transform', e.transform);
-      this.initLabels(); // TODO debounce ?
-      this.initScale();
+
+      this.initLabels();
+      if (!isPan) {
+        this.initScale();
+      }
     });
     this.svgSelection.call(this.d3Zoom);
 
