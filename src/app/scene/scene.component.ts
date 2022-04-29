@@ -326,7 +326,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private getRotationForLongitudeOfAscendingNode(body: CelestialBody): string|null {
     if (body.longitudeOfAscendingNode && body.orbitBody) {
-      return `rotate(${body.longitudeOfAscendingNode}, ${body.orbitBody.position.x}, ${body.orbitBody.position.y})`;
+      // we negate the longitude of ascending node because the rotate function is clockwise:
+      return `rotate(${-body.longitudeOfAscendingNode}, ${body.orbitBody.position.x}, ${body.orbitBody.position.y})`;
     } else if (body.orbitBody) {
       return this.getRotationForLongitudeOfAscendingNode(body.orbitBody);
     } else {

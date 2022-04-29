@@ -86,8 +86,10 @@ export class SceneService {
    */
   public getPositionForTrueAnomaly(body: CelestialBody, trueAnomaly): Point {
     const d = this.getDistanceToFocusPoint(body, trueAnomaly);
-    // we convert the distance to a position using basic trigonometry :
-    const yKm = d * Math.sin(trueAnomaly * DEG_TO_RAD);
+
+    // we convert the distance to a position using trigonometry.
+    // we have to negate the y position because in svg the origin is at the top left.
+    const yKm = - d * Math.sin(trueAnomaly * DEG_TO_RAD);
     const xKm = d * Math.cos(trueAnomaly * DEG_TO_RAD);
 
     // we have the position relative to the orbited body, so we add its
