@@ -338,7 +338,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
       return {
         body,
         boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect(),
-        visible: true
+        visible: true,
+        hasSymbol: HAS_SYMBOL.includes(body)
       };
     });
     // only show label of the biggest body if body are near each other:
@@ -406,15 +407,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                         .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
                                         .attr('dominant-baseline', 'central')
                                         .text((d) => this.bodiesLabels[d.body.id])
-                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? 1.2 * SYMBOL_SIZE : 0))
+                                        .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (d.hasSymbol ? 1.2 * SYMBOL_SIZE : 0))
                                         .attr('y', (d) => d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y),
-                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (HAS_SYMBOL.includes(d.body) ? 1.2 * SYMBOL_SIZE : 0))
+                          update => update.attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (d.hasSymbol ? 1.2 * SYMBOL_SIZE : 0))
                                           .attr('y', (d) =>  d.boundingBox.bottom + LABEL_DISTANCE_TO_BODY.y)
                         );
 
     // add the image for the symbol in all the group which have a symbol:
     groupLabelsSelection.selectAll('.label-symbol')
-                        .data(d => d.body !== SUN && HAS_SYMBOL.includes(d.body) ? [ d ] : [], (d) => d.body.id)
+                        .data(d => d.body !== SUN && d.hasSymbol ? [ d ] : [], (d) => d.body.id)
                         .join(
                           enter => enter.append('image')
                                         .attr('id', (d) => 'labelsymbol_' + d.body.id)
