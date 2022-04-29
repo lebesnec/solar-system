@@ -21,7 +21,7 @@ import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
-import {fromEvent} from 'rxjs';
+import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
 
@@ -130,8 +130,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe((body) => {
       if (body) {
-        this.select(body);
-        this.zoomTo(body, true);
+        this.zoomTo(body, true).subscribe({
+          complete: () => this.select(body)
+        });
       } else {
         this.deselectAll();
         this.deZoom();
@@ -475,7 +476,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private zoomTo(body: CelestialBody, forceZoom: boolean): void {
+  private zoomTo(body: CelestialBody, forceZoom: boolean): Observable<unknown> {
     const bbox = this.getBoundingBox(body);
     let scale = this.getScale(body);
     // do not dezoom when clicking on a body, only when clicking on a search result :
@@ -488,9 +489,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               )
                               .scale(scale);
 
-    this.svgSelection.transition()
-                      .duration(ZOOM_TRANSITION_MS)
-                      .call(this.d3Zoom.transform, zoomTo);
+    const transition = this.svgSelection.transition()
+                                        .duration(ZOOM_TRANSITION_MS)
+                                        .call(this.d3Zoom.transform, zoomTo);
+    return from(transition.end());
   }
 
   /**
