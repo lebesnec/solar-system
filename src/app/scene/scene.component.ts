@@ -435,7 +435,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private initScale(): void {
     const scaleSizeAU = SCALE_AVERAGE_SIZE / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
     // find the nearest available scale value:
-    const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max) )[0];
+    const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
     const scaleSizePx = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
     const scaleSizeKm = Math.round(scale.max * AU_TO_KM);
 
