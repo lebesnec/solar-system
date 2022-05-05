@@ -152,7 +152,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupZoomSelection = this.svgSelection.append('g');
     this.groupForegroundSelection = this.svgSelection.append('g');
 
-    this.initMilkyWay();
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
@@ -172,7 +171,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // redraw reticule and milky way when window size change because they are dependant from the window size
     this.groupBackgroundSelection.remove();
     this.groupBackgroundSelection = this.svgSelection.append('g');
-    this.initMilkyWay();
     this.initReticule();
   }
 
@@ -193,34 +191,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.transform = zoomIdentity.translate(this.center.x, this.center.y)
                                  .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
     this.svgSelection.call(this.d3Zoom.transform, this.transform);
-  }
-
-  private initMilkyWay(): void {
-    const randomNormalX = randomNormal(this.center.x, MILKY_WAY_RADIUS_X);
-    const randomNormalY = randomNormal(this.center.y, MILKY_WAY_RADIUS_Y);
-    const starsData = range(0, NB_STARS).map(i => {
-      return {
-        x: randomNormalX(),
-        y: randomNormalY(),
-        radius: Math.random() * STAR_MAX_RADIUS,
-        opacity: Math.random()
-      };
-    });
-
-    const groupMilkyWaySelection = this.groupBackgroundSelection.append('g')
-                                                                .attr('class', 'milky-way')
-                                                                .attr('transform', 'rotate(' + MILKY_WAY_ANGLE + ', ' + this.center.x + ', ' + this.center.y + ')');
-
-    groupMilkyWaySelection.selectAll('.star')
-                                .data(starsData)
-                                .join(
-                                  enter => enter.append('circle')
-                                                .attr('class', 'star')
-                                                .attr('r', (star) => star.radius)
-                                                .attr('cx', (star) => star.x)
-                                                .attr('cy', (star) => star.y)
-                                                .style('opacity', (star) => star.opacity)
-                                );
   }
 
   private initReticule(): void {

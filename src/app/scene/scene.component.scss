@@ -40,12 +40,11 @@
     display: none;
   }
 
-  .hide-mikyway .milky-way {
-    display: none;
-  }
-
-  .milky-way .star {
-    fill: rgb(255, 255, 255);
+  svg:not(.hide-milkyway) {
+    background-image: url(../../assets/milky-way.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   .reticuleV, .reticuleH {
