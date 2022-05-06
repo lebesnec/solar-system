@@ -20,7 +20,7 @@
 
 :host ::ng-deep {
 
-  .hide-scale .scale {
+  .hide-scale .scale, .hide-scale .compass {
     display: none;
   }
 
@@ -202,6 +202,10 @@
     text {
       fill: rgb(255, 255, 255);
     }
+  }
+
+  .compass {
+    fill: rgb(255, 255, 255);
   }
 
 }

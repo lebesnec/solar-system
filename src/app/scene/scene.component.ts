@@ -25,12 +25,6 @@ import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
 
-const MILKY_WAY_RADIUS_X = window.innerWidth / 4; // px
-const MILKY_WAY_RADIUS_Y = window.innerWidth / 25; // px
-const MILKY_WAY_ANGLE = -10; // degrees
-const NB_STARS = Math.min((window.innerWidth * window.innerHeight) / 500, 2000);
-const STAR_MAX_RADIUS = 0.5; // px
-
 const TOOLBAR_HEIGHT = 65;
 
 const RETICULE_SIZE = 30; // px
@@ -73,6 +67,8 @@ const SCALE_HEIGHT_SMALL_TICK = 6; // px
 const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
+const COMPASS_TITLE_KEY = 'First Point of Aries';
+const COMPAS_WIDTH = 50; // px
 
 const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
 
@@ -415,7 +411,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // horizontal line
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + scaleSizePx} ${window.innerHeight - SCALE_PADDING}`);
+                        .attr('d', `M ${SCALE_PADDING + COMPAS_WIDTH} ${window.innerHeight - SCALE_PADDING} L ${SCALE_PADDING + COMPAS_WIDTH + scaleSizePx} ${window.innerHeight - SCALE_PADDING}`);
 
     // ticks
     for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
@@ -423,27 +419,40 @@ export class SceneComponent implements OnInit, AfterViewInit {
       const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
-                          .attr('d', `M ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
+                          .attr('d', `M ${SCALE_PADDING + COMPAS_WIDTH + nbPx} ${window.innerHeight - SCALE_PADDING - (height / 2)} L ${SCALE_PADDING + COMPAS_WIDTH + nbPx} ${window.innerHeight - SCALE_PADDING + (height / 2)}`);
     }
     // last tick (not included in the previous loop because of float rounding error)
     const nbPxLastTick = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING + nbPxLastTick} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${SCALE_PADDING + nbPxLastTick} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
+                        .attr('d', `M ${SCALE_PADDING + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${SCALE_PADDING + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
-    // text
     const translationParams = {
       NB_AU: formatNumber(scale.max, this.translate.currentLang, '1.0-4'),
       NB_KM: formatNumber(scaleSizeKm, this.translate.currentLang, '1.0-4')
     };
-    this.translate.get([ SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY ], translationParams).subscribe((translations) => {
+    const translationsKeys = [
+      SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_KEY
+    ];
+    this.translate.get(translationsKeys, translationParams).subscribe((translations) => {
+      // text
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
                             .attr('dominant-baseline', 'central')
-                            .attr('x', SCALE_PADDING + SCALE_TEXT_PADDING + scaleSizePx)
+                            .attr('x', SCALE_PADDING + COMPAS_WIDTH + scaleSizePx + SCALE_TEXT_PADDING)
                             .attr('y', window.innerHeight - SCALE_PADDING)
                           .append('title')
                             .html(scale.max > 1 ? translations[SCALE_TITLE_PLURAL_KEY] : translations[SCALE_TITLE_KEY]);
+
+      // compass
+      this.groupForegroundSelection.append('text')
+                                      .html('⬆ ♈&#xFE0E;')
+                                      .attr('dominant-baseline', 'central')
+                                      .attr('x', SCALE_PADDING)
+                                      .attr('y', window.innerHeight - SCALE_PADDING)
+                                      .attr('class', 'compass')
+                                    .append('title')
+                                      .html(translations[COMPASS_TITLE_KEY]);
     });
   }
 

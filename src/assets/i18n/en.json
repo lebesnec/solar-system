@@ -2,6 +2,7 @@
   "APP_TITLE": "Solar system",
   "APP_DESCRIPTION": "An interactive map of the solar system. Explore the planets and their satellites, and visualize their orbit.",
 
+  "First Point of Aries": "First Point of Aries",
   "NB AU": "{{NB_AU}} AU",
   "NB_AU Astronomical Unit = NB_KM km": "{{NB_AU}} Astronomical Unit = {{NB_KM}} km",
   "NB_AU Astronomical Units = NB_KM km": "{{NB_AU}} Astronomical Units = {{NB_KM}} km",
