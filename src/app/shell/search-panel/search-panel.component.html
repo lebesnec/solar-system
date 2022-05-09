@@ -11,7 +11,7 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
-        <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'">
+        <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -20,7 +20,7 @@
 
 <!-- No search result -->
 <div class="empty-search" *ngIf="searchResult && searchResult.length === 0">
-  <img src="assets/empty_search.svg">
+  <img src="assets/empty_search.svg" [alt]="'No results' | translate">
   <h2>{{ 'No results' | translate }}</h2>
   <h4>
     {{ 'Try' | translate }}
@@ -44,7 +44,7 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile [class]="'celestial-body ' + SUN.type" (click)="onBodySelected(SUN)">
-        <img *ngIf="HAS_SYMBOL.includes(SUN)" [src]="'assets/symbols/' + SUN.id + '.svg'">
+        <img *ngIf="HAS_SYMBOL.includes(SUN)" [src]="'assets/symbols/' + SUN.id + '.svg'" [alt]="SUN.id | translate">
         <span class="name">{{ SUN.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -61,11 +61,11 @@
 
     <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
       <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
-        <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'">
+        <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
         <span class="name">{{ planet.id | translate }}</span>
       </mat-grid-tile>
       <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
-        <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'">
+        <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
         <span class="name">{{ moon.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
@@ -82,12 +82,12 @@
       <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px" class="dwarf-planet-grid">
         <!-- The dwarf planet -->
         <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
-          <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'">
+          <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
           <span class="name">{{ planet.id | translate }}</span>
         </mat-grid-tile>
         <!-- The dwarf planet moon's -->
         <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
-          <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'">
+          <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
           <span class="name">{{ moon.id | translate }}</span>
         </mat-grid-tile>
       </mat-grid-list>

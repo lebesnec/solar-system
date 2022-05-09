@@ -1,5 +1,5 @@
 <div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" class="symbol">
+  <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" class="symbol" [alt]="body.id | translate">
   {{ body.id | translate }},
   <ng-container [ngSwitch]="body.type">
     <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ 'star' | translate }}</ng-container>
@@ -15,10 +15,10 @@
 
 <mat-dialog-content>
   <ng-container *ngIf="!MISSING_PICTURES.includes(body)" [ngSwitch]="body.type">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" src="assets/celestial_bodies/{{ body.id }}_small.jpg" width="300">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" src="assets/celestial_bodies/{{ body.orbitBody.id }}/{{ body.id }}_small.jpg" width="300">
+    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" src="assets/celestial_bodies/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
+    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
+    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
+    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" src="assets/celestial_bodies/{{ body.orbitBody.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
   </ng-container>
 
   <table>
