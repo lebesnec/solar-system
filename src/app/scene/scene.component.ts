@@ -513,23 +513,23 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private getScale(body: CelestialBody): number {
     switch (body) {
       case SUN:
-        return 5.0;
+        return 0.035;
       case MERCURY:
       case VENUS:
       case EARTH:
       case MARS:
-        return 500.0;
-      case JUPITER:
         return 1.3;
+      case JUPITER:
+        return 0.13;
       case SATURN:
-        return 1.5;
+        return 0.15;
       case URANUS:
-        return 2.0;
+        return 0.2;
       case NEPTUNE:
-        return 0.6;
+        return 0.06;
       default:
         if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
-          return 500.0;
+          return 1.3;
         } else {
           return this.getScale(body.orbitBody);
         }
