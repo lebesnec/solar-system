@@ -68,7 +68,7 @@ const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 const COMPASS_TITLE_KEY = 'First Point of Aries';
-const COMPAS_WIDTH = 50; // px
+const COMPAS_WIDTH = 35; // px
 
 const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
 
@@ -446,10 +446,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
       // compass
       this.groupForegroundSelection.append('text')
-                                      .html('⬆ ♈&#xFE0E;')
+                                      .html('🔼&#xFE0E;')
                                       .attr('dominant-baseline', 'central')
                                       .attr('x', SCALE_PADDING)
-                                      .attr('y', window.innerHeight - SCALE_PADDING)
+                                      .attr('y', window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
+                                      .attr('class', 'compass')
+                                    .append('title')
+                                      .html(translations[COMPASS_TITLE_KEY]);
+      this.groupForegroundSelection.append('text')
+                                      .html('♈&#xFE0E;')
+                                      .attr('dominant-baseline', 'central')
+                                      .attr('x', SCALE_PADDING)
+                                      .attr('y', window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
                                       .attr('class', 'compass')
                                     .append('title')
                                       .html(translations[COMPASS_TITLE_KEY]);
