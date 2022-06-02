@@ -4,7 +4,6 @@ import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
-import {randomNormal} from 'd3-random';
 import {AU_TO_KM, KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
@@ -70,7 +69,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
+const ZOOM_EXTENT: [ number, number ] = [ 7e-7, 1.3 ];
 
 @Component({
   selector: 'app-scene',
@@ -271,6 +270,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                );
 
     // Path:
+    // TODO sedna render is horrible
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
     const largeOrbitsData = SOLAR_SYSTEM
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
