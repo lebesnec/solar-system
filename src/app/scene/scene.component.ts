@@ -31,7 +31,6 @@ const RETICULE_SPACING = 300; // px
 
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
-const MIN_BODY_RADIUS = 50; // km
 
 const SYMBOL_SIZE = 18; // px
 const LABEL_SPACING = 15;
@@ -69,7 +68,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 7e-7, 1.3 ];
+const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
 
 @Component({
   selector: 'app-scene',
@@ -163,9 +162,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private onWindowResize(): void {
-    // redraw reticule and milky way when window size change because they are dependant from the window size
-    this.groupBackgroundSelection.remove();
-    this.groupBackgroundSelection = this.svgSelection.append('g');
+    // redraw reticule when window size change because they are dependant from the window size
     this.initReticule();
   }
 
@@ -231,8 +228,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                   enter => enter.append('circle')
                                                 .attr('id', (body) => body.id)
                                                 .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-                                                // nothing will show below a MIN_BODY_RADIUS radius :
-                                                .attr('r', (body) => Math.max(body.radius, MIN_BODY_RADIUS) / KM_TO_PX)
+                                                .attr('r', (body) => body.radius / KM_TO_PX)
                                                 .attr('cx', (body) => body.position.x)
                                                 .attr('cy', (body) => body.position.y)
                                                 .attr('transform', (body) => this.getRotationForLongitudeOfAscendingNode(body))
@@ -270,7 +266,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                );
 
     // Path:
-    // TODO sedna render is horrible
     const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
     const largeOrbitsData = SOLAR_SYSTEM
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
@@ -513,23 +508,23 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private getScale(body: CelestialBody): number {
     switch (body) {
       case SUN:
-        return 0.035;
+        return 5.0;
       case MERCURY:
       case VENUS:
       case EARTH:
       case MARS:
-        return 1.3;
+        return 500.0;
       case JUPITER:
-        return 0.13;
+        return 1.3;
       case SATURN:
-        return 0.15;
+        return 1.5;
       case URANUS:
-        return 0.2;
+        return 2.0;
       case NEPTUNE:
-        return 0.06;
+        return 0.6;
       default:
         if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
-          return 1.3;
+          return 500.0;
         } else {
           return this.getScale(body.orbitBody);
         }
