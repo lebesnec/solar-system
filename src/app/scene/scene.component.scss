@@ -63,7 +63,13 @@
 
   .celestial-body.satellite {
     stroke-width: 0;
+    vector-effect: none;
     fill: rgb(101, 101, 101);
+  }
+
+  .celestial-body.dwarf_planet {
+    stroke-width: 0;
+    vector-effect: none;
   }
 
   .celestial-body.sun {
