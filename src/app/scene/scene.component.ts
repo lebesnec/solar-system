@@ -68,7 +68,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 1000 ];
+const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 900 ];
 
 @Component({
   selector: 'app-scene',
