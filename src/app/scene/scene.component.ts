@@ -68,7 +68,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 900 ];
+const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 350 ];
 
 @Component({
   selector: 'app-scene',
@@ -513,7 +513,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       case VENUS:
       case EARTH:
       case MARS:
-        return 500.0;
+        return 350.0;
       case JUPITER:
         return 1.3;
       case SATURN:
@@ -524,7 +524,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
         return 0.6;
       default:
         if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
-          return 500.0;
+          return 350.0;
         } else {
           return this.getScale(body.orbitBody);
         }
