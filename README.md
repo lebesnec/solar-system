@@ -4,6 +4,7 @@
 
 ## TODO
 
+- https://www.behance.net/gallery/60073341/Destiny-2-UI-Visual-Design
 - opti initLabels
 - open on wikipedia
 - lighthouse & https://search.google.com/search-console/welcome
