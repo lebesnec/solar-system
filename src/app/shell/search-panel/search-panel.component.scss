@@ -59,31 +59,25 @@ mat-expansion-panel {
 }
 
 .celestial-body {
-  border: 3px solid white;
+  border: 1px solid hsl(0, 0%, 30%);
+  border-radius: 2px;
+  background: hsla(0, 0%, 100%, .2);
   color: white;
   cursor: pointer;
   img {
-    @include recolor(#ffffff);
+    @include recolor(hsl(0, 0%, 30%));
     width: 30px;
     height: 30px;
   }
 }
 .celestial-body:hover {
-  border: 3px solid white;
-  background: hsla(0, 0%, 100%, .3);
-}
-
-.celestial-body.star {
-  border-color: rgb(185, 167, 0);
-}
-.celestial-body.star:hover {
-  border-color: rgb(232, 210, 0);
+  background: hsla(0, 0%, 100%, 0.3);
 }
 
 .celestial-body.satellite {
-  border-color: #620002;
+  background: hsla(0, 0%, 100%, .05);
 }
 .celestial-body.satellite:hover {
-  border-color: #910003;
+  background: hsla(0, 0%, 100%, 0.25);
 }
 
