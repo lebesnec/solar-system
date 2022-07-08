@@ -25,6 +25,13 @@ mat-expansion-panel {
     display: block;
     text-align: end;
   }
+
+  mat-grid-list {
+    padding-bottom: 20px;
+  }
+  mat-grid-list:last-child {
+    padding-bottom: 0;
+  }
 }
 
 .empty-search {
@@ -72,6 +79,13 @@ mat-expansion-panel {
 }
 .celestial-body:hover {
   background: hsla(0, 0%, 100%, 0.3);
+}
+
+.celestial-body.star {
+  background: hsla(0, 0%, 100%, 0.4);
+}
+.celestial-body.star:hover {
+  background: hsla(0, 0%, 100%, 0.45);
 }
 
 .celestial-body.satellite {

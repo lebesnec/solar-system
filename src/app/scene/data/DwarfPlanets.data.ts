@@ -372,7 +372,9 @@ export const SEDNA: CelestialBody = {
   orbitBody: null
 };
 
-export const DWARF_PLANETS = [ PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR, GONGGONG, SEDNA ];
+export const DWARF_PLANETS = [
+  PLUTO, CERES, ERIS, MAKEMAKE, HAUMEA, ORCUS, QUAOAR, GONGGONG, SEDNA
+];
 
 DWARF_PLANETS.forEach(dwarfPlanet => {
   dwarfPlanet.satellites.forEach(satellite => satellite.orbitBody = dwarfPlanet);

@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
-import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
+import {HAS_SYMBOL, INNER_PLANETS, OUTER_PLANETS, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
 import {CelestialBody} from '../../scene/scene.model';
 import {SearchPanelService} from './search-panel.service';
 import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
@@ -20,6 +20,8 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   public searchResult: CelestialBody[] = null;
 
   public readonly SUN = SUN;
+  public readonly INNER_PLANETS = INNER_PLANETS;
+  public readonly OUTER_PLANETS = OUTER_PLANETS;
   public readonly DWARF_PLANETS = DWARF_PLANETS;
   public readonly JUPITER = JUPITER;
   public readonly MOON = MOON;

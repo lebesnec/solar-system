@@ -33,7 +33,7 @@
 <!-- Empty search -->
 <mat-accordion *ngIf="!searchResult" multi>
 
-  <!-- Sun -->
+  <!-- Sun + inner planets -->
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ SUN.id | translate }}</mat-panel-title>
@@ -48,10 +48,23 @@
         <span class="name">{{ SUN.id | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
+
+      <ng-container *ngFor="let planet of INNER_PLANETS">
+        <mat-grid-list cols="4" gutterSize="20px" rowHeight="70px">
+          <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
+            <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
+            <span class="name">{{ planet.id | translate }}</span>
+          </mat-grid-tile>
+          <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
+            <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
+            <span class="name">{{ moon.id | translate }}</span>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </ng-container>
   </mat-expansion-panel>
 
-  <!-- Planets -->
-  <mat-expansion-panel *ngFor="let planet of SUN.satellites" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
+  <!-- Outer planets -->
+  <mat-expansion-panel *ngFor="let planet of OUTER_PLANETS" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id | translate }}</mat-panel-title>
       <mat-panel-description *ngIf="planet.satellites.length">
