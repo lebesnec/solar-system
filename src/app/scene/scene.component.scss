@@ -79,9 +79,9 @@
   }
 
   .celestial-body.venus {
-    stroke: #D7B170;
+    stroke: #ffe1ad;
     stroke-width: 1;
-    fill: #EBD6A7;
+    fill: #f1e5c8;
   }
 
   .celestial-body.earth {
@@ -121,27 +121,18 @@
   }
 
   .celestial-body.pluto {
-    stroke: #6e6054;
-    vector-effect: none;
-    stroke-width: 0; // stroke render awfull for such a small body
     fill: #d5b89f;
   }
 
   .celestial-body.io {
-    stroke: #8f8237;
-    stroke-width: 1;
-    fill: #D6C251;
+    stroke: #D6C251;
   }
 
   .celestial-body.europa {
-    stroke: #654E2E;
-    stroke-width: 1;
     fill: #E5C36C;
   }
 
   .celestial-body.titan {
-    stroke: #8c7e3d;
-    stroke-width: 1;
     fill: #DEC863;
   }
 
