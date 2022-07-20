@@ -60,7 +60,7 @@ mat-toolbar {
   .search-field {
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: min(max(50%, 500px), 100%);
     span {
       vertical-align: bottom;
       padding-right: 10px;
@@ -74,7 +74,11 @@ mat-toolbar {
   .close-button, .menu-button {
     color: rgba(0, 0, 0, 0.5);
     font-size: 25px;
+    margin-top: 10px;
     margin-right: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   .menu-button {
     font-weight: bold;

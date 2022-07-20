@@ -13,7 +13,7 @@ mat-divider {
 mat-expansion-panel {
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: min(max(50%, 500px), 100%);
   background: transparent !important;
   color: white;
 
@@ -27,7 +27,7 @@ mat-expansion-panel {
   }
 
   mat-grid-list {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
   }
   mat-grid-list:last-child {
     padding-bottom: 0;
@@ -66,15 +66,14 @@ mat-expansion-panel {
 }
 
 .celestial-body {
-  border: 1px solid hsl(0, 0%, 30%);
-  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   background: hsla(0, 0%, 100%, .2);
   color: white;
   cursor: pointer;
   img {
-    @include recolor(hsl(0, 0%, 30%));
-    width: 30px;
-    height: 30px;
+    @include recolor(white);
+    width: 25px;
+    height: 25px;
   }
 }
 .celestial-body:hover {
