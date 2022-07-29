@@ -12,10 +12,6 @@ CI : https://lebesnec.github.io/solar-system-map
 
     npm install
     npm start    
-    
-## Build
-
-    npm build
 
 ## Contact
 
