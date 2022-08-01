@@ -19,6 +19,11 @@ $solar-system-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $solar-system-warn: mat.define-palette(mat.$red-palette);
 
+// Font
+$custom-typography: mat.define-typography-config(
+  $font-family: '"Exo 2", sans-serif;'
+);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $solar-system-theme: mat.define-light-theme((
@@ -26,12 +31,14 @@ $solar-system-theme: mat.define-light-theme((
     primary: $solar-system-primary,
     accent: $solar-system-accent,
     warn: $solar-system-warn,
-  )
+  ),
+  typography: $custom-typography
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+@include mat.core($custom-typography);
 @include mat.all-component-themes($solar-system-theme);
 
 // custom global style:

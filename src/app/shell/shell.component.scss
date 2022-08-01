@@ -41,11 +41,11 @@ mat-toolbar {
   }
   .logo h1 {
     display: inline-block;
-    line-height: $toolbar-height;
+    line-height: 60px;
     vertical-align: top;
     color: white;
     font-weight: lighter;
-    font-size: 22px;
+    font-size: 30px;
   }
   .logo:hover {
     svg {
