@@ -2,28 +2,23 @@
 
 ![logo](/src/assets/logo.svg?raw=true)
 
-## TODO
+An interactive map of the solar system.
 
-- https://www.behance.net/gallery/60073341/Destiny-2-UI-Visual-Design
-- opti initLabels + tooltip not overriding
-- replace milky way by svg
-- font
-- open on wikipedia
-- lighthouse & https://search.google.com/search-console/welcome
-- https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element/?cb=1&_ga=2.106175107.1273758949.1648469886-51255508.1580900213
-- orientation orbit ellipse https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node https://en.wikipedia.org/wiki/First_Point_of_Aries
-- pwa
-- mobile
-- firefox
-- dnd dialog & common component
-- expand img
-- legals + header on source code files + licence file
+Prod : https://lebesnec.github.io/solar-system
 
-## low priority
-- asteroids
-- rovers & probe
-- lagrange points
-- rings
-- half-lite planet
-- cloudy milky way
-- diagram orbit calculation
+CI : https://lebesnec.github.io/solar-system-map
+
+## Install and start
+
+    npm install
+    npm start    
+
+## Contact
+
+Mail: todo@aaa.com
+
+Post ideas, suggestions, bug report… on GitHub: https://github.com/lebesnec/solar-system/discussions
+
+Follow us on Twitter: twitter.com/TODO
+
+© Christophe Le Besnerais
