@@ -13,7 +13,7 @@ import {LegalsComponent} from './legals/legals.component';
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   animations: [
-    trigger('panelAnimation', [ // TODO suppr ?
+    trigger('panelAnimation', [
       transition( ':enter', [
         style({ opacity: 0 }),
         animate(100, style({ opacity: 1 }))
