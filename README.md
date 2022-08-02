@@ -15,7 +15,7 @@ CI : https://lebesnec.github.io/solar-system-map
 
 ## Contact
 
-Mail: todo@aaa.com
+Mail: christophe.lebesnerais.pro@gmail.com
 
 Post ideas, suggestions, bug report… on GitHub: https://github.com/lebesnec/solar-system/discussions
 
