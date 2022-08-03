@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
 import {HAS_SYMBOL, MISSING_PICTURES, SUN} from '../data/SolarSystem.data';
@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './celestial-body-dialog.component.html',
   styleUrls: ['./celestial-body-dialog.component.scss']
 })
-export class CelestialBodyDialogComponent implements OnInit {
+export class CelestialBodyDialogComponent {
 
   public body: CelestialBody;
   public readonly SUN = SUN;
@@ -28,7 +28,15 @@ export class CelestialBodyDialogComponent implements OnInit {
     this.body = data.body;
   }
 
-  ngOnInit(): void {
+  public getImagePath(body: CelestialBody, format: 'jpg' | 'avif'): string {
+    let path = 'assets/celestial_bodies/';
+    if (body.type === CELESTIAL_BODY_TYPE.PLANET || body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
+      path += body.id + '/';
+    } else if (body.type === CELESTIAL_BODY_TYPE.SATELLITE) {
+      path += body.orbitBody.id + '/';
+    }
+
+    return path + body.id + '_small.' + format;
   }
 
 }

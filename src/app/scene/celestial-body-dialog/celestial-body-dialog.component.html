@@ -14,12 +14,11 @@
 </button>
 
 <mat-dialog-content>
-  <ng-container *ngIf="!MISSING_PICTURES.includes(body)" [ngSwitch]="body.type">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR" src="assets/celestial_bodies/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET" src="assets/celestial_bodies/{{ body.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
-    <img *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE" src="assets/celestial_bodies/{{ body.orbitBody.id }}/{{ body.id }}_small.jpg" width="300" [alt]="body.id | translate">
-  </ng-container>
+  <picture *ngIf="!MISSING_PICTURES.includes(body)">
+    <source [srcset]="getImagePath(body, 'avif')" type="image/avif">
+    <source [srcset]="getImagePath(body, 'jpg')" type="image/jpeg">
+    <img [src]="getImagePath(body, 'jpg')" width="350" [alt]="body.id | translate">
+  </picture>
 
   <table>
     <tr>
