@@ -79,6 +79,8 @@
   "NB km/s": "{{NB}} km/s",
   "Longitude of the ascending node": "Longitude du nœud ascendant",
   "https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node": "https://fr.wikipedia.org/wiki/Longitude_du_n%C5%93ud_ascendant",
+  "Satellites": "Satellites",
+  "none": "aucun",
   "unknown": "inconnu{{suffix}}",
 
   "sun": "Le Soleil",
