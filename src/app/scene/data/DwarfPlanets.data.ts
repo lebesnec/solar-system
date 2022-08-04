@@ -166,15 +166,20 @@ export const S_2015_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  mass: 5e15, // TODO unknown
+  mass: 5e15,
   radius: 87.5,
   semiMajorAxis: 21000,
-  eccentricity: 0, // TODO unknown
+  eccentricity: 0,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO unknown
+  meanAnomaly: 0,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
-  orbitBody: null
+  orbitBody: null,
+  unknowData: {
+    mass: true,
+    eccentricity: true,
+    meanAnomaly: true,
+  }
 };
 
 export const MAKEMAKE: CelestialBody = {

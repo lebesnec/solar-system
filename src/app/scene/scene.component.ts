@@ -548,7 +548,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.celestialBodyDialogRef.componentInstance.body = body;
     } else {
       this.celestialBodyDialogRef = this.dialog.open(CelestialBodyDialogComponent, {
-        width: '420px',
+        width: '450px',
         maxHeight: '80vh',
         panelClass: 'celestial-body-dialog-panel',
         closeOnNavigation: true,
@@ -558,9 +558,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
           right: '50px'
         },
         hasBackdrop: false,
-        data: {
-          body
-        }
+        data: { body }
       });
       this.celestialBodyDialogRef.afterClosed().subscribe(() => {
         this.celestialBodyDialogRef = null;

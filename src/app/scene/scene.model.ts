@@ -46,4 +46,14 @@ export interface CelestialBody {
     type: CELESTIAL_BODY_TYPE;
     satellites: CelestialBody[];
     orbitBody: CelestialBody | null;
+    unknowData?: {
+      speed?: boolean;
+      mass?: boolean;
+      radius?: boolean;
+      semiMajorAxis?: boolean;
+      eccentricity?: boolean;
+      trueAnomaly?: boolean;
+      meanAnomaly?: boolean;
+      longitudeOfAscendingNode?: boolean;
+    };
 }
