@@ -20,33 +20,33 @@
 <mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
   <mat-button-toggle [value]="ORBITS_SETTING.ALL">{{ 'All' | translate }}</mat-button-toggle>
   <mat-button-toggle [value]="ORBITS_SETTING.PLANET">{{ 'Planets only' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="ORBITS_SETTING.NONE">{{ 'Off' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="ORBITS_SETTING.NONE">{{ 'Off' | translate: { suffix: 'es'} }}</mat-button-toggle>
 </mat-button-toggle-group>
 
 <h3>{{ 'Labels' | translate }}</h3>
 
 <mat-button-toggle-group [value]="labels" (change)="labels = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
 </mat-button-toggle-group>
 
 <h3>{{ 'Scale' | translate }}</h3>
 
 <mat-button-toggle-group [value]="scale" (change)="scale = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
 </mat-button-toggle-group>
 
-<h3>{{ 'Reticule' | translate }}</h3>
+<h3>{{ 'Reticules' | translate }}</h3>
 
 <mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
 </mat-button-toggle-group>
 
 <h3>{{ 'Milky way' | translate }}</h3>
 
 <mat-button-toggle-group [value]="milkyWay" (change)="milkyWay = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
 </mat-button-toggle-group>
