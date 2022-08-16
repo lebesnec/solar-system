@@ -41,8 +41,9 @@ mat-expansion-panel {
   width: 50%;
   padding-top: 130px;
   text-align: center;
+  color: #c5c5c5;
   img {
-    @include recolor(#333333);
+    @include recolor(#c5c5c5);
     width: 100%;
     max-width: 150px;
     margin: auto;

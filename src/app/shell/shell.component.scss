@@ -13,22 +13,24 @@
   position: relative;
 }
 
-$toolbar-height: 64px;
+$toolbar-height: 68px;
+$color: #c5c5c5;
 
-mat-toolbar {
+.toolbar {
   z-index: 1;
   height: $toolbar-height;
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, .3) !important;
   padding: 0;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
   .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
     z-index: 2;
     cursor: pointer;
     height: $toolbar-height;
@@ -36,8 +38,8 @@ mat-toolbar {
   .logo svg {
     height: $toolbar-height;
     width: $toolbar-height;
-    stroke: #c5c5c5;
-    fill: #c5c5c5;
+    stroke: $color;
+    fill: $color;
   }
   .logo h1 {
     display: inline-block;
@@ -58,38 +60,46 @@ mat-toolbar {
   }
 
   .search-field {
-    margin-left: auto;
-    margin-right: auto;
+    color: $color;
     width: min(max(50%, 500px), 100%);
-    span {
-      vertical-align: bottom;
-      padding-right: 10px;
-      color: rgba(0, 0, 0, 0.5);
+    input {
+      color: $color;
+      font-size: 20px;
+      line-height: 1;
     }
-    button {
-      color: rgba(0, 0, 0, 0.5);
+    input::placeholder {
+      color: rgba($color, 0.5);
+      font-size: 20px;
+    }
+    button, .prefix {
+      color: rgba($color, 0.5);
+      font-size: 20px;
+      line-height: 1;
+    }
+    .prefix {
+      padding-right: 10px;
     }
   }
 
   .close-button, .menu-button {
-    color: rgba(0, 0, 0, 0.5);
+    color: $color;
     font-size: 25px;
     margin-top: 10px;
     margin-right: 15px;
-    position: absolute;
-    top: 0;
-    right: 0;
   }
   .menu-button {
     font-weight: bold;
   }
 }
 
+:host ::ng-deep .search-field .mat-form-field-outline {
+  color: rgba($color, 0.5);
+}
+
 ::ng-deep .toolbar-menu {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  margin-top: 12px;
   box-shadow: none;
 }
 
