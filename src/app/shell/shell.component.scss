@@ -31,6 +31,9 @@ $color: #c5c5c5;
   justify-content: space-between;
 
   .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 2;
     cursor: pointer;
     height: $toolbar-height;
@@ -72,8 +75,16 @@ $color: #c5c5c5;
       color: rgba($color, 0.5);
       font-size: 20px;
     }
-    button, .prefix {
+    .prefix {
       color: $color;
+    }
+    button {
+      color: rgb($color, 0.5);
+    }
+    button:hover {
+      color: rgb($color, 0.75);
+    }
+    button, .prefix {
       font-size: 20px;
       line-height: 1;
     }
@@ -84,13 +95,18 @@ $color: #c5c5c5;
   }
 
   .close-button, .menu-button {
-    color: $color;
-    font-size: 25px;
+    color: rgb($color, 0.5);
     margin-top: 10px;
     margin-right: 15px;
   }
+  .close-button:hover, .menu-button:hover {
+    color: rgb($color, 0.75);
+  }
+  .close-button {
+    font-size: 25px;
+  }
   .menu-button {
-    font-weight: bold;
+    font-size: 34px;
   }
 }
 
