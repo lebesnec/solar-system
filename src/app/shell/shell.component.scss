@@ -111,7 +111,7 @@ $color: #c5c5c5;
 }
 
 :host ::ng-deep .search-field .mat-form-field-outline {
-  color: $color;
+  color: rgb($color, 0.5);
 }
 :host ::ng-deep .search-field .mat-form-field-outline-thick div {
   background-color: rgb($color, 0.1);
