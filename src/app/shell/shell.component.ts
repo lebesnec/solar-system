@@ -81,7 +81,8 @@ export class ShellComponent implements OnInit {
       panelClass: 'contact-dialog-panel',
       closeOnNavigation: true,
       hasBackdrop: false,
-      autoFocus: false
+      autoFocus: false,
+      minWidth: 450
     });
   }
 

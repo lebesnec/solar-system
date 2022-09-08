@@ -8,6 +8,27 @@
   cursor: move;
 }
 
+p {
+  margin-bottom: 10px;
+}
+
+a[mat-stroked-button] {
+  display: block;
+  height: 80px;
+  width: 100%;
+  margin-top: 15px;
+  border-color: rgba(197, 197, 197, 0.5) !important;
+  font-size: 16px;
+  font-weight: bold;
+}
+a[mat-stroked-button]:hover {
+  background-color: rgba(197, 197, 197, 0.2);
+}
+
+:host ::ng-deep a[mat-stroked-button] .mat-button-wrapper {
+  line-height: 80px;
+}
+
 .close-button {
   float: right;
   top: -38px;
