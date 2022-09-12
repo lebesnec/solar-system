@@ -8,7 +8,7 @@ Prod : https://lebesnec.github.io/solar-system
 
 CI : https://lebesnec.github.io/solar-system-map
 
-## Install and start
+## Get started
 
     npm install
     npm start    
@@ -17,8 +17,10 @@ CI : https://lebesnec.github.io/solar-system-map
 
 Mail: christophe.lebesnerais.pro@gmail.com
 
-Post ideas, suggestions, bug report… on GitHub: https://github.com/lebesnec/solar-system/discussions
+GitHub: https://github.com/lebesnec/solar-system/discussions
 
-Follow us on Twitter: twitter.com/TODO
+Twitter: twitter.com/TODO
 
-© Christophe Le Besnerais
+## Author
+
+[Christophe Le Besnerais](https://github.com/lebesnec)
