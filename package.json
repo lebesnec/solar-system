@@ -1,6 +1,24 @@
 {
   "name": "solar-system",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An interactive map of the Solar System",
+  "keywords": [ "angular", "d3js",, "astronomy", "space", "solar system" ],
+  "homepage": "https://github.com/lebesnec/solar-system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lebesnec/solar-system"
+  },
+  "bugs": {
+    "url": "https://github.com/lebesnec/solar-system/issues",
+    "email": "christophe.lebesnerais.pro@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Christophe Le Besnerais",
+    "email": "christophe.lebesnerais.pro@gmail.com",
+    "url": "https://github.com/lebesnec"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4203 --open",
@@ -11,7 +29,6 @@
     "e2e": "ng e2e",
     "deploy": "ng deploy --base-href=https://lebesnec.github.io/solar-system-map/ --repo=https://github.com/lebesnec/solar-system-map.git --branch=main"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^14.1.0",
     "@angular/cdk": "^14.1.0",
