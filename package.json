@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "An interactive map of the Solar System",
-  "keywords": [ "angular", "d3js",, "astronomy", "space", "solar system" ],
+  "keywords": [ "angular", "d3js", "astronomy", "space", "solar system" ],
   "homepage": "https://github.com/lebesnec/solar-system",
   "repository": {
     "type": "git",
