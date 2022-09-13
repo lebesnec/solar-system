@@ -51,6 +51,8 @@
   "ABOUT_CONTENT_9": "Les images des corps célestes sont reproduites avec l'aimable autorisation de <a href=\"https://www.wikipedia.org\" target=\"_blank\">Wikipedia</a>.",
   "Built with": "Construit avec",
   "Legals": "Mentions légales",
+  "License": "License",
+  "LEGAL_CONTENT_1": "Le contenu de ce site est sous <a target=\"_blank\" href=\"https://github.com/lebesnec/solar-system/blob/master/TODO.md\">license MIT</a>.",
   "Copyright": "Droits d'auteur",
 
   "star": "étoile",

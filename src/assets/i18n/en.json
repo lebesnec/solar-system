@@ -51,6 +51,8 @@
   "ABOUT_CONTENT_9": "Images of celestial bodies courtesy of <a href=\"https://www.wikipedia.org\" target=\"_blank\">Wikipedia</a>.",
   "Built with": "Built with",
   "Legals": "Legals",
+  "License": "License",
+  "LEGAL_CONTENT_1": "The content of this site is licensed under <a target=\"_blank\" href=\"https://github.com/lebesnec/solar-system/blob/master/TODO.md\">the MIT licence</a>.",
   "Copyright": "Copyright",
 
   "star": "star",
