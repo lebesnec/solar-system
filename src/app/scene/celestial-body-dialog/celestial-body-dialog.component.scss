@@ -6,9 +6,15 @@
 }
 
 ::ng-deep .celestial-body-dialog-panel mat-dialog-container {
-  backdrop-filter: blur(10px);
-  background: hsla(0, 0%, 100%, 0.15);
+  background: hsl(0, 0%, 40%);
 }
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  ::ng-deep .celestial-body-dialog-panel mat-dialog-container {
+    backdrop-filter: blur(10px);
+    background: hsla(0, 0%, 100%, 0.15);
+  }
+}
+
 
 [mat-dialog-title] {
   margin-bottom: 0;

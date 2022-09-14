@@ -2,8 +2,13 @@
 
 :host {
   display: block;
-  backdrop-filter: blur(10px);
-  background: hsla(0, 0%, 100%, .3) !important;
+  background: hsl(0, 0%, 40%);
+}
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  :host {
+    backdrop-filter: blur(10px);
+    background: hsla(0, 0%, 100%, .3) !important;
+  }
 }
 
 mat-divider {
