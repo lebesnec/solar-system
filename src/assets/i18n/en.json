@@ -42,7 +42,7 @@
   "Method of calculation": "Method of calculation",
   "ABOUT_CONTENT_2": "<a href=\"https://en.wikipedia.org/wiki/Kepler_orbit\" target=\"_blank\">Kepler's first law of planetary motion</a> is used to calculate the orbit of the celestial bodies around their orbited object.",
   "ABOUT_CONTENT_3": "This mean that we do not take into account things like gravitational interactions with other objects, effects of general relativity…",
-  "ABOUT_CONTENT_4": "All orbits and celestial bodies are also displayed on the same plane which is not the case in the real world!",
+  "ABOUT_CONTENT_4": "As this is a 2D representation, all celestial bodies and orbits are also displayed on the same plane.",
   "Credits": "Credits",
   "ABOUT_CONTENT_5": "This application was made possible thanks to the in-depth articles about celestial mechanics from <a href=\"https://www.wikipedia.org\" target=\"_blank\">Wikipedia</a>.",
   "ABOUT_CONTENT_6": "The data for the orbits of the planets and satellites come from:",
