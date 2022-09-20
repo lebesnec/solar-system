@@ -12,6 +12,11 @@ a {
   color: white;
 }
 
+* {
+  scrollbar-color: #8d8d8d #c9c9c9 !important;
+  scrollbar-width: thin !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
