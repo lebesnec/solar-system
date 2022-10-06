@@ -17,11 +17,11 @@
   "theme_color": "#c5c5c5",
   "screenshots": [
     {
-      "src": "assets/en/screenshot1.jpg",
+      "src": "assets/screenshots/en/screenshot1.jpg",
       "type": "image/jpg",
       "sizes": "2558x1282"
     }, {
-      "src": "assets/en/screenshot2.jpg",
+      "src": "assets/screenshots/en/screenshot2.jpg",
       "type": "image/jpg",
       "sizes": "2559x1298"
     }
