@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
 import {Meta, Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import {DOCUMENT} from '@angular/common';
 
 export enum ORBITS_SETTING {
   ALL = 'all',
@@ -62,6 +63,7 @@ export class SettingsService {
   constructor(
     titleService: Title,
     metaService: Meta,
+    @Inject(DOCUMENT) doc: Document,
     private translateService: TranslateService
   ) {
     // Change page title when user changes language preference
@@ -72,6 +74,10 @@ export class SettingsService {
       this.translateService.get('APP_DESCRIPTION').subscribe((res: string) => {
         metaService.addTag({ name: 'description', content: res }, true);
       });
+      const link: HTMLLinkElement = doc.createElement('link');
+      link.setAttribute('rel', 'manifest');
+      link.setAttribute('href', event.lang + '.manifest.json');
+      doc.head.appendChild(link);
     });
   }
 

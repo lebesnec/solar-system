@@ -1,0 +1,29 @@
+{
+  "short_name": "Système solaire",
+  "name": "Système solaire",
+  "description": "Une carte interactive du système solaire. Explorez les planètes et leurs satellites, et visualisez leurs orbites.",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "scope": "/",
+  "background_color": "#c5c5c5",
+  "theme_color": "#c5c5c5",
+  "screenshots": [
+    {
+      "src": "assets/fr/screenshot1.jpg",
+      "type": "image/jpg",
+      "sizes": "2560x1300"
+    }, {
+      "src": "assets/fr/screenshot2.jpg",
+      "type": "image/jpg",
+      "sizes": "2560x1299"
+    }
+  ]
+}
