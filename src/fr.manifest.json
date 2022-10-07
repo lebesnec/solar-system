@@ -6,7 +6,7 @@
     {
       "src": "assets/logo.svg",
       "type": "image/svg+xml",
-      "sizes": "512x512"
+      "sizes": "150x150"
     }
   ],
   "id": "/?source=pwa",
@@ -17,11 +17,11 @@
   "theme_color": "#c5c5c5",
   "screenshots": [
     {
-      "src": "assets/fr/screenshot1.jpg",
+      "src": "assets/screenshots/fr/screenshot1.jpg",
       "type": "image/jpg",
       "sizes": "2560x1300"
     }, {
-      "src": "assets/fr/screenshot2.jpg",
+      "src": "assets/screenshots/fr/screenshot2.jpg",
       "type": "image/jpg",
       "sizes": "2560x1299"
     }

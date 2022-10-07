@@ -66,7 +66,7 @@ export class SettingsService {
     @Inject(DOCUMENT) doc: Document,
     private translateService: TranslateService
   ) {
-    // Change page title when user changes language preference
+    // Change page title/description/manifest when user changes language preference:
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateService.get('APP_TITLE').subscribe((res: string) => {
         titleService.setTitle(res);
