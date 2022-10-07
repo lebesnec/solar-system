@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CelestialBody, Ellipse, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBody, DEG_TO_RAD, Ellipse, G, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
 import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
@@ -11,21 +11,6 @@ import {SOLAR_SYSTEM} from './data/SolarSystem.data';
  * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
  */
 export const KM_TO_PX = 1e5;
-
-/**
- * degrees to radian
- */
-export const DEG_TO_RAD = Math.PI / 180;
-
-/**
- * Astronomical units to kilometers
- */
-export const AU_TO_KM = 1.495978707e8;
-
-/**
- * Gravitational constant in m^3.kg^−1.s^−2
- */
-export const G = 6.6743e-11;
 
 /**
  * in km

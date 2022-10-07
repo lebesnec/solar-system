@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
-import {AU_TO_KM, KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
