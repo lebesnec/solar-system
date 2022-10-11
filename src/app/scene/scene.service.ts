@@ -98,13 +98,13 @@ export class SceneService {
    * https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes#Orbital_period
    * @returns number in hours
    */
-  public getOrbitalPeriod(body: CelestialBody): number {
-    if (body.orbitBody) {
-      // TODO > max_int
-      return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (G * body.orbitBody.mass)) / (60 * 60);
-    } else {
-      return 0;
-    }
-  }
+  // public getOrbitalPeriod(body: CelestialBody): number {
+  //   if (body.orbitBody) {
+  //     // TODO > max_int
+  //     return 2 * Math.PI * Math.sqrt(((body.semiMajorAxis * 1000) ** 3) / (G * body.orbitBody.mass)) / (60 * 60);
+  //   } else {
+  //     return 0;
+  //   }
+  // }
 
 }

@@ -35,7 +35,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   ) { }
 
   public ngOnInit(): void {
-    this.searchChanged.pipe(debounceTime(300)).subscribe((search) => {
+    this.searchChanged.pipe(debounceTime(300)).subscribe(() => {
       if (this.search === '') {
         this.searchResult = null;
       } else {

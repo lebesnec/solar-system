@@ -16,7 +16,7 @@ import {SATURN} from './data/Saturn.data';
 import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 import {selectAll} from 'd3';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
@@ -151,7 +151,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initCelestialBodies();
     this.initZoom();
 
-    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.translateService.onLangChange.subscribe(() => {
       this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
         this.groupForegroundSelection.selectAll('.group-label').remove();
         this.bodiesLabels = bodiesLabels;
