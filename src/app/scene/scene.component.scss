@@ -147,7 +147,7 @@
   }
 
   .label-path {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.get-color-from-palette($solar-system-primary, lighter);
     stroke-width: 1;
     fill: transparent;
   }
@@ -163,10 +163,10 @@
 
   .group-label:hover {
     .label {
-      fill: mat.get-color-from-palette($solar-system-primary);
+      fill: mat.get-color-from-palette($solar-system-primary, lighter);
     }
     .label-symbol {
-      @include recolor(mat.get-color-from-palette($solar-system-primary));
+      @include recolor(mat.get-color-from-palette($solar-system-primary, lighter));
     }
   }
 
@@ -179,12 +179,12 @@
   }
 
   .orbit.hovered {
-    stroke: mat.get-color-from-palette($solar-system-warn);
+    stroke: mat.get-color-from-palette($solar-system-primary);
     stroke-width: 1;
   }
 
   .orbit.selected {
-    stroke: mat.get-color-from-palette($solar-system-accent);
+    stroke: mat.get-color-from-palette($solar-system-primary);
     stroke-width: 1;
   }
 

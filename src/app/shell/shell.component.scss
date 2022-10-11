@@ -47,17 +47,17 @@ $color: #c5c5c5;
     display: inline-block;
     line-height: 60px;
     vertical-align: top;
-    color: white;
+    color: $color;
     font-weight: lighter;
     font-size: 30px;
   }
   .logo:hover {
     svg {
-      stroke: mat.get-color-from-palette($solar-system-primary);
-      fill: mat.get-color-from-palette($solar-system-primary);
+      stroke: #ffffff;
+      fill: #ffffff;
     }
     h1 {
-      color: mat.get-color-from-palette($solar-system-primary);
+      color: #ffffff;
     }
   }
 
