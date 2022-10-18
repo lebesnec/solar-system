@@ -20,6 +20,8 @@ a[mat-stroked-button] {
   border-color: rgba(197, 197, 197, 0.5) !important;
   font-size: 16px;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 a[mat-stroked-button]:hover {
   background-color: rgba(197, 197, 197, 0.2);
@@ -38,4 +40,15 @@ a[mat-stroked-button]:hover {
 }
 .close-button:hover {
   color: rgba(196, 196, 196, 0.788);
+}
+
+// mobile
+@media only screen and (max-width: 800px) and (min-width: 500px) {
+
+  a[mat-stroked-button] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+  }
+
 }
