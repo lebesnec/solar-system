@@ -30,9 +30,6 @@ $color: #c5c5c5;
   justify-content: space-between;
 
   .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
     z-index: 2;
     cursor: pointer;
     height: $toolbar-height;
@@ -62,9 +59,14 @@ $color: #c5c5c5;
   }
 
   .search-field {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     cursor: text;
     color: $color;
-    width: min(max(50%, 500px), 100%);
+    width: min(max(50%, 500px), calc(100% - 150px));
     input {
       color: $color;
       font-size: 20px;
@@ -95,8 +97,7 @@ $color: #c5c5c5;
 
   .close-button, .menu-button {
     color: rgb($color, 0.5);
-    margin-top: 10px;
-    margin-right: 15px;
+    margin: 10px 15px 0 15px;
   }
   .close-button:hover, .menu-button:hover {
     color: rgb($color, 0.75);
@@ -158,4 +159,13 @@ app-search-panel {
   position: absolute;
   top: $toolbar-height;
   left: 0;
+}
+
+// mobile
+@media only screen and (max-width: 1150px) {
+
+  .logo h1 {
+    display: none !important;
+  }
+
 }

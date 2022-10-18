@@ -41,3 +41,13 @@ h3 {
     border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
   }
 }
+
+// mobile
+@media only screen and (max-width: 700px) {
+
+  :host ::ng-deep mat-button-toggle-group .mat-button-toggle {
+    min-width: unset;
+  }
+
+}
+

@@ -8,8 +8,6 @@
     <h1>{{ 'APP_TITLE' | translate }}</h1>
   </div>
 
-  <span></span>
-
   <mat-form-field appearance="outline" class="search-field" (click)="openSearchPanel()">
     <span matPrefix class="prefix">🚀&#xFE0E;</span>
     <input #search matInput [placeholder]="translate.get('Navigate') | async" autocomplete="off">

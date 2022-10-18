@@ -18,7 +18,7 @@ mat-divider {
 mat-expansion-panel {
   margin-left: auto;
   margin-right: auto;
-  width: min(max(50%, 500px), 100%);
+  width: min(max(50%, 800px), 100%);
   background: transparent !important;
   color: white;
 
@@ -98,5 +98,15 @@ mat-expansion-panel {
 }
 .celestial-body.satellite:hover {
   background: hsla(0, 0%, 100%, 0.25);
+}
+
+// mobile
+@media only screen and (max-width: 800px) {
+
+  :host ::ng-deep .celestial-body .mat-grid-tile-content {
+    grid-gap: 10px;
+    padding-left: 10px;
+  }
+
 }
 
