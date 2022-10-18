@@ -58,3 +58,23 @@ mat-dialog-content {
     width: 100%;
   }
 }
+
+// mobile
+@media only screen and (max-width: 800px) {
+
+  // fullscreen dialog on mobile
+  ::ng-deep .celestial-body-dialog-panel {
+    min-width: unset !important;
+    max-width: unset !important;
+    max-height: unset !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: unset !important;
+    margin-bottom: unset !important;
+    margin-right: unset !important;
+    .mat-dialog-content {
+      max-height: unset !important;
+    }
+  }
+
+}
