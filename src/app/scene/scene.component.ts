@@ -57,7 +57,7 @@ const SCALE_POSSIBLE_VALUES = [
   { max: 0.0001, tickInterval: 0.00001 }
 ];
 const SCALE_LARGE_TICK_STEP = 5; // there is a large tick every SCALE_LARGE_TICK_STEP small tick
-const SCALE_AVERAGE_SIZE = 200; // px
+const SCALE_AVERAGE_SIZE = window.innerWidth <= 400 ? 100 : 200; // px
 const SCALE_PADDING = 50; // px
 const SCALE_TEXT_PADDING = 10; // px
 const SCALE_HEIGHT_LARGE_TICK = 10; // px
