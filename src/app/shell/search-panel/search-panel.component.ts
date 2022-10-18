@@ -19,6 +19,10 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   public searchResult: CelestialBody[] = null;
 
+  public get nbCol(): number {
+    return window.innerWidth <= 600 ? 3 : 4;
+  }
+
   public readonly SUN = SUN;
   public readonly INNER_PLANETS = INNER_PLANETS;
   public readonly OUTER_PLANETS = OUTER_PLANETS;

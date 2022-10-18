@@ -9,7 +9,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-grid-list cols="4" gutterSize="5px" rowHeight="70px">
+    <mat-grid-list [cols]="nbCol" gutterSize="5px" rowHeight="70px">
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
         <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
@@ -42,7 +42,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-grid-list cols="4" gutterSize="10px" rowHeight="50px">
+    <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
       <mat-grid-tile [class]="'celestial-body ' + SUN.type" (click)="onBodySelected(SUN)">
         <img *ngIf="HAS_SYMBOL.includes(SUN)" [src]="'assets/symbols/' + SUN.id + '.svg'" [alt]="SUN.id | translate">
         <span class="name">{{ SUN.id | translate }}</span>
@@ -50,7 +50,7 @@
     </mat-grid-list>
 
       <ng-container *ngFor="let planet of INNER_PLANETS">
-        <mat-grid-list cols="4" gutterSize="10px" rowHeight="50px">
+        <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
           <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
             <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
             <span class="name">{{ planet.id | translate }}</span>
@@ -72,7 +72,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-grid-list cols="4" gutterSize="10px" rowHeight="50px">
+    <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
       <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
         <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
         <span class="name">{{ planet.id | translate }}</span>
@@ -92,7 +92,7 @@
     </mat-expansion-panel-header>
 
     <ng-template ngFor let-planet [ngForOf]="DWARF_PLANETS">
-      <mat-grid-list cols="4" gutterSize="10px" rowHeight="50px" class="dwarf-planet-grid">
+      <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px" class="dwarf-planet-grid">
         <!-- The dwarf planet -->
         <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
           <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
