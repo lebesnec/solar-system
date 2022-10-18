@@ -162,8 +162,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private onWindowResize(): void {
-    // redraw reticule when window size change because they are dependant from the window size
+    // redraw reticule & scale when window size change because they are dependant from the window size
     this.initReticule();
+    this.initScale();
   }
 
   private initZoom(): void {
