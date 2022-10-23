@@ -4,9 +4,8 @@
 
 An interactive map of the solar system.
 
-Master (production) : https://lebesnec.github.io/solar-system
-
-Develop (CI) : https://lebesnec.github.io/solar-system-develop
+- main (production) : https://lebesnec.github.io/solar-system
+- develop (CI) : https://lebesnec.github.io/solar-system-develop
 
 ## Get started
 
