@@ -27,7 +27,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng deploy --no-silent --base-href=https://lebesnec.github.io/solar-system-develop/ --repo=https://github.com/lebesnec/solar-system-develop.git --branch=develop"
+    "deploy": "ng deploy  --no-silent --name=\"Christophe Le Besnerais\" --email=christophe.lebesnerais.pro@gmail.com --base-href=https://lebesnec.github.io/solar-system-develop/ --repo=https://github.com/lebesnec/solar-system-develop.git --branch=develop"
   },
   "dependencies": {
     "@angular/animations": "^14.1.0",
