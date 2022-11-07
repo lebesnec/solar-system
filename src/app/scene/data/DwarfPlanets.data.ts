@@ -300,10 +300,13 @@ export const WEYWOT: CelestialBody = {
   semiMajorAxis: 14500,
   eccentricity: 0.148,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO unknown
+  meanAnomaly: 0,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
-  orbitBody: null
+  orbitBody: null,
+  unknowData: {
+    meanAnomaly: true
+  }
 };
 
 export const QUAOAR: CelestialBody = {
@@ -330,15 +333,19 @@ export const XIANGLIU: CelestialBody = {
     x: 0,
     y: 0
   },
-  mass: 5e15, // TODO unknown
+  mass: 5e15,
   radius: 100 / 2,
   semiMajorAxis: 24021,
   eccentricity: 0.2908,
   trueAnomaly: 0,
-  meanAnomaly: 0, // TODO unknown
+  meanAnomaly: 0,
   type: CELESTIAL_BODY_TYPE.SATELLITE,
   satellites: [],
-  orbitBody: null
+  orbitBody: null,
+  unknowData: {
+    mass: true,
+    meanAnomaly: true
+  }
 };
 
 export const GONGGONG: CelestialBody = {
