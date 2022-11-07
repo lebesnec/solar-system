@@ -22,12 +22,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4203 --open",
-    "build": "ng build",
+    "buildCI": "ng build --base-href=https://lebesnec.github.io/solar-system-develop/ --deploy-url=https://lebesnec.github.io/solar-system-develop/",
     "buildProd": "ng build --configuration production --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng deploy --base-href=https://lebesnec.github.io/solar-system-develop/ --repo=https://github.com/lebesnec/solar-system-develop.git --branch=develop"
+    "deploy": "ng deploy --no-silent --name=\"Christophe Le Besnerais\" --email=christophe.lebesnerais@gmail.com --base-href=https://lebesnec.github.io/solar-system-develop/ --repo=https://github.com/lebesnec/solar-system-develop.git --branch=develop"
   },
   "dependencies": {
     "@angular/animations": "^14.1.0",

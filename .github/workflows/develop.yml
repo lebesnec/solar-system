@@ -1,21 +1,24 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Build and deploy develop
-
 on:
   push:
     branches: [ "develop" ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      PERSONAL_TOKEN: ${{ secrets.TOKEN_DEVELOP }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.1
 
-      - name: Build and deploy
+      - name: Build
         run: |
           npm install
-          npm run deploy
+          npm run buildCI
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: main
+          folder: dist/solar-system
+          repository-name: lebesnec/solar-system-develop
+          token: ${{ secrets.SOLAR_SYSTEM_DEVELOP_TOKEN }}
+
