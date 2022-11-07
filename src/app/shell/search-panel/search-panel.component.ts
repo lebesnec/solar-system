@@ -31,6 +31,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   public readonly MOON = MOON;
   public readonly GANYMEDE = GANYMEDE;
   public readonly HAS_SYMBOL = HAS_SYMBOL;
+  public readonly NB_DWARF_PLANETS_SATELLITES = DWARF_PLANETS.reduce((nb, p) => nb + p.satellites.length, 0);
 
   private searchChanged: Subject<void> = new Subject<void>();
 

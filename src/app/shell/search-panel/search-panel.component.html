@@ -88,7 +88,9 @@
   <mat-expansion-panel class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ 'Dwarf planets' | translate }}</mat-panel-title>
-      <mat-panel-description>{{ 'NB planets' | translate:{ NB: DWARF_PLANETS.length } }}</mat-panel-description>
+      <mat-panel-description>
+        {{ 'NB1 dwarf planets and NB2 satellites' | translate:{ NB1: DWARF_PLANETS.length, NB2: NB_DWARF_PLANETS_SATELLITES } }}
+      </mat-panel-description>
     </mat-expansion-panel-header>
 
     <ng-template ngFor let-planet [ngForOf]="DWARF_PLANETS">
