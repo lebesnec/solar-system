@@ -22,7 +22,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4203 --open",
-    "build": "ng build",
+    "buildCI": "ng build --base-href=https://lebesnec.github.io/solar-system-develop/ --deploy-url=https://lebesnec.github.io/solar-system-develop/",
     "buildProd": "ng build --configuration production --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
     "test": "ng test",
     "lint": "ng lint",
