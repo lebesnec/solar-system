@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AU_TO_KM, CelestialBody, DEG_TO_RAD, Ellipse, G, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBody, DEG_TO_RAD, Ellipse, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
 import {SOLAR_SYSTEM} from './data/SolarSystem.data';
 
