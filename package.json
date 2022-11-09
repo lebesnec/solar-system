@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "private": false,
   "description": "An interactive map of the Solar System",
-  "keywords": [ "angular", "d3js", "astronomy", "space", "solar system" ],
+  "keywords": [
+    "angular",
+    "d3js",
+    "astronomy",
+    "space",
+    "solar system"
+  ],
   "homepage": "https://github.com/lebesnec/solar-system",
   "repository": {
     "type": "git",
@@ -22,12 +28,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4203 --open",
-    "buildCI": "ng build --base-href=https://lebesnec.github.io/solar-system-develop/ --deploy-url=https://lebesnec.github.io/solar-system-develop/",
-    "buildProd": "ng build --configuration production --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
+    "buildCI": "node prebuild.js & ng build --base-href=https://lebesnec.github.io/solar-system-develop/ --deploy-url=https://lebesnec.github.io/solar-system-develop/",
+    "buildProd": "node prebuild.js & ng build --configuration production --base-href=https://lebesnec.github.io/solar-system/ --deploy-url=https://lebesnec.github.io/solar-system/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "deploy": "ng deploy --no-silent --name=\"Christophe Le Besnerais\" --email=christophe.lebesnerais@gmail.com --base-href=https://lebesnec.github.io/solar-system-develop/ --repo=https://github.com/lebesnec/solar-system-develop.git --branch=develop"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^14.1.0",
@@ -56,7 +61,6 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "angular-cli-ghpages": "^1.0.3",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
