@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VERSION } from '../../../environments/version';
 
 @Component({
   selector: 'app-about',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
+
+  public VERSION = VERSION;
 
   constructor() { }
 
