@@ -76,16 +76,13 @@ $color: #c5c5c5;
       color: rgba($color, 0.5);
       font-size: 20px;
     }
-    .prefix {
-      color: $color;
-    }
     button {
       color: rgb($color, 0.5);
     }
     button:hover {
       color: rgb($color, 0.75);
     }
-    button, .prefix {
+    button {
       font-size: 20px;
       line-height: 1;
     }
