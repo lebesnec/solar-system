@@ -27,6 +27,7 @@ import {LegalsComponent} from './legals/legals.component';
 export class ShellComponent implements OnInit {
 
   public showSearchPanel = false;
+  public search = '';
   private settingsDialog: MatDialogRef<SettingsComponent>;
   private aboutDialog: MatDialogRef<AboutComponent>;
   private contactDialog: MatDialogRef<ContactComponent>;
@@ -40,13 +41,13 @@ export class ShellComponent implements OnInit {
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe(() => {
-      this.showSearchPanel = false;
+      this.closeSearchPanel();
     });
   }
 
   public onLogoClick(): void {
     if (this.showSearchPanel) {
-      this.showSearchPanel = false;
+      this.closeSearchPanel();
     } else {
       this.dialog.closeAll();
       this.searchPanelService.onBodySelected.next(null);
@@ -58,9 +59,14 @@ export class ShellComponent implements OnInit {
     this.showSearchPanel = true;
   }
 
+  public closeSearchPanel(): void {
+    this.search = '';
+    this.showSearchPanel = false;
+  }
+
   public onCloseClick(): void {
     this.dialog.closeAll();
-    this.showSearchPanel = false;
+    this.closeSearchPanel();
   }
 
   public openSettings(): void {
