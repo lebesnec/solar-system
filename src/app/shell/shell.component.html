@@ -10,11 +10,14 @@
 
   <mat-form-field appearance="outline" class="search-field" (click)="openSearchPanel()">
     <mat-icon matPrefix class="prefix" fontIcon="rocket_launch"></mat-icon>
-    <input #search matInput [placeholder]="translate.get('Navigate') | async" autocomplete="off">
+    <input matInput
+           [(ngModel)]="search"
+           [placeholder]="translate.get('Navigate') | async"
+           autocomplete="off">
     <button mat-icon-button
             matSuffix
-            *ngIf="showSearchPanel && search.value && search.value !== ''"
-            (click)="search.value = ''">
+            *ngIf="showSearchPanel && search && search !== ''"
+            (click)="search = ''">
       <mat-icon fontIcon="close"></mat-icon>
     </button>
   </mat-form-field>
@@ -41,6 +44,6 @@
 <div class="content">
   <router-outlet></router-outlet>
 
-  <app-search-panel *ngIf="showSearchPanel" @panelAnimation [search]="search.value">
+  <app-search-panel *ngIf="showSearchPanel" @panelAnimation [search]="search">
   </app-search-panel>
 </div>

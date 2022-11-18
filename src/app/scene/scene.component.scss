@@ -205,7 +205,8 @@
 
   .compass text {
     fill: rgb(255, 255, 255);
-    filter: grayscale(100%);
   }
-
+  .compass text:last-child {
+    font-size: 25px;
+  }
 }

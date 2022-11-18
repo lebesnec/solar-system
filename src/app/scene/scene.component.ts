@@ -445,7 +445,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       const groupCompassSelection = this.groupForegroundSelection.append('g').attr('class', 'compass');
 
       groupCompassSelection.append('text')
-                              .html('🔼&#xFE0E;')
+                              .html('▲')
                               .attr('dominant-baseline', 'central')
                               .attr('x', SCALE_PADDING)
                               .attr('y', window.innerHeight - SCALE_PADDING - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
@@ -453,7 +453,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             .append('title')
                               .html(translations[COMPASS_TITLE_KEY]);
       groupCompassSelection.append('text')
-                              .html('♈&#xFE0E;')
+                              .html('ɤ')
                               .attr('dominant-baseline', 'central')
                               .attr('x', SCALE_PADDING)
                               .attr('y', window.innerHeight - SCALE_PADDING + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
