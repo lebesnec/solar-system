@@ -17,10 +17,10 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   @Input() public search = '';
 
-  public searchResult: CelestialBody[] = null;
+  public searchResult: CelestialBody[] | null = null;
 
   public get nbCol(): number {
-    return window.innerWidth <= 600 ? 3 : 4;
+    return window.innerWidth <= 600 ? 2 : 4;
   }
 
   public readonly SUN = SUN;
