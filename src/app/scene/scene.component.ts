@@ -131,7 +131,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       }
     });
 
-    fromEvent(window, 'resize').pipe(throttleTime(500)).subscribe(() => {
+    fromEvent(window, 'resize').pipe(throttleTime(300, undefined, { trailing: true })).subscribe(() => {
       this.onWindowResize();
     });
   }
@@ -393,11 +393,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initScale(): void {
-    const SCALE_AVERAGE_SIZE = window.innerWidth <= 400 ? 100 : 200; // px
     const SCALE_PADDING_X = window.innerWidth <= 400 ? 20 : 50; // px
     const SCALE_PADDING_Y = window.innerWidth <= 400 ? 40 : 50; // px
+    const SCALE_AVERAGE_WIDTH = Math.min(200, window.innerWidth - SCALE_PADDING_X - COMPAS_WIDTH - 200); // px
 
-    const scaleSizeAU = SCALE_AVERAGE_SIZE / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
+    const scaleSizeAU = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
     // find the nearest available scale value:
     const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
     const scaleSizePx = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
@@ -552,7 +552,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     } else {
       this.celestialBodyDialogRef = this.dialog.open(CelestialBodyDialogComponent, {
         width: '500px',
-        maxHeight: '80vh',
+        maxHeight: '100vh',
         panelClass: 'celestial-body-dialog-panel',
         closeOnNavigation: true,
         autoFocus: false,
