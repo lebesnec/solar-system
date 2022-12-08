@@ -265,7 +265,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                );
 
     // Path:
-    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
+    const lineFn = line<OrbitPoint>(p => p.x, p => p.y).curve(curveCardinalClosed.tension(1));
     const largeOrbitsData = SOLAR_SYSTEM
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
                             .map((body) => ({
