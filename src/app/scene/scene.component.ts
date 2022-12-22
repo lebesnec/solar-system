@@ -265,7 +265,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                );
 
     // Path:
-    const lineFn = line<OrbitPoint>().curve(curveCardinalClosed.tension(1)).x(p => p.x).y(p => p.y);
+    const lineFn = line<OrbitPoint>(p => p.x, p => p.y).curve(curveCardinalClosed.tension(1));
     const largeOrbitsData = SOLAR_SYSTEM
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
                             .map((body) => ({
@@ -393,15 +393,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initScale(): void {
-    const SCALE_PADDING_X = window.innerWidth <= 400 ? 20 : 50; // px
-    const SCALE_PADDING_Y = window.innerWidth <= 400 ? 40 : 50; // px
-    const SCALE_AVERAGE_WIDTH = Math.min(200, window.innerWidth - SCALE_PADDING_X - COMPAS_WIDTH - 200); // px
+    const paddingX = window.innerWidth <= 400 ? 20 : 50; // px
+    const paddingY = window.innerWidth <= 400 ? 40 : 50; // px
+    const averageScaleWidth = Math.min(200, window.innerWidth - paddingX - COMPAS_WIDTH - 200); // px
 
-    const scaleSizeAU = SCALE_AVERAGE_WIDTH / ((AU_TO_KM / KM_TO_PX) * this.transform.k);
+    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / KM_TO_PX) * this.transform.k); // au
     // find the nearest available scale value:
     const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
-    const scaleSizePx = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
-    const scaleSizeKm = Math.round(scale.max * AU_TO_KM);
+    const scaleWidth = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k; // px
+    const scaleSizeKm = Math.round(scale.max * AU_TO_KM); // km
 
     this.groupForegroundSelection.select('.scale').remove();
     const groupScaleSelection = this.groupForegroundSelection.append('g').attr('class', 'scale');
@@ -409,7 +409,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // horizontal line
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING_X + COMPAS_WIDTH} ${window.innerHeight - SCALE_PADDING_Y} L ${SCALE_PADDING_X + COMPAS_WIDTH + scaleSizePx} ${window.innerHeight - SCALE_PADDING_Y}`);
+                        .attr('d', `M ${paddingX + COMPAS_WIDTH} ${window.innerHeight - paddingY} L ${paddingX + COMPAS_WIDTH + scaleWidth} ${window.innerHeight - paddingY}`);
 
     // ticks
     for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
@@ -417,13 +417,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
       const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
-                          .attr('d', `M ${SCALE_PADDING_X + COMPAS_WIDTH + nbPx} ${window.innerHeight - SCALE_PADDING_Y - (height / 2)} L ${SCALE_PADDING_X + COMPAS_WIDTH + nbPx} ${window.innerHeight - SCALE_PADDING_Y + (height / 2)}`);
+                          .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY - (height / 2)} L ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY + (height / 2)}`);
     }
     // last tick (not included in the previous loop because of float rounding error)
     const nbPxLastTick = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
-                        .attr('d', `M ${SCALE_PADDING_X + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - SCALE_PADDING_Y - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${SCALE_PADDING_X + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - SCALE_PADDING_Y + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
+                        .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
     const translationParams = {
       NB_AU: formatNumber(scale.max, this.translate.currentLang, '1.0-4'),
@@ -437,8 +437,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
                             .attr('dominant-baseline', 'central')
-                            .attr('x', SCALE_PADDING_X + COMPAS_WIDTH + scaleSizePx + SCALE_TEXT_PADDING)
-                            .attr('y', window.innerHeight - SCALE_PADDING_Y)
+                            .attr('x', paddingX + COMPAS_WIDTH + scaleWidth + SCALE_TEXT_PADDING)
+                            .attr('y', window.innerHeight - paddingY)
                           .append('title')
                             .html(scale.max > 1 ? translations[SCALE_TITLE_PLURAL_KEY] : translations[SCALE_TITLE_KEY]);
 
@@ -449,16 +449,16 @@ export class SceneComponent implements OnInit, AfterViewInit {
       groupCompassSelection.append('text')
                               .html('▲')
                               .attr('dominant-baseline', 'central')
-                              .attr('x', SCALE_PADDING_X)
-                              .attr('y', window.innerHeight - SCALE_PADDING_Y - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
+                              .attr('x', paddingX)
+                              .attr('y', window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
                               .html(translations[COMPASS_TITLE_KEY]);
       groupCompassSelection.append('text')
                               .html('ɤ')
                               .attr('dominant-baseline', 'central')
-                              .attr('x', SCALE_PADDING_X)
-                              .attr('y', window.innerHeight - SCALE_PADDING_Y + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
+                              .attr('x', paddingX)
+                              .attr('y', window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
                               .html(translations[COMPASS_TITLE_KEY]);

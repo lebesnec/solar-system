@@ -9,7 +9,7 @@
   </ng-container>
 </div>
 
-<button mat-icon-button [mat-dialog-close]="true" class="close-button">
+<button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
   <mat-icon fontIcon="close"></mat-icon>
 </button>
 
@@ -23,7 +23,9 @@
   <table>
     <tr>
       <td>
-        <a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">{{ 'Mass' | translate }}</a>
+        <a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">
+          {{ 'Mass' | translate }}
+        </a>
       </td>
       <td>
         {{ body.unknowData?.mass ? ('unknown' | translate: { suffix: 'e'}) : ('NB kg' | translate: { NB: body.mass | number: '1.0-3' : lang }) }}
@@ -31,7 +33,9 @@
     </tr>
     <tr>
       <td>
-        <a [href]="'https://en.wikipedia.org/wiki/Radius' | translate" target="_blank">{{ 'Mean radius' | translate }}</a>
+        <a [href]="'https://en.wikipedia.org/wiki/Radius' | translate" target="_blank">
+          {{ 'Mean radius' | translate }}
+        </a>
       </td>
       <td>
         {{ body.unknowData?.radius ? ('unknown' | translate: { suffix: ''}) : ('NB km' | translate: { NB: body.radius | number: '1.0-0' : lang }) }}
@@ -40,7 +44,9 @@
     <ng-container *ngIf="body !== SUN">
       <tr>
         <td>
-          <a [href]="'https://en.wikipedia.org/wiki/Mean_anomaly' | translate" target="_blank">{{ 'Mean anomaly' | translate }}</a>
+          <a [href]="'https://en.wikipedia.org/wiki/Mean_anomaly' | translate" target="_blank">
+            {{ 'Mean anomaly' | translate }}
+          </a>
         </td>
         <td>
           {{ body.unknowData?.meanAnomaly ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.meanAnomaly | number: '1.0-0' : lang }) }}
@@ -48,7 +54,9 @@
       </tr>
       <tr>
         <td>
-          <a [href]="'https://en.wikipedia.org/wiki/Orbital_eccentricity' | translate" target="_blank">{{ 'Eccentricity' | translate }}</a>
+          <a [href]="'https://en.wikipedia.org/wiki/Orbital_eccentricity' | translate" target="_blank">
+            {{ 'Eccentricity' | translate }}
+          </a>
         </td>
         <td>
           {{ body.unknowData?.eccentricity ? ('unknown' | translate: { suffix: 'e'}) : (body.eccentricity | number: '1.1-10' : lang) }}
@@ -56,7 +64,9 @@
       </tr>
       <tr>
         <td>
-          <a [href]="'https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes' | translate" target="_blank">{{ 'Semi-major axis' | translate }}</a>
+          <a [href]="'https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes' | translate" target="_blank">
+            {{ 'Semi-major axis' | translate }}
+          </a>
         </td>
         <td>
           {{ body.unknowData?.semiMajorAxis ? ('unknown' | translate: { suffix: ''}) : ('NB km' | translate: { NB: body.semiMajorAxis | number: '1.0-0' : lang }) }}
@@ -72,14 +82,20 @@
       </tr>
       <tr *ngIf="body.longitudeOfAscendingNode">
         <td>
-          <a [href]="'https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node' | translate" target="_blank">{{ 'Longitude of the ascending node' | translate }}</a>
+          <a [href]="'https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node' | translate" target="_blank">
+            {{ 'Longitude of the ascending node' | translate }}
+          </a>
         </td>
         <td>
           {{ body.unknowData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
         </td>
       </tr>
       <tr *ngIf="body.type === CELESTIAL_BODY_TYPE.PLANET || body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET">
-        <td>{{ 'Satellites' | translate }}</td>
+        <td>
+          <a [href]="'https://en.wikipedia.org/wiki/Natural_satellite' | translate" target="_blank">
+            {{ 'Satellites' | translate }}
+          </a>
+        </td>
         <td>
           {{ body.satellites.length > 0 ? (body.satellites.length | number: '1.0-0' : lang) : ('none' | translate) }}
         </td>

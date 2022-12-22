@@ -15,6 +15,7 @@
            [placeholder]="translate.get('Navigate') | async"
            autocomplete="off">
     <button mat-icon-button
+            aria-label="clear search"
             matSuffix
             *ngIf="showSearchPanel && search && search !== ''"
             (click)="search = ''">
@@ -24,12 +25,13 @@
 
   <button *ngIf="showSearchPanel"
           mat-icon-button
+          aria-label="close"
           class="close-button"
           (click)="onCloseClick()">
     <mat-icon fontIcon="close"></mat-icon>
   </button>
   <div *ngIf="!showSearchPanel" [matMenuTriggerFor]="menu">
-    <button mat-icon-button class="menu-button">
+    <button mat-icon-button class="menu-button" aria-label="menu">
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
   </div>

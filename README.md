@@ -20,7 +20,7 @@ Mail: christophe.lebesnerais.pro@gmail.com
 
 GitHub: https://github.com/lebesnec/solar-system/discussions
 
-Twitter: twitter.com/TODO
+Twitter: twitter.com/celestial_map
 
 ## Author
 
