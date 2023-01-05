@@ -68,6 +68,8 @@ export const DEG_TO_RAD = Math.PI / 180;
  */
 export const AU_TO_KM = 1.495978707e8;
 
+export const KM_TO_MILES = 1.495978707e8;
+
 /**
  * Gravitational constant in m^3.kg^−1.s^−2
  */

@@ -15,6 +15,13 @@
   </mat-button-toggle>
 </mat-button-toggle-group>
 
+<h3>{{ 'Units' | translate }}</h3>
+
+<mat-button-toggle-group [value]="metric" (change)="metric = $event.value">
+  <mat-button-toggle [value]="true">{{ 'Metric' }}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{ 'Imperial' }}</mat-button-toggle>
+</mat-button-toggle-group>
+
 <h3>{{ 'Orbits' | translate }}</h3>
 
 <mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
