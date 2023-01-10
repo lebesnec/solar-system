@@ -1,8 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CELESTIAL_BODY_TYPE, CelestialBody, KG_TO_POUND, KM_TO_MILE} from '../scene.model';
 import {HAS_SYMBOL, MISSING_PICTURES, SUN} from '../data/SolarSystem.data';
 import {TranslateService} from '@ngx-translate/core';
+import {SettingsService} from '../../shell/settings/settings.service';
 
 @Component({
   selector: 'app-celestial-body-dialog',
@@ -12,18 +13,26 @@ import {TranslateService} from '@ngx-translate/core';
 export class CelestialBodyDialogComponent {
 
   public body: CelestialBody;
+
   public readonly SUN = SUN;
   public readonly CELESTIAL_BODY_TYPE = CELESTIAL_BODY_TYPE;
   public readonly MISSING_PICTURES = MISSING_PICTURES;
   public readonly HAS_SYMBOL = HAS_SYMBOL;
+  public readonly KM_TO_MILE = KM_TO_MILE;
+  public readonly KG_TO_POUND = KG_TO_POUND;
 
   public get lang(): string {
     return this.translate.currentLang;
   }
 
+  public get isMetric(): boolean {
+    return this.settings.metric;
+  }
+
   constructor(
     @Inject(MAT_DIALOG_DATA) data: { body: CelestialBody },
-    private translate: TranslateService
+    private translate: TranslateService,
+    private settings: SettingsService
   ) {
     this.body = data.body;
   }
