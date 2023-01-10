@@ -147,6 +147,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
+    this.initLagrangePoints();
     this.initZoom();
 
     this.translateService.onLangChange.subscribe(() => {
@@ -236,6 +237,29 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   event.stopPropagation();
                                                 })
                                 );
+  }
+
+  private initLagrangePoints(): void {
+    // Pythagore give the earth-sun distance
+    const distance = Math.sqrt((EARTH.position.x ** 2) + (EARTH.position.y ** 2));
+    // https://en.wikipedia.org/wiki/Lagrange_point#Physical_and_mathematical_details
+    const l1 = distance * Math.cbrt(EARTH.mass / (3 * SUN.mass));
+
+    // thales theorem
+    const xL1 = (EARTH.position.x * (distance - l1)) / distance;
+    const yL1 = (EARTH.position.y * (distance - l1)) / distance;
+    const l1Point = { x: xL1, y: yL1, id: 'l1' };
+
+    this.groupZoomSelection.selectAll('.lagrange-point')
+                            .data([ l1Point ], (d) => d.id)
+                            .join(
+                              enter => enter.append('circle')
+                                            .attr('id', (body) => 'lagrange-point-' + body.id)
+                                            .attr('class', (body) => 'lagrange-point lagrange-point-' + body.id)
+                                            .attr('r', 15)
+                                            .attr('cx', (body) => body.x)
+                                            .attr('cy', (body) => body.y)
+                            );
   }
 
   private initOrbits(): void {

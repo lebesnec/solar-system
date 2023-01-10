@@ -188,6 +188,13 @@
     stroke-width: 1;
   }
 
+  .lagrange-point {
+    vector-effect: non-scaling-stroke;
+    stroke: rgb(255, 0, 0);
+    stroke-width: 1;
+    fill: rgb(49, 245, 5);
+  }
+
   .hidden {
     display: none;
   }
