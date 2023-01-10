@@ -19,6 +19,13 @@ export class SettingsComponent {
     this.settingsService.language = value;
   }
 
+  public get metric(): boolean {
+    return this.settingsService.metric;
+  }
+  public set metric(value: boolean) {
+    this.settingsService.metric = value;
+  }
+
   public get reticule(): boolean {
     return this.settingsService.reticule;
   }

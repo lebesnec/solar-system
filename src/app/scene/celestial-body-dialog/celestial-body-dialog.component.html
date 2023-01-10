@@ -28,7 +28,17 @@
         </a>
       </td>
       <td>
-        {{ body.unknowData?.mass ? ('unknown' | translate: { suffix: 'e'}) : ('NB kg' | translate: { NB: body.mass | number: '1.0-3' : lang }) }}
+        <ng-template [ngIf]="body.unknowData?.mass" [ngIfElse]="valueMass">
+          {{ 'unknown' | translate: { suffix: 'e'} }}
+        </ng-template>
+        <ng-template #valueMass>
+          <ng-template [ngIf]="isMetric" [ngIfElse]="imperialMass">
+            {{ ('NB kg' | translate: { NB: body.mass | number: '1.0-3' : lang }) }}
+          </ng-template>
+          <ng-template #imperialMass>
+            {{ ('NB lb' | translate: { NB: body.mass * KG_TO_POUND | number: '1.0-3' : lang }) }}
+          </ng-template>
+        </ng-template>
       </td>
     </tr>
     <tr>
@@ -38,7 +48,17 @@
         </a>
       </td>
       <td>
-        {{ body.unknowData?.radius ? ('unknown' | translate: { suffix: ''}) : ('NB km' | translate: { NB: body.radius | number: '1.0-0' : lang }) }}
+        <ng-template [ngIf]="body.unknowData?.radius" [ngIfElse]="valueRadius">
+          {{ 'unknown' | translate: { suffix: ''} }}
+        </ng-template>
+        <ng-template #valueRadius>
+          <ng-template [ngIf]="isMetric" [ngIfElse]="imperialRadius">
+            {{ ('NB km' | translate: { NB: body.radius | number: '1.0-0' : lang }) }}
+          </ng-template>
+          <ng-template #imperialRadius>
+            {{ ('NB mi' | translate: { NB: body.radius * KM_TO_MILE | number: '1.0-0' : lang }) }}
+          </ng-template>
+        </ng-template>
       </td>
     </tr>
     <ng-container *ngIf="body !== SUN">
@@ -69,7 +89,17 @@
           </a>
         </td>
         <td>
-          {{ body.unknowData?.semiMajorAxis ? ('unknown' | translate: { suffix: ''}) : ('NB km' | translate: { NB: body.semiMajorAxis | number: '1.0-0' : lang }) }}
+          <ng-template [ngIf]="body.unknowData?.semiMajorAxis" [ngIfElse]="valueAxis">
+            {{ 'unknown' | translate: { suffix: ''} }}
+          </ng-template>
+          <ng-template #valueAxis>
+            <ng-template [ngIf]="isMetric" [ngIfElse]="imperialAxis">
+              {{ ('NB km' | translate: { NB: body.semiMajorAxis | number: '1.0-0' : lang }) }}
+            </ng-template>
+            <ng-template #imperialAxis>
+              {{ ('NB mi' | translate: { NB: body.semiMajorAxis * KM_TO_MILE | number: '1.0-0' : lang }) }}
+            </ng-template>
+          </ng-template>
         </td>
       </tr>
       <tr *ngIf="body.speed">
@@ -77,7 +107,17 @@
           <a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a>
         </td>
         <td>
-          {{ body.unknowData?.speed ? ('unknown' | translate: { suffix: 'e'}) : ('NB km/s' | translate: { NB: body.speed | number: '1.0-0' : lang }) }}
+          <ng-template [ngIf]="body.unknowData?.speed" [ngIfElse]="valueSpeed">
+            {{ 'unknown' | translate: { suffix: 'e'} }}
+          </ng-template>
+          <ng-template #valueSpeed>
+            <ng-template [ngIf]="isMetric" [ngIfElse]="imperialSpeed">
+              {{ ('NB km/s' | translate: { NB: body.speed | number: '1.0-0' : lang }) }}
+            </ng-template>
+            <ng-template #imperialSpeed>
+              {{ ('NB mi/s' | translate: { NB: body.speed * KM_TO_MILE | number: '1.0-0' : lang }) }}
+            </ng-template>
+          </ng-template>
         </td>
       </tr>
       <tr *ngIf="body.longitudeOfAscendingNode">

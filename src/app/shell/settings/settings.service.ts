@@ -24,6 +24,13 @@ export class SettingsService {
     localStorage.setItem('language', value);
   }
 
+  public get metric(): boolean {
+    return localStorage.getItem('metric') !== 'false';
+  }
+  public set metric(value: boolean) {
+    localStorage.setItem('metric', value ? 'true' : 'false');
+  }
+
   public get reticule(): boolean {
     return localStorage.getItem('reticule') !== 'false';
   }
