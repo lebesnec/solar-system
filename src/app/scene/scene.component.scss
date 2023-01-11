@@ -190,9 +190,27 @@
 
   .lagrange-point {
     vector-effect: non-scaling-stroke;
-    stroke: rgb(255, 0, 0);
     stroke-width: 1;
-    fill: rgb(49, 245, 5);
+  }
+  .lagrange-point-l1 {
+    stroke: red;
+    fill: red;
+  }
+  .lagrange-point-l2 {
+    stroke: greenyellow;
+    fill: greenyellow;
+  }
+  .lagrange-point-l3 {
+    stroke: blue;
+    fill: blue;
+  }
+  .lagrange-point-l4 {
+    stroke: yellow;
+    fill: yellow;
+  }
+  .lagrange-point-l5 {
+    stroke: orange;
+    fill: orange;
   }
 
   .hidden {

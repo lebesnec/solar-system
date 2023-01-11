@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody, DEG_TO_RAD, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -243,15 +243,34 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // Pythagore give the earth-sun distance
     const distance = Math.sqrt((EARTH.position.x ** 2) + (EARTH.position.y ** 2));
     // https://en.wikipedia.org/wiki/Lagrange_point#Physical_and_mathematical_details
-    const l1 = distance * Math.cbrt(EARTH.mass / (3 * SUN.mass));
+    let r = distance * Math.cbrt(EARTH.mass / (3 * SUN.mass));
 
     // thales theorem
-    const xL1 = (EARTH.position.x * (distance - l1)) / distance;
-    const yL1 = (EARTH.position.y * (distance - l1)) / distance;
-    const l1Point = { x: xL1, y: yL1, id: 'l1' };
+    const xL1 = (EARTH.position.x * (distance - r)) / distance;
+    const yL1 = (EARTH.position.y * (distance - r)) / distance;
+    const l1 = { x: xL1, y: yL1, id: 'l1' };
+
+    const xL2 = (EARTH.position.x * (distance + r)) / distance;
+    const yL2 = (EARTH.position.y * (distance + r)) / distance;
+    const l2 = { x: xL2, y: yL2, id: 'l2' };
+
+    r = distance * ((7 * EARTH.mass) / (12 * SUN.mass));
+    const xL3 = - (EARTH.position.x * (distance - r)) / distance;
+    const yL3 = - (EARTH.position.y * (distance - r)) / distance;
+    const l3 = { x: xL3, y: yL3, id: 'l3' };
+
+    // 60° rotation of the earth position
+    const xL4 = (EARTH.position.x * Math.cos(60 * DEG_TO_RAD)) + (EARTH.position.y * Math.sin(60 * DEG_TO_RAD));
+    const yL4 = - (EARTH.position.x * Math.sin(60 * DEG_TO_RAD)) + (EARTH.position.y * Math.cos(60 * DEG_TO_RAD));
+    const l4 = { x: xL4, y: yL4, id: 'l4' };
+
+    // -60° rotation of the earth position
+    const xL5 = (EARTH.position.x * Math.cos(-60 * DEG_TO_RAD)) + (EARTH.position.y * Math.sin(-60 * DEG_TO_RAD));
+    const yL5 = - (EARTH.position.x * Math.sin(-60 * DEG_TO_RAD)) + (EARTH.position.y * Math.cos(-60 * DEG_TO_RAD));
+    const l5 = { x: xL5, y: yL5, id: 'l5' };
 
     this.groupZoomSelection.selectAll('.lagrange-point')
-                            .data([ l1Point ], (d) => d.id)
+                            .data([ l1, l2, l3, l4, l5 ], (d) => d.id)
                             .join(
                               enter => enter.append('circle')
                                             .attr('id', (body) => 'lagrange-point-' + body.id)
