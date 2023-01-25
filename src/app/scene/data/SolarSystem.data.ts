@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 import {MERCURY} from './Mercury.data';
 import {VENUS} from './Venus.data';
 import {EARTH, MOON} from './Earth.data';
@@ -144,7 +144,7 @@ export const SUN: CelestialBody = {
   eccentricity: 0,
   trueAnomaly: 0,
   meanAnomaly: 0,
-  type: CELESTIAL_BODY_TYPE.STAR,
+  type: CelestialBodyType.STAR,
   satellites: [ MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE ],
   orbitBody: null
 };

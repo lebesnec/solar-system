@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody, DEG_TO_RAD, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody, DEG_TO_RAD, OrbitPoint, Point} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -19,7 +19,7 @@ import {selectAll} from 'd3';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
-import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
+import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service';
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
@@ -75,7 +75,7 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
-  public ORBITS_SETTING = ORBITS_SETTING;
+  public ORBITS_SETTING = OrbitsSetting;
 
   public get scaleSetting(): boolean {
     return this.settingsService.scale;
@@ -83,7 +83,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   public get reticuleSetting(): boolean {
     return this.settingsService.reticule;
   }
-  public get orbitsSetting(): ORBITS_SETTING {
+  public get orbitsSetting(): OrbitsSetting {
     return this.settingsService.orbits;
   }
   public get labelsSetting(): boolean {
@@ -572,7 +572,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       case NEPTUNE:
         return 0.6;
       default:
-        if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
+        if (body.type === CelestialBodyType.DWARF_PLANET) {
           return max;
         } else {
           return this.getScale(body.orbitBody);

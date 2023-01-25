@@ -3,6 +3,18 @@ export interface Point {
   y: number;
 }
 
+export enum LagrangePointId {
+  L1 = 'l1',
+  L2 = 'l2',
+  L3 = 'l3',
+  L4 = 'l4',
+  L5 = 'l5'
+}
+
+export interface LagrangePoint extends Point {
+  id: LagrangePointId;
+}
+
 export interface Ellipse {
   cx: number;
   cy: number;
@@ -14,7 +26,7 @@ export interface OrbitPoint extends Point {
   trueAnomaly: number;
 }
 
-export enum CELESTIAL_BODY_TYPE {
+export enum CelestialBodyType {
   STAR = 'star',
   PLANET = 'planet',
   SATELLITE = 'satellite',
@@ -43,7 +55,7 @@ export interface CelestialBody {
   trueAnomaly: number;
   meanAnomaly: number;
   longitudeOfAscendingNode?: number;
-  type: CELESTIAL_BODY_TYPE;
+  type: CelestialBodyType;
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
   unknowData?: {

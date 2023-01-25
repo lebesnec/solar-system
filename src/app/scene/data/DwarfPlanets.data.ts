@@ -1,4 +1,4 @@
-import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const CHARON: CelestialBody = {
   id: 'charon',
@@ -13,7 +13,7 @@ export const CHARON: CelestialBody = {
   eccentricity: 0.0002,
   trueAnomaly: 0,
   meanAnomaly: 131.070,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -30,7 +30,7 @@ export const STYX: CelestialBody = {
   eccentricity: 0.005787,
   trueAnomaly: 0,
   meanAnomaly: 194.546,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -47,7 +47,7 @@ export const NIX: CelestialBody = {
   eccentricity: 0.002036,
   trueAnomaly: 0,
   meanAnomaly: 284.405,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -64,7 +64,7 @@ export const KERBEROS: CelestialBody = {
   eccentricity: 0.00328,
   trueAnomaly: 0,
   meanAnomaly: 161.061,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -81,7 +81,7 @@ export const HYDRA: CelestialBody = {
   eccentricity: 0.005862,
   trueAnomaly: 0,
   meanAnomaly: 326.678,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -100,7 +100,7 @@ export const PLUTO: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 14.53,
   longitudeOfAscendingNode: 110.299,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ CHARON, STYX, NIX, KERBEROS, HYDRA ],
   orbitBody: null
 };
@@ -119,7 +119,7 @@ export const CERES: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 77.37209589,
   longitudeOfAscendingNode: 80.3,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [],
   orbitBody: null
 };
@@ -136,7 +136,7 @@ export const DYSNOMIA: CelestialBody = {
   eccentricity: 0.0062,
   trueAnomaly: 0,
   meanAnomaly: 328.6,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -155,7 +155,7 @@ export const ERIS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 205.989,
   longitudeOfAscendingNode: 35.951,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ DYSNOMIA ],
   orbitBody: null
 };
@@ -172,7 +172,7 @@ export const S_2015_1: CelestialBody = {
   eccentricity: 0,
   trueAnomaly: 0,
   meanAnomaly: 0,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
   unknowData: {
@@ -196,7 +196,7 @@ export const MAKEMAKE: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 165.514,
   longitudeOfAscendingNode: 79.620,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ S_2015_1 ],
   orbitBody: null
 };
@@ -213,7 +213,7 @@ export const HIIAKA: CelestialBody = {
   eccentricity: 0.0513,
   trueAnomaly: 0,
   meanAnomaly: 152.8,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -230,7 +230,7 @@ export const NAMAKA: CelestialBody = {
   eccentricity: 0.249,
   trueAnomaly: 0,
   meanAnomaly: 178.5,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -249,7 +249,7 @@ export const HAUMEA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 218.205,
   longitudeOfAscendingNode: 122.167,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ HIIAKA, NAMAKA ],
   orbitBody: null
 };
@@ -266,7 +266,7 @@ export const VANTH: CelestialBody = {
   eccentricity: 0.00091,
   trueAnomaly: 0,
   meanAnomaly: 188.52,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -284,7 +284,7 @@ export const ORCUS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 181.735,
   longitudeOfAscendingNode: 268.799,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ VANTH ],
   orbitBody: null
 };
@@ -301,7 +301,7 @@ export const WEYWOT: CelestialBody = {
   eccentricity: 0.148,
   trueAnomaly: 0,
   meanAnomaly: 0,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
   unknowData: {
@@ -322,7 +322,7 @@ export const QUAOAR: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 301.104,
   longitudeOfAscendingNode: 188.927,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ WEYWOT ],
   orbitBody: null
 };
@@ -339,7 +339,7 @@ export const XIANGLIU: CelestialBody = {
   eccentricity: 0.2908,
   trueAnomaly: 0,
   meanAnomaly: 0,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
   unknowData: {
@@ -361,7 +361,7 @@ export const GONGGONG: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 106.496,
   longitudeOfAscendingNode: 336.8573,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ XIANGLIU ],
   orbitBody: null
 };
@@ -379,7 +379,7 @@ export const SEDNA: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 358.117,
   longitudeOfAscendingNode: 144.248,
-  type: CELESTIAL_BODY_TYPE.DWARF_PLANET,
+  type: CelestialBodyType.DWARF_PLANET,
   satellites: [ ],
   orbitBody: null
 };

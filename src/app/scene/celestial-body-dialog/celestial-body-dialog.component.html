@@ -2,10 +2,10 @@
   <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" class="symbol" [alt]="body.id | translate">
   {{ body.id | translate }},
   <ng-container [ngSwitch]="body.type">
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.STAR">{{ 'star' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.PLANET">{{ 'planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.DWARF_PLANET">{{ 'dwarf planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CELESTIAL_BODY_TYPE.SATELLITE">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
+    <ng-container *ngSwitchCase="CelestialBodyType.STAR">{{ 'star' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CelestialBodyType.PLANET">{{ 'planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CelestialBodyType.DWARF_PLANET">{{ 'dwarf planet' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="CelestialBodyType.SATELLITE">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
   </ng-container>
 </div>
 
@@ -130,7 +130,7 @@
           {{ body.unknowData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
         </td>
       </tr>
-      <tr *ngIf="body.type === CELESTIAL_BODY_TYPE.PLANET || body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET">
+      <tr *ngIf="body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET">
         <td>
           <a [href]="'https://en.wikipedia.org/wiki/Natural_satellite' | translate" target="_blank">
             {{ 'Satellites' | translate }}

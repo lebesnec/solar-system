@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const MOON: CelestialBody = {
   id: 'moon',
@@ -13,7 +13,7 @@ export const MOON: CelestialBody = {
   eccentricity: 0.0549,
   trueAnomaly: 0,
   meanAnomaly: 135.27,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -32,7 +32,7 @@ export const EARTH: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 358.617,
   longitudeOfAscendingNode: 0,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [ MOON ],
   orbitBody: null
 };

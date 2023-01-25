@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const METIS: CelestialBody = {
   id: 'metis',
@@ -12,7 +12,7 @@ export const METIS: CelestialBody = {
   eccentricity: 0.0077,
   trueAnomaly: 0,
   meanAnomaly: 276.047,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -29,7 +29,7 @@ export const ADRASTEA: CelestialBody = {
   eccentricity: 0.0063,
   trueAnomaly: 0,
   meanAnomaly: 135.673,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -46,7 +46,7 @@ export const AMALTHEA: CelestialBody = {
   eccentricity: 0.0075,
   trueAnomaly: 0,
   meanAnomaly: 185.194,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -63,7 +63,7 @@ export const THEBE: CelestialBody = {
   eccentricity: 0.0180,
   trueAnomaly: 0,
   meanAnomaly: 135.956,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -80,7 +80,7 @@ export const IO: CelestialBody = {
   eccentricity: 0.0041,
   trueAnomaly: 0,
   meanAnomaly: 342.021,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -97,7 +97,7 @@ export const EUROPA: CelestialBody = {
   eccentricity: 0.0094,
   trueAnomaly: 0,
   meanAnomaly: 171.016,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -114,7 +114,7 @@ export const GANYMEDE: CelestialBody = {
   eccentricity: 0.0011,
   trueAnomaly: 0,
   meanAnomaly: 317.540,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -131,7 +131,7 @@ export const CALLISTO: CelestialBody = {
   eccentricity: 0.0074,
   trueAnomaly: 0,
   meanAnomaly: 181.408,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -148,7 +148,7 @@ export const THEMISTO: CelestialBody = {
   eccentricity: 0.2514,
   trueAnomaly: 0,
   meanAnomaly: 313.051,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -165,7 +165,7 @@ export const LEDA: CelestialBody = {
   eccentricity: 0.1648,
   trueAnomaly: 0,
   meanAnomaly: 230.352,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -182,7 +182,7 @@ export const ERSA: CelestialBody = {
   eccentricity: 0.1043,
   trueAnomaly: 0,
   meanAnomaly: 356.6,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -199,7 +199,7 @@ export const PANDIA: CelestialBody = {
   eccentricity: 0.2084,
   trueAnomaly: 0,
   meanAnomaly: 282.4,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -216,7 +216,7 @@ export const HIMALIA: CelestialBody = {
   eccentricity: 0.1510,
   trueAnomaly: 0,
   meanAnomaly: 66.874,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -233,7 +233,7 @@ export const LYSITHEA: CelestialBody = {
   eccentricity: 0.1377,
   trueAnomaly: 0,
   meanAnomaly: 330.475,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -250,7 +250,7 @@ export const ELARA: CelestialBody = {
   eccentricity: 0.2079,
   trueAnomaly: 0,
   meanAnomaly: 330.985,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -267,7 +267,7 @@ export const DIA: CelestialBody = {
   eccentricity: 0.2606,
   trueAnomaly: 0,
   meanAnomaly: 169.9,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -284,7 +284,7 @@ export const CARPO: CelestialBody = {
   eccentricity: 0.4967,
   trueAnomaly: 0,
   meanAnomaly: 337.062,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -301,7 +301,7 @@ export const VALETUDO: CelestialBody = {
   eccentricity: 0.2018,
   trueAnomaly: 0,
   meanAnomaly: 201.41718,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -318,7 +318,7 @@ export const EUPORIE: CelestialBody = {
   eccentricity: 0.1402,
   trueAnomaly: 0,
   meanAnomaly: 70.243,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -335,7 +335,7 @@ export const EUPHEME: CelestialBody = {
   eccentricity: 0.4104,
   trueAnomaly: 0,
   meanAnomaly: 168.7,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -352,7 +352,7 @@ export const S_2003_J_18: CelestialBody = {
   eccentricity: 0.0465,
   trueAnomaly: 0,
   meanAnomaly: 202.160,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -369,7 +369,7 @@ export const S_2010_J_2: CelestialBody = {
   eccentricity: 0.3403,
   trueAnomaly: 0,
   meanAnomaly: 312.074,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -386,7 +386,7 @@ export const HELIKE: CelestialBody = {
   eccentricity: 0.1331,
   trueAnomaly: 0,
   meanAnomaly: 43.659,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -403,7 +403,7 @@ export const S_2003_J_16: CelestialBody = {
   eccentricity: 0.3331,
   trueAnomaly: 0,
   meanAnomaly: 307.563,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -420,7 +420,7 @@ export const S_2003_J_2: CelestialBody = {
   eccentricity: 0.2777,
   trueAnomaly: 0,
   meanAnomaly: 237.932,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -437,7 +437,7 @@ export const EUANTHE: CelestialBody = {
   eccentricity: 0.1096,
   trueAnomaly: 0,
   meanAnomaly: 333.101,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -454,7 +454,7 @@ export const S_2017_J_7: CelestialBody = {
   eccentricity: 0.2626,
   trueAnomaly: 0,
   meanAnomaly:  236.9,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -471,7 +471,7 @@ export const HERMIPPE: CelestialBody = {
   eccentricity: 0.1981,
   trueAnomaly: 0,
   meanAnomaly: 131.854,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -488,7 +488,7 @@ export const PRAXIDIKE: CelestialBody = {
   eccentricity: 0.2959,
   trueAnomaly: 0,
   meanAnomaly: 117.480,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -505,7 +505,7 @@ export const THYONE: CelestialBody = {
   eccentricity: 0.1770,
   trueAnomaly: 0,
   meanAnomaly: 238.786,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -522,7 +522,7 @@ export const THELXINOE: CelestialBody = {
   eccentricity: 0.1709,
   trueAnomaly: 0,
   meanAnomaly: 268.013,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -539,7 +539,7 @@ export const S_2017_J_3: CelestialBody = {
   eccentricity: 0.1907,
   trueAnomaly: 0,
   meanAnomaly: 91.2,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -556,7 +556,7 @@ export const ANANKE: CelestialBody = {
   eccentricity: 0.1747,
   trueAnomaly: 0,
   meanAnomaly: 253.384,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -573,7 +573,7 @@ export const MNEME: CelestialBody = {
   eccentricity: 0.3428,
   trueAnomaly: 0,
   meanAnomaly: 256.860,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -590,7 +590,7 @@ export const S_2016_J_1: CelestialBody = {
   eccentricity: 0.1294,
   trueAnomaly: 0,
   meanAnomaly:  25.53,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -607,7 +607,7 @@ export const ORTHOSIE: CelestialBody = {
   eccentricity: 0.4838,
   trueAnomaly: 0,
   meanAnomaly: 204.517,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -624,7 +624,7 @@ export const HARPALYKE: CelestialBody = {
   eccentricity: 0.1602,
   trueAnomaly: 0,
   meanAnomaly: 215.956,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -641,7 +641,7 @@ export const IOCASTE: CelestialBody = {
   eccentricity: 0.3295,
   trueAnomaly: 0,
   meanAnomaly: 213.675,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -658,7 +658,7 @@ export const S_2017_J_9: CelestialBody = {
   eccentricity: 0.2524,
   trueAnomaly: 0,
   meanAnomaly: 259.5,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -675,7 +675,7 @@ export const S_2003_J_12: CelestialBody = {
   eccentricity: 0.3657,
   trueAnomaly: 0,
   meanAnomaly: 38.543,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -692,7 +692,7 @@ export const S_2003_J_4: CelestialBody = {
   eccentricity: 0.4967,
   trueAnomaly: 0,
   meanAnomaly: 260.480,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -709,7 +709,7 @@ export const ERINOME: CelestialBody = {
   eccentricity: 0.2052,
   trueAnomaly: 0,
   meanAnomaly: 267.136,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -726,7 +726,7 @@ export const AITNE: CelestialBody = {
   eccentricity: 0.3150,
   trueAnomaly: 0,
   meanAnomaly: 105.000,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -743,7 +743,7 @@ export const HERSE: CelestialBody = {
   eccentricity: 0.1854,
   trueAnomaly: 0,
   meanAnomaly: 141.667,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -760,7 +760,7 @@ export const TAYGETE: CelestialBody = {
   eccentricity: 0.3257,
   trueAnomaly: 0,
   meanAnomaly: 94.756,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -777,7 +777,7 @@ export const S_2017_J_2: CelestialBody = {
   eccentricity: 0.3852,
   trueAnomaly: 0,
   meanAnomaly: 344.4,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -794,7 +794,7 @@ export const S_2017_J_6: CelestialBody = {
   eccentricity: 0.3226,
   trueAnomaly: 0,
   meanAnomaly: 236.9,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -811,7 +811,7 @@ export const EUKELADE: CelestialBody = {
   eccentricity: 0.2790,
   trueAnomaly: 0,
   meanAnomaly: 204.846,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -828,7 +828,7 @@ export const CARME: CelestialBody = {
   eccentricity: 0.2295,
   trueAnomaly: 0,
   meanAnomaly: 233.375,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -845,7 +845,7 @@ export const S_2003_J_19: CelestialBody = {
   eccentricity: 0.2928,
   trueAnomaly: 0,
   meanAnomaly: 223.035,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -862,7 +862,7 @@ export const ISONOE: CelestialBody = {
   eccentricity: 0.2159,
   trueAnomaly: 0,
   meanAnomaly: 124.941,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -879,7 +879,7 @@ export const S_2003_J_10: CelestialBody = {
   eccentricity: 0.2066,
   trueAnomaly: 0,
   meanAnomaly: 258.937,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -896,7 +896,7 @@ export const AUTONOE: CelestialBody = {
   eccentricity: 0.4290,
   trueAnomaly: 0,
   meanAnomaly: 142.035,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -913,7 +913,7 @@ export const PHILOPHROSYNE: CelestialBody = {
   eccentricity: 0.3013,
   trueAnomaly: 0,
   meanAnomaly: 161.6,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -930,7 +930,7 @@ export const CYLLENE: CelestialBody = {
   eccentricity: 0.6079,
   trueAnomaly: 0,
   meanAnomaly: 128.345,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -947,7 +947,7 @@ export const PASITHEE: CelestialBody = {
   eccentricity: 0.2097,
   trueAnomaly: 0,
   meanAnomaly: 215.443,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -964,7 +964,7 @@ export const S_2010_J_1: CelestialBody = {
   eccentricity: 0.2937,
   trueAnomaly: 0,
   meanAnomaly: 160.525,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -981,7 +981,7 @@ export const PASIPHAE: CelestialBody = {
   eccentricity: 0.4362,
   trueAnomaly: 0,
   meanAnomaly: 279.769,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -998,7 +998,7 @@ export const SPONDE: CelestialBody = {
   eccentricity: 0.3455,
   trueAnomaly: 0,
   meanAnomaly: 174.044,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1015,7 +1015,7 @@ export const S_2017_J_8: CelestialBody = {
   eccentricity: 0.2039,
   trueAnomaly: 0,
   meanAnomaly: 70.8,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1032,7 +1032,7 @@ export const EURYDOME: CelestialBody = {
   eccentricity: 0.2975,
   trueAnomaly: 0,
   meanAnomaly: 287.689,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1049,7 +1049,7 @@ export const S_2017_J_5: CelestialBody = {
   eccentricity: 0.2460,
   trueAnomaly: 0,
   meanAnomaly: 77.5,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1066,7 +1066,7 @@ export const KALYKE: CelestialBody = {
   eccentricity: 0.2660,
   trueAnomaly: 0,
   meanAnomaly: 255.702,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1083,7 +1083,7 @@ export const HEGEMONE: CelestialBody = {
   eccentricity: 0.3358,
   trueAnomaly: 0,
   meanAnomaly: 236.950,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1100,7 +1100,7 @@ export const KALE: CelestialBody = {
   eccentricity: 0.2893,
   trueAnomaly: 0,
   meanAnomaly: 212.853,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1117,7 +1117,7 @@ export const KALLICHORE: CelestialBody = {
   eccentricity: 0.3183,
   trueAnomaly: 0,
   meanAnomaly: 55.937,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1134,7 +1134,7 @@ export const S_2011_J_1: CelestialBody = {
   eccentricity: 0.3193,
   trueAnomaly: 0,
   meanAnomaly: 256.027,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1151,7 +1151,7 @@ export const S_2017_J_1: CelestialBody = {
   eccentricity: 0.4500,
   trueAnomaly: 0,
   meanAnomaly: 161.3,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1168,7 +1168,7 @@ export const CHALDENE: CelestialBody = {
   eccentricity: 0.2705,
   trueAnomaly: 0,
   meanAnomaly: 267.454,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1185,7 +1185,7 @@ export const ARCHE: CelestialBody = {
   eccentricity: 0.2367,
   trueAnomaly: 0,
   meanAnomaly: 39.713,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1202,7 +1202,7 @@ export const EIRENE: CelestialBody = {
   eccentricity: 0.2413,
   trueAnomaly: 0,
   meanAnomaly: 284.4,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1219,7 +1219,7 @@ export const KORE: CelestialBody = {
   eccentricity: 0.2347,
   trueAnomaly: 0,
   meanAnomaly: 33.416,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1236,7 +1236,7 @@ export const S_2011_J_2: CelestialBody = {
   eccentricity: 0.1729,
   trueAnomaly: 0,
   meanAnomaly: 285.597,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1253,7 +1253,7 @@ export const S_2003_J_9: CelestialBody = {
   eccentricity: 0.1702,
   trueAnomaly: 0,
   meanAnomaly: 348.415,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1270,7 +1270,7 @@ export const MEGACLITE: CelestialBody = {
   eccentricity: 0.3139,
   trueAnomaly: 0,
   meanAnomaly: 135.272,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1287,7 +1287,7 @@ export const AOEDE: CelestialBody = {
   eccentricity: 0.3131,
   trueAnomaly: 0,
   meanAnomaly: 197.676,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1304,7 +1304,7 @@ export const S_2003_J_23: CelestialBody = {
   eccentricity: 0.3208,
   trueAnomaly: 0,
   meanAnomaly: 144.222,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1321,7 +1321,7 @@ export const CALLIRRHOE: CelestialBody = {
   eccentricity: 0.3562,
   trueAnomaly: 0,
   meanAnomaly: 107.962,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1338,7 +1338,7 @@ export const SINOPE: CelestialBody = {
   eccentricity: 0.1669,
   trueAnomaly: 0,
   meanAnomaly: 165.352,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -1357,7 +1357,7 @@ export const JUPITER: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 20.020,
   longitudeOfAscendingNode: 100.464,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [
     METIS,
     ADRASTEA,
