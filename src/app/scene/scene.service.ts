@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AU_TO_KM, CelestialBody, DEG_TO_RAD, Ellipse, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBody, DEG_TO_RAD, Ellipse, LagrangePoint, LagrangePointType, OrbitPoint, Point} from './scene.model';
 import * as d3 from 'd3';
-import {SOLAR_SYSTEM} from './data/SolarSystem.data';
+import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
+import {EARTH} from './data/Earth.data';
 
 /**
  * SVG does not work well with big number, so we have to divide each value
@@ -92,6 +93,50 @@ export class SceneService {
    */
   public getDistanceToFocusPoint(body: CelestialBody, trueAnomaly: number): number {
     return (body.semiMajorAxis * (1 - (body.eccentricity ** 2))) / (1 + (body.eccentricity * Math.cos(trueAnomaly * DEG_TO_RAD)));
+  }
+
+  /**
+   * https://en.wikipedia.org/wiki/Lagrange_point#Physical_and_mathematical_details
+   * @returns LagrangePoints the 5 Lagrange points for the earth and sun
+   */
+  public getEarthLagrangePoints(): [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ] {
+    // Pythagore give the earth-sun distance
+    const distance = Math.sqrt((EARTH.position.x ** 2) + (EARTH.position.y ** 2));
+
+    // Thales give us l1, l2 and l3 from r and the earth position
+    let r = distance * Math.cbrt(EARTH.mass / (3 * SUN.mass));
+    const l1: LagrangePoint = {
+      x: (EARTH.position.x * (distance - r)) / distance,
+      y: (EARTH.position.y * (distance - r)) / distance,
+      type: LagrangePointType.L1
+    };
+    const l2: LagrangePoint = {
+      x: (EARTH.position.x * (distance + r)) / distance,
+      y: (EARTH.position.y * (distance + r)) / distance,
+      type: LagrangePointType.L2
+    };
+    r = distance * ((7 * EARTH.mass) / (12 * SUN.mass));
+    const l3: LagrangePoint = {
+      x: - (EARTH.position.x * (distance - r)) / distance,
+      y: - (EARTH.position.y * (distance - r)) / distance,
+      type: LagrangePointType.L3
+    };
+
+    // 60° rotation of the earth position give l4
+    const l4: LagrangePoint = {
+      x: (EARTH.position.x * Math.cos(60 * DEG_TO_RAD)) + (EARTH.position.y * Math.sin(60 * DEG_TO_RAD)),
+      y: - (EARTH.position.x * Math.sin(60 * DEG_TO_RAD)) + (EARTH.position.y * Math.cos(60 * DEG_TO_RAD)),
+      type: LagrangePointType.L4
+    };
+
+    // -60° rotation of the earth position give l5
+    const l5: LagrangePoint = {
+      x: (EARTH.position.x * Math.cos(-60 * DEG_TO_RAD)) + (EARTH.position.y * Math.sin(-60 * DEG_TO_RAD)),
+      y: - (EARTH.position.x * Math.sin(-60 * DEG_TO_RAD)) + (EARTH.position.y * Math.cos(-60 * DEG_TO_RAD)),
+      type: LagrangePointType.L5
+    };
+
+    return [ l1, l2, l3, l4, l5 ];
   }
 
   /**
