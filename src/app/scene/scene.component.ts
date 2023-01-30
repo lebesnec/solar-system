@@ -248,7 +248,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               enter => enter.append('circle')
                                             .attr('id', (p) => 'lagrange-point-' + p.type)
                                             .attr('class', (p) => 'lagrange-point lagrange-point-' + p.type)
-                                            .attr('r', 15)
+                                            .attr('r', 10000 / KM_TO_PX)
                                             .attr('cx', (p) => p.x)
                                             .attr('cy', (p) => p.y)
                             );
