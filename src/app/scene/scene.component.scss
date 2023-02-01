@@ -189,9 +189,18 @@
   }
 
   .lagrange-point {
-    stroke-width: 1;
-    stroke: mat.get-color-from-palette($solar-system-primary);
-    fill: mat.get-color-from-palette($solar-system-primary);
+    pointer-events: bounding-box;
+    .lagrange-point-inner, .lagrange-point-outer {
+      vector-effect: non-scaling-stroke;
+      stroke-width: 1;
+      stroke: rgb(255, 255, 255);
+      fill: none;
+    }
+  }
+  .lagrange-point:hover {
+    .lagrange-point-inner, .lagrange-point-outer {
+      stroke: mat.get-color-from-palette($solar-system-primary);
+    }
   }
 
   .hidden {

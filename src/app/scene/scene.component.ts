@@ -32,6 +32,8 @@ const RETICULE_SPACING = 300; // px
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
 
+const LAGRANGE_POINTS_WIDTH = 4; // px
+
 const SYMBOL_SIZE = 18; // px
 const LABEL_SPACING = 15;
 const LABEL_DISTANCE_TO_BODY: Point = { x: 20, y: 10 }; // px
@@ -147,8 +149,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
-    this.initLagrangePoints();
     this.initZoom();
+    this.initLagrangePoints();
 
     this.translateService.onLangChange.subscribe(() => {
       this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
@@ -157,6 +159,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.initLabels();
       });
       this.initScale();
+      this.initLagrangePoints();
     });
   }
 
@@ -176,6 +179,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.initLabels();
       if (!isPan) {
         this.initScale();
+        this.initLagrangePoints();
       }
     });
     this.svgSelection.call(this.d3Zoom);
@@ -242,16 +246,28 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private initLagrangePoints(): void {
     const points = this.sceneService.getEarthLagrangePoints();
 
-    this.groupZoomSelection.selectAll('.lagrange-point')
-                            .data(points, (d) => d.type)
-                            .join(
-                              enter => enter.append('circle')
-                                            .attr('id', (p) => 'lagrange-point-' + p.type)
-                                            .attr('class', (p) => 'lagrange-point lagrange-point-' + p.type)
-                                            .attr('r', 10000 / KM_TO_PX)
-                                            .attr('cx', (p) => p.x)
-                                            .attr('cy', (p) => p.y)
-                            );
+    this.translate.get(points.map(p => p.type)).subscribe(translations => {
+      this.groupZoomSelection.selectAll('.lagrange-point').remove();
+      this.groupZoomSelection.selectAll('.lagrange-point')
+        .data(points, d => d.type)
+        .join(
+          enter => {
+            const g = enter.append('g')
+              .attr('class', p => 'lagrange-point lagrange-point-' + p.type);
+            g.append('circle')
+              .attr('class', 'lagrange-point-inner')
+              .attr('r', LAGRANGE_POINTS_WIDTH / this.transform.k)
+              .attr('cx', p => p.x)
+              .attr('cy', p => p.y);
+            g.append('circle')
+              .attr('class', 'lagrange-point-outer')
+              .attr('r', Math.floor(LAGRANGE_POINTS_WIDTH / 2) / this.transform.k)
+              .attr('cx', p => p.x)
+              .attr('cy', p => p.y);
+            g.append('title').html(p => translations[p.type]);
+          }
+        );
+    });
   }
 
   private initOrbits(): void {
