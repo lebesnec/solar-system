@@ -244,12 +244,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initLagrangePoints(): void {
-    const points = this.sceneService.getEarthLagrangePoints();
-
-    this.translate.get(points.map(p => p.type)).subscribe(translations => {
+    this.translate.get(EARTH.lagrangePoints.map(p => 'Sun–Earth Lagrange point ' + p.type)).subscribe(translations => {
       this.groupZoomSelection.selectAll('.lagrange-point').remove();
       this.groupZoomSelection.selectAll('.lagrange-point')
-        .data(points, d => d.type)
+        .data(EARTH.lagrangePoints, d => d.type)
         .join(
           enter => {
             const g = enter.append('g').attr('class', p => 'lagrange-point lagrange-point-' + p.type);
@@ -258,7 +256,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
               .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
             g.append('path')
               .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
-            g.append('title').html(p => translations[p.type]);
+            g.append('title').html(p => translations['Sun–Earth Lagrange point ' + p.type]);
           }
         );
     });

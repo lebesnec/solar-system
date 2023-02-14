@@ -61,17 +61,17 @@ mat-expansion-panel {
   color: white;
 }
 
-.dwarf-planet-grid {
+.lagrange-points-grid {
   padding-bottom: 20px;
 }
 
-:host ::ng-deep .celestial-body .mat-grid-tile-content {
+:host ::ng-deep mat-grid-tile .mat-grid-tile-content {
   justify-content: flex-start;
   grid-gap: 20px;
   padding-left: 20px;
 }
 
-.celestial-body {
+mat-grid-tile {
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: hsla(0, 0%, 100%, .2);
   color: white;
@@ -82,28 +82,35 @@ mat-expansion-panel {
     height: 25px;
   }
 }
-.celestial-body:hover {
+mat-grid-tile:hover {
   background: hsla(0, 0%, 100%, 0.3);
 }
 
-.celestial-body.star {
+mat-grid-tile.star {
   background: hsla(0, 0%, 100%, 0.4);
 }
-.celestial-body.star:hover {
+mat-grid-tile.star:hover {
   background: hsla(0, 0%, 100%, 0.45);
 }
 
-.celestial-body.satellite {
+mat-grid-tile.satellite {
   background: hsla(0, 0%, 100%, .05);
 }
-.celestial-body.satellite:hover {
+mat-grid-tile.satellite:hover {
+  background: hsla(0, 0%, 100%, 0.25);
+}
+
+mat-grid-tile.lagrange-point {
+  background: hsla(0, 0%, 100%, .06);
+}
+mat-grid-tile.lagrange-point:hover {
   background: hsla(0, 0%, 100%, 0.25);
 }
 
 // mobile
 @media only screen and (max-width: 800px) {
 
-  :host ::ng-deep .celestial-body .mat-grid-tile-content {
+  :host ::ng-deep mat-grid-tile .mat-grid-tile-content {
     grid-gap: 10px;
     padding-left: 10px;
   }

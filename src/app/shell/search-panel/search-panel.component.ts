@@ -1,10 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
 import {HAS_SYMBOL, INNER_PLANETS, OUTER_PLANETS, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
-import {CelestialBody} from '../../scene/scene.model';
+import {CelestialBody, LagrangePoint} from '../../scene/scene.model';
 import {SearchPanelService} from './search-panel.service';
 import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
-import {MOON} from '../../scene/data/Earth.data';
+import {EARTH, MOON} from '../../scene/data/Earth.data';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
@@ -27,6 +27,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   public readonly INNER_PLANETS = INNER_PLANETS;
   public readonly OUTER_PLANETS = OUTER_PLANETS;
   public readonly DWARF_PLANETS = DWARF_PLANETS;
+  public readonly EARTH = EARTH;
   public readonly JUPITER = JUPITER;
   public readonly MOON = MOON;
   public readonly GANYMEDE = GANYMEDE;
@@ -57,6 +58,10 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   public onBodySelected(body: CelestialBody): void {
     this.searchService.onBodySelected.next(body);
+  }
+
+  public onLagrangePointSelected(point: LagrangePoint): void {
+    // this.searchService.onBodySelected.next(body);
   }
 
 }

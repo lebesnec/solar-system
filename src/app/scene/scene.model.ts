@@ -46,6 +46,7 @@ export interface CelestialBody {
   type: CelestialBodyType;
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
+  lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ]; // with the sun as the 2nd body
   unknowData?: {
     speed?: boolean;
     mass?: boolean;

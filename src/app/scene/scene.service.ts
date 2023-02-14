@@ -30,6 +30,8 @@ export class SceneService {
         body.trueAnomaly = body.meanAnomaly; // TODO
         body.position = this.getPositionForTrueAnomaly(body, body.trueAnomaly);
       });
+
+    EARTH.lagrangePoints = this.getEarthLagrangePoints();
   }
 
   /**
@@ -99,7 +101,7 @@ export class SceneService {
    * https://en.wikipedia.org/wiki/Lagrange_point#Physical_and_mathematical_details
    * @returns LagrangePoints the 5 Lagrange points for the earth and sun
    */
-  public getEarthLagrangePoints(): [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ] {
+  private getEarthLagrangePoints(): [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ] {
     // Pythagore give the earth-sun distance
     const distance = Math.sqrt((EARTH.position.x ** 2) + (EARTH.position.y ** 2));
 
