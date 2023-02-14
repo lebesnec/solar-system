@@ -32,7 +32,7 @@ const RETICULE_SPACING = 300; // px
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
 
-const LAGRANGE_POINTS_WIDTH = 4; // px
+const LAGRANGE_POINTS_WIDTH = 6; // px
 
 const SYMBOL_SIZE = 18; // px
 const LABEL_SPACING = 15;
@@ -252,18 +252,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
         .data(points, d => d.type)
         .join(
           enter => {
-            const g = enter.append('g')
-              .attr('class', p => 'lagrange-point lagrange-point-' + p.type);
-            g.append('circle')
-              .attr('class', 'lagrange-point-inner')
-              .attr('r', LAGRANGE_POINTS_WIDTH / this.transform.k)
-              .attr('cx', p => p.x)
-              .attr('cy', p => p.y);
-            g.append('circle')
-              .attr('class', 'lagrange-point-outer')
-              .attr('r', Math.floor(LAGRANGE_POINTS_WIDTH / 2) / this.transform.k)
-              .attr('cx', p => p.x)
-              .attr('cy', p => p.y);
+            const g = enter.append('g').attr('class', p => 'lagrange-point lagrange-point-' + p.type);
+            const halfWidth = LAGRANGE_POINTS_WIDTH / (2 * this.transform.k);
+            g.append('path')
+              .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
+            g.append('path')
+              .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
             g.append('title').html(p => translations[p.type]);
           }
         );

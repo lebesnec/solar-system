@@ -190,17 +190,14 @@
 
   .lagrange-point {
     pointer-events: bounding-box;
-    .lagrange-point-inner, .lagrange-point-outer {
+    path {
       vector-effect: non-scaling-stroke;
       stroke-width: 1;
-      stroke: rgb(255, 255, 255);
-      fill: none;
+      stroke: rgba(255, 255, 255, 0.68);
     }
   }
-  .lagrange-point:hover {
-    .lagrange-point-inner, .lagrange-point-outer {
-      stroke: mat.get-color-from-palette($solar-system-primary);
-    }
+  .lagrange-point:hover path {
+    stroke: mat.get-color-from-palette($solar-system-primary);
   }
 
   .hidden {
