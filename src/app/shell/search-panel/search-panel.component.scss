@@ -121,3 +121,8 @@ mat-grid-tile.lagrange-point:hover {
 
 }
 
+// https://github.com/angular/components/issues/11765#issuecomment-937377036
+::ng-deep .ng-animating mat-accordion mat-expansion-panel div.mat-expansion-panel-content {
+  height: 0px;
+  visibility: hidden;
+}

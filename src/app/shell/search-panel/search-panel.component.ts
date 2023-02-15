@@ -7,6 +7,7 @@ import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
 import {EARTH, MOON} from '../../scene/data/Earth.data';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-panel',
@@ -18,6 +19,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   @Input() public search = '';
 
   public searchResult: CelestialBody[] | null = null;
+  public searchResultLagrangePoints: LagrangePoint[] | null = null;
 
   public get nbCol(): number {
     return window.innerWidth <= 600 ? 2 : 4;
@@ -37,7 +39,8 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   private searchChanged: Subject<void> = new Subject<void>();
 
   constructor(
-    private searchService: SearchPanelService
+    private searchService: SearchPanelService,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit(): void {
@@ -45,7 +48,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
       if (this.search === '') {
         this.searchResult = null;
       } else {
-        this.searchResult = this.searchService.filter(SOLAR_SYSTEM, [ 'id' ], this.search);
+        this.onSearchChange();
       }
     });
   }
@@ -62,6 +65,18 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   public onLagrangePointSelected(point: LagrangePoint): void {
     this.searchService.onLagrangePointSelected.next(point);
+  }
+
+  private onSearchChange(): void {
+    this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe(translations => {
+      const data = SOLAR_SYSTEM.map(body => ({ body, translation: translations[body.id] }));
+      this.searchResult = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.body);
+    });
+
+    this.translate.get(EARTH.lagrangePoints.map(p => 'Sun–Earth Lagrange point ' + p.type)).subscribe(translations => {
+      const data = EARTH.lagrangePoints.map(point => ({ point, translation: translations['Sun–Earth Lagrange point ' + point.type] }));
+      this.searchResultLagrangePoints = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.point);
+    });
   }
 
 }

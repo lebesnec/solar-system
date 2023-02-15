@@ -1,11 +1,11 @@
 <mat-divider></mat-divider>
 
 <!-- Search result -->
-<mat-accordion multi *ngIf="searchResult && searchResult.length > 0">
+<mat-accordion multi *ngIf="searchResult && (searchResult.length + searchResultLagrangePoints.length) > 0">
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ searchResult.length | i18nPlural: { '=1': 'NB result', 'other': 'NB results' } | translate: { NB: searchResult.length } }}
+        {{ (searchResult.length + searchResultLagrangePoints.length) | i18nPlural: { '=1': 'NB result', 'other': 'NB results' } | translate: { NB: (searchResult.length + searchResultLagrangePoints.length) } }}
       </mat-panel-title>
     </mat-expansion-panel-header>
 
@@ -13,6 +13,9 @@
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
         <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let point of searchResultLagrangePoints" class="lagrange-point" (click)="onLagrangePointSelected(point)">
+        <span class="name">{{ 'Sun–Earth ' + point.type | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
@@ -64,7 +67,7 @@
   </mat-expansion-panel>
 
   <!-- Outer planets -->
-  <mat-expansion-panel *ngFor="let planet of OUTER_PLANETS" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
+  <mat-expansion-panel *ngFor="let planet of OUTER_PLANETS" class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id | translate }}</mat-panel-title>
       <mat-panel-description *ngIf="planet.satellites.length">
