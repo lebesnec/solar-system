@@ -28,7 +28,7 @@
         </a>
       </td>
       <td>
-        <ng-template [ngIf]="body.unknowData?.mass" [ngIfElse]="valueMass">
+        <ng-template [ngIf]="body.unknownData?.mass" [ngIfElse]="valueMass">
           {{ 'unknown' | translate: { suffix: 'e'} }}
         </ng-template>
         <ng-template #valueMass>
@@ -48,7 +48,7 @@
         </a>
       </td>
       <td>
-        <ng-template [ngIf]="body.unknowData?.radius" [ngIfElse]="valueRadius">
+        <ng-template [ngIf]="body.unknownData?.radius" [ngIfElse]="valueRadius">
           {{ 'unknown' | translate: { suffix: ''} }}
         </ng-template>
         <ng-template #valueRadius>
@@ -69,7 +69,7 @@
           </a>
         </td>
         <td>
-          {{ body.unknowData?.meanAnomaly ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.meanAnomaly | number: '1.0-0' : lang }) }}
+          {{ body.unknownData?.meanAnomaly ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.meanAnomaly | number: '1.0-0' : lang }) }}
         </td>
       </tr>
       <tr>
@@ -79,7 +79,7 @@
           </a>
         </td>
         <td>
-          {{ body.unknowData?.eccentricity ? ('unknown' | translate: { suffix: 'e'}) : (body.eccentricity | number: '1.1-10' : lang) }}
+          {{ body.unknownData?.eccentricity ? ('unknown' | translate: { suffix: 'e'}) : (body.eccentricity | number: '1.1-10' : lang) }}
         </td>
       </tr>
       <tr>
@@ -89,7 +89,7 @@
           </a>
         </td>
         <td>
-          <ng-template [ngIf]="body.unknowData?.semiMajorAxis" [ngIfElse]="valueAxis">
+          <ng-template [ngIf]="body.unknownData?.semiMajorAxis" [ngIfElse]="valueAxis">
             {{ 'unknown' | translate: { suffix: ''} }}
           </ng-template>
           <ng-template #valueAxis>
@@ -107,7 +107,7 @@
           <a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a>
         </td>
         <td>
-          <ng-template [ngIf]="body.unknowData?.speed" [ngIfElse]="valueSpeed">
+          <ng-template [ngIf]="body.unknownData?.speed" [ngIfElse]="valueSpeed">
             {{ 'unknown' | translate: { suffix: 'e'} }}
           </ng-template>
           <ng-template #valueSpeed>
@@ -127,7 +127,7 @@
           </a>
         </td>
         <td>
-          {{ body.unknowData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
+          {{ body.unknownData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
         </td>
       </tr>
       <tr *ngIf="body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET">

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CelestialBodyType, CelestialBody, DEG_TO_RAD, OrbitPoint, Point, LagrangePoint} from './scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';

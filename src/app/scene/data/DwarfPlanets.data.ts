@@ -175,7 +175,7 @@ export const S_2015_1: CelestialBody = {
   type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
-  unknowData: {
+  unknownData: {
     mass: true,
     eccentricity: true,
     meanAnomaly: true,
@@ -304,7 +304,7 @@ export const WEYWOT: CelestialBody = {
   type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
-  unknowData: {
+  unknownData: {
     meanAnomaly: true
   }
 };
@@ -342,7 +342,7 @@ export const XIANGLIU: CelestialBody = {
   type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null,
-  unknowData: {
+  unknownData: {
     mass: true,
     meanAnomaly: true
   }

@@ -47,7 +47,7 @@ export interface CelestialBody {
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
   lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ]; // with the sun as the 2nd body
-  unknowData?: {
+  unknownData?: {
     speed?: boolean;
     mass?: boolean;
     radius?: boolean;
@@ -94,4 +94,4 @@ export const KG_TO_POUND = 2.20462;
 /**
  * Gravitational constant in m^3.kg^−1.s^−2
  */
-export const G = 6.6743e-11;
+// export const G = 6.6743e-11;
