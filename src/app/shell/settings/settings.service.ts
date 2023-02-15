@@ -4,7 +4,7 @@ import {Meta, Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {DOCUMENT} from '@angular/common';
 
-export enum ORBITS_SETTING {
+export enum OrbitsSetting {
   ALL = 'all',
   PLANET = 'planet',
   NONE = 'none'
@@ -38,11 +38,11 @@ export class SettingsService {
     localStorage.setItem('reticule', value ? 'true' : 'false');
   }
 
-  public get orbits(): ORBITS_SETTING {
+  public get orbits(): OrbitsSetting {
     const val = localStorage.getItem('orbits');
-    return val ? val as ORBITS_SETTING : ORBITS_SETTING.ALL;
+    return val ? val as OrbitsSetting : OrbitsSetting.ALL;
   }
-  public set orbits(value: ORBITS_SETTING) {
+  public set orbits(value: OrbitsSetting) {
     localStorage.setItem('orbits', value);
   }
 

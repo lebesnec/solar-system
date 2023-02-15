@@ -1,11 +1,11 @@
 <mat-divider></mat-divider>
 
 <!-- Search result -->
-<mat-accordion multi *ngIf="searchResult && searchResult.length > 0">
+<mat-accordion multi *ngIf="searchResult && (searchResult.length + searchResultLagrangePoints.length) > 0">
   <mat-expansion-panel expanded class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ searchResult.length | i18nPlural: { '=1': 'NB result', 'other': 'NB results' } | translate: { NB: searchResult.length } }}
+        {{ (searchResult.length + searchResultLagrangePoints.length) | i18nPlural: { '=1': 'NB result', 'other': 'NB results' } | translate: { NB: (searchResult.length + searchResultLagrangePoints.length) } }}
       </mat-panel-title>
     </mat-expansion-panel-header>
 
@@ -13,6 +13,9 @@
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
         <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let point of searchResultLagrangePoints" class="lagrange-point" (click)="onLagrangePointSelected(point)">
+        <span class="name">{{ 'Sun–Earth ' + point.type | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
@@ -43,7 +46,7 @@
     </mat-expansion-panel-header>
 
     <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
-      <mat-grid-tile [class]="'celestial-body ' + SUN.type" (click)="onBodySelected(SUN)">
+      <mat-grid-tile [class]="SUN.type" (click)="onBodySelected(SUN)">
         <img *ngIf="HAS_SYMBOL.includes(SUN)" [src]="'assets/symbols/' + SUN.id + '.svg'" [alt]="SUN.id | translate">
         <span class="name">{{ SUN.id | translate }}</span>
       </mat-grid-tile>
@@ -51,11 +54,11 @@
 
       <ng-container *ngFor="let planet of INNER_PLANETS">
         <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
-          <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
+          <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
             <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
             <span class="name">{{ planet.id | translate }}</span>
           </mat-grid-tile>
-          <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
+          <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="moon.type" (click)="onBodySelected(moon)">
             <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
             <span class="name">{{ moon.id | translate }}</span>
           </mat-grid-tile>
@@ -64,7 +67,7 @@
   </mat-expansion-panel>
 
   <!-- Outer planets -->
-  <mat-expansion-panel *ngFor="let planet of OUTER_PLANETS" [expanded]="planet.satellites.length <= 2" class="mat-elevation-z0">
+  <mat-expansion-panel *ngFor="let planet of OUTER_PLANETS" class="mat-elevation-z0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ planet.id | translate }}</mat-panel-title>
       <mat-panel-description *ngIf="planet.satellites.length">
@@ -73,11 +76,11 @@
     </mat-expansion-panel-header>
 
     <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
-      <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
+      <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
         <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
         <span class="name">{{ planet.id | translate }}</span>
       </mat-grid-tile>
-      <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
+      <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="moon.type" (click)="onBodySelected(moon)">
         <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
         <span class="name">{{ moon.id | translate }}</span>
       </mat-grid-tile>
@@ -94,19 +97,34 @@
     </mat-expansion-panel-header>
 
     <ng-template ngFor let-planet [ngForOf]="DWARF_PLANETS">
-      <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px" class="dwarf-planet-grid">
+      <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
         <!-- The dwarf planet -->
-        <mat-grid-tile [class]="'celestial-body ' + planet.type" (click)="onBodySelected(planet)">
+        <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
           <img *ngIf="HAS_SYMBOL.includes(planet)" [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
           <span class="name">{{ planet.id | translate }}</span>
         </mat-grid-tile>
         <!-- The dwarf planet moon's -->
-        <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="'celestial-body ' + moon.type" (click)="onBodySelected(moon)">
+        <mat-grid-tile *ngFor="let moon of planet.satellites" [class]="moon.type" (click)="onBodySelected(moon)">
           <img *ngIf="HAS_SYMBOL.includes(moon)" [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
           <span class="name">{{ moon.id | translate }}</span>
         </mat-grid-tile>
       </mat-grid-list>
     </ng-template>
-
   </mat-expansion-panel>
+
+  <!-- Lagrange points -->
+  <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'Lagrange points' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px" class="lagrange-points-grid">
+      <ng-template ngFor let-point [ngForOf]="EARTH.lagrangePoints">
+        <mat-grid-tile (click)="onLagrangePointSelected(point)" class="lagrange-point">
+          <span class="name">{{ 'Sun–Earth ' + point.type | translate }}</span>
+        </mat-grid-tile>
+      </ng-template>
+    </mat-grid-list>
+  </mat-expansion-panel>
+
 </mat-accordion>

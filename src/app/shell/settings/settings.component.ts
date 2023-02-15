@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ORBITS_SETTING, SettingsService} from './settings.service';
+import {OrbitsSetting, SettingsService} from './settings.service';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
 
 @Component({
@@ -10,7 +10,7 @@ import {AVAILABLE_LANGUAGES} from '../../app.component';
 export class SettingsComponent {
 
   public AVAILABLE_LANGUAGES = AVAILABLE_LANGUAGES;
-  public ORBITS_SETTING = ORBITS_SETTING;
+  public OrbitsSetting = OrbitsSetting;
 
   public get language(): string {
     return this.settingsService.language;
@@ -33,10 +33,10 @@ export class SettingsComponent {
     this.settingsService.reticule = value;
   }
 
-  public get orbits(): ORBITS_SETTING {
+  public get orbits(): OrbitsSetting {
     return this.settingsService.orbits;
   }
-  public set orbits(value: ORBITS_SETTING) {
+  public set orbits(value: OrbitsSetting) {
     this.settingsService.orbits = value;
   }
 

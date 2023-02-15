@@ -25,9 +25,9 @@
 <h3>{{ 'Orbits' | translate }}</h3>
 
 <mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
-  <mat-button-toggle [value]="ORBITS_SETTING.ALL">{{ 'All' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="ORBITS_SETTING.PLANET">{{ 'Planets only' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="ORBITS_SETTING.NONE">{{ 'Off' | translate: { suffix: 'es'} }}</mat-button-toggle>
+  <mat-button-toggle [value]="OrbitsSetting.ALL">{{ 'All' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="OrbitsSetting.PLANET">{{ 'Planets only' | translate }}</mat-button-toggle>
+  <mat-button-toggle [value]="OrbitsSetting.NONE">{{ 'Off' | translate: { suffix: 'es'} }}</mat-button-toggle>
 </mat-button-toggle-group>
 
 <h3>{{ 'Labels' | translate }}</h3>

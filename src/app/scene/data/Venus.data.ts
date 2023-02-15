@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const VENUS: CelestialBody = {
   id: 'venus',
@@ -14,7 +14,7 @@ export const VENUS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 50.115,
   longitudeOfAscendingNode: 76.680,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [],
   orbitBody: null
 };

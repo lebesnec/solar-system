@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const MERCURY: CelestialBody = {
   id: 'mercury',
@@ -14,7 +14,7 @@ export const MERCURY: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 174.796,
   longitudeOfAscendingNode: 48.331,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [],
   orbitBody: null
 };

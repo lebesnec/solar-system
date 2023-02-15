@@ -43,6 +43,9 @@ export class ShellComponent implements OnInit {
     this.searchPanelService.onBodySelected.subscribe(() => {
       this.closeSearchPanel();
     });
+    this.searchPanelService.onLagrangePointSelected.subscribe(() => {
+      this.closeSearchPanel();
+    });
   }
 
   public onLogoClick(): void {

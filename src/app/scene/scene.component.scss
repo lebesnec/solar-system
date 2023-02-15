@@ -188,6 +188,18 @@
     stroke-width: 1;
   }
 
+  .lagrange-point {
+    pointer-events: bounding-box;
+    path {
+      vector-effect: non-scaling-stroke;
+      stroke-width: 1;
+      stroke: rgba(255, 255, 255, 0.68);
+    }
+  }
+  .lagrange-point:hover path {
+    stroke: mat.get-color-from-palette($solar-system-primary);
+  }
+
   .hidden {
     display: none;
   }
