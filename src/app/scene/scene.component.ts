@@ -77,7 +77,7 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
-  public ORBITS_SETTING = OrbitsSetting;
+  public OrbitsSetting = OrbitsSetting;
 
   public get scaleSetting(): boolean {
     return this.settingsService.scale;
