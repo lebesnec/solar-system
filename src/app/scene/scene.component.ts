@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CelestialBodyType, CelestialBody, DEG_TO_RAD, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody, DEG_TO_RAD, OrbitPoint, Point, LagrangePoint} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -122,15 +122,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
   ) { }
 
   public ngOnInit(): void {
-    this.searchPanelService.onBodySelected.subscribe((body) => {
+    this.searchPanelService.onBodySelected.subscribe(body => {
       if (body) {
-        this.zoomTo(body, true).subscribe({
+        this.zoomToCelestialBody(body, true).subscribe({
           complete: () => this.select(body)
         });
       } else {
         this.deselectAll();
         this.deZoom();
       }
+    });
+    this.searchPanelService.onLagrangePointSelected.subscribe(point => {
+      this.zoomToLagrangePoint(point);
     });
 
     fromEvent(window, 'resize').pipe(throttleTime(300, undefined, { trailing: true })).subscribe(() => {
@@ -379,7 +382,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                       })
                                                       .on('click', (event, d) => {
                                                         this.select(d.body);
-                                                        this.zoomTo(d.body, false);
+                                                        this.zoomToCelestialBody(d.body, false);
                                                         event.stopPropagation();
                                                       })
                                     );
@@ -489,18 +492,28 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private zoomTo(body: CelestialBody, forceZoom: boolean): Observable<unknown> {
+  private zoomToCelestialBody(body: CelestialBody, forceZoom: boolean): Observable<unknown> {
     const bbox = this.getBoundingBox(body);
     let scale = this.getScale(body);
     // do not dezoom when clicking on a body, only when clicking on a search result :
     if (!forceZoom && scale < this.transform.k) {
       scale = this.transform.k;
     }
+
+    return this.zoomTo(bbox, scale);
+  }
+
+  private zoomToLagrangePoint(point: LagrangePoint): Observable<unknown> {
+    const element: any = select('.lagrange-point-' + point.type).node();
+    return this.zoomTo(element.getBBox(), ZOOM_EXTENT[1]);
+  }
+
+  private zoomTo(bbox: DOMRect, scale: number): Observable<unknown> {
     const zoomTo = zoomIdentity.translate(
-                                this.center.x + ((-bbox.x - bbox.width / 2) * scale),
-                                this.center.y + ((-bbox.y - bbox.height / 2) * scale)
-                              )
-                              .scale(scale);
+                                  this.center.x + ((-bbox.x - bbox.width / 2) * scale),
+                                  this.center.y + ((-bbox.y - bbox.height / 2) * scale)
+                                )
+                                .scale(scale);
 
     const transition = this.svgSelection.transition()
                                         .duration(ZOOM_TRANSITION_MS)
@@ -509,8 +522,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * getBBox() does not take into account rotation of the element, so we have to wrapp
-   * the element into a group, get the bbox, and remove the group.
+   * SVG insanity: getBBox() does not take into account rotation of the element,
+   * so we have to wrap the element into a group, get the bbox, and remove the group.
    */
   private getBoundingBox(body: CelestialBody): DOMRect {
     const element: any = select('#' + body.id).node();

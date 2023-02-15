@@ -45,7 +45,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
       if (this.search === '') {
         this.searchResult = null;
       } else {
-        this.searchResult = this.searchService.filter(SOLAR_SYSTEM, ['id'], this.search);
+        this.searchResult = this.searchService.filter(SOLAR_SYSTEM, [ 'id' ], this.search);
       }
     });
   }
@@ -61,7 +61,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   }
 
   public onLagrangePointSelected(point: LagrangePoint): void {
-    // this.searchService.onBodySelected.next(body);
+    this.searchService.onLagrangePointSelected.next(point);
   }
 
 }
