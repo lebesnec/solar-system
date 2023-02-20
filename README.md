@@ -6,8 +6,8 @@
 
 An interactive map of the solar system.
 
-- main (production) : https://lebesnec.github.io/solar-system
-- develop (CI) : https://lebesnec.github.io/solar-system-develop
+- main (production): https://lebesnec.github.io/solar-system
+- develop (CI): https://lebesnec.github.io/solar-system-develop
 
 ## Get started
 
@@ -16,11 +16,9 @@ An interactive map of the solar system.
 
 ## Contact
 
-Mail: christophe.lebesnerais.pro@gmail.com
-
-GitHub: https://github.com/lebesnec/solar-system/discussions
-
-Twitter: https://twitter.com/celestial_map
+- Mail: christophe.lebesnerais.pro@gmail.com
+- GitHub: https://github.com/lebesnec/solar-system/discussions
+- Twitter: https://twitter.com/celestial_map
 
 ## Author
 
