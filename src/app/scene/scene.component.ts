@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint} from './scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -23,6 +23,7 @@ import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
+import {ActivatedRoute, Params} from '@angular/router';
 
 const TOOLBAR_HEIGHT = 65;
 
@@ -113,12 +114,12 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private translate: TranslateService,
     private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService,
     private settingsService: SettingsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private route: ActivatedRoute
   ) { }
 
   public ngOnInit(): void {
@@ -156,14 +157,42 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initLagrangePoints();
 
     this.translateService.onLangChange.subscribe(() => {
-      this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
-        this.groupForegroundSelection.selectAll('.group-label').remove();
-        this.bodiesLabels = bodiesLabels;
-        this.initLabels();
-      });
-      this.initScale();
-      this.initLagrangePoints();
+      this.onLangChange();
     });
+
+    this.route.params.subscribe(params => {
+      if (params.id) {
+        this.handleParamId(params.id);
+      }
+    });
+  }
+
+  private onLangChange(): void {
+    this.translateService.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
+      this.groupForegroundSelection.selectAll('.group-label').remove();
+      this.bodiesLabels = bodiesLabels;
+      this.initLabels();
+    });
+
+    this.initScale();
+    this.initLagrangePoints();
+  }
+
+  private handleParamId(id: string): void {
+    const body = SOLAR_SYSTEM.find(b => b.id === id);
+
+    if (body) {
+      this.zoomToCelestialBody(body, true).subscribe({
+        complete: () => this.select(body)
+      });
+    } else {
+      const point = EARTH.lagrangePoints.find(p => p.type === id);
+      if (point) {
+        this.translateService.get(LAGRANGE_POINT_I18N_KEY + point.type).subscribe(translation => {
+          this.zoomToLagrangePoint(point);
+        });
+      }
+    }
   }
 
   private onWindowResize(): void {
@@ -247,7 +276,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   private initLagrangePoints(): void {
-    this.translate.get(EARTH.lagrangePoints.map(p => 'Sun–Earth Lagrange point ' + p.type)).subscribe(translations => {
+    this.translateService.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
       this.groupZoomSelection.selectAll('.lagrange-point').remove();
       this.groupZoomSelection.selectAll('.lagrange-point')
         .data(EARTH.lagrangePoints, d => d.type)
@@ -259,7 +288,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
               .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
             g.append('path')
               .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
-            g.append('title').html(p => translations['Sun–Earth Lagrange point ' + p.type]);
+            g.append('title').html(p => translations[LAGRANGE_POINT_I18N_KEY + p.type]);
           }
         );
     });
@@ -453,13 +482,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
     const translationParams = {
-      NB_AU: formatNumber(scale.max, this.translate.currentLang, '1.0-4'),
-      NB_KM: formatNumber(scaleSizeKm, this.translate.currentLang, '1.0-4')
+      NB_AU: formatNumber(scale.max, this.translateService.currentLang, '1.0-4'),
+      NB_KM: formatNumber(scaleSizeKm, this.translateService.currentLang, '1.0-4')
     };
     const translationsKeys = [
       SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_KEY
     ];
-    this.translate.get(translationsKeys, translationParams).subscribe((translations) => {
+    this.translateService.get(translationsKeys, translationParams).subscribe((translations) => {
       // text
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
