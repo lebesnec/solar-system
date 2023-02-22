@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
 import {HAS_SYMBOL, INNER_PLANETS, OUTER_PLANETS, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
-import {CelestialBody, LagrangePoint} from '../../scene/scene.model';
+import {CelestialBody, LAGRANGE_POINT_I18N_KEY, LagrangePoint} from '../../scene/scene.model';
 import {SearchPanelService} from './search-panel.service';
 import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
 import {EARTH, MOON} from '../../scene/data/Earth.data';
@@ -73,8 +73,8 @@ export class SearchPanelComponent implements OnInit, OnChanges {
       this.searchResult = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.body);
     });
 
-    this.translate.get(EARTH.lagrangePoints.map(p => 'Sun–Earth Lagrange point ' + p.type)).subscribe(translations => {
-      const data = EARTH.lagrangePoints.map(point => ({ point, translation: translations['Sun–Earth Lagrange point ' + point.type] }));
+    this.translate.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
+      const data = EARTH.lagrangePoints.map(point => ({ point, translation: translations[LAGRANGE_POINT_I18N_KEY + point.type] }));
       this.searchResultLagrangePoints = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.point);
     });
   }

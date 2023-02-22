@@ -71,6 +71,8 @@ export interface LagrangePoint extends Point {
   type: LagrangePointType;
 }
 
+export const LAGRANGE_POINT_I18N_KEY = 'Sun–Earth Lagrange point ';
+
 /**
  * degrees to radian
  */
