@@ -633,6 +633,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.celestialBodyDialogRef = null;
       });
     }
+
+    history.pushState({}, '', '/' + body.id);
   }
 
 }
