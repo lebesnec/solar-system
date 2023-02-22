@@ -634,7 +634,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       });
     }
 
-    history.pushState({}, '', '/' + body.id);
+    history.pushState({}, '', body.id);
   }
 
 }
