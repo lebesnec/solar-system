@@ -160,9 +160,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.onLangChange();
     });
 
-    this.route.params.subscribe(params => {
-      if (params.id) {
-        this.handleParamId(params.id);
+    this.route.queryParams.subscribe(params => {
+      if (params.goto) {
+        this.handleParamId(params.goto);
       }
     });
   }
@@ -634,7 +634,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
       });
     }
 
-    history.pushState({}, '', body.id);
+    // update the browser url:
+    const url = new URL(location.href);
+    url.searchParams.set('goto', body.id);
+    history.pushState(null, '', url);
   }
 
 }
