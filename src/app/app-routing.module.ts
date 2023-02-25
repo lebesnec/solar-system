@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {SceneComponent} from './scene/scene.component';
 
 const routes: Routes = [
-  { path: ':id', component: SceneComponent },
   { path: '**', component: SceneComponent }
 ];
 
