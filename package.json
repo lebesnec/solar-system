@@ -1,6 +1,6 @@
 {
   "name": "solar-system",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "private": false,
   "description": "An interactive map of the Solar System",
   "keywords": [
