@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CELESTIAL_BODY_TYPE, CelestialBody, OrbitPoint, Point} from './scene.model';
+import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -19,10 +19,11 @@ import {selectAll} from 'd3';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
-import {ORBITS_SETTING, SettingsService} from '../shell/settings/settings.service';
+import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service';
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
+import {ActivatedRoute, Params} from '@angular/router';
 
 const TOOLBAR_HEIGHT = 65;
 
@@ -31,6 +32,8 @@ const RETICULE_SPACING = 300; // px
 
 const ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD = 100000; // km
 const NB_POINTS_ORBIT = 180;
+
+const LAGRANGE_POINTS_WIDTH = 6; // px
 
 const SYMBOL_SIZE = 18; // px
 const LABEL_SPACING = 15;
@@ -75,7 +78,7 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
-  public ORBITS_SETTING = ORBITS_SETTING;
+  public OrbitsSetting = OrbitsSetting;
 
   public get scaleSetting(): boolean {
     return this.settingsService.scale;
@@ -83,7 +86,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   public get reticuleSetting(): boolean {
     return this.settingsService.reticule;
   }
-  public get orbitsSetting(): ORBITS_SETTING {
+  public get orbitsSetting(): OrbitsSetting {
     return this.settingsService.orbits;
   }
   public get labelsSetting(): boolean {
@@ -111,24 +114,27 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private translate: TranslateService,
     private dialog: MatDialog,
     private sceneService: SceneService,
     private searchPanelService: SearchPanelService,
     private settingsService: SettingsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private route: ActivatedRoute
   ) { }
 
   public ngOnInit(): void {
-    this.searchPanelService.onBodySelected.subscribe((body) => {
+    this.searchPanelService.onBodySelected.subscribe(body => {
       if (body) {
-        this.zoomTo(body, true).subscribe({
+        this.zoomToCelestialBody(body, true).subscribe({
           complete: () => this.select(body)
         });
       } else {
         this.deselectAll();
         this.deZoom();
       }
+    });
+    this.searchPanelService.onLagrangePointSelected.subscribe(point => {
+      this.zoomToLagrangePoint(point);
     });
 
     fromEvent(window, 'resize').pipe(throttleTime(300, undefined, { trailing: true })).subscribe(() => {
@@ -148,15 +154,45 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initOrbits();
     this.initCelestialBodies();
     this.initZoom();
+    this.initLagrangePoints();
 
     this.translateService.onLangChange.subscribe(() => {
-      this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
-        this.groupForegroundSelection.selectAll('.group-label').remove();
-        this.bodiesLabels = bodiesLabels;
-        this.initLabels();
-      });
-      this.initScale();
+      this.onLangChange();
     });
+
+    this.route.queryParams.subscribe(params => {
+      if (params.goto) {
+        this.handleParamId(params.goto);
+      }
+    });
+  }
+
+  private onLangChange(): void {
+    this.translateService.get(SOLAR_SYSTEM.map(b => b.id)).subscribe((bodiesLabels) => {
+      this.groupForegroundSelection.selectAll('.group-label').remove();
+      this.bodiesLabels = bodiesLabels;
+      this.initLabels();
+    });
+
+    this.initScale();
+    this.initLagrangePoints();
+  }
+
+  private handleParamId(id: string): void {
+    const body = SOLAR_SYSTEM.find(b => b.id === id);
+
+    if (body) {
+      this.zoomToCelestialBody(body, true).subscribe({
+        complete: () => this.select(body)
+      });
+    } else {
+      const point = EARTH.lagrangePoints.find(p => p.type === id);
+      if (point) {
+        this.translateService.get(LAGRANGE_POINT_I18N_KEY + point.type).subscribe(translation => {
+          this.zoomToLagrangePoint(point);
+        });
+      }
+    }
   }
 
   private onWindowResize(): void {
@@ -175,6 +211,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.initLabels();
       if (!isPan) {
         this.initScale();
+        this.initLagrangePoints();
       }
     });
     this.svgSelection.call(this.d3Zoom);
@@ -236,6 +273,25 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   event.stopPropagation();
                                                 })
                                 );
+  }
+
+  private initLagrangePoints(): void {
+    this.translateService.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
+      this.groupZoomSelection.selectAll('.lagrange-point').remove();
+      this.groupZoomSelection.selectAll('.lagrange-point')
+        .data(EARTH.lagrangePoints, d => d.type)
+        .join(
+          enter => {
+            const g = enter.append('g').attr('class', p => 'lagrange-point lagrange-point-' + p.type);
+            const halfWidth = LAGRANGE_POINTS_WIDTH / (2 * this.transform.k);
+            g.append('path')
+              .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
+            g.append('path')
+              .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
+            g.append('title').html(p => translations[LAGRANGE_POINT_I18N_KEY + p.type]);
+          }
+        );
+    });
   }
 
   private initOrbits(): void {
@@ -355,7 +411,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                       })
                                                       .on('click', (event, d) => {
                                                         this.select(d.body);
-                                                        this.zoomTo(d.body, false);
+                                                        this.zoomToCelestialBody(d.body, false);
                                                         event.stopPropagation();
                                                       })
                                     );
@@ -426,13 +482,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
     const translationParams = {
-      NB_AU: formatNumber(scale.max, this.translate.currentLang, '1.0-4'),
-      NB_KM: formatNumber(scaleSizeKm, this.translate.currentLang, '1.0-4')
+      NB_AU: formatNumber(scale.max, this.translateService.currentLang, '1.0-4'),
+      NB_KM: formatNumber(scaleSizeKm, this.translateService.currentLang, '1.0-4')
     };
     const translationsKeys = [
       SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_KEY
     ];
-    this.translate.get(translationsKeys, translationParams).subscribe((translations) => {
+    this.translateService.get(translationsKeys, translationParams).subscribe((translations) => {
       // text
       groupScaleSelection.append('text')
                             .text(translations[SCALE_TEXT_KEY])
@@ -465,18 +521,28 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private zoomTo(body: CelestialBody, forceZoom: boolean): Observable<unknown> {
+  private zoomToCelestialBody(body: CelestialBody, forceZoom: boolean): Observable<unknown> {
     const bbox = this.getBoundingBox(body);
     let scale = this.getScale(body);
     // do not dezoom when clicking on a body, only when clicking on a search result :
     if (!forceZoom && scale < this.transform.k) {
       scale = this.transform.k;
     }
+
+    return this.zoomTo(bbox, scale);
+  }
+
+  private zoomToLagrangePoint(point: LagrangePoint): Observable<unknown> {
+    const element: any = select('.lagrange-point-' + point.type).node();
+    return this.zoomTo(element.getBBox(), ZOOM_EXTENT[1]);
+  }
+
+  private zoomTo(bbox: DOMRect, scale: number): Observable<unknown> {
     const zoomTo = zoomIdentity.translate(
-                                this.center.x + ((-bbox.x - bbox.width / 2) * scale),
-                                this.center.y + ((-bbox.y - bbox.height / 2) * scale)
-                              )
-                              .scale(scale);
+                                  this.center.x + ((-bbox.x - bbox.width / 2) * scale),
+                                  this.center.y + ((-bbox.y - bbox.height / 2) * scale)
+                                )
+                                .scale(scale);
 
     const transition = this.svgSelection.transition()
                                         .duration(ZOOM_TRANSITION_MS)
@@ -485,8 +551,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * getBBox() does not take into account rotation of the element, so we have to wrapp
-   * the element into a group, get the bbox, and remove the group.
+   * SVG insanity: getBBox() does not take into account rotation of the element,
+   * so we have to wrap the element into a group, get the bbox, and remove the group.
    */
   private getBoundingBox(body: CelestialBody): DOMRect {
     const element: any = select('#' + body.id).node();
@@ -529,7 +595,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       case NEPTUNE:
         return 0.6;
       default:
-        if (body.type === CELESTIAL_BODY_TYPE.DWARF_PLANET) {
+        if (body.type === CelestialBodyType.DWARF_PLANET) {
           return max;
         } else {
           return this.getScale(body.orbitBody);
@@ -567,6 +633,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.celestialBodyDialogRef = null;
       });
     }
+
+    // update the browser url:
+    const url = new URL(location.href);
+    url.searchParams.set('goto', body.id);
+    history.pushState(null, '', url);
   }
 
 }

@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const PHOBOS: CelestialBody = {
   id: 'phobos',
@@ -13,7 +13,7 @@ export const PHOBOS: CelestialBody = {
   eccentricity: 0.0151,
   trueAnomaly: 0,
   meanAnomaly: 91.059,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -31,7 +31,7 @@ export const DEIMOS: CelestialBody = {
   eccentricity: 0.00033,
   trueAnomaly: 0,
   meanAnomaly: 325.329,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -50,7 +50,7 @@ export const MARS: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 19.412,
   longitudeOfAscendingNode: 49.558,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [ PHOBOS, DEIMOS ],
   orbitBody: null
 };

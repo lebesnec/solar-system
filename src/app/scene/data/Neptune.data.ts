@@ -1,4 +1,4 @@
-import {CELESTIAL_BODY_TYPE, CelestialBody} from '../scene.model';
+import {CelestialBodyType, CelestialBody} from '../scene.model';
 
 export const NAIAD: CelestialBody = {
   id: 'naiad',
@@ -12,7 +12,7 @@ export const NAIAD: CelestialBody = {
   eccentricity: 0.0047,
   trueAnomaly: 0,
   meanAnomaly: 334.9,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -29,7 +29,7 @@ export const THALASSA: CelestialBody = {
   eccentricity: 0.0018,
   trueAnomaly: 0,
   meanAnomaly: 193.6,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -46,7 +46,7 @@ export const DESPINA: CelestialBody = {
   eccentricity: 0.0004,
   trueAnomaly: 0,
   meanAnomaly: 319.6,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -63,7 +63,7 @@ export const GALATEA: CelestialBody = {
   eccentricity: 0.0001,
   trueAnomaly: 0,
   meanAnomaly: 187.1,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -80,7 +80,7 @@ export const LARISSA: CelestialBody = {
   eccentricity: 0.0012,
   trueAnomaly: 0,
   meanAnomaly: 34.9,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -97,7 +97,7 @@ export const HIPPOCAMP: CelestialBody = {
   eccentricity: 0.0005,
   trueAnomaly: 0,
   meanAnomaly: 0,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -114,7 +114,7 @@ export const PROTEUS: CelestialBody = {
   eccentricity: 0.0005,
   trueAnomaly: 0,
   meanAnomaly: 114.2,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -131,7 +131,7 @@ export const TRITON: CelestialBody = {
   eccentricity: 0.0000,
   trueAnomaly: 0,
   meanAnomaly: 264.8,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -148,7 +148,7 @@ export const NEREID: CelestialBody = {
   eccentricity: 0.7507,
   trueAnomaly: 0,
   meanAnomaly: 359.3,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -165,7 +165,7 @@ export const HALIMEDE: CelestialBody = {
   eccentricity: 0.2909,
   trueAnomaly: 0,
   meanAnomaly: 96.8,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -182,7 +182,7 @@ export const SAO: CelestialBody = {
   eccentricity: 0.2827,
   trueAnomaly: 0,
   meanAnomaly: 129.4,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -199,7 +199,7 @@ export const LAOMEDEIA: CelestialBody = {
   eccentricity: 0.4339,
   trueAnomaly: 0,
   meanAnomaly: 321.1,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -216,7 +216,7 @@ export const PSAMATHE: CelestialBody = {
   eccentricity: 0.4617,
   trueAnomaly: 0,
   meanAnomaly: 206.2,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -233,7 +233,7 @@ export const NESO: CelestialBody = {
   eccentricity: 0.4243,
   trueAnomaly: 0,
   meanAnomaly: 269.8,
-  type: CELESTIAL_BODY_TYPE.SATELLITE,
+  type: CelestialBodyType.SATELLITE,
   satellites: [],
   orbitBody: null
 };
@@ -252,7 +252,7 @@ export const NEPTUNE: CelestialBody = {
   trueAnomaly: 0,
   meanAnomaly: 256.228,
   longitudeOfAscendingNode: 131.783,
-  type: CELESTIAL_BODY_TYPE.PLANET,
+  type: CelestialBodyType.PLANET,
   satellites: [
     NAIAD,
     THALASSA,

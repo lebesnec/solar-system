@@ -14,7 +14,7 @@ export interface OrbitPoint extends Point {
   trueAnomaly: number;
 }
 
-export enum CELESTIAL_BODY_TYPE {
+export enum CelestialBodyType {
   STAR = 'star',
   PLANET = 'planet',
   SATELLITE = 'satellite',
@@ -43,10 +43,11 @@ export interface CelestialBody {
   trueAnomaly: number;
   meanAnomaly: number;
   longitudeOfAscendingNode?: number;
-  type: CELESTIAL_BODY_TYPE;
+  type: CelestialBodyType;
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
-  unknowData?: {
+  lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ]; // with the sun as the 2nd body
+  unknownData?: {
     speed?: boolean;
     mass?: boolean;
     radius?: boolean;
@@ -57,6 +58,20 @@ export interface CelestialBody {
     longitudeOfAscendingNode?: boolean;
   };
 }
+
+export enum LagrangePointType {
+  L1 = 'l1',
+  L2 = 'l2',
+  L3 = 'l3',
+  L4 = 'l4',
+  L5 = 'l5'
+}
+
+export interface LagrangePoint extends Point {
+  type: LagrangePointType;
+}
+
+export const LAGRANGE_POINT_I18N_KEY = 'Sun–Earth Lagrange point ';
 
 /**
  * degrees to radian
@@ -69,6 +84,16 @@ export const DEG_TO_RAD = Math.PI / 180;
 export const AU_TO_KM = 1.495978707e8;
 
 /**
+ * Kilometers to miles
+ */
+export const KM_TO_MILE = 0.621371;
+
+/**
+ * Kilograms to pounds
+ */
+export const KG_TO_POUND = 2.20462;
+
+/**
  * Gravitational constant in m^3.kg^−1.s^−2
  */
-export const G = 6.6743e-11;
+// export const G = 6.6743e-11;
