@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {TranslateService} from '@ngx-translate/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
 import {SettingsComponent} from './settings/settings.component';
 import {ContactComponent} from './contact/contact.component';
 import {AboutComponent} from './about/about.component';

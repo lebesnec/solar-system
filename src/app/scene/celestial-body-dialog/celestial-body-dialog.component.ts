@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
 import {CelestialBodyType, CelestialBody, KG_TO_POUND, KM_TO_MILE} from '../scene.model';
 import {HAS_SYMBOL, MISSING_PICTURES, SUN} from '../data/SolarSystem.data';
 import {TranslateService} from '@ngx-translate/core';

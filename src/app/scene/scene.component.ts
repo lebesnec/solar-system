@@ -17,7 +17,7 @@ import {URANUS} from './data/Uranus.data';
 import {NEPTUNE} from './data/Neptune.data';
 import {selectAll} from 'd3';
 import {TranslateService} from '@ngx-translate/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
 import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-body-dialog.component';
 import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service';
 import {from, fromEvent, Observable} from 'rxjs';
