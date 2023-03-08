@@ -145,7 +145,7 @@ export const THEMISTO: CelestialBody = {
   mass: 0.069e16,
   radius: 4.5,
   semiMajorAxis: 7405000,
-  eccentricity: 0.2514,
+  eccentricity: 0.2424,
   trueAnomaly: 0,
   meanAnomaly: 313.051,
   type: CelestialBodyType.SATELLITE,
@@ -1343,6 +1343,240 @@ export const SINOPE: CelestialBody = {
   orbitBody: null
 };
 
+export const S_2018_J_4: CelestialBody = {
+  id: 's_2018-j-4',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.00042e16,
+  radius: 1,
+  semiMajorAxis: 16328500,
+  eccentricity: 0.177,
+  trueAnomaly: 0,
+  meanAnomaly: 307.484673,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_3: CelestialBody = {
+  id: 's_2021-j-3',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.00042e16,
+  radius: 1,
+  semiMajorAxis: 20776700,
+  eccentricity: 0.239,
+  trueAnomaly: 0,
+  meanAnomaly: 64.69138,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2022_J_3: CelestialBody = {
+  id: 's_2022-j-3',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 20912400,
+  eccentricity: 0.272,
+  trueAnomaly: 0,
+  meanAnomaly: 77.88890,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_2: CelestialBody = {
+  id: 's_2021-j-2',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 20926600,
+  eccentricity: 0.242,
+  trueAnomaly: 0,
+  meanAnomaly: 320.08120,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_1: CelestialBody = {
+  id: 's_2021-j-1',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 20954700,
+  eccentricity: 0.228,
+  trueAnomaly: 0,
+  meanAnomaly: 312.94753,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2022_J_1: CelestialBody = {
+  id: 's_2022-j-1',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 22015500,
+  eccentricity: 0.191,
+  trueAnomaly: 0,
+  meanAnomaly: 330.01243,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2022_J_2: CelestialBody = {
+  id: 's_2022-j-2',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 22413200,
+  eccentricity: 0.182,
+  trueAnomaly: 0,
+  meanAnomaly: 257.85858,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2016_J_3: CelestialBody = {
+  id: 's_2016-j-3',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.00042e16,
+  radius: 1,
+  semiMajorAxis: 22719300,
+  eccentricity: 0.251,
+  trueAnomaly: 0,
+  meanAnomaly: 1.36683,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_6: CelestialBody = {
+  id: 's_2021-j-6',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 22870300,
+  eccentricity: 0.271,
+  trueAnomaly: 0,
+  meanAnomaly: 77.36574,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_4: CelestialBody = {
+  id: 's_2021-j-4',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 23019700,
+  eccentricity: 0.265,
+  trueAnomaly: 0,
+  meanAnomaly: 102.76481,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2016_J_4: CelestialBody = {
+  id: 's_2016-j-4',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 23113800,
+  eccentricity: 0.294,
+  trueAnomaly: 0,
+  meanAnomaly: 138.36439,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2018_J_3: CelestialBody = {
+  id: 's_2018-j-3',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.000052e16,
+  radius: 0.5,
+  semiMajorAxis: 23400300,
+  eccentricity: 0.268,
+  trueAnomaly: 0,
+  meanAnomaly: 16.59790,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_2021_J_5: CelestialBody = {
+  id: 's_2021-j-5',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.00042e16,
+  radius: 1,
+  semiMajorAxis: 23414600,
+  eccentricity: 0.272,
+  trueAnomaly: 0,
+  meanAnomaly: 329.67857,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const JUPITER: CelestialBody = {
   id: 'jupiter',
   position: {
@@ -1437,7 +1671,21 @@ export const JUPITER: CelestialBody = {
     AOEDE,
     S_2003_J_23,
     CALLIRRHOE,
-    SINOPE
+    SINOPE,
+    S_2018_J_4,
+    S_2021_J_3,
+    S_2022_J_3,
+    S_2021_J_2,
+    S_2021_J_1,
+    S_2022_J_1,
+    S_2022_J_2,
+    S_2016_J_3,
+    S_2021_J_6,
+    S_2021_J_4,
+    S_2016_J_4,
+    S_2018_J_3,
+    S_2021_J_5
+
   ],
   orbitBody: null
 };
