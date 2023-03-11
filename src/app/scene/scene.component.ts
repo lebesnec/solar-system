@@ -66,6 +66,7 @@ const SCALE_HEIGHT_SMALL_TICK = 6; // px
 const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
+
 const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
@@ -259,21 +260,40 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initCelestialBodies(): void {
     this.groupZoomSelection.selectAll('.celestial-body')
-                                .data(SOLAR_SYSTEM, (d) => d.id)
+                                .data(SOLAR_SYSTEM, d => d.id)
+                                .join(
+                                  enter => {
+                                    const g = enter.append('g').attr('class', body => 'celestial-body ' + body.type + ' ' + body.id);
+                                    g.append('circle')
+                                      .attr('id', body => body.id)
+                                      .attr('class', 'body')
+                                      .attr('r', body => body.radius / KM_TO_PX)
+                                      .attr('cx', body => body.position.x)
+                                      .attr('cy', body => body.position.y)
+                                      .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
+                                      .on('click', (event, d) => {
+                                        this.select(d);
+                                        event.stopPropagation();
+                                      });
+                                      return g;
+                                  }
+                                )
+                            .selectAll('.ring')
+                                .data(body => (body.rings ?? []).map(ring => ({ body, ring })), d => d.ring.id)
                                 .join(
                                   enter => enter.append('circle')
-                                                .attr('id', (body) => body.id)
-                                                .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-                                                .attr('r', (body) => body.radius / KM_TO_PX)
-                                                .attr('cx', (body) => body.position.x)
-                                                .attr('cy', (body) => body.position.y)
-                                                .attr('transform', (body) => this.getRotationForLongitudeOfAscendingNode(body))
+                                                .attr('id', d => d.ring.id)
+                                                .attr('class', 'ring')
+                                                .attr('stroke-width', d => Math.max(d.ring.width / KM_TO_PX, 1))
+                                                .attr('r', d => d.ring.radius / KM_TO_PX)
+                                                .attr('cx', d => d.body.position.x)
+                                                .attr('cy', d => d.body.position.y)
+                                                .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
                                                 .on('click', (event, d) => {
-                                                  this.select(d);
+                                                  this.select(d.body);
                                                   event.stopPropagation();
                                                 })
-                                );
-  }
+                                );  }
 
   private initLagrangePoints(): void {
     this.translateService.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
