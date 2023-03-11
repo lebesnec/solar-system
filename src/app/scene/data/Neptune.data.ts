@@ -269,6 +269,12 @@ export const NEPTUNE: CelestialBody = {
     PSAMATHE,
     NESO
   ],
+  rings: [
+    { id: 'galle', radius: 40900, width: 2000, depth: 0.15 },
+    { id: 'le_verrier', radius: 53200, width: 113, depth: 0.7 },
+    { id: 'lassell', radius: 53200, width: 4000, depth: 0.4 },
+    { id: 'adams', radius: 62932, width: 35, depth: 0.4 }
+  ],
   orbitBody: null
 };
 
