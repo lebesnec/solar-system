@@ -54,7 +54,7 @@
     fill: transparent;
   }
 
-  .celestial-body {
+  .celestial-body .body {
     vector-effect: non-scaling-stroke;
     stroke: rgb(90, 90, 90);
     stroke-width: 1;
@@ -62,78 +62,85 @@
     cursor: pointer;
   }
 
-  .celestial-body.satellite {
+  .celestial-body .ring {
+    vector-effect: non-scaling-stroke;
+    stroke: rgb(255, 0, 0);
+    fill: none;
+    cursor: pointer;
+  }
+
+  .celestial-body.satellite .body {
     stroke-width: 0;
     vector-effect: none;
     fill: rgb(101, 101, 101);
   }
 
-  .celestial-body.dwarf_planet {
+  .celestial-body.dwarf_planet .body {
     stroke-width: 0;
     vector-effect: none;
   }
 
-  .celestial-body.sun {
+  .celestial-body.sun .body {
     stroke: rgb(168, 160, 114);
     stroke-width: 1;
     fill: rgb(185, 167, 0);
   }
 
-  .celestial-body.venus {
+  .celestial-body.venus .body {
     stroke: #ffe1ad;
     stroke-width: 1;
     fill: #f1e5c8;
   }
 
-  .celestial-body.earth {
+  .celestial-body.earth .body {
     stroke: #213e70;
     stroke-width: 1;
     fill: #3B74D6;
   }
 
-  .celestial-body.mars {
+  .celestial-body.mars .body {
     stroke: #633725;
     stroke-width: 1;
     fill: #DB7755;
   }
 
-  .celestial-body.jupiter {
+  .celestial-body.jupiter .body {
     stroke: #BF8936;
     stroke-width: 1;
     fill: #CDC095;
   }
 
-  .celestial-body.saturn {
+  .celestial-body.saturn .body {
     stroke: #BF8936;
     stroke-width: 1;
     fill: #CDC095;
   }
 
-  .celestial-body.uranus {
+  .celestial-body.uranus .body {
     stroke: #628288;
     stroke-width: 1;
     fill: #A3D9E2;
   }
 
-  .celestial-body.neptune {
+  .celestial-body.neptune .body {
     stroke: #02334b;
     stroke-width: 1;
     fill: #0276A5;
   }
 
-  .celestial-body.pluto {
+  .celestial-body.pluto .body {
     fill: #d5b89f;
   }
 
-  .celestial-body.io {
+  .celestial-body.io .body {
     stroke: #D6C251;
   }
 
-  .celestial-body.europa {
+  .celestial-body.europa .body {
     fill: #E5C36C;
   }
 
-  .celestial-body.titan {
+  .celestial-body.titan .body {
     fill: #DEC863;
   }
 
