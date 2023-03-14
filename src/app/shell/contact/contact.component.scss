@@ -11,11 +11,14 @@ a[mat-stroked-button] {
   height: 80px;
   width: 100%;
   margin-top: 15px;
+  padding-top: 28px;
   border-color: rgba(197, 197, 197, 0.5) !important;
+  text-align: center;
   font-size: 16px;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: white;
 }
 a[mat-stroked-button]:hover {
   background-color: rgba(197, 197, 197, 0.2);
