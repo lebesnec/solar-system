@@ -15,9 +15,9 @@
 //  If you specify typography styles for the components you use elsewhere, you should delete this line.
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -29,7 +29,7 @@ $solar-system-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
 $solar-system-warn: mat.define-palette(mat.$red-palette);
 
 // Font
-$custom-typography: mat.define-legacy-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: '"Exo 2", sans-serif;'
 );
 
@@ -55,41 +55,43 @@ $solar-system-theme: mat.define-light-theme((
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy($custom-typography);`
-@include mat.all-legacy-component-typographies($custom-typography);
-@include mat.legacy-core();
-@include mat.all-legacy-component-themes($solar-system-theme);
+@include mat.all-component-typographies($custom-typography);
+@include mat.core();
+@include mat.all-component-themes($solar-system-theme);
 
 // custom global style:
 
 // https://github.com/angular/components/issues/12803
 .mat-form-field-appearance-outline {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-form-field-prefix, .mat-form-field-suffix {
     place-self: center;
     top: 0.15em !important;
   }
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-form-field-infix {
     top: 0.15em !important;
     padding: 0.5em 0 1.5em 0;
   }
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   background: hsl(0, 0%, 40%);
 }
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .mat-menu-panel {
+  .mat-mdc-menu-panel {
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.3);
   }
 }
 
-.mat-menu-item {
+.mat-mdc-menu-item {
   color: white;
   min-width: 150px;
   padding-left: 30px;
 }
 
-.mat-menu-item:hover:not([disabled]) {
+.mat-mdc-menu-item:hover:not([disabled]) {
   background: rgba(0, 0, 0, 0.09);
 }
 

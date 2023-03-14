@@ -3,22 +3,6 @@
   color: white;
 }
 
-[mat-dialog-title] {
-  margin-bottom: 0;
-  cursor: move;
-}
-
-.close-button {
-  float: right;
-  top: -38px;
-  right: -15px;
-  font-size: 20px;
-  color: rgba(196, 196, 196, 0.6);
-}
-.close-button:hover {
-  color: rgba(196, 196, 196, 0.8);
-}
-
 .version {
   color: #8d8d8d;
   font-style: italic;

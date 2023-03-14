@@ -111,9 +111,11 @@ $color: #c5c5c5;
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 :host ::ng-deep .search-field .mat-form-field-outline {
   color: rgb($color, 0.5);
 }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 :host ::ng-deep .search-field .mat-form-field-outline-thick div {
   background-color: rgb($color, 0.1);
 }
@@ -125,24 +127,9 @@ $color: #c5c5c5;
   box-shadow: none;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 :host ::ng-deep .search-field .mat-form-field-flex {
   padding-right: 5px;
-}
-
-::ng-deep .settings-dialog-panel mat-dialog-container,
-::ng-deep .contact-dialog-panel mat-dialog-container,
-::ng-deep .about-dialog-panel mat-dialog-container,
-::ng-deep .legals-dialog-panel mat-dialog-container {
-  background: hsl(0, 0%, 40%);
-}
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  ::ng-deep .settings-dialog-panel mat-dialog-container,
-  ::ng-deep .contact-dialog-panel mat-dialog-container,
-  ::ng-deep .about-dialog-panel mat-dialog-container,
-  ::ng-deep .legals-dialog-panel mat-dialog-container {
-    backdrop-filter: blur(10px);
-    background: hsla(0, 0%, 100%, 0.15);
-  }
 }
 
 app-search-panel {
@@ -155,16 +142,46 @@ app-search-panel {
   left: 0;
 }
 
+// Dialog
+::ng-deep .mat-mdc-dialog-container {
+  .mat-mdc-dialog-title, .mat-mdc-dialog-content {
+    color: white !important;
+  }
+  .celestial-body-dialog-panel .mat-mdc-dialog-surface {
+    background: hsl(0, 0%, 40%) !important;
+  }
+  [mat-dialog-title] {
+    padding-top: 18px !important;
+    padding-right: 18px !important;
+    cursor: move !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .mat-mdc-dialog-title .close-button {
+    margin-left: auto !important;
+    font-size: 20px !important;
+    color: rgba(196, 196, 196, 0.6) !important;
+  }
+  .mat-mdc-dialog-title .close-button:hover {
+    color: rgba(196, 196, 196, 0.8) !important;
+  }
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .mat-mdc-dialog-surface {
+      backdrop-filter: blur(10px) !important;
+      background: hsla(0, 0%, 100%, 0.15) !important;
+    }
+  }
+}
+
 // mobile
 @media only screen and (max-width: 1150px) {
-
   .logo h1 {
     display: none !important;
   }
-
 }
-@media only screen and (max-width: 800px) {
 
+@media only screen and (max-width: 800px) {
   ::ng-deep {
     // fullscreen dialog on mobile
     .settings-dialog-panel, .contact-dialog-panel, .about-dialog-panel, .legals-dialog-panel {
@@ -174,5 +191,4 @@ app-search-panel {
       height: 100%;
     }
   }
-
 }

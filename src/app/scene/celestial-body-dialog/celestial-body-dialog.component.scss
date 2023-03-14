@@ -2,24 +2,6 @@
 
 :host {
   display: block;
-  color: white;
-}
-
-::ng-deep .celestial-body-dialog-panel mat-dialog-container {
-  background: hsl(0, 0%, 40%);
-}
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  ::ng-deep .celestial-body-dialog-panel mat-dialog-container {
-    backdrop-filter: blur(10px);
-    background: hsla(0, 0%, 100%, 0.15);
-  }
-}
-
-[mat-dialog-title] {
-  margin-bottom: 0;
-  display: flex;
-  align-items:center;
-  cursor: move;
 }
 
 .symbol {
@@ -27,17 +9,6 @@
   width: 20px;
   height: 20px;
   margin-right: 10px;
-}
-
-.close-button {
-  float: right;
-  top: -38px;
-  right: -15px;
-  font-size: 20px;
-  color: rgba(196, 196, 196, 0.6);
-}
-.close-button:hover {
-  color: rgba(196, 196, 196, 0.8);
 }
 
 mat-dialog-content {
@@ -72,7 +43,7 @@ mat-dialog-content {
     position: unset !important;
     margin-bottom: unset !important;
     margin-right: unset !important;
-    .mat-dialog-content {
+    .mat-mdc-dialog-content {
       max-height: unset !important;
     }
   }

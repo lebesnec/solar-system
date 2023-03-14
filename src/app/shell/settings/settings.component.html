@@ -1,59 +1,61 @@
 <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   {{ 'Settings' | translate }}
+
+  <button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
 </h2>
 
-<button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
-  <mat-icon fontIcon="close"></mat-icon>
-</button>
+<mat-dialog-content>
+  <h3>{{ 'Language' | translate }}</h3>
 
-<h3>{{ 'Language' | translate }}</h3>
+  <mat-button-toggle-group [value]="language" (change)="language = $event.value">
+    <mat-button-toggle *ngFor="let lang of AVAILABLE_LANGUAGES" [value]="lang">
+      {{ 'LANGUAGE_' + lang | translate }}
+      {{ lang === language ? '' : ' - ' + ('LANGUAGE_NOT_TRANSLATED_' + lang | translate) }}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="language" (change)="language = $event.value">
-  <mat-button-toggle *ngFor="let lang of AVAILABLE_LANGUAGES" [value]="lang">
-    {{ 'LANGUAGE_' + lang | translate }}
-    {{ lang === language ? '' : ' - ' + ('LANGUAGE_NOT_TRANSLATED_' + lang | translate) }}
-  </mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Units' | translate }}</h3>
 
-<h3>{{ 'Units' | translate }}</h3>
+  <mat-button-toggle-group [value]="metric" (change)="metric = $event.value">
+    <mat-button-toggle [value]="true">{{ 'Metric' }}</mat-button-toggle>
+    <mat-button-toggle [value]="false">{{ 'Imperial' }}</mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="metric" (change)="metric = $event.value">
-  <mat-button-toggle [value]="true">{{ 'Metric' }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Imperial' }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Orbits' | translate }}</h3>
 
-<h3>{{ 'Orbits' | translate }}</h3>
+  <mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
+    <mat-button-toggle [value]="OrbitsSetting.ALL">{{ 'All' | translate }}</mat-button-toggle>
+    <mat-button-toggle [value]="OrbitsSetting.PLANET">{{ 'Planets only' | translate }}</mat-button-toggle>
+    <mat-button-toggle [value]="OrbitsSetting.NONE">{{ 'Off' | translate: { suffix: 'es'} }}</mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="orbits" (change)="orbits = $event.value">
-  <mat-button-toggle [value]="OrbitsSetting.ALL">{{ 'All' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="OrbitsSetting.PLANET">{{ 'Planets only' | translate }}</mat-button-toggle>
-  <mat-button-toggle [value]="OrbitsSetting.NONE">{{ 'Off' | translate: { suffix: 'es'} }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Labels' | translate }}</h3>
 
-<h3>{{ 'Labels' | translate }}</h3>
+  <mat-button-toggle-group [value]="labels" (change)="labels = $event.value">
+    <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
+    <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="labels" (change)="labels = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Scale' | translate }}</h3>
 
-<h3>{{ 'Scale' | translate }}</h3>
+  <mat-button-toggle-group [value]="scale" (change)="scale = $event.value">
+    <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
+    <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="scale" (change)="scale = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Reticules' | translate }}</h3>
 
-<h3>{{ 'Reticules' | translate }}</h3>
+  <mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">
+    <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
+    <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group [value]="reticule" (change)="reticule = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 's'} }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 's'} }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <h3>{{ 'Milky way' | translate }}</h3>
 
-<h3>{{ 'Milky way' | translate }}</h3>
-
-<mat-button-toggle-group [value]="milkyWay" (change)="milkyWay = $event.value">
-  <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
-  <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
-</mat-button-toggle-group>
+  <mat-button-toggle-group [value]="milkyWay" (change)="milkyWay = $event.value">
+    <mat-button-toggle [value]="true">{{ 'On' | translate: { suffix: 'e'} }}</mat-button-toggle>
+    <mat-button-toggle [value]="false">{{ 'Off' | translate: { suffix: 'e'} }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-dialog-content>
