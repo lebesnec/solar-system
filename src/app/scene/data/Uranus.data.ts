@@ -504,19 +504,19 @@ export const URANUS: CelestialBody = {
     FERDINAND
   ],
   rings: [
-    { id: 'zeta', radius: 26840, width: 8000, depth: 0.8 },
-    { id: 'six', radius: 41837, width: 1.6, depth: 0.41 },
-    { id: 'five', radius: 42234, width: 1.9, depth: 0.91 },
-    { id: 'four', radius: 42570, width: 2.4, depth: 0.71 },
-    { id: 'alpha', radius: 44718, width: 4.8, depth: 3.39 },
-    { id: 'beta', radius: 45661, width: 6.1, depth: 2.14 },
-    { id: 'eta', radius: 47175, width: 1.9, depth: 0.42 },
-    { id: 'gamma', radius: 47627, width: 3.6, depth: 3.3 },
-    { id: 'delta', radius: 26840, width: 8000, depth: 0.8 },
-    { id: 'epsilon', radius: 48300, width: 4.1, depth: 2.2 },
-    { id: 'lambda', radius: 50023, width: 1, depth: 0.2 },
-    { id: 'mu', radius: 66100, width: 3800, depth: 0.012 },
-    { id: 'nu', radius: 86000, width: 17000, depth: 0.14 }
+    { id: 'zeta', radius: 37850, width: 3500, depth: 1 },
+    { id: 'six', radius: 41837, width: 2.2, depth: 0.41 },
+    { id: 'five', radius: 42234, width: 4.9, depth: 0.91 },
+    { id: 'four', radius: 42570, width: 4.4, depth: 0.71 },
+    { id: 'alpha', radius: 44718, width: 10, depth: 3.39 },
+    { id: 'beta', radius: 45661, width: 11.4, depth: 2.14 },
+    { id: 'eta', radius: 47175, width: 2.7, depth: 0.42 },
+    { id: 'gamma', radius: 47627, width: 4.7, depth: 3.3 },
+    { id: 'delta', radius: 48300, width: 6.1, depth: 2.2 },
+    { id: 'lambda', radius: 50023, width: 2, depth: 0.2 },
+    { id: 'epsilon', radius: 51149, width: 96.4, depth: 47 },
+    { id: 'nu', radius: 66100, width: 3800, depth: 0.012 },
+    { id: 'mu', radius: 86000, width: 17000, depth: 0.14 }
   ],
   orbitBody: null
 };
