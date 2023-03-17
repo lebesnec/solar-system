@@ -1512,6 +1512,15 @@ export const SATURN: CelestialBody = {
     S_2004_S_26,
     S_2019_S_1
   ],
+  rings: [
+    { id: 'a', radius: 122170, width: 14600, depth: 10 },
+    { id: 'b', radius: 92000, width: 25500, depth: 5 },
+    { id: 'c', radius: 74658, width: 17500, depth: 5 },
+    { id: 'd', radius: 66900, width: 7500, depth: 5 },
+    { id: 'e', radius: 180000, width: 300000, depth: 5 },
+    { id: 'f', radius: 140180, width: 500, depth: 5 },
+    { id: 'g', radius: 166000, width: 9000, depth: 5 }
+  ],
   orbitBody: null
 };
 
