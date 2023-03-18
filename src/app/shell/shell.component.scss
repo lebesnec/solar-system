@@ -92,12 +92,13 @@ $color: #c5c5c5;
       padding-top: 15px;
       padding-left: 20px;
       padding-right: 13px;
+      color: rgb($color, 0.75);
     }
   }
 
   .close-button, .menu-button {
-    color: rgb($color, 0.5);
-    margin: 10px 15px 0 15px;
+    color: rgb($color, 0.75);
+    margin: 10px 5px 0 0;
   }
   .close-button:hover, .menu-button:hover {
     color: rgb($color, 0.75);
