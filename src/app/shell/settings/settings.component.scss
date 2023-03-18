@@ -9,18 +9,14 @@ h3 {
   margin-top: 16px;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 :host ::ng-deep mat-button-toggle-group {
   border: none;
-  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
   .mat-button-toggle {
     color: white !important;
     background-color: transparent;
     border: solid 1px rgba(0, 0, 0, 0.12);
     min-width: 150px;
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
   .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
     border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
@@ -29,7 +25,6 @@ h3 {
 
 // mobile
 @media only screen and (max-width: 700px) {
-  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
   :host ::ng-deep mat-button-toggle-group .mat-button-toggle {
     min-width: unset;
   }
