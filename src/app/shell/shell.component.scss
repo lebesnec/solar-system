@@ -62,7 +62,7 @@ $color: #c5c5c5;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
+    margin-top: 4px;
     left: 0;
     right: 0;
     cursor: text;
@@ -104,6 +104,23 @@ $color: #c5c5c5;
   }
   .close-button {
     font-size: 25px;
+  }
+}
+
+:host ::ng-deep .search-field {
+  .mdc-notched-outline__leading, .mdc-notched-outline__notch, .mdc-notched-outline__trailing {
+    border-color: rgb($color, 0.5);
+  }
+}
+:host ::ng-deep .search-field:hover {
+  .mdc-notched-outline__leading, .mdc-notched-outline__notch, .mdc-notched-outline__trailing {
+    background-color: rgb($color, 0.1);
+    border-color: rgb($color, 0.75) !important;
+  }
+}
+:host ::ng-deep .search-field.mat-focused {
+  .mdc-notched-outline__leading, .mdc-notched-outline__notch, .mdc-notched-outline__trailing {
+    border-color: rgb($color, 0.75) !important;
   }
 }
 
