@@ -124,7 +124,10 @@ $color: #c5c5c5;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  box-shadow: none;
+  box-shadow: none !important;
+  button span {
+    color: white;
+  }
 }
 
 /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
