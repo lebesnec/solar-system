@@ -7,11 +7,11 @@
     <ng-container *ngSwitchCase="CelestialBodyType.DWARF_PLANET">{{ 'dwarf planet' | translate }}</ng-container>
     <ng-container *ngSwitchCase="CelestialBodyType.SATELLITE">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
   </ng-container>
-</div>
 
-<button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
-  <mat-icon fontIcon="close"></mat-icon>
-</button>
+  <button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+</div>
 
 <mat-dialog-content>
   <picture *ngIf="!MISSING_PICTURES.includes(body)">

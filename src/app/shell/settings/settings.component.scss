@@ -1,25 +1,8 @@
 @use '@angular/material' as mat;
-@import '~src/custom-theme';
+@import 'src/custom-theme';
 
 :host {
   display: block;
-  color: white;
-}
-
-[mat-dialog-title] {
-  margin-bottom: 0;
-  cursor: move;
-}
-
-.close-button {
-  float: right;
-  top: -38px;
-  right: -15px;
-  font-size: 20px;
-  color: rgba(196, 196, 196, 0.6);
-}
-.close-button:hover {
-  color: rgba(196, 196, 196, 0.8);
 }
 
 h3 {
@@ -28,14 +11,12 @@ h3 {
 
 :host ::ng-deep mat-button-toggle-group {
   border: none;
-
   .mat-button-toggle {
     color: white !important;
     background-color: transparent;
     border: solid 1px rgba(0, 0, 0, 0.12);
     min-width: 150px;
   }
-
   .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($solar-system-primary, 0.2);
     border: solid 1px mat.get-color-from-palette($solar-system-primary, 0.5);
@@ -44,10 +25,12 @@ h3 {
 
 // mobile
 @media only screen and (max-width: 700px) {
-
-  :host ::ng-deep mat-button-toggle-group .mat-button-toggle {
-    min-width: unset;
+  :host ::ng-deep mat-button-toggle-group.large {
+    min-width: 306px;
+    .mat-button-toggle {
+      min-width: unset;
+      width: 100%;
+    }
   }
-
 }
 

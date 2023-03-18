@@ -5,11 +5,6 @@
 // For more information: https://material.angular.io/guide/theming
 // Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -38,41 +33,82 @@ $solar-system-theme: mat.define-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.core($custom-typography);
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy($custom-typography);`
+@include mat.all-component-typographies($custom-typography);
+@include mat.core();
 @include mat.all-component-themes($solar-system-theme);
 
 // custom global style:
 
-// https://github.com/angular/components/issues/12803
-.mat-form-field-appearance-outline {
-  .mat-form-field-prefix, .mat-form-field-suffix {
-    place-self: center;
-    top: 0.15em !important;
-  }
-  .mat-form-field-infix {
-    top: 0.15em !important;
-    padding: 0.5em 0 1.5em 0;
-  }
-}
-
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   background: hsl(0, 0%, 40%);
 }
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .mat-menu-panel {
+  .mat-mdc-menu-panel {
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.3);
   }
 }
 
-.mat-menu-item {
+.mat-mdc-menu-item {
   color: white;
   min-width: 150px;
   padding-left: 30px;
 }
 
-.mat-menu-item:hover:not([disabled]) {
+.mat-mdc-menu-item:hover:not([disabled]) {
   background: rgba(0, 0, 0, 0.09);
+}
+
+// Dialog
+::ng-deep .mat-mdc-dialog-container {
+  .mat-mdc-dialog-title, .mat-mdc-dialog-content {
+    color: white !important;
+  }
+  .mat-mdc-dialog-title {
+    padding-top: 10px !important;
+    padding-right: 10px !important;
+    cursor: move !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .mat-mdc-dialog-content {
+    max-height: calc(90vh);
+  }
+  .mat-mdc-dialog-title .close-button {
+    margin-left: auto !important;
+    font-size: 20px !important;
+    color: rgba(196, 196, 196, 0.6) !important;
+  }
+  .mat-mdc-dialog-title .close-button:hover {
+    color: rgba(196, 196, 196, 0.8) !important;
+  }
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .mat-mdc-dialog-surface {
+      backdrop-filter: blur(10px) !important;
+      background: hsla(0, 0%, 100%, 0.15) !important;
+    }
+  }
+}
+@media only screen and (max-width: 800px) {
+  ::ng-deep {
+    // fullscreen dialog on mobile
+    .celestial-body-dialog-panel, .settings-dialog-panel, .contact-dialog-panel, .about-dialog-panel, .legals-dialog-panel {
+      min-width: unset !important;
+      max-width: unset !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+    }
+  }
 }
 
 // helper to convert a color to a css filter, to easily change the color af svg element

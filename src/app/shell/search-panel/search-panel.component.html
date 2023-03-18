@@ -9,7 +9,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-grid-list [cols]="nbCol" gutterSize="5px" rowHeight="70px">
+    <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
       <mat-grid-tile *ngFor="let body of searchResult" [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
         <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
