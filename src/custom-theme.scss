@@ -72,9 +72,6 @@ $solar-system-theme: mat.define-light-theme((
   .mat-mdc-dialog-title, .mat-mdc-dialog-content {
     color: white !important;
   }
-  .celestial-body-dialog-panel .mat-mdc-dialog-surface {
-    background: hsl(0, 0%, 40%) !important;
-  }
   .mat-mdc-dialog-title {
     padding-top: 10px !important;
     padding-right: 10px !important;
@@ -98,6 +95,18 @@ $solar-system-theme: mat.define-light-theme((
     .mat-mdc-dialog-surface {
       backdrop-filter: blur(10px) !important;
       background: hsla(0, 0%, 100%, 0.15) !important;
+    }
+  }
+}
+@media only screen and (max-width: 800px) {
+  ::ng-deep {
+    // fullscreen dialog on mobile
+    .celestial-body-dialog-panel, .settings-dialog-panel, .contact-dialog-panel, .about-dialog-panel, .legals-dialog-panel {
+      min-width: unset !important;
+      max-width: unset !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
     }
   }
 }

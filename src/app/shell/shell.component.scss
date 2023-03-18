@@ -137,15 +137,3 @@ app-search-panel {
     display: none !important;
   }
 }
-
-@media only screen and (max-width: 800px) {
-  ::ng-deep {
-    // fullscreen dialog on mobile
-    .settings-dialog-panel, .contact-dialog-panel, .about-dialog-panel, .legals-dialog-panel {
-      min-width: unset !important;
-      max-width: unset !important;
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
