@@ -63,10 +63,10 @@
   }
 
   .celestial-body .ring {
-    vector-effect: non-scaling-stroke;
+    vector-effect: none;
+    stroke-width: 1px;
     stroke: rgb(255, 0, 0);
-    fill: none;
-    cursor: pointer;
+    fill: green;
   }
 
   .celestial-body.satellite .body {

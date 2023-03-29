@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
+import {AU_TO_KM, Ring, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -23,7 +23,7 @@ import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 const TOOLBAR_HEIGHT = 65;
 
@@ -281,19 +281,33 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             .selectAll('.ring')
                                 .data(body => (body.rings ?? []).map(ring => ({ body, ring })), d => d.ring.id)
                                 .join(
-                                  enter => enter.append('circle')
+                                  enter => enter.append('path')
                                                 .attr('id', d => d.ring.id)
                                                 .attr('class', 'ring')
-                                                .attr('stroke-width', d => Math.max(d.ring.width / KM_TO_PX, 1))
-                                                .attr('r', d => d.ring.radius / KM_TO_PX)
-                                                .attr('cx', d => d.body.position.x)
-                                                .attr('cy', d => d.body.position.y)
+                                                .attr('d', d => this.getRingPath(d))
                                                 .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
                                                 .on('click', (event, d) => {
                                                   this.select(d.body);
                                                   event.stopPropagation();
                                                 })
-                                );  }
+                                );
+  }
+
+  private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
+    const position = data.body.position;
+    const outerRadius = data.ring.radius + data.ring.width;
+    const innerRadius = data.ring.radius;
+
+    // https://stackoverflow.com/a/42425397/990193
+    return `M ${position.x} ${position.y - outerRadius}
+            A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y + outerRadius}
+            A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y - outerRadius}
+            Z
+            M ${position.x} ${position.y - outerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y + outerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y - outerRadius}
+            Z`;
+  }
 
   private initLagrangePoints(): void {
     this.translateService.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
