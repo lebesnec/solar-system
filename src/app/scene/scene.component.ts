@@ -286,10 +286,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                 .attr('class', 'ring')
                                                 .attr('d', d => this.getRingPath(d))
                                                 .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
-                                                .on('click', (event, d) => {
-                                                  this.select(d.body);
-                                                  event.stopPropagation();
-                                                })
                                                 .append('title')
                                                   .html(d => d.ring.id)
                                 );
