@@ -305,9 +305,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
             A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y + outerRadius}
             A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y - outerRadius}
             Z
-            M ${position.x} ${position.y - outerRadius}
-            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y + outerRadius}
-            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y - outerRadius}
+            M ${position.x} ${position.y - innerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y + innerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y - innerRadius}
             Z`;
   }
 
