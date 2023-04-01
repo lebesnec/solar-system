@@ -290,13 +290,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                   this.select(d.body);
                                                   event.stopPropagation();
                                                 })
+                                                .append('title')
+                                                  .html(d => d.ring.id)
                                 );
   }
 
   private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
     const position = data.body.position;
-    const outerRadius = data.ring.radius + data.ring.width;
-    const innerRadius = data.ring.radius;
+    const outerRadius = (data.ring.radius + data.ring.width) / KM_TO_PX;
+    const innerRadius = data.ring.radius / KM_TO_PX;
 
     // https://stackoverflow.com/a/42425397/990193
     return `M ${position.x} ${position.y - outerRadius}
