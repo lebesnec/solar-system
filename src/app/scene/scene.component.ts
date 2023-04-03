@@ -291,7 +291,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private initRings(): void {
     const ringsData = SOLAR_SYSTEM.reduce<{ ring: Ring, body: CelestialBody }[]>((result, body) => {
       if (body.rings) {
-        result.push(...body.rings.map(ring => ({ ring, body })));
+        const rings = body.rings.sort((r1, r2) => r2.radius - r1.radius)
+                                .map(ring => ({ ring, body }));
+        result.push(...rings);
       }
       return result;
     }, []);
