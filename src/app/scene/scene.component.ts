@@ -187,6 +187,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
 
     this.initScale();
+    this.initRings();
     this.initLagrangePoints();
   }
 
@@ -296,6 +297,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     }, []);
 
     this.translateService.get(ringsData.map(d => d.ring.id + RING_I18N_KEY)).subscribe(translations => {
+      this.groupZoomSelection.selectAll('.ring').remove();
       this.groupZoomSelection.selectAll('.ring')
                               .data(ringsData, d => d.ring.id)
                               .join(
