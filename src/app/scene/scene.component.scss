@@ -54,7 +54,7 @@
     fill: transparent;
   }
 
-  .celestial-body .body {
+  .celestial-body {
     vector-effect: non-scaling-stroke;
     stroke: rgb(90, 90, 90);
     stroke-width: 1;
@@ -62,85 +62,85 @@
     cursor: pointer;
   }
 
-  .celestial-body .ring {
+  .ring {
     vector-effect: non-scaling-stroke;
     stroke-width: 1px;
     stroke: rgba(255, 250, 241, 0.15);
     fill: rgba(255, 210, 142, 0.15);
   }
 
-  .celestial-body.satellite .body {
+  .celestial-body.satellite {
     stroke-width: 0;
     vector-effect: none;
     fill: rgb(101, 101, 101);
   }
 
-  .celestial-body.dwarf_planet .body {
+  .celestial-body.dwarf_planet {
     stroke-width: 0;
     vector-effect: none;
   }
 
-  .celestial-body.sun .body {
+  .celestial-body.sun {
     stroke: rgb(168, 160, 114);
     stroke-width: 1;
     fill: rgb(185, 167, 0);
   }
 
-  .celestial-body.venus .body {
+  .celestial-body.venus {
     stroke: #ffe1ad;
     stroke-width: 1;
     fill: #f1e5c8;
   }
 
-  .celestial-body.earth .body {
+  .celestial-body.earth {
     stroke: #213e70;
     stroke-width: 1;
     fill: #3B74D6;
   }
 
-  .celestial-body.mars .body {
+  .celestial-body.mars {
     stroke: #633725;
     stroke-width: 1;
     fill: #DB7755;
   }
 
-  .celestial-body.jupiter .body {
+  .celestial-body.jupiter {
     stroke: #BF8936;
     stroke-width: 1;
     fill: #CDC095;
   }
 
-  .celestial-body.saturn .body {
+  .celestial-body.saturn {
     stroke: #BF8936;
     stroke-width: 1;
     fill: #CDC095;
   }
 
-  .celestial-body.uranus .body {
+  .celestial-body.uranus {
     stroke: #628288;
     stroke-width: 1;
     fill: #A3D9E2;
   }
 
-  .celestial-body.neptune .body {
+  .celestial-body.neptune {
     stroke: #02334b;
     stroke-width: 1;
     fill: #0276A5;
   }
 
-  .celestial-body.pluto .body {
+  .celestial-body.pluto {
     fill: #d5b89f;
   }
 
-  .celestial-body.io .body {
+  .celestial-body.io {
     stroke: #D6C251;
   }
 
-  .celestial-body.europa .body {
+  .celestial-body.europa {
     fill: #E5C36C;
   }
 
-  .celestial-body.titan .body {
+  .celestial-body.titan {
     fill: #DEC863;
   }
 

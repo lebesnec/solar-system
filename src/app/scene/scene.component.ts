@@ -1,5 +1,15 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, Ring, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
+import {
+  AU_TO_KM,
+  Ring,
+  CelestialBodyType,
+  CelestialBody,
+  OrbitPoint,
+  Point,
+  LagrangePoint,
+  LAGRANGE_POINT_I18N_KEY,
+  RING_I18N_KEY
+} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
@@ -154,6 +164,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
+    this.initRings();
     this.initZoom();
     this.initLagrangePoints();
 
@@ -262,33 +273,41 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupZoomSelection.selectAll('.celestial-body')
                                 .data(SOLAR_SYSTEM, d => d.id)
                                 .join(
-                                  enter => {
-                                    const g = enter.append('g').attr('class', body => 'celestial-body ' + body.type + ' ' + body.id);
-                                    g.append('circle')
-                                      .attr('id', body => body.id)
-                                      .attr('class', 'body')
-                                      .attr('r', body => body.radius / KM_TO_PX)
-                                      .attr('cx', body => body.position.x)
-                                      .attr('cy', body => body.position.y)
-                                      .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
-                                      .on('click', (event, d) => {
-                                        this.select(d);
-                                        event.stopPropagation();
-                                      });
-                                      return g;
-                                  }
-                                )
-                            .selectAll('.ring')
-                                .data(body => (body.rings ?? []).map(ring => ({ body, ring })), d => d.ring.id)
-                                .join(
-                                  enter => enter.append('path')
+                                  enter => enter.append('circle')
+                                                .attr('id', body => body.id)
+                                                .attr('class', 'celestial-body')
+                                                .attr('r', body => body.radius / KM_TO_PX)
+                                                .attr('cx', body => body.position.x)
+                                                .attr('cy', body => body.position.y)
+                                                .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
+                                                .on('click', (event, d) => {
+                                                  this.select(d);
+                                                  event.stopPropagation();
+                                                })
+                                );
+  }
+
+  private initRings(): void {
+    const ringsData = SOLAR_SYSTEM.reduce<{ ring: Ring, body: CelestialBody }[]>((result, body) => {
+      if (body.rings) {
+        result.push(...body.rings.map(ring => ({ ring, body })));
+      }
+      return result;
+    }, []);
+
+    this.translateService.get(ringsData.map(d => d.ring.id + RING_I18N_KEY)).subscribe(translations => {
+      this.groupZoomSelection.selectAll('.ring')
+                              .data(ringsData, d => d.ring.id)
+                              .join(
+                                enter => enter.append('path')
                                                 .attr('id', d => d.ring.id)
-                                                .attr('class', 'ring')
+                                                .attr('class', 'celestial-body ring')
                                                 .attr('d', d => this.getRingPath(d))
                                                 .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
-                                                .append('title')
-                                                  .html(d => d.ring.id)
-                                );
+                                              .append('title')
+                                                .html(d => translations[d.ring.id + RING_I18N_KEY])
+                              );
+    });
   }
 
   private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
