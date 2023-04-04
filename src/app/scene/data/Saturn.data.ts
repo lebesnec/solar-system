@@ -1517,9 +1517,9 @@ export const SATURN: CelestialBody = {
     { id: 'b', radius: 92000, width: 25500, depth: 5 },
     { id: 'c', radius: 74658, width: 17500, depth: 5 },
     { id: 'd', radius: 66900, width: 7500, depth: 5 },
-    { id: 'e', radius: 180000, width: 300000, depth: 5 },
     { id: 'f', radius: 140180, width: 500, depth: 5 },
-    { id: 'g', radius: 166000, width: 9000, depth: 5 }
+    { id: 'g', radius: 166000, width: 9000, depth: 5 },
+    { id: 'e', radius: 180000, width: 300000, depth: 5 }
   ],
   orbitBody: null
 };

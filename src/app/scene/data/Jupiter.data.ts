@@ -1689,8 +1689,8 @@ export const JUPITER: CelestialBody = {
   rings: [
     { id: 'halo', radius: 92000, width: 30500, depth: 12500 },
     { id: 'main', radius: 122500, width: 6500, depth: 160 },
-    { id: 'amalthea_gossamer', radius: 129000, width: 53000, depth: 2000 },
-    { id: 'thebe_gossamer', radius: 129000, width: 97000, depth: 8400 }
+    { id: 'thebe_gossamer', radius: 129000, width: 97000, depth: 8400 },
+    { id: 'amalthea_gossamer', radius: 129000, width: 53000, depth: 2000 }
   ],
   orbitBody: null
 };
