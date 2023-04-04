@@ -8,7 +8,8 @@ import {
   Point,
   LagrangePoint,
   LAGRANGE_POINT_I18N_KEY,
-  RING_I18N_KEY
+  RING_I18N_KEY,
+  COMPASS_TITLE_I18N_KEY
 } from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
@@ -77,7 +78,6 @@ const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 
-const COMPASS_TITLE_KEY = 'First Point of Aries';
 const COMPAS_WIDTH = 35; // px
 
 const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
@@ -541,7 +541,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       NB_KM: formatNumber(scaleSizeKm, this.translateService.currentLang, '1.0-4')
     };
     const translationsKeys = [
-      SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_KEY
+      SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_I18N_KEY
     ];
     this.translateService.get(translationsKeys, translationParams).subscribe((translations) => {
       // text
@@ -564,7 +564,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               .attr('y', window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
-                              .html(translations[COMPASS_TITLE_KEY]);
+                              .html(translations[COMPASS_TITLE_I18N_KEY]);
       groupCompassSelection.append('text')
                               .html('ɤ')
                               .attr('dominant-baseline', 'central')
@@ -572,7 +572,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               .attr('y', window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
-                              .html(translations[COMPASS_TITLE_KEY]);
+                              .html(translations[COMPASS_TITLE_I18N_KEY]);
     });
   }
 

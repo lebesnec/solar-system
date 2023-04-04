@@ -87,6 +87,7 @@ export interface LagrangePoint extends Point {
 
 export const LAGRANGE_POINT_I18N_KEY = 'Sun–Earth Lagrange point ';
 export const RING_I18N_KEY = ' ring';
+export const COMPASS_TITLE_I18N_KEY = 'First Point of Aries';
 
 /**
  * degrees to radian
