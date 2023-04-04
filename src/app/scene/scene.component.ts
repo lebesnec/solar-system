@@ -131,7 +131,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private settingsService: SettingsService,
     private translateService: TranslateService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    // prevents pinch to zoom with a trackpad on desktop
+    // https://stackoverflow.com/questions/68808218/how-to-capture-pinch-zoom-gestures-from-the-trackpad-in-a-desktop-browser-and-p
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+    }, { passive: false });
+   }
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe(body => {
