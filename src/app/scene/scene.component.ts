@@ -296,12 +296,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initRings(): void {
     const ringsData = SOLAR_SYSTEM.reduce<{ ring: Ring, body: CelestialBody }[]>((result, body) => {
-      if (body.rings) {
-        const rings = body.rings.sort((r1, r2) => r2.radius - r1.radius)
-                                .map(ring => ({ ring, body }));
-        result.push(...rings);
-      }
-      return result;
+      const rings = body.rings ?? [];
+      return result.concat(rings.map(ring => ({ ring, body })));
     }, []);
 
     this.translateService.get(ringsData.map(d => d.ring.id + RING_I18N_KEY)).subscribe(translations => {
@@ -323,7 +319,15 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
     const position = data.body.position;
     const outerRadius = (data.ring.radius + data.ring.width) / KM_TO_PX;
-    const innerRadius = data.ring.radius / KM_TO_PX;
+
+    // avoid overlapping rings:
+    let innerRadius = data.ring.radius;
+    const overlappingRings = data.body.rings.filter(r => (r.id !== data.ring.id) && (r.radius <= innerRadius) && ((r.radius + r.width) > innerRadius))
+                                            .sort((r1, r2) => r1.radius - r2.radius);
+    if (overlappingRings.length > 0) {
+      innerRadius = (overlappingRings[0].radius + overlappingRings[0].width);
+    }
+    innerRadius = innerRadius / KM_TO_PX;
 
     // https://stackoverflow.com/a/42425397/990193
     return `M ${position.x} ${position.y - outerRadius}
