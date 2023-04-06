@@ -1,51 +1,51 @@
 <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   {{ 'About' | translate }}
+
+  <button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
 </h2>
 
-<button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
-  <mat-icon fontIcon="close"></mat-icon>
-</button>
-
-<br>
-
-<a class="version" href="https://github.com/lebesnec/solar-system/releases" target="_blank">
-  v{{ VERSION }}
-</a>
-<br>
-<br>
-
-<p [innerHTML]="'ABOUT_CONTENT_1' | translate"></p>
-<br>
-
-<h2>{{ 'Method of calculation' | translate }}</h2>
-<p [innerHTML]="'ABOUT_CONTENT_2' | translate"></p>
-<p [innerHTML]="'ABOUT_CONTENT_3' | translate"></p>
-<p [innerHTML]="'ABOUT_CONTENT_4' | translate"></p>
-<br>
-
-<h2>{{ 'Source code' | translate }}</h2>
-<p [innerHTML]="'ABOUT_CONTENT_5' | translate"></p>
-<br>
-
-<h2>{{ 'Credits' | translate }}</h2>
-<p [innerHTML]="'ABOUT_CONTENT_6' | translate"></p>
-<p [innerHTML]="'ABOUT_CONTENT_7' | translate"></p>
-<ul>
-  <li [innerHTML]="'ABOUT_CONTENT_8' | translate"></li>
-  <li [innerHTML]="'ABOUT_CONTENT_9' | translate"></li>
-</ul>
-<p [innerHTML]="'ABOUT_CONTENT_10' | translate"></p>
-<br>
-
-<h2>{{ 'Built with' | translate }}</h2>
-<div class="build-panel">
-  <a href="https://angular.io" target="_blank">
-    <img alt="logo angular" height="100" width="100" src="assets/angular.png">
+<mat-dialog-content>
+  <a class="version" href="https://github.com/lebesnec/solar-system/releases" target="_blank">
+    v{{ VERSION }}
   </a>
-  <a href="https://d3js.org" target="_blank">
-    <img alt="logo d3.js" height="100" width="100" src="assets/d3.png">
-  </a>
-  <a href="https://github.com" target="_blank">
-    <img alt="logo github" height="100" width="350" src="assets/github.png">
-  </a>
-</div>
+  <br>
+  <br>
+
+  <p [innerHTML]="'ABOUT_CONTENT_1' | translate"></p>
+  <br>
+
+  <h2>{{ 'Method of calculation' | translate }}</h2>
+  <p [innerHTML]="'ABOUT_CONTENT_2' | translate"></p>
+  <p [innerHTML]="'ABOUT_CONTENT_3' | translate"></p>
+  <p [innerHTML]="'ABOUT_CONTENT_4' | translate"></p>
+  <br>
+
+  <h2>{{ 'Source code' | translate }}</h2>
+  <p [innerHTML]="'ABOUT_CONTENT_5' | translate"></p>
+  <br>
+
+  <h2>{{ 'Credits' | translate }}</h2>
+  <p [innerHTML]="'ABOUT_CONTENT_6' | translate"></p>
+  <p [innerHTML]="'ABOUT_CONTENT_7' | translate"></p>
+  <ul>
+    <li [innerHTML]="'ABOUT_CONTENT_8' | translate"></li>
+    <li [innerHTML]="'ABOUT_CONTENT_9' | translate"></li>
+  </ul>
+  <p [innerHTML]="'ABOUT_CONTENT_10' | translate"></p>
+  <br>
+
+  <h2>{{ 'Built with' | translate }}</h2>
+  <div class="build-panel">
+    <a href="https://angular.io" target="_blank">
+      <img alt="logo angular" height="100" width="100" src="assets/angular.png">
+    </a>
+    <a href="https://d3js.org" target="_blank">
+      <img alt="logo d3.js" height="100" width="100" src="assets/d3.png">
+    </a>
+    <a href="https://github.com" target="_blank">
+      <img alt="logo github" height="100" width="350" src="assets/github.png">
+    </a>
+  </div>
+</mat-dialog-content>

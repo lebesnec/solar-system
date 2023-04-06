@@ -1394,6 +1394,24 @@ export const S_2004_S_26: CelestialBody = {
   orbitBody: null
 };
 
+export const S_2019_S_1: CelestialBody = {
+  id: 's_2019-s-1',
+  position: {
+    x: 0,
+    y: 0
+  },
+  speed: 0, // TODO
+  mass: 0.014e15,
+  radius: 1.5,
+  semiMajorAxis: 11244000,
+  eccentricity: 0.541,
+  trueAnomaly: 0,
+  meanAnomaly: 66.33,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const SATURN: CelestialBody = {
   id: 'saturn',
   position: {
@@ -1491,7 +1509,17 @@ export const SATURN: CelestialBody = {
     S_2004_S_36,
     FORNJOT,
     S_2004_S_34,
-    S_2004_S_26
+    S_2004_S_26,
+    S_2019_S_1
+  ],
+  rings: [
+    { id: 'a', radius: 122170, width: 14600, depth: 10 },
+    { id: 'b', radius: 92000, width: 25500, depth: 5 },
+    { id: 'c', radius: 74658, width: 17500, depth: 5 },
+    { id: 'd', radius: 66900, width: 7500, depth: 5 },
+    { id: 'f', radius: 140180, width: 500, depth: 5 },
+    { id: 'g', radius: 166000, width: 9000, depth: 5 },
+    { id: 'e', radius: 180000, width: 300000, depth: 5 }
   ],
   orbitBody: null
 };

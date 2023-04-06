@@ -1,10 +1,21 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AU_TO_KM, CelestialBodyType, CelestialBody, OrbitPoint, Point, LagrangePoint, LAGRANGE_POINT_I18N_KEY} from './scene.model';
+import {
+  AU_TO_KM,
+  Ring,
+  CelestialBodyType,
+  CelestialBody,
+  OrbitPoint,
+  Point,
+  LagrangePoint,
+  LAGRANGE_POINT_I18N_KEY,
+  RING_I18N_KEY,
+  COMPASS_TITLE_I18N_KEY
+} from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
-import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {PX_TO_KM, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -23,7 +34,7 @@ import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
 import {formatNumber} from '@angular/common';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 const TOOLBAR_HEIGHT = 65;
 
@@ -66,7 +77,7 @@ const SCALE_HEIGHT_SMALL_TICK = 6; // px
 const SCALE_TEXT_KEY = 'NB AU';
 const SCALE_TITLE_KEY = 'NB_AU Astronomical Unit = NB_KM km';
 const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
-const COMPASS_TITLE_KEY = 'First Point of Aries';
+
 const COMPAS_WIDTH = 35; // px
 
 const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
@@ -120,7 +131,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
     private settingsService: SettingsService,
     private translateService: TranslateService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    // prevents pinch to zoom with a trackpad on desktop
+    // https://stackoverflow.com/questions/68808218/how-to-capture-pinch-zoom-gestures-from-the-trackpad-in-a-desktop-browser-and-p
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+    }, { passive: false });
+   }
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe(body => {
@@ -154,7 +171,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initOrbits();
     this.initCelestialBodies();
     this.initZoom();
-    this.initLagrangePoints();
 
     this.translateService.onLangChange.subscribe(() => {
       this.onLangChange();
@@ -175,6 +191,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
 
     this.initScale();
+    this.initRings();
     this.initLagrangePoints();
   }
 
@@ -217,7 +234,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection.call(this.d3Zoom);
 
     this.transform = zoomIdentity.translate(this.center.x, this.center.y)
-                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
     this.svgSelection.call(this.d3Zoom.transform, this.transform);
   }
 
@@ -259,20 +276,68 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private initCelestialBodies(): void {
     this.groupZoomSelection.selectAll('.celestial-body')
-                                .data(SOLAR_SYSTEM, (d) => d.id)
+                                .data(SOLAR_SYSTEM, d => d.id)
                                 .join(
                                   enter => enter.append('circle')
-                                                .attr('id', (body) => body.id)
-                                                .attr('class', (body) => 'celestial-body ' + body.type + ' ' + body.id)
-                                                .attr('r', (body) => body.radius / KM_TO_PX)
-                                                .attr('cx', (body) => body.position.x)
-                                                .attr('cy', (body) => body.position.y)
-                                                .attr('transform', (body) => this.getRotationForLongitudeOfAscendingNode(body))
+                                                .attr('id', body => body.id)
+                                                .attr('class', 'celestial-body')
+                                                .attr('r', body => body.radius / PX_TO_KM)
+                                                .attr('cx', body => body.position.x)
+                                                .attr('cy', body => body.position.y)
+                                                .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
                                                 .on('click', (event, d) => {
                                                   this.select(d);
                                                   event.stopPropagation();
                                                 })
                                 );
+  }
+
+  private initRings(): void {
+    const ringsData = SOLAR_SYSTEM.reduce<{ ring: Ring, body: CelestialBody }[]>((result, body) => {
+      const rings = body.rings ?? [];
+      return result.concat(rings.map(ring => ({ ring, body })));
+    }, []);
+
+    this.translateService.get(ringsData.map(d => d.ring.id + RING_I18N_KEY)).subscribe(translations => {
+      this.groupZoomSelection.selectAll('.ring').remove();
+      this.groupZoomSelection.selectAll('.ring')
+                              .data(ringsData, d => d.ring.id)
+                              .join(
+                                enter => enter.append('path')
+                                                .attr('id', d => d.ring.id)
+                                                .attr('class', 'celestial-body ring')
+                                                .attr('d', d => this.getRingPath(d))
+                                                .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
+                                              .append('title')
+                                                .html(d => translations[d.ring.id + RING_I18N_KEY])
+                              );
+    });
+  }
+
+  private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
+    const position = data.body.position;
+    let outerRadius = (data.ring.radius + data.ring.width);
+    let innerRadius = data.ring.radius;
+
+    // avoid overlapping rings:
+    const overlappingRings = data.body.rings.filter(r => (r.id !== data.ring.id) && (innerRadius >= r.radius) && (innerRadius < (r.radius + r.width)) && (outerRadius > (r.radius + r.width)))
+                                            .sort((r1, r2) => r1.radius - r2.radius);
+    if (overlappingRings.length > 0) {
+      innerRadius = (overlappingRings[0].radius + overlappingRings[0].width);
+    }
+
+    innerRadius = innerRadius / PX_TO_KM;
+    outerRadius = outerRadius / PX_TO_KM;
+
+    // https://stackoverflow.com/a/42425397/990193
+    return `M ${position.x} ${position.y - outerRadius}
+            A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y + outerRadius}
+            A ${outerRadius} ${outerRadius} 0 1 0 ${position.x} ${position.y - outerRadius}
+            Z
+            M ${position.x} ${position.y - innerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y + innerRadius}
+            A ${innerRadius} ${innerRadius} 0 1 1 ${position.x} ${position.y - innerRadius}
+            Z`;
   }
 
   private initLagrangePoints(): void {
@@ -453,10 +518,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const paddingY = window.innerWidth <= 400 ? 40 : 50; // px
     const averageScaleWidth = Math.min(200, window.innerWidth - paddingX - COMPAS_WIDTH - 200); // px
 
-    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / KM_TO_PX) * this.transform.k); // au
+    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / PX_TO_KM) * this.transform.k); // au
     // find the nearest available scale value:
     const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
-    const scaleWidth = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k; // px
+    const scaleWidth = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k; // px
     const scaleSizeKm = Math.round(scale.max * AU_TO_KM); // km
 
     this.groupForegroundSelection.select('.scale').remove();
@@ -469,14 +534,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     // ticks
     for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
-      const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+      const nbPx = ((i * AU_TO_KM) / PX_TO_KM) * this.transform.k;
       const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY - (height / 2)} L ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY + (height / 2)}`);
     }
     // last tick (not included in the previous loop because of float rounding error)
-    const nbPxLastTick = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    const nbPxLastTick = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k;
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
@@ -486,7 +551,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
       NB_KM: formatNumber(scaleSizeKm, this.translateService.currentLang, '1.0-4')
     };
     const translationsKeys = [
-      SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_KEY
+      SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_I18N_KEY
     ];
     this.translateService.get(translationsKeys, translationParams).subscribe((translations) => {
       // text
@@ -509,7 +574,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               .attr('y', window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2) - (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
-                              .html(translations[COMPASS_TITLE_KEY]);
+                              .html(translations[COMPASS_TITLE_I18N_KEY]);
       groupCompassSelection.append('text')
                               .html('ɤ')
                               .attr('dominant-baseline', 'central')
@@ -517,7 +582,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                               .attr('y', window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2) + (SCALE_TEXT_PADDING / 4))
                               .attr('class', 'compass')
                             .append('title')
-                              .html(translations[COMPASS_TITLE_KEY]);
+                              .html(translations[COMPASS_TITLE_I18N_KEY]);
     });
   }
 
@@ -568,7 +633,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private deZoom(): void {
     const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
-                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);

@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import '~src/custom-theme';
+@import 'src/custom-theme';
 
 :host {
   display: block;
@@ -60,6 +60,13 @@
     stroke-width: 1;
     fill: rgb(43, 43, 43);
     cursor: pointer;
+  }
+
+  .ring {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1px;
+    stroke: rgba(255, 250, 241, 0.15);
+    fill: rgba(255, 210, 142, 0.15);
   }
 
   .celestial-body.satellite {
