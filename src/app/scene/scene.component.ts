@@ -170,9 +170,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initReticule();
     this.initOrbits();
     this.initCelestialBodies();
-    this.initRings();
     this.initZoom();
-    this.initLagrangePoints();
 
     this.translateService.onLangChange.subscribe(() => {
       this.onLangChange();
@@ -318,16 +316,18 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
     const position = data.body.position;
-    const outerRadius = (data.ring.radius + data.ring.width) / KM_TO_PX;
+    let outerRadius = (data.ring.radius + data.ring.width);
+    let innerRadius = data.ring.radius;
 
     // avoid overlapping rings:
-    let innerRadius = data.ring.radius;
-    const overlappingRings = data.body.rings.filter(r => (r.id !== data.ring.id) && (r.radius <= innerRadius) && ((r.radius + r.width) > innerRadius))
+    const overlappingRings = data.body.rings.filter(r => (r.id !== data.ring.id) && (innerRadius >= r.radius) && (innerRadius < (r.radius + r.width)) && (outerRadius > (r.radius + r.width)))
                                             .sort((r1, r2) => r1.radius - r2.radius);
     if (overlappingRings.length > 0) {
       innerRadius = (overlappingRings[0].radius + overlappingRings[0].width);
     }
+
     innerRadius = innerRadius / KM_TO_PX;
+    outerRadius = outerRadius / KM_TO_PX;
 
     // https://stackoverflow.com/a/42425397/990193
     return `M ${position.x} ${position.y - outerRadius}
