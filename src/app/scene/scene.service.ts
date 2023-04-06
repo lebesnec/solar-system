@@ -11,7 +11,7 @@ import {EARTH} from './data/Earth.data';
  * properly. This does NOT take into account the scale applied by the current
  * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
  */
-export const KM_TO_PX = 1e5;
+export const PX_TO_KM = 1e5;
 
 /**
  * in km
@@ -41,10 +41,10 @@ export class SceneService {
     // convert eccentricity and semi major axis to radius and position using
     // https://en.wikipedia.org/wiki/Ellipse#Standard_equation
     return {
-      cx: body.orbitBody.position.x - (body.eccentricity * body.semiMajorAxis / KM_TO_PX),
+      cx: body.orbitBody.position.x - (body.eccentricity * body.semiMajorAxis / PX_TO_KM),
       cy: body.orbitBody.position.y,
-      rx: body.semiMajorAxis / KM_TO_PX,
-      ry: Math.sqrt((body.semiMajorAxis ** 2) * (1 - (body.eccentricity ** 2))) / KM_TO_PX
+      rx: body.semiMajorAxis / PX_TO_KM,
+      ry: Math.sqrt((body.semiMajorAxis ** 2) * (1 - (body.eccentricity ** 2))) / PX_TO_KM
     };
   }
 
@@ -83,8 +83,8 @@ export class SceneService {
     // we have the position relative to the orbited body, so we add its
     // position to have the absolute position (to the sun) of the orbiting body :
     return {
-      x: (xKm / KM_TO_PX) + body.orbitBody.position.x,
-      y: (yKm / KM_TO_PX) + body.orbitBody.position.y
+      x: (xKm / PX_TO_KM) + body.orbitBody.position.x,
+      y: (yKm / PX_TO_KM) + body.orbitBody.position.y
     };
   }
 
