@@ -22,6 +22,18 @@ export enum CelestialBodyType {
 }
 
 /**
+ * radius: km, to the inner side of the ring
+ * width: km
+ * depth: km
+ */
+export interface Ring {
+  id: string;
+  radius: number;
+  width: number;
+  depth: number;
+}
+
+/**
  * position: px
  * speed: km/s
  * mass: kg
@@ -31,6 +43,7 @@ export enum CelestialBodyType {
  * trueAnomaly: degrees (between 0 & 360), counterclockwise
  * meanAnomaly: degrees (between 0 & 360), counterclockwise
  * longitudeOfAscendingNode: degrees (between 0 & 360), counterclockwise. The First Point of Aries is used as the origin of longitude.
+ * lagrangePoints: with the sun as the 2nd body
  */
 export interface CelestialBody {
   id: string;
@@ -46,7 +59,8 @@ export interface CelestialBody {
   type: CelestialBodyType;
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
-  lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ]; // with the sun as the 2nd body
+  lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ];
+  rings?: Ring[];
   unknownData?: {
     speed?: boolean;
     mass?: boolean;
@@ -72,6 +86,8 @@ export interface LagrangePoint extends Point {
 }
 
 export const LAGRANGE_POINT_I18N_KEY = 'Sun–Earth Lagrange point ';
+export const RING_I18N_KEY = ' ring';
+export const COMPASS_TITLE_I18N_KEY = 'First Point of Aries';
 
 /**
  * degrees to radian
