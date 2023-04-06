@@ -111,6 +111,9 @@ $solar-system-theme: mat.define-light-theme((
       height: 100% !important;
       margin: 0 !important;
     }
+    .mat-mdc-dialog-content {
+      max-height: 100% !important;
+    }
   }
 }
 
