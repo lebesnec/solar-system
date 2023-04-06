@@ -15,7 +15,7 @@ import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
-import {KM_TO_PX, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {PX_TO_KM, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -234,7 +234,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection.call(this.d3Zoom);
 
     this.transform = zoomIdentity.translate(this.center.x, this.center.y)
-                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
     this.svgSelection.call(this.d3Zoom.transform, this.transform);
   }
 
@@ -281,7 +281,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                   enter => enter.append('circle')
                                                 .attr('id', body => body.id)
                                                 .attr('class', 'celestial-body')
-                                                .attr('r', body => body.radius / KM_TO_PX)
+                                                .attr('r', body => body.radius / PX_TO_KM)
                                                 .attr('cx', body => body.position.x)
                                                 .attr('cy', body => body.position.y)
                                                 .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
@@ -326,8 +326,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
       innerRadius = (overlappingRings[0].radius + overlappingRings[0].width);
     }
 
-    innerRadius = innerRadius / KM_TO_PX;
-    outerRadius = outerRadius / KM_TO_PX;
+    innerRadius = innerRadius / PX_TO_KM;
+    outerRadius = outerRadius / PX_TO_KM;
 
     // https://stackoverflow.com/a/42425397/990193
     return `M ${position.x} ${position.y - outerRadius}
@@ -518,10 +518,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const paddingY = window.innerWidth <= 400 ? 40 : 50; // px
     const averageScaleWidth = Math.min(200, window.innerWidth - paddingX - COMPAS_WIDTH - 200); // px
 
-    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / KM_TO_PX) * this.transform.k); // au
+    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / PX_TO_KM) * this.transform.k); // au
     // find the nearest available scale value:
     const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
-    const scaleWidth = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k; // px
+    const scaleWidth = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k; // px
     const scaleSizeKm = Math.round(scale.max * AU_TO_KM); // km
 
     this.groupForegroundSelection.select('.scale').remove();
@@ -534,14 +534,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     // ticks
     for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
-      const nbPx = ((i * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+      const nbPx = ((i * AU_TO_KM) / PX_TO_KM) * this.transform.k;
       const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY - (height / 2)} L ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY + (height / 2)}`);
     }
     // last tick (not included in the previous loop because of float rounding error)
-    const nbPxLastTick = ((scale.max * AU_TO_KM) / KM_TO_PX) * this.transform.k;
+    const nbPxLastTick = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k;
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
@@ -633,7 +633,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private deZoom(): void {
     const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
-                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / KM_TO_PX));
+                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
