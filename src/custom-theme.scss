@@ -91,10 +91,13 @@ $solar-system-theme: mat.define-light-theme((
   .mat-mdc-dialog-title .close-button:hover {
     color: rgba(196, 196, 196, 0.8) !important;
   }
+  .mat-mdc-dialog-surface {
+    background: hsl(0, 0%, 40%) !important;
+  }
   @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
     .mat-mdc-dialog-surface {
       backdrop-filter: blur(10px) !important;
-      background: hsla(0, 0%, 100%, 0.15) !important;
+      background-color: hsla(0, 0%, 100%, 0.15) !important;
     }
   }
 }
@@ -107,6 +110,9 @@ $solar-system-theme: mat.define-light-theme((
       width: 100% !important;
       height: 100% !important;
       margin: 0 !important;
+    }
+    .mat-mdc-dialog-content {
+      max-height: 100% !important;
     }
   }
 }
