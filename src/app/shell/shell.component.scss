@@ -33,6 +33,9 @@ $color: #c5c5c5;
     z-index: 2;
     cursor: pointer;
     height: $toolbar-height;
+    display:flex;
+    align-items: center;
+    justify-content: center;
   }
   .logo svg {
     height: $toolbar-height;
@@ -41,9 +44,8 @@ $color: #c5c5c5;
     fill: $color;
   }
   .logo h1 {
-    display: inline-block;
-    line-height: 60px;
-    vertical-align: top;
+    line-height: 30px;
+    margin: 0 0 7px 0; // I give up centering this properly. Fuck this shit.
     color: $color;
     font-weight: lighter;
     font-size: 30px;
