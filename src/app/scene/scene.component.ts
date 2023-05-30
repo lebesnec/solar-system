@@ -205,7 +205,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     } else {
       const point = EARTH.lagrangePoints.find(p => p.type === id);
       if (point) {
-        this.translateService.get(LAGRANGE_POINT_I18N_KEY + point.type).subscribe(translation => {
+        this.translateService.get(LAGRANGE_POINT_I18N_KEY + point.type).subscribe(() => {
           this.zoomToLagrangePoint(point);
         });
       }
@@ -280,7 +280,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 .join(
                                   enter => enter.append('circle')
                                                 .attr('id', body => body.id)
-                                                .attr('class', 'celestial-body')
+                                                .attr('class', body => 'celestial-body ' + body.type + ' ' + body.id)
                                                 .attr('r', body => body.radius / PX_TO_KM)
                                                 .attr('cx', body => body.position.x)
                                                 .attr('cy', body => body.position.y)
@@ -377,7 +377,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                .join(
                                   enter => enter.append('ellipse')
                                                 .attr('id', (d) => 'orbit_' + d.body.id)
-                                                .attr('class', (d) => 'orbit-ellipse orbit ' + d.body.type + ' ' + d.body.id)
+                                                .attr('class', (d) => 'orbit-ellipse orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
                                                 .attr('cx', (d) => d.orbit.cx)
                                                 .attr('cy', (d) => d.orbit.cy)
                                                 .attr('rx', (d) => d.orbit.rx)
@@ -399,7 +399,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             .join(
                               enter => enter.append('path')
                                             .attr('id', (d) => 'orbit_' + d.body.id)
-                                            .attr('class', (d) => 'orbit-path orbit ' + d.body.type + ' ' + d.body.id)
+                                            .attr('class', (d) => 'orbit-path orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
                                             .attr('d', (d) => d.orbit)
                                             .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body))
                             );
