@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs';
-import {CelestialBody, LagrangePoint} from '../../scene/scene.model';
+import {CelestialBody, LagrangePointType} from '../../scene/scene.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {CelestialBody, LagrangePoint} from '../../scene/scene.model';
 export class SearchPanelService {
 
   public onBodySelected: Subject<CelestialBody | null> = new Subject();
-  public onLagrangePointSelected: Subject<LagrangePoint> = new Subject();
+  public onLagrangePointSelected: Subject<LagrangePointType> = new Subject();
 
   constructor() { }
 

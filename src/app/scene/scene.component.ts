@@ -6,16 +6,15 @@ import {
   CelestialBody,
   OrbitPoint,
   Point,
-  LagrangePoint,
   LAGRANGE_POINT_I18N_KEY,
   RING_I18N_KEY,
-  COMPASS_TITLE_I18N_KEY
+  COMPASS_TITLE_I18N_KEY, LAGRANGE_POINT_TYPES, LagrangePointType
 } from './scene.model';
 import {select} from 'd3-selection';
 import {curveCardinalClosed, line} from 'd3-shape';
 import {zoom, zoomIdentity, ZoomTransform} from 'd3-zoom';
 import {range} from 'd3-array';
-import {PX_TO_KM, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
+import {PX_TO_KM, PX_TO_KM_CLOSE, SceneService, SOLAR_SYSTEM_SIZE} from './scene.service';
 import {HAS_SYMBOL, SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {SearchPanelService} from '../shell/search-panel/search-panel.service';
 import {MERCURY} from './data/Mercury.data';
@@ -110,6 +109,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private svgSelection: any;
   private groupBackgroundSelection: any;
   private groupZoomSelection: any;
+  private groupZoomCloseSelection: any;
   private groupForegroundSelection: any;
   private d3Zoom: any;
   private labelsPath: any;
@@ -150,8 +150,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.deZoom();
       }
     });
-    this.searchPanelService.onLagrangePointSelected.subscribe(point => {
-      this.zoomToLagrangePoint(point);
+    this.searchPanelService.onLagrangePointSelected.subscribe(type => {
+      this.zoomToLagrangePoint(type);
     });
 
     fromEvent(window, 'resize').pipe(throttleTime(300, undefined, { trailing: true })).subscribe(() => {
@@ -165,11 +165,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
     this.groupBackgroundSelection = this.svgSelection.append('g');
     this.groupZoomSelection = this.svgSelection.append('g');
+    this.groupZoomCloseSelection = this.svgSelection.append('g');
     this.groupForegroundSelection = this.svgSelection.append('g');
 
     this.initReticule();
-    this.initOrbits();
-    this.initCelestialBodies();
+    this.initOrbits(true);
+    this.initOrbits(false);
+    this.initCelestialBodies(true);
+    this.initCelestialBodies(false);
     this.initZoom();
 
     this.translateService.onLangChange.subscribe(() => {
@@ -191,8 +194,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
 
     this.initScale();
-    this.initRings();
-    this.initLagrangePoints();
+    this.initRings(true);
+    this.initRings(false);
+    this.initLagrangePoints(true);
+    this.initLagrangePoints(false);
   }
 
   private handleParamId(id: string): void {
@@ -203,10 +208,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
         complete: () => this.select(body)
       });
     } else {
-      const point = EARTH.lagrangePoints.find(p => p.type === id);
-      if (point) {
-        this.translateService.get(LAGRANGE_POINT_I18N_KEY + point.type).subscribe(() => {
-          this.zoomToLagrangePoint(point);
+      const lagrangePointType = LAGRANGE_POINT_TYPES.find(t => t === id);
+      if (lagrangePointType) {
+        this.translateService.get(LAGRANGE_POINT_I18N_KEY + lagrangePointType).subscribe(() => {
+          this.zoomToLagrangePoint(lagrangePointType);
         });
       }
     }
@@ -224,11 +229,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.transform = e.transform;
 
       this.groupZoomSelection.attr('transform', e.transform);
+      this.groupZoomCloseSelection.attr('transform', e.transform);
 
       this.initLabels();
       if (!isPan) {
         this.initScale();
-        this.initLagrangePoints();
+        this.initLagrangePoints(true);
+        this.initLagrangePoints(false);
       }
     });
     this.svgSelection.call(this.d3Zoom);
@@ -274,48 +281,57 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                 );
   }
 
-  private initCelestialBodies(): void {
-    this.groupZoomSelection.selectAll('.celestial-body')
-                                .data(SOLAR_SYSTEM, d => d.id)
-                                .join(
-                                  enter => enter.append('circle')
-                                                .attr('id', body => body.id)
-                                                .attr('class', body => 'celestial-body ' + body.type + ' ' + body.id)
-                                                .attr('r', body => body.radius / PX_TO_KM)
-                                                .attr('cx', body => body.position.x)
-                                                .attr('cy', body => body.position.y)
-                                                .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body))
-                                                .on('click', (event, d) => {
-                                                  this.select(d);
-                                                  event.stopPropagation();
-                                                })
-                                );
+  private initCelestialBodies(close: boolean): void {
+    const group = close ? this.groupZoomCloseSelection : this.groupZoomSelection;
+    const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
+
+    group.selectAll('.celestial-body')
+          .data(SOLAR_SYSTEM, d => d.id)
+          .join(
+            enter => enter.append('circle')
+                          .attr('id', body => body.id)
+                          .attr('class', body => 'celestial-body ' + body.type + ' ' + body.id)
+                          .attr('r', body => body.radius / scale)
+                          .attr('cx', body => body.position.x / scale)
+                          .attr('cy', body => body.position.y / scale)
+                          .attr('transform', body => this.getRotationForLongitudeOfAscendingNode(body, close))
+                          .on('click', (event, d) => {
+                            this.select(d);
+                            event.stopPropagation();
+                          })
+          );
   }
 
-  private initRings(): void {
+  private initRings(close: boolean): void {
+    const group = close ? this.groupZoomCloseSelection : this.groupZoomSelection;
+
     const ringsData = SOLAR_SYSTEM.reduce<{ ring: Ring, body: CelestialBody }[]>((result, body) => {
       const rings = body.rings ?? [];
       return result.concat(rings.map(ring => ({ ring, body })));
     }, []);
 
     this.translateService.get(ringsData.map(d => d.ring.id + RING_I18N_KEY)).subscribe(translations => {
-      this.groupZoomSelection.selectAll('.ring').remove();
-      this.groupZoomSelection.selectAll('.ring')
-                              .data(ringsData, d => d.ring.id)
-                              .join(
-                                enter => enter.append('path')
-                                                .attr('id', d => d.ring.id)
-                                                .attr('class', 'celestial-body ring')
-                                                .attr('d', d => this.getRingPath(d))
-                                                .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body))
-                                              .append('title')
-                                                .html(d => translations[d.ring.id + RING_I18N_KEY])
-                              );
+      group.selectAll('.ring').remove();
+      group.selectAll('.ring')
+                .data(ringsData, d => d.ring.id)
+                .join(
+                  enter => enter.append('path')
+                                  .attr('id', d => d.ring.id)
+                                  .attr('class', 'celestial-body ring')
+                                  .attr('d', d => this.getRingPath(d, close))
+                                  .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body, close))
+                                .append('title')
+                                  .html(d => translations[d.ring.id + RING_I18N_KEY])
+                );
     });
   }
 
-  private getRingPath(data: { body: CelestialBody, ring: Ring }): string {
-    const position = data.body.position;
+  private getRingPath(data: { body: CelestialBody, ring: Ring }, close: boolean): string {
+    const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
+    const position = {
+      x: data.body.position.x / scale,
+      y: data.body.position.y / scale
+    };
     let outerRadius = (data.ring.radius + data.ring.width);
     let innerRadius = data.ring.radius;
 
@@ -326,8 +342,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
       innerRadius = (overlappingRings[0].radius + overlappingRings[0].width);
     }
 
-    innerRadius = innerRadius / PX_TO_KM;
-    outerRadius = outerRadius / PX_TO_KM;
+    innerRadius = innerRadius / scale;
+    outerRadius = outerRadius / scale;
 
     // https://stackoverflow.com/a/42425397/990193
     return `M ${position.x} ${position.y - outerRadius}
@@ -340,26 +356,31 @@ export class SceneComponent implements OnInit, AfterViewInit {
             Z`;
   }
 
-  private initLagrangePoints(): void {
-    this.translateService.get(EARTH.lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
-      this.groupZoomSelection.selectAll('.lagrange-point').remove();
-      this.groupZoomSelection.selectAll('.lagrange-point')
-        .data(EARTH.lagrangePoints, d => d.type)
-        .join(
-          enter => {
-            const g = enter.append('g').attr('class', p => 'lagrange-point lagrange-point-' + p.type);
-            const halfWidth = LAGRANGE_POINTS_WIDTH / (2 * this.transform.k);
-            g.append('path')
-              .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
-            g.append('path')
-              .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
-            g.append('title').html(p => translations[LAGRANGE_POINT_I18N_KEY + p.type]);
-          }
-        );
+  private initLagrangePoints(close: boolean): void {
+    const group = close ? this.groupZoomCloseSelection : this.groupZoomSelection;
+    const lagrangePoints = this.sceneService.getEarthLagrangePoints(close);
+
+    this.translateService.get(lagrangePoints.map(p => LAGRANGE_POINT_I18N_KEY + p.type)).subscribe(translations => {
+      group.selectAll('.lagrange-point').remove();
+      group.selectAll('.lagrange-point')
+            .data(lagrangePoints, d => d.type)
+            .join(
+              enter => {
+                const g = enter.append('g').attr('class', p => 'lagrange-point lagrange-point-' + p.type);
+                const halfWidth = LAGRANGE_POINTS_WIDTH / (2 * this.transform.k);
+                g.append('path')
+                  .attr('d', p => `M ${p.x - halfWidth} ${p.y - halfWidth} L ${p.x + halfWidth} ${p.y + halfWidth}`);
+                g.append('path')
+                  .attr('d', p => `M ${p.x - halfWidth} ${p.y + halfWidth} L ${p.x + halfWidth} ${p.y - halfWidth}`);
+                g.append('title').html(p => translations[LAGRANGE_POINT_I18N_KEY + p.type]);
+              }
+            );
     });
   }
 
-  private initOrbits(): void {
+  private initOrbits(close: boolean): void {
+    const group = close ? this.groupZoomCloseSelection : this.groupZoomSelection;
+
     // "big" orbits does not render well with ellipse, so we use a path instead.
     // On the contrary "small" orbit does not look good with path, so we use an
     // ellipse for everything with a semi major axis <= to ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD
@@ -369,21 +390,21 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis <= ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
                             .map((body) => ({
                                 body,
-                                orbit: this.sceneService.getOrbitEllipse(body)
+                                orbit: this.sceneService.getOrbitEllipse(body, close)
                             }));
 
-    this.groupZoomSelection.selectAll('.orbit-ellipse')
-                               .data(smallOrbitsData, (d) => d.body.id)
-                               .join(
-                                  enter => enter.append('ellipse')
-                                                .attr('id', (d) => 'orbit_' + d.body.id)
-                                                .attr('class', (d) => 'orbit-ellipse orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
-                                                .attr('cx', (d) => d.orbit.cx)
-                                                .attr('cy', (d) => d.orbit.cy)
-                                                .attr('rx', (d) => d.orbit.rx)
-                                                .attr('ry', (d) => d.orbit.ry)
-                                                .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body))
-                               );
+    group.selectAll('.orbit-ellipse')
+           .data(smallOrbitsData, (d) => d.body.id)
+           .join(
+              enter => enter.append('ellipse')
+                            .attr('id', (d) => 'orbit_' + d.body.id)
+                            .attr('class', (d) => 'orbit-ellipse orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
+                            .attr('cx', (d) => d.orbit.cx)
+                            .attr('cy', (d) => d.orbit.cy)
+                            .attr('rx', (d) => d.orbit.rx)
+                            .attr('ry', (d) => d.orbit.ry)
+                            .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body, close))
+           );
 
     // Path:
     const lineFn = line<OrbitPoint>(p => p.x, p => p.y).curve(curveCardinalClosed.tension(1));
@@ -391,26 +412,27 @@ export class SceneComponent implements OnInit, AfterViewInit {
                             .filter((body) => body.id !== 'sun' && body.semiMajorAxis > ORBIT_SEMI_MAJOR_AXIS_ELLIPSE_THRESHOLD)
                             .map((body) => ({
                               body,
-                              orbit: lineFn(this.sceneService.getOrbitPath(body, NB_POINTS_ORBIT))
+                              orbit: lineFn(this.sceneService.getOrbitPath(body, NB_POINTS_ORBIT, close))
                             }));
 
-    this.groupZoomSelection.selectAll('.orbit-path')
-                            .data(largeOrbitsData, (d) => d.body.id)
-                            .join(
-                              enter => enter.append('path')
-                                            .attr('id', (d) => 'orbit_' + d.body.id)
-                                            .attr('class', (d) => 'orbit-path orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
-                                            .attr('d', (d) => d.orbit)
-                                            .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body))
-                            );
+    group.selectAll('.orbit-path')
+          .data(largeOrbitsData, (d) => d.body.id)
+          .join(
+            enter => enter.append('path')
+                          .attr('id', (d) => 'orbit_' + d.body.id)
+                          .attr('class', (d) => 'orbit-path orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
+                          .attr('d', (d) => d.orbit)
+                          .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body, close))
+          );
   }
 
-  private getRotationForLongitudeOfAscendingNode(body: CelestialBody): string|null {
+  private getRotationForLongitudeOfAscendingNode(body: CelestialBody, close: boolean): string|null {
     if (body.longitudeOfAscendingNode && body.orbitBody) {
       // we negate the longitude of ascending node because the rotate function is clockwise:
-      return `rotate(${-body.longitudeOfAscendingNode}, ${body.orbitBody.position.x}, ${body.orbitBody.position.y})`;
+      const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
+      return `rotate(${-body.longitudeOfAscendingNode}, ${body.orbitBody.position.x / scale}, ${body.orbitBody.position.y / scale})`;
     } else if (body.orbitBody) {
-      return this.getRotationForLongitudeOfAscendingNode(body.orbitBody);
+      return this.getRotationForLongitudeOfAscendingNode(body.orbitBody, close);
     } else {
       return null;
     }
@@ -597,8 +619,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     return this.zoomTo(bbox, scale);
   }
 
-  private zoomToLagrangePoint(point: LagrangePoint): Observable<unknown> {
-    const element: any = select('.lagrange-point-' + point.type).node();
+  private zoomToLagrangePoint(type: LagrangePointType): Observable<unknown> {
+    const element: any = select('.lagrange-point-' + type).node();
     return this.zoomTo(element.getBBox(), ZOOM_EXTENT[1]);
   }
 

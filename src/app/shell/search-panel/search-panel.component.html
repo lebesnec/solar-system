@@ -14,8 +14,8 @@
         <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
         <span class="name">{{ body.id | translate }}</span>
       </mat-grid-tile>
-      <mat-grid-tile *ngFor="let point of searchResultLagrangePoints" class="lagrange-point" (click)="onLagrangePointSelected(point)">
-        <span class="name">{{ 'Sun–Earth ' + point.type | translate }}</span>
+      <mat-grid-tile *ngFor="let type of searchResultLagrangePoints" class="lagrange-point" (click)="onLagrangePointSelected(type)">
+        <span class="name">{{ 'Sun–Earth ' + type | translate }}</span>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
@@ -119,9 +119,9 @@
     </mat-expansion-panel-header>
 
     <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px" class="lagrange-points-grid">
-      <ng-template ngFor let-point [ngForOf]="EARTH.lagrangePoints">
-        <mat-grid-tile (click)="onLagrangePointSelected(point)" class="lagrange-point">
-          <span class="name">{{ 'Sun–Earth ' + point.type | translate }}</span>
+      <ng-template ngFor let-type [ngForOf]="LAGRANGE_POINT_TYPES">
+        <mat-grid-tile (click)="onLagrangePointSelected(type)" class="lagrange-point">
+          <span class="name">{{ 'Sun–Earth ' + type | translate }}</span>
         </mat-grid-tile>
       </ng-template>
     </mat-grid-list>
