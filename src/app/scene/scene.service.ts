@@ -6,7 +6,7 @@ import {EARTH} from './data/Earth.data';
 
 /**
  * SVG does not work well with big number, so we have to divide each value
- * (in km) by this ratio before drawing. SCG also doesn't have much decimal
+ * (in km) by this ratio before drawing. SVG also doesn't have much decimal
  * precision, so we can't have a ratio too big, or small bodies won't render
  * properly. This does NOT take into account the scale applied by the current
  * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html

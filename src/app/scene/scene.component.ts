@@ -169,9 +169,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.groupForegroundSelection = this.svgSelection.append('g');
 
     this.initReticule();
-    this.initOrbits(true);
     this.initOrbits(false);
-    this.initCelestialBodies(true);
     this.initCelestialBodies(false);
     this.initZoom();
 
@@ -194,9 +192,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     });
 
     this.initScale();
-    this.initRings(true);
     this.initRings(false);
-    this.initLagrangePoints(true);
     this.initLagrangePoints(false);
   }
 
@@ -234,7 +230,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
       this.initLabels();
       if (!isPan) {
         this.initScale();
-        this.initLagrangePoints(true);
         this.initLagrangePoints(false);
       }
     });
@@ -289,7 +284,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
           .data(SOLAR_SYSTEM, d => d.id)
           .join(
             enter => enter.append('circle')
-                          .attr('id', body => body.id)
                           .attr('class', body => 'celestial-body ' + body.type + ' ' + body.id)
                           .attr('r', body => body.radius / scale)
                           .attr('cx', body => body.position.x / scale)
@@ -316,8 +310,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                 .data(ringsData, d => d.ring.id)
                 .join(
                   enter => enter.append('path')
-                                  .attr('id', d => d.ring.id)
-                                  .attr('class', 'celestial-body ring')
+                                  .attr('class', d => 'ring ' + d.ring.id)
                                   .attr('d', d => this.getRingPath(d, close))
                                   .attr('transform', d => this.getRotationForLongitudeOfAscendingNode(d.body, close))
                                 .append('title')
@@ -397,7 +390,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
            .data(smallOrbitsData, (d) => d.body.id)
            .join(
               enter => enter.append('ellipse')
-                            .attr('id', (d) => 'orbit_' + d.body.id)
                             .attr('class', (d) => 'orbit-ellipse orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
                             .attr('cx', (d) => d.orbit.cx)
                             .attr('cy', (d) => d.orbit.cy)
@@ -419,7 +411,6 @@ export class SceneComponent implements OnInit, AfterViewInit {
           .data(largeOrbitsData, (d) => d.body.id)
           .join(
             enter => enter.append('path')
-                          .attr('id', (d) => 'orbit_' + d.body.id)
                           .attr('class', (d) => 'orbit-path orbit orbit-' + d.body.type + ' orbit-' + d.body.id)
                           .attr('d', (d) => d.orbit)
                           .attr('transform', (d) => this.getRotationForLongitudeOfAscendingNode(d.body, close))
@@ -442,7 +433,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const allLabelsData = SOLAR_SYSTEM.map(body => {
       return {
         body,
-        boundingBox: (select('#' + body.id).node() as any).getBoundingClientRect(),
+        boundingBox: (select('.' + body.id).node() as any).getBoundingClientRect(),
         visible: true,
         hasSymbol: HAS_SYMBOL.includes(body)
       };
@@ -485,13 +476,13 @@ export class SceneComponent implements OnInit, AfterViewInit {
                                                                       .transition()
                                                                       .duration(LABEL_TRANSITION_MS)
                                                                       .style('opacity', 1);
-                                                        select('#orbit_' + d.body.id).classed('hovered', true);
+                                                        select('.orbit-' + d.body.id).classed('hovered', true);
                                                       })
                                                       .on('mouseout', (event, d) => {
                                                         this.labelsPath.transition()
                                                                         .duration(LABEL_TRANSITION_MS)
                                                                         .style('opacity', 0);
-                                                        select('#orbit_' + d.body.id).classed('hovered', false);
+                                                        select('.orbit-' + d.body.id).classed('hovered', false);
                                                       })
                                                       .on('mousedown', () => {
                                                         this.labelsPath.style('opacity', 0);
@@ -508,8 +499,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .data(d => [ d ], (d) => d.body.id)
                         .join(
                           enter => enter.append('text')
-                                        .attr('id', (d) => 'labeltext_' + d.body.id)
-                                        .attr('class', (d) => 'label ' + d.body.type + ' ' + d.body.id)
+                                        .attr('class', (d) => 'label label-' + d.body.type + ' label-' + d.body.id)
                                         .attr('dominant-baseline', 'central')
                                         .text((d) => this.bodiesLabels[d.body.id])
                                         .attr('x', (d) => d.boundingBox.right + LABEL_DISTANCE_TO_BODY.x + (d.hasSymbol ? 1.2 * SYMBOL_SIZE : 0))
@@ -523,8 +513,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .data(d => d.body !== SUN && d.hasSymbol ? [ d ] : [], (d) => d.body.id)
                         .join(
                           enter => enter.append('image')
-                                        .attr('id', (d) => 'labelsymbol_' + d.body.id)
-                                        .attr('class', (d) => 'label-symbol ' + d.body.type + ' ' + d.body.id)
+                                        .attr('class', (d) => 'label-symbol label-symbol-' + d.body.type + ' label-symbol-' + d.body.id)
                                         .attr('href', (d) => 'assets/symbols/' + d.body.id + '.svg')
                                         .attr('width', SYMBOL_SIZE)
                                         .attr('height', SYMBOL_SIZE)
@@ -642,7 +631,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
    * so we have to wrap the element into a group, get the bbox, and remove the group.
    */
   private getBoundingBox(body: CelestialBody): DOMRect {
-    const element: any = select('#' + body.id).node();
+    const element: any = select('.' + body.id).node();
     const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     element.parentNode.appendChild(group);
     group.appendChild(element);
@@ -696,9 +685,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private select(body: CelestialBody): void {
     this.deselectAll();
-    select('#labeltext_' + body.id).classed('selected', true);
-    select('#labelsymbol_' + body.id).classed('selected', true);
-    select('#orbit_' + body.id).classed('selected', true);
+    select('.label-' + body.id).classed('selected', true);
+    select('.label-symbol-' + body.id).classed('selected', true);
+    select('.orbit-' + body.id).classed('selected', true);
 
     if (this.celestialBodyDialogRef) {
       this.celestialBodyDialogRef.componentInstance.body = body;
