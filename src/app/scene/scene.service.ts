@@ -5,16 +5,6 @@ import {SOLAR_SYSTEM, SUN} from './data/SolarSystem.data';
 import {EARTH} from './data/Earth.data';
 
 /**
- * SVG does not work well with big number, so we have to divide each value
- * (in km) by this ratio before drawing. SVG also doesn't have much decimal
- * precision, so we can't have a ratio too big, or small bodies won't render
- * properly. This does NOT take into account the scale applied by the current
- * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
- */
-export const PX_TO_KM = 1e5;
-export const PX_TO_KM_CLOSE = 1e2;
-
-/**
  * in km
  */
 export const SOLAR_SYSTEM_SIZE = 80 * AU_TO_KM;
@@ -36,10 +26,9 @@ export class SceneService {
   /**
    * In px, relative to the sun at (0, 0)
    */
-  public getOrbitEllipse(body: CelestialBody, close: boolean): Ellipse {
+  public getOrbitEllipse(body: CelestialBody, scale: number): Ellipse {
     // convert eccentricity and semi major axis to radius and position using
     // https://en.wikipedia.org/wiki/Ellipse#Standard_equation
-    const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
     return {
       cx: (body.orbitBody.position.x / scale) - (body.eccentricity * body.semiMajorAxis / scale),
       cy: body.orbitBody.position.y / scale,
@@ -51,9 +40,7 @@ export class SceneService {
   /**
    * Positions in px, relative to the sun at (0, 0)
    */
-  public getOrbitPath(body: CelestialBody, nbPoints: number, close: boolean): OrbitPoint[] {
-    const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
-
+  public getOrbitPath(body: CelestialBody, nbPoints: number, scale: number): OrbitPoint[] {
     const result = d3.range(0, 360, 360 / nbPoints).map(trueAnomaly => {
       const point = this.getPositionForTrueAnomaly(body, trueAnomaly);
       return {
@@ -103,8 +90,7 @@ export class SceneService {
    * https://en.wikipedia.org/wiki/Lagrange_point#Physical_and_mathematical_details
    * @returns LagrangePoints the 5 Lagrange points for the earth and sun (positions in px from the sun)
    */
-  public getEarthLagrangePoints(close: boolean): [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ] {
-    const scale = close ? PX_TO_KM_CLOSE : PX_TO_KM;
+  public getEarthLagrangePoints(scale: number): [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ] {
     const earthPos = {
       x: EARTH.position.x / scale,
       y: EARTH.position.y / scale
