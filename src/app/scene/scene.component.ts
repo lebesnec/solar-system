@@ -79,17 +79,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
-
-/**
- * SVG does not work well with big number, so we have to divide each value
- * (in km) by this ratio before drawing. SVG also doesn't have much decimal
- * precision, so we can't have a ratio too big, or small bodies won't render
- * properly. This does NOT take into account the scale applied by the current
- * zoom! See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
- */
-const PX_TO_KM = 1e5;
-const PX_TO_KM_CLOSE = 1e2;
+const ZOOM_EXTENT: [ number, number ] = [ 0.0000005, 0.5 ];
 
 @Component({
   selector: 'app-scene',
@@ -125,7 +115,16 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private transform: ZoomTransform;
   private bodiesLabels = {};
   private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }>;
-  private scale = PX_TO_KM; // TODO PX_TO_KM_CLOSE
+
+  /**
+   * SVG does not work well with big number, so we have to divide each value
+   * (in km) by this ratio before drawing (in px). SVG also doesn't have much
+   * decimal precision, so we can't have a ratio too big, or small bodies won't
+   * render properly. This does NOT take into account the scale applied by the
+   * current zoom!
+   * See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
+   */
+  private scale = 75;
 
   private get center(): Point {
     return {
@@ -244,7 +243,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.svgSelection.call(this.d3Zoom);
 
     this.transform = zoomIdentity.translate(this.center.x, this.center.y)
-                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
+                                 .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / this.scale));
     this.svgSelection.call(this.d3Zoom.transform, this.transform);
   }
 
@@ -527,10 +526,10 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const paddingY = window.innerWidth <= 400 ? 40 : 50; // px
     const averageScaleWidth = Math.min(200, window.innerWidth - paddingX - COMPAS_WIDTH - 200); // px
 
-    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / PX_TO_KM) * this.transform.k); // au
+    const scaleSizeAU = averageScaleWidth / ((AU_TO_KM / this.scale) * this.transform.k); // au
     // find the nearest available scale value:
     const scale = SCALE_POSSIBLE_VALUES.sort((a, b) => Math.abs(scaleSizeAU - a.max) - Math.abs(scaleSizeAU - b.max))[0];
-    const scaleWidth = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k; // px
+    const scaleWidth = ((scale.max * AU_TO_KM) / this.scale) * this.transform.k; // px
     const scaleSizeKm = Math.round(scale.max * AU_TO_KM); // km
 
     this.groupForegroundSelection.select('.scale').remove();
@@ -543,14 +542,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
     // ticks
     for (let i = 0; i < scale.max; i = i + scale.tickInterval) {
-      const nbPx = ((i * AU_TO_KM) / PX_TO_KM) * this.transform.k;
+      const nbPx = ((i * AU_TO_KM) / this.scale) * this.transform.k;
       const height = (i % (SCALE_LARGE_TICK_STEP * scale.tickInterval) === 0 || i === scale.max ? SCALE_HEIGHT_LARGE_TICK : SCALE_HEIGHT_SMALL_TICK);
       groupScaleSelection.append('path')
                           .attr('shape-rendering', 'crispEdges')
                           .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY - (height / 2)} L ${paddingX + COMPAS_WIDTH + nbPx} ${window.innerHeight - paddingY + (height / 2)}`);
     }
     // last tick (not included in the previous loop because of float rounding error)
-    const nbPxLastTick = ((scale.max * AU_TO_KM) / PX_TO_KM) * this.transform.k;
+    const nbPxLastTick = ((scale.max * AU_TO_KM) / this.scale) * this.transform.k;
     groupScaleSelection.append('path')
                         .attr('shape-rendering', 'crispEdges')
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
@@ -642,7 +641,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
 
   private deZoom(): void {
     const zoomTo = zoomIdentity.translate(this.center.x, this.center.y)
-                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / PX_TO_KM));
+                               .scale(Math.min(this.center.x * 2, this.center.y * 2) / (SOLAR_SYSTEM_SIZE / this.scale));
     this.svgSelection.transition()
                       .duration(ZOOM_TRANSITION_MS)
                       .call(this.d3Zoom.transform, zoomTo);
@@ -652,22 +651,22 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const max = ZOOM_EXTENT[1];
     switch (body) {
       case SUN:
-        return 5.0;
+        return 0.01;
       case MERCURY:
       case VENUS:
         return max;
       case EARTH:
-        return 100;
+        return 0.05;
       case MARS:
         return max;
       case JUPITER:
-        return 1.3;
+        return 0.05;
       case SATURN:
-        return 1.5;
+        return 0.03;
       case URANUS:
-        return 2.0;
+        return 0.1;
       case NEPTUNE:
-        return 0.6;
+        return 0.15;
       default:
         if (body.type === CelestialBodyType.DWARF_PLANET) {
           return max;
