@@ -21,23 +21,29 @@
 
 :host ::ng-deep {
 
-  .hide-scale .scale, .hide-scale .compass {
-    display: none;
+  .hide-scale {
+    .scale, .compass {
+      display: none;
+    }
   }
 
-  .hide-reticule .reticuleV, .hide-reticule .reticuleH {
-    display: none;
+  .hide-reticule {
+    .reticuleV, .reticuleH {
+      display: none;
+    }
   }
 
-  .hide-labels .label-path, .hide-labels .label, .hide-labels .label-symbol {
-    display: none;
+  .hide-labels {
+    .label-path, .label, .label-symbol {
+      display: none;
+    }
   }
 
   .hide-orbits .orbit {
     display: none;
   }
 
-  .hide-orbits-satellites .orbit.satellite {
+  .hide-orbits-satellites .orbit-satellite {
     display: none;
   }
 
@@ -147,6 +153,7 @@
   .label {
     fill: white;
     cursor: pointer;
+    font-weight: 300;
   }
 
   .label.selected {

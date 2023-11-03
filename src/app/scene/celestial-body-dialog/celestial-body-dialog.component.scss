@@ -18,7 +18,30 @@ mat-dialog-content {
     padding-bottom: 30px;
   }
 
-  table {
-    width: 100%;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: flex;
+      margin: 6px;
+    }
+    li span:first-child {
+      padding-right: 7px;
+      order: 1;
+    }
+    li span:last-child {
+      padding-left: 7px;
+      order: 3;
+    }
+    li::after {
+      background-image: radial-gradient(circle, currentcolor 1px, transparent 1.5px);
+      background-position: bottom;
+      background-size: 1ex 4.5px;
+      background-repeat: space no-repeat;
+      content: "";
+      flex-grow: 1;
+      height: 1em;
+      order: 2;
+    }
   }
 }

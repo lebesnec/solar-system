@@ -20,14 +20,14 @@
     <img [src]="getImagePath(body, 'jpg')" width="100%" [alt]="body.id | translate">
   </picture>
 
-  <table>
-    <tr>
-      <td>
+  <ul>
+    <li>
+      <span>
         <a [href]="'https://en.wikipedia.org/wiki/Mass' | translate" target="_blank">
           {{ 'Mass' | translate }}
         </a>
-      </td>
-      <td>
+      </span>
+      <span>
         <ng-template [ngIf]="body.unknownData?.mass" [ngIfElse]="valueMass">
           {{ 'unknown' | translate: { suffix: 'e'} }}
         </ng-template>
@@ -39,15 +39,15 @@
             {{ ('NB lb' | translate: { NB: body.mass * KG_TO_POUND | number: '1.0-3' : lang }) }}
           </ng-template>
         </ng-template>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </span>
+    </li>
+    <li>
+      <span>
         <a [href]="'https://en.wikipedia.org/wiki/Radius' | translate" target="_blank">
           {{ 'Mean radius' | translate }}
         </a>
-      </td>
-      <td>
+      </span>
+      <span>
         <ng-template [ngIf]="body.unknownData?.radius" [ngIfElse]="valueRadius">
           {{ 'unknown' | translate: { suffix: ''} }}
         </ng-template>
@@ -59,36 +59,36 @@
             {{ ('NB mi' | translate: { NB: body.radius * KM_TO_MILE | number: '1.0-0' : lang }) }}
           </ng-template>
         </ng-template>
-      </td>
-    </tr>
+      </span>
+    </li>
     <ng-container *ngIf="body !== SUN">
-      <tr>
-        <td>
+      <li>
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Mean_anomaly' | translate" target="_blank">
             {{ 'Mean anomaly' | translate }}
           </a>
-        </td>
-        <td>
+        </span>
+        <span>
           {{ body.unknownData?.meanAnomaly ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.meanAnomaly | number: '1.0-0' : lang }) }}
-        </td>
-      </tr>
-      <tr>
-        <td>
+        </span>
+      </li>
+      <li>
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Orbital_eccentricity' | translate" target="_blank">
             {{ 'Eccentricity' | translate }}
           </a>
-        </td>
-        <td>
+        </span>
+        <span>
           {{ body.unknownData?.eccentricity ? ('unknown' | translate: { suffix: 'e'}) : (body.eccentricity | number: '1.1-10' : lang) }}
-        </td>
-      </tr>
-      <tr>
-        <td>
+        </span>
+      </li>
+      <li>
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes' | translate" target="_blank">
             {{ 'Semi-major axis' | translate }}
           </a>
-        </td>
-        <td>
+        </span>
+        <span>
           <ng-template [ngIf]="body.unknownData?.semiMajorAxis" [ngIfElse]="valueAxis">
             {{ 'unknown' | translate: { suffix: ''} }}
           </ng-template>
@@ -100,13 +100,13 @@
               {{ ('NB mi' | translate: { NB: body.semiMajorAxis * KM_TO_MILE | number: '1.0-0' : lang }) }}
             </ng-template>
           </ng-template>
-        </td>
-      </tr>
-      <tr *ngIf="body.speed">
-        <td>
+        </span>
+      </li>
+      <li *ngIf="body.speed">
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a>
-        </td>
-        <td>
+        </span>
+        <span>
           <ng-template [ngIf]="body.unknownData?.speed" [ngIfElse]="valueSpeed">
             {{ 'unknown' | translate: { suffix: 'e'} }}
           </ng-template>
@@ -118,28 +118,28 @@
               {{ ('NB mi/s' | translate: { NB: body.speed * KM_TO_MILE | number: '1.0-0' : lang }) }}
             </ng-template>
           </ng-template>
-        </td>
-      </tr>
-      <tr *ngIf="body.longitudeOfAscendingNode">
-        <td>
+        </span>
+      </li>
+      <li *ngIf="body.longitudeOfAscendingNode">
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node' | translate" target="_blank">
             {{ 'Longitude of the ascending node' | translate }}
           </a>
-        </td>
-        <td>
+        </span>
+        <span>
           {{ body.unknownData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
-        </td>
-      </tr>
-      <tr *ngIf="body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET">
-        <td>
+        </span>
+      </li>
+      <li *ngIf="body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET">
+        <span>
           <a [href]="'https://en.wikipedia.org/wiki/Natural_satellite' | translate" target="_blank">
             {{ 'Satellites' | translate }}
           </a>
-        </td>
-        <td>
+        </span>
+        <span>
           {{ body.satellites.length > 0 ? (body.satellites.length | number: '1.0-0' : lang) : ('none' | translate) }}
-        </td>
-      </tr>
+        </span>
+      </li>
     </ng-container>
-  </table>
+  </ul>
 </mat-dialog-content>
