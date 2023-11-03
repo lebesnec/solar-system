@@ -112,7 +112,7 @@ $color: #c5c5c5;
 
 :host ::ng-deep .search-field {
   .mdc-notched-outline__leading, .mdc-notched-outline__notch, .mdc-notched-outline__trailing {
-    border-color: rgb($color, 0.5);
+    border-color: rgb($color, 0.5) !important;
   }
 }
 :host ::ng-deep .search-field:hover {
