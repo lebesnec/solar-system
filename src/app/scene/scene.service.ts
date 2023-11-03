@@ -30,7 +30,7 @@ export class SceneService {
     // convert eccentricity and semi major axis to radius and position using
     // https://en.wikipedia.org/wiki/Ellipse#Standard_equation
     return {
-      cx: (body.orbitBody.position.x / scale) - (body.eccentricity * body.semiMajorAxis / scale),
+      cx: (body.orbitBody.position.x / scale) - ((body.eccentricity * body.semiMajorAxis) / scale),
       cy: body.orbitBody.position.y / scale,
       rx: body.semiMajorAxis / scale,
       ry: Math.sqrt((body.semiMajorAxis ** 2) * (1 - (body.eccentricity ** 2))) / scale

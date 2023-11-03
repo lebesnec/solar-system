@@ -79,7 +79,7 @@ const SCALE_TITLE_PLURAL_KEY = 'NB_AU Astronomical Units = NB_KM km';
 
 const COMPAS_WIDTH = 35; // px
 
-const ZOOM_EXTENT: [ number, number ] = [ 0.0000005, 0.5 ];
+const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 
 @Component({
   selector: 'app-scene',
@@ -124,7 +124,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
    * current zoom!
    * See https://oreillymedia.github.io/Using_SVG/extras/ch08-precision.html
    */
-  private scale = 75;
+  private scale = 1e5;
 
   private get center(): Point {
     return {
@@ -651,22 +651,22 @@ export class SceneComponent implements OnInit, AfterViewInit {
     const max = ZOOM_EXTENT[1];
     switch (body) {
       case SUN:
-        return 0.01;
+        return 5.0;
       case MERCURY:
       case VENUS:
         return max;
       case EARTH:
-        return 0.05;
+        return 100;
       case MARS:
         return max;
       case JUPITER:
-        return 0.05;
+        return 1.3;
       case SATURN:
-        return 0.03;
+        return 1.5;
       case URANUS:
-        return 0.1;
+        return 2.0;
       case NEPTUNE:
-        return 0.15;
+        return 0.6;
       default:
         if (body.type === CelestialBodyType.DWARF_PLANET) {
           return max;
