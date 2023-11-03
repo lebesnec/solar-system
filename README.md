@@ -18,7 +18,6 @@ An interactive map of the solar system.
 
 - Mail: christophe.lebesnerais.pro@gmail.com
 - GitHub: https://github.com/lebesnec/solar-system/discussions
-- Twitter: https://twitter.com/celestial_map
 
 ## Author
 
