@@ -34,7 +34,7 @@ export interface Ring {
 }
 
 /**
- * position: px
+ * position: km from the Sun
  * speed: km/s
  * mass: kg
  * radius: km
@@ -59,7 +59,6 @@ export interface CelestialBody {
   type: CelestialBodyType;
   satellites: CelestialBody[];
   orbitBody: CelestialBody | null;
-  lagrangePoints?: [ LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint, LagrangePoint ];
   rings?: Ring[];
   unknownData?: {
     speed?: boolean;
@@ -80,6 +79,14 @@ export enum LagrangePointType {
   L4 = 'l4',
   L5 = 'l5'
 }
+
+export const LAGRANGE_POINT_TYPES: LagrangePointType[] = [
+  LagrangePointType.L1,
+  LagrangePointType.L2,
+  LagrangePointType.L3,
+  LagrangePointType.L4,
+  LagrangePointType.L5
+];
 
 export interface LagrangePoint extends Point {
   type: LagrangePointType;
