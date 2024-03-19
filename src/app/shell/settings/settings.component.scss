@@ -16,6 +16,9 @@ h3 {
     background-color: transparent !important;
     min-width: 150px;
   }
+  .mat-pseudo-checkbox::after {
+    color: white !important;
+  }
   .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($solar-system-primary, 0.2) !important;
   }

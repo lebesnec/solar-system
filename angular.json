@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "solar-system:build"
+            "buildTarget": "solar-system:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "solar-system:build:production"
+              "buildTarget": "solar-system:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "solar-system:build"
+            "buildTarget": "solar-system:build"
           }
         },
         "test": {
@@ -120,5 +120,8 @@
     "@schematics/angular:component": {
       "style": "scss"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
