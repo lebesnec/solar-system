@@ -5,7 +5,7 @@ MIT
 MIT
 The MIT License
 
-Copyright (c) 2023 Google LLC.
+Copyright (c) 2024 Google LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ MIT
 MIT
 The MIT License
 
-Copyright (c) 2023 Google LLC.
+Copyright (c) 2024 Google LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ THIS SOFTWARE.
 
 d3-array
 ISC
-Copyright 2010-2022 Mike Bostock
+Copyright 2010-2023 Mike Bostock
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -225,7 +225,7 @@ THIS SOFTWARE.
 
 d3-path
 ISC
-Copyright 2015-2021 Mike Bostock
+Copyright 2015-2022 Mike Bostock
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -259,7 +259,7 @@ THIS SOFTWARE.
 
 d3-shape
 ISC
-Copyright 2010-2021 Mike Bostock
+Copyright 2010-2022 Mike Bostock
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
