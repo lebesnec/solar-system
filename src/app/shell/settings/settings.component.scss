@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import 'src/custom-theme';
+@use 'src/m3-theme';
 
 :host {
   display: block;
@@ -20,7 +20,7 @@ h3 {
     color: white !important;
   }
   .mat-button-toggle-checked {
-    background-color: mat.m2-get-color-from-palette($solar-system-primary, 0.2) !important;
+    background-color: mat.get-theme-color(m3-theme.$dark-theme, primary) !important;
   }
 }
 
