@@ -20,7 +20,7 @@ h3 {
     color: white !important;
   }
   .mat-button-toggle-checked {
-    background-color: mat.get-color-from-palette($solar-system-primary, 0.2) !important;
+    background-color: mat.m2-get-color-from-palette($solar-system-primary, 0.2) !important;
   }
 }
 

@@ -157,11 +157,11 @@
   }
 
   .label.selected {
-    fill: mat.get-color-from-palette($solar-system-primary);
+    fill: mat.m2-get-color-from-palette($solar-system-primary);
   }
 
   .label-path {
-    stroke: mat.get-color-from-palette($solar-system-primary, lighter);
+    stroke: mat.m2-get-color-from-palette($solar-system-primary, lighter);
     stroke-width: 1;
     fill: transparent;
   }
@@ -172,15 +172,15 @@
   }
 
   .label-symbol.selected {
-    @include recolor(mat.get-color-from-palette($solar-system-primary));
+    @include recolor(mat.m2-get-color-from-palette($solar-system-primary));
   }
 
   .group-label:hover {
     .label {
-      fill: mat.get-color-from-palette($solar-system-primary, lighter);
+      fill: mat.m2-get-color-from-palette($solar-system-primary, lighter);
     }
     .label-symbol {
-      @include recolor(mat.get-color-from-palette($solar-system-primary, lighter));
+      @include recolor(mat.m2-get-color-from-palette($solar-system-primary, lighter));
     }
   }
 
@@ -193,12 +193,12 @@
   }
 
   .orbit.hovered {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.m2-get-color-from-palette($solar-system-primary);
     stroke-width: 1;
   }
 
   .orbit.selected {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.m2-get-color-from-palette($solar-system-primary);
     stroke-width: 1;
   }
 
@@ -211,7 +211,7 @@
     }
   }
   .lagrange-point:hover path {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.m2-get-color-from-palette($solar-system-primary);
   }
 
   .hidden {
