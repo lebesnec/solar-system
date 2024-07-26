@@ -151,8 +151,20 @@ $dark-theme: mat.define-theme((
 
 html {
   @include mat.core-theme($dark-theme);
-  @include mat.all-component-themes($dark-theme);
-  @include mat.color-variants-backwards-compatibility($dark-theme);
+  @include mat.toolbar-theme($dark-theme);
+  @include mat.input-theme($dark-theme);
+  @include mat.icon-button-theme($dark-theme);
+  @include mat.button-theme($dark-theme);
+  @include mat.divider-theme($dark-theme);
+  @include mat.expansion-theme($dark-theme);
+  @include mat.grid-list-theme($dark-theme);
+  @include mat.dialog-theme($dark-theme);
+  @include mat.sidenav-theme($dark-theme);
+  @include mat.list-theme($dark-theme);
+  @include mat.button-toggle-theme($dark-theme);
+  @include mat.menu-theme($dark-theme);
+  @include mat.form-field-theme($dark-theme);
+  @include mat.color-variants-backwards-compatibility($dark-theme); // TODO
 }
 
 // custom global style:
