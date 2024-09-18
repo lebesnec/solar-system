@@ -18,7 +18,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: main
-          folder: dist/solar-system
+          folder: dist/solar-system/browser
           repository-name: lebesnec/solar-system-develop
           token: ${{ secrets.SOLAR_SYSTEM_DEVELOP_TOKEN }}
 

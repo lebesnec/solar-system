@@ -1,12 +1,22 @@
 <div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  <img *ngIf="HAS_SYMBOL.includes(body)" [src]="'assets/symbols/' + body.id + '.svg'" class="symbol" [alt]="body.id | translate">
+  @if (HAS_SYMBOL.includes(body)) {
+    <img [src]="'assets/symbols/' + body.id + '.svg'" class="symbol" [alt]="body.id | translate">
+  }
   {{ body.id | translate }},
-  <ng-container [ngSwitch]="body.type">
-    <ng-container *ngSwitchCase="CelestialBodyType.STAR">{{ 'star' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CelestialBodyType.PLANET">{{ 'planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CelestialBodyType.DWARF_PLANET">{{ 'dwarf planet' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="CelestialBodyType.SATELLITE">{{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}</ng-container>
-  </ng-container>
+  @switch (body.type) {
+    @case (CelestialBodyType.STAR) {
+      {{ 'star' | translate }}
+    }
+    @case (CelestialBodyType.PLANET) {
+      {{ 'planet' | translate }}
+    }
+    @case (CelestialBodyType.DWARF_PLANET) {
+      {{ 'dwarf planet' | translate }}
+    }
+    @case (CelestialBodyType.SATELLITE) {
+      {{ 'satellite of PLANET' | translate: { PLANET: body.orbitBody.id | translate } }}
+    }
+  }
 
   <button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
     <mat-icon fontIcon="close"></mat-icon>
@@ -14,11 +24,13 @@
 </div>
 
 <mat-dialog-content>
-  <picture *ngIf="!MISSING_PICTURES.includes(body)">
-    <source [srcset]="getImagePath(body, 'avif')" type="image/avif">
-    <source [srcset]="getImagePath(body, 'jpg')" type="image/jpeg">
-    <img [src]="getImagePath(body, 'jpg')" width="100%" [alt]="body.id | translate">
-  </picture>
+  @if (!MISSING_PICTURES.includes(body)) {
+    <picture>
+      <source [srcset]="getImagePath(body, 'avif')" type="image/avif">
+      <source [srcset]="getImagePath(body, 'jpg')" type="image/jpeg">
+      <img [src]="getImagePath(body, 'jpg')" width="100%" [alt]="body.id | translate">
+    </picture>
+  }
 
   <ul>
     <li>
@@ -28,17 +40,15 @@
         </a>
       </span>
       <span>
-        <ng-template [ngIf]="body.unknownData?.mass" [ngIfElse]="valueMass">
+        @if (body.unknownData?.mass) {
           {{ 'unknown' | translate: { suffix: 'e'} }}
-        </ng-template>
-        <ng-template #valueMass>
-          <ng-template [ngIf]="isMetric" [ngIfElse]="imperialMass">
+        } @else {
+          @if (isMetric) {
             {{ ('NB kg' | translate: { NB: body.mass | number: '1.0-3' : lang }) }}
-          </ng-template>
-          <ng-template #imperialMass>
+          } @else {
             {{ ('NB lb' | translate: { NB: body.mass * KG_TO_POUND | number: '1.0-3' : lang }) }}
-          </ng-template>
-        </ng-template>
+          }
+        }
       </span>
     </li>
     <li>
@@ -48,20 +58,18 @@
         </a>
       </span>
       <span>
-        <ng-template [ngIf]="body.unknownData?.radius" [ngIfElse]="valueRadius">
+        @if (body.unknownData?.radius) {
           {{ 'unknown' | translate: { suffix: ''} }}
-        </ng-template>
-        <ng-template #valueRadius>
-          <ng-template [ngIf]="isMetric" [ngIfElse]="imperialRadius">
+        } @else {
+          @if (isMetric) {
             {{ ('NB km' | translate: { NB: body.radius | number: '1.0-0' : lang }) }}
-          </ng-template>
-          <ng-template #imperialRadius>
+          } @else {
             {{ ('NB mi' | translate: { NB: body.radius * KM_TO_MILE | number: '1.0-0' : lang }) }}
-          </ng-template>
-        </ng-template>
+          }
+        }
       </span>
     </li>
-    <ng-container *ngIf="body !== SUN">
+    @if (body !== SUN) {
       <li>
         <span>
           <a [href]="'https://en.wikipedia.org/wiki/Mean_anomaly' | translate" target="_blank">
@@ -89,57 +97,59 @@
           </a>
         </span>
         <span>
-          <ng-template [ngIf]="body.unknownData?.semiMajorAxis" [ngIfElse]="valueAxis">
+          @if (body.unknownData?.semiMajorAxis) {
             {{ 'unknown' | translate: { suffix: ''} }}
-          </ng-template>
-          <ng-template #valueAxis>
-            <ng-template [ngIf]="isMetric" [ngIfElse]="imperialAxis">
+          } @else {
+            @if (isMetric) {
               {{ ('NB km' | translate: { NB: body.semiMajorAxis | number: '1.0-0' : lang }) }}
-            </ng-template>
-            <ng-template #imperialAxis>
+            } @else {
               {{ ('NB mi' | translate: { NB: body.semiMajorAxis * KM_TO_MILE | number: '1.0-0' : lang }) }}
-            </ng-template>
-          </ng-template>
+            }
+          }
         </span>
       </li>
-      <li *ngIf="body.speed">
-        <span>
-          <a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a>
-        </span>
-        <span>
-          <ng-template [ngIf]="body.unknownData?.speed" [ngIfElse]="valueSpeed">
-            {{ 'unknown' | translate: { suffix: 'e'} }}
-          </ng-template>
-          <ng-template #valueSpeed>
-            <ng-template [ngIf]="isMetric" [ngIfElse]="imperialSpeed">
-              {{ ('NB km/s' | translate: { NB: body.speed | number: '1.0-0' : lang }) }}
-            </ng-template>
-            <ng-template #imperialSpeed>
-              {{ ('NB mi/s' | translate: { NB: body.speed * KM_TO_MILE | number: '1.0-0' : lang }) }}
-            </ng-template>
-          </ng-template>
-        </span>
-      </li>
-      <li *ngIf="body.longitudeOfAscendingNode">
-        <span>
-          <a [href]="'https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node' | translate" target="_blank">
-            {{ 'Longitude of the ascending node' | translate }}
-          </a>
-        </span>
-        <span>
-          {{ body.unknownData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
-        </span>
-      </li>
-      <li *ngIf="body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET">
-        <span>
-          <a [href]="'https://en.wikipedia.org/wiki/Natural_satellite' | translate" target="_blank">
-            {{ 'Satellites' | translate }}
-          </a>
-        </span>
-        <span>
-          {{ body.satellites.length > 0 ? (body.satellites.length | number: '1.0-0' : lang) : ('none' | translate) }}
-        </span>
-      </li>
-    </ng-container>
+      @if (body.speed) {
+        <li>
+          <span>
+            <a [href]="'https://en.wikipedia.org/wiki/Orbital_speed' | translate" target="_blank">{{ 'Average orbital speed' | translate }}</a>
+          </span>
+          <span>
+            @if (body.unknownData?.speed) {
+              {{ 'unknown' | translate: { suffix: 'e'} }}
+            } @else {
+              @if (isMetric) {
+                {{ ('NB km/s' | translate: { NB: body.speed | number: '1.0-0' : lang }) }}
+              } @else {
+                {{ ('NB mi/s' | translate: { NB: body.speed * KM_TO_MILE | number: '1.0-0' : lang }) }}
+              }
+            }
+          </span>
+        </li>
+      }
+      @if (body.longitudeOfAscendingNode) {
+        <li>
+          <span>
+            <a [href]="'https://en.wikipedia.org/wiki/Longitude_of_the_ascending_node' | translate" target="_blank">
+              {{ 'Longitude of the ascending node' | translate }}
+            </a>
+          </span>
+          <span>
+            {{ body.unknownData?.longitudeOfAscendingNode ? ('unknown' | translate: { suffix: 'e'}) : ('NB°' | translate: { NB: body.longitudeOfAscendingNode | number: '1.0-0' : lang }) }}
+          </span>
+        </li>
+      }
+      @if (body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET) {
+        <li>
+          <span>
+            <a [href]="'https://en.wikipedia.org/wiki/Natural_satellite' | translate" target="_blank">
+              {{ 'Satellites' | translate }}
+            </a>
+          </span>
+          <span>
+            {{ body.satellites.length > 0 ? (body.satellites.length | number: '1.0-0' : lang) : ('none' | translate) }}
+          </span>
+        </li>
+      }
+    }
   </ul>
 </mat-dialog-content>
