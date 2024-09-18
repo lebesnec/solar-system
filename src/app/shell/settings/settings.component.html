@@ -10,10 +10,12 @@
   <h3>{{ 'Language' | translate }}</h3>
 
   <mat-button-toggle-group [value]="language" (change)="language = $event.value">
-    <mat-button-toggle *ngFor="let lang of AVAILABLE_LANGUAGES" [value]="lang">
-      {{ 'LANGUAGE_' + lang | translate }}
-      {{ lang === language ? '' : ' - ' + ('LANGUAGE_NOT_TRANSLATED_' + lang | translate) }}
-    </mat-button-toggle>
+    @for (lang of AVAILABLE_LANGUAGES; track lang) {
+      <mat-button-toggle [value]="lang">
+        {{ 'LANGUAGE_' + lang | translate }}
+        {{ lang === language ? '' : ' - ' + ('LANGUAGE_NOT_TRANSLATED_' + lang | translate) }}
+      </mat-button-toggle>
+    }
   </mat-button-toggle-group>
 
   <h3>{{ 'Units' | translate }}</h3>

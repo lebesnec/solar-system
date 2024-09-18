@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import 'src/custom-theme';
+@use 'src/m3-theme';
 
 :host {
   display: block;
@@ -157,30 +157,30 @@
   }
 
   .label.selected {
-    fill: mat.get-color-from-palette($solar-system-primary);
+    fill: mat.get-theme-color(m3-theme.$dark-theme, primary);
   }
 
   .label-path {
-    stroke: mat.get-color-from-palette($solar-system-primary, lighter);
+    stroke: mat.get-theme-color(m3-theme.$dark-theme, primary, 70);
     stroke-width: 1;
     fill: transparent;
   }
 
   .label-symbol {
     cursor: pointer;
-    @include recolor(#ffffff);
+    @include m3-theme.recolor(#ffffff);
   }
 
   .label-symbol.selected {
-    @include recolor(mat.get-color-from-palette($solar-system-primary));
+    @include m3-theme.recolor(mat.get-theme-color(m3-theme.$dark-theme, primary));
   }
 
   .group-label:hover {
     .label {
-      fill: mat.get-color-from-palette($solar-system-primary, lighter);
+      fill: mat.get-theme-color(m3-theme.$dark-theme, primary, 70);
     }
     .label-symbol {
-      @include recolor(mat.get-color-from-palette($solar-system-primary, lighter));
+      @include m3-theme.recolor(mat.get-theme-color(m3-theme.$dark-theme, primary, 70));
     }
   }
 
@@ -193,12 +193,12 @@
   }
 
   .orbit.hovered {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.get-theme-color(m3-theme.$dark-theme, primary);
     stroke-width: 1;
   }
 
   .orbit.selected {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.get-theme-color(m3-theme.$dark-theme, primary);
     stroke-width: 1;
   }
 
@@ -211,7 +211,7 @@
     }
   }
   .lagrange-point:hover path {
-    stroke: mat.get-color-from-palette($solar-system-primary);
+    stroke: mat.get-theme-color(m3-theme.$dark-theme, primary);
   }
 
   .hidden {

@@ -21,7 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { SearchPanelComponent } from './shell/search-panel/search-panel.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CelestialBodyDialogComponent } from './scene/celestial-body-dialog/celestial-body-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -34,48 +34,41 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ShellComponent,
-    SceneComponent,
-    SearchPanelComponent,
-    CelestialBodyDialogComponent,
-    SettingsComponent,
-    ContactComponent,
-    AboutComponent,
-    LegalsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [ HttpClient ]
-      }
-    }),
-    LayoutModule,
-    DragDropModule,
-    FormsModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatDialogModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonToggleModule,
-    MatMenuModule
-  ],
-  providers: [],
-  bootstrap: [ AppComponent ]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ShellComponent,
+        SceneComponent,
+        SearchPanelComponent,
+        CelestialBodyDialogComponent,
+        SettingsComponent,
+        ContactComponent,
+        AboutComponent,
+        LegalsComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        LayoutModule,
+        DragDropModule,
+        FormsModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatDialogModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonToggleModule,
+        MatMenuModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

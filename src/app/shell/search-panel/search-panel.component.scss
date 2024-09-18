@@ -1,4 +1,4 @@
-@import 'src/custom-theme';
+@use 'src/m3-theme';
 
 :host {
   display: block;
@@ -48,7 +48,7 @@ mat-expansion-panel {
   text-align: center;
   color: #c5c5c5;
   img {
-    @include recolor(#c5c5c5);
+    @include m3-theme.recolor(#c5c5c5);
     width: 100%;
     max-width: 150px;
     margin: auto;
@@ -77,7 +77,7 @@ mat-grid-tile {
   color: white;
   cursor: pointer;
   img {
-    @include recolor(white);
+    @include m3-theme.recolor(white);
     width: 25px;
     height: 25px;
   }

@@ -11,41 +11,48 @@
   <mat-form-field appearance="outline" class="search-field" (click)="openSearchPanel()">
     <mat-icon matPrefix class="prefix" fontIcon="rocket_launch"></mat-icon>
     <input matInput
-           [(ngModel)]="search"
-           [placeholder]="translate.get('Navigate') | async"
-           autocomplete="off">
-    <button mat-icon-button
-            aria-label="clear search"
-            matSuffix
-            *ngIf="showSearchPanel && search && search !== ''"
-            (click)="search = ''">
-      <mat-icon fontIcon="close"></mat-icon>
-    </button>
-  </mat-form-field>
+      [(ngModel)]="search"
+      [placeholder]="translate.get('Navigate') | async"
+      autocomplete="off">
+      @if (showSearchPanel && search && search !== '') {
+        <button mat-icon-button
+          aria-label="clear search"
+          matSuffix
+          (click)="search = ''">
+          <mat-icon fontIcon="close"></mat-icon>
+        </button>
+      }
+    </mat-form-field>
 
-  <button *ngIf="showSearchPanel"
-          mat-icon-button
-          aria-label="close"
-          class="close-button"
-          (click)="onCloseClick()">
-    <mat-icon fontIcon="close"></mat-icon>
-  </button>
-  <div *ngIf="!showSearchPanel" [matMenuTriggerFor]="menu">
-    <button mat-icon-button class="menu-button" aria-label="menu">
-      <mat-icon fontIcon="more_vert"></mat-icon>
-    </button>
+    @if (showSearchPanel) {
+      <button
+        mat-icon-button
+        aria-label="close"
+        class="close-button"
+        (click)="onCloseClick()">
+        <mat-icon fontIcon="close"></mat-icon>
+      </button>
+    }
+    @if (!showSearchPanel) {
+      <div [matMenuTriggerFor]="menu">
+        <button mat-icon-button class="menu-button" aria-label="menu">
+          <mat-icon fontIcon="more_vert"></mat-icon>
+        </button>
+      </div>
+    }
+    <mat-menu #menu="matMenu" class="toolbar-menu">
+      <button mat-menu-item (click)="openSettings()">{{ 'Settings' | translate }}</button>
+      <button mat-menu-item (click)="openContact()">{{ 'Contact' | translate }}</button>
+      <button mat-menu-item (click)="openAbout()">{{ 'About' | translate }}</button>
+      <button mat-menu-item (click)="openLegals()">{{ 'Legals' | translate }}</button>
+    </mat-menu>
   </div>
-  <mat-menu #menu="matMenu" class="toolbar-menu">
-    <button mat-menu-item (click)="openSettings()">{{ 'Settings' | translate }}</button>
-    <button mat-menu-item (click)="openContact()">{{ 'Contact' | translate }}</button>
-    <button mat-menu-item (click)="openAbout()">{{ 'About' | translate }}</button>
-    <button mat-menu-item (click)="openLegals()">{{ 'Legals' | translate }}</button>
-  </mat-menu>
-</div>
 
-<div class="content">
-  <router-outlet></router-outlet>
+  <div class="content">
+    <router-outlet></router-outlet>
 
-  <app-search-panel *ngIf="showSearchPanel" @panelAnimation [search]="search">
-  </app-search-panel>
-</div>
+    @if (showSearchPanel) {
+      <app-search-panel @panelAnimation [search]="search">
+      </app-search-panel>
+    }
+  </div>
