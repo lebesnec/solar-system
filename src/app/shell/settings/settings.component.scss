@@ -11,6 +11,7 @@ h3 {
 
 :host ::ng-deep mat-button-toggle-group {
   border: solid 1px white;
+  --mat-standard-button-toggle-divider-color: white;
   .mat-button-toggle {
     color: white !important;
     background-color: transparent !important;
@@ -20,7 +21,7 @@ h3 {
     color: white !important;
   }
   .mat-button-toggle-checked {
-    background-color: mat.get-theme-color(m3-theme.$dark-theme, primary) !important;
+    background-color: rgba(mat.get-theme-color(m3-theme.$dark-theme, primary, 60), 0.3) !important;
   }
 }
 
