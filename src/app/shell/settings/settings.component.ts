@@ -1,12 +1,31 @@
 import { Component, inject } from '@angular/core';
 import {OrbitsSetting, SettingsService} from './settings.service';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
+import { MatDialogTitle, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkDrag,
+    CdkDragHandle,
+    MatIconButton,
+    MatDialogClose,
+    MatIcon,
+    CdkScrollable,
+    MatDialogContent,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    TranslateModule,
+  ],
 })
 export class SettingsComponent {
 

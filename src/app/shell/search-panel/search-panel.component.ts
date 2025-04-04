@@ -7,13 +7,30 @@ import {GANYMEDE, JUPITER} from '../../scene/data/Jupiter.data';
 import {MOON} from '../../scene/data/Earth.data';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { MatDivider } from '@angular/material/divider';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { RouterLink } from '@angular/router';
+import { I18nPluralPipe } from '@angular/common';
 
 @Component({
   selector: 'app-search-panel',
   templateUrl: './search-panel.component.html',
   styleUrls: ['./search-panel.component.scss'],
-  standalone: false
+  imports: [
+    MatDivider,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatGridList,
+    MatGridTile,
+    RouterLink,
+    MatExpansionPanelDescription,
+    I18nPluralPipe,
+    TranslateModule,
+  ],
 })
 export class SearchPanelComponent implements OnInit, OnChanges {
 

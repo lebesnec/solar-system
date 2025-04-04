@@ -1,15 +1,31 @@
 import { Component, inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogTitle, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import {CelestialBodyType, CelestialBody, KG_TO_POUND, KM_TO_MILE} from '../scene.model';
 import {HAS_SYMBOL, MISSING_PICTURES, SUN} from '../data/SolarSystem.data';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {SettingsService} from '../../shell/settings/settings.service';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-celestial-body-dialog',
   templateUrl: './celestial-body-dialog.component.html',
   styleUrls: ['./celestial-body-dialog.component.scss'],
-  standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkDrag,
+    CdkDragHandle,
+    MatIconButton,
+    MatDialogClose,
+    MatIcon,
+    CdkScrollable,
+    MatDialogContent,
+    DecimalPipe,
+    TranslateModule,
+  ],
 })
 export class CelestialBodyDialogComponent {
 

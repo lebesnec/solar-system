@@ -1,12 +1,20 @@
 import { Component, OnInit, inject } from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SettingsComponent} from './settings/settings.component';
 import {ContactComponent} from './contact/contact.component';
 import {AboutComponent} from './about/about.component';
 import {LegalsComponent} from './legals/legals.component';
+import { MatFormField, MatPrefix, MatInput, MatSuffix } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatIconButton } from '@angular/material/button';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { RouterOutlet } from '@angular/router';
+import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-shell',
@@ -23,7 +31,22 @@ import {LegalsComponent} from './legals/legals.component';
       ])
     ])
   ],
-  standalone: false
+  imports: [
+    MatFormField,
+    MatIcon,
+    MatPrefix,
+    MatInput,
+    FormsModule,
+    MatIconButton,
+    MatSuffix,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    RouterOutlet,
+    SearchPanelComponent,
+    AsyncPipe,
+    TranslateModule,
+  ],
 })
 export class ShellComponent implements OnInit {
 

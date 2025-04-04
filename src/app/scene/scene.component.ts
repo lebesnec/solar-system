@@ -32,7 +32,7 @@ import {CelestialBodyDialogComponent} from './celestial-body-dialog/celestial-bo
 import {OrbitsSetting, SettingsService} from '../shell/settings/settings.service';
 import {from, fromEvent, Observable} from 'rxjs';
 import {throttleTime} from 'rxjs/operators';
-import {formatNumber} from '@angular/common';
+import { formatNumber, NgClass } from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 
 const TOOLBAR_HEIGHT = 65;
@@ -85,7 +85,7 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
   selector: 'app-scene',
   templateUrl: './scene.component.html',
   styleUrls: ['./scene.component.scss'],
-  standalone: false
+  imports: [NgClass]
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 

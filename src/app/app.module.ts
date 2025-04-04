@@ -34,41 +34,46 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        ShellComponent,
-        SceneComponent,
-        SearchPanelComponent,
-        CelestialBodyDialogComponent,
-        SettingsComponent,
-        ContactComponent,
-        AboutComponent,
-        LegalsComponent
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot({
-            defaultLanguage: 'en',
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
-        LayoutModule,
-        DragDropModule,
-        FormsModule,
-        MatToolbarModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatGridListModule,
-        MatDialogModule,
-        MatSidenavModule,
-        MatListModule,
-        MatButtonToggleModule,
-        MatMenuModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({ declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    LayoutModule,
+    DragDropModule,
+    FormsModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonToggleModule,
+    MatMenuModule,
+    ShellComponent,
+    SceneComponent,
+    SearchPanelComponent,
+    CelestialBodyDialogComponent,
+    SettingsComponent,
+    ContactComponent,
+    AboutComponent,
+    LegalsComponent,
+  ],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AppModule { }
