@@ -12,7 +12,8 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-search-panel',
   templateUrl: './search-panel.component.html',
-  styleUrls: ['./search-panel.component.scss']
+  styleUrls: ['./search-panel.component.scss'],
+  standalone: false
 })
 export class SearchPanelComponent implements OnInit, OnChanges {
 

@@ -14,15 +14,16 @@ import {LegalsComponent} from './legals/legals.component';
   styleUrls: ['./shell.component.scss'],
   animations: [
     trigger('panelAnimation', [
-      transition( ':enter', [
+      transition(':enter', [
         style({ opacity: 0 }),
         animate(100, style({ opacity: 1 }))
       ]),
-      transition( ':leave', [
+      transition(':leave', [
         animate(100, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  standalone: false
 })
 export class ShellComponent implements OnInit {
 

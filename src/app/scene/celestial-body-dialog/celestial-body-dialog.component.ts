@@ -8,7 +8,8 @@ import {SettingsService} from '../../shell/settings/settings.service';
 @Component({
   selector: 'app-celestial-body-dialog',
   templateUrl: './celestial-body-dialog.component.html',
-  styleUrls: ['./celestial-body-dialog.component.scss']
+  styleUrls: ['./celestial-body-dialog.component.scss'],
+  standalone: false
 })
 export class CelestialBodyDialogComponent {
 

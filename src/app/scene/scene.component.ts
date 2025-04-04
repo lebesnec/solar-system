@@ -84,7 +84,8 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 @Component({
   selector: 'app-scene',
   templateUrl: './scene.component.html',
-  styleUrls: ['./scene.component.scss']
+  styleUrls: ['./scene.component.scss'],
+  standalone: false
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
