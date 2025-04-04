@@ -4,6 +4,7 @@ import {SettingsService} from './shell/settings/settings.service';
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
+import { ShellComponent } from './shell/shell.component';
 
 export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
 
@@ -11,7 +12,7 @@ export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false
+  imports: [ShellComponent]
 })
 export class AppComponent {
 
