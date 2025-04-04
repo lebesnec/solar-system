@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
 import {HAS_SYMBOL, INNER_PLANETS, OUTER_PLANETS, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
 import {CelestialBody, LAGRANGE_POINT_I18N_KEY, LAGRANGE_POINT_TYPES, LagrangePointType} from '../../scene/scene.model';
@@ -19,30 +19,28 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   @Input() public search = '';
 
-  public searchResult: CelestialBody[] | null = null;
-  public searchResultLagrangePoints: LagrangePointType[] | null = null;
+  protected searchResult: CelestialBody[] | null = null;
+  protected searchResultLagrangePoints: LagrangePointType[] | null = null;
 
-  public get nbCol(): number {
+  protected get nbCol(): number {
     return window.innerWidth <= 600 ? 2 : 4;
   }
 
-  public readonly SUN = SUN;
-  public readonly INNER_PLANETS = INNER_PLANETS;
-  public readonly OUTER_PLANETS = OUTER_PLANETS;
-  public readonly DWARF_PLANETS = DWARF_PLANETS;
-  public readonly JUPITER = JUPITER;
-  public readonly MOON = MOON;
-  public readonly GANYMEDE = GANYMEDE;
-  public readonly LAGRANGE_POINT_TYPES = LAGRANGE_POINT_TYPES;
-  public readonly HAS_SYMBOL = HAS_SYMBOL;
-  public readonly NB_DWARF_PLANETS_SATELLITES = DWARF_PLANETS.reduce((nb, p) => nb + p.satellites.length, 0);
+  protected readonly SUN = SUN;
+  protected readonly INNER_PLANETS = INNER_PLANETS;
+  protected readonly OUTER_PLANETS = OUTER_PLANETS;
+  protected readonly DWARF_PLANETS = DWARF_PLANETS;
+  protected readonly JUPITER = JUPITER;
+  protected readonly MOON = MOON;
+  protected readonly GANYMEDE = GANYMEDE;
+  protected readonly LAGRANGE_POINT_TYPES = LAGRANGE_POINT_TYPES;
+  protected readonly HAS_SYMBOL = HAS_SYMBOL;
+  protected readonly NB_DWARF_PLANETS_SATELLITES = DWARF_PLANETS.reduce((nb, p) => nb + p.satellites.length, 0);
 
   private searchChanged: Subject<void> = new Subject<void>();
 
-  constructor(
-    private searchService: SearchPanelService,
-    private translate: TranslateService
-  ) { }
+  private searchService = inject(SearchPanelService);
+  private translate = inject(TranslateService);
 
   public ngOnInit(): void {
     this.searchChanged.pipe(debounceTime(300)).subscribe(() => {
@@ -60,11 +58,11 @@ export class SearchPanelComponent implements OnInit, OnChanges {
     }
   }
 
-  public onBodySelected(body: CelestialBody): void {
+  protected onBodySelected(body: CelestialBody): void {
     this.searchService.onBodySelected.next(body);
   }
 
-  public onLagrangePointSelected(type: LagrangePointType): void {
+  protected onLagrangePointSelected(type: LagrangePointType): void {
     this.searchService.onLagrangePointSelected.next(type);
   }
 

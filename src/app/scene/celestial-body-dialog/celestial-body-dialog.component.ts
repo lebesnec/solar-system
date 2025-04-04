@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {CelestialBodyType, CelestialBody, KG_TO_POUND, KM_TO_MILE} from '../scene.model';
 import {HAS_SYMBOL, MISSING_PICTURES, SUN} from '../data/SolarSystem.data';
@@ -15,30 +15,30 @@ export class CelestialBodyDialogComponent {
 
   public body: CelestialBody;
 
-  public readonly SUN = SUN;
-  public readonly CelestialBodyType = CelestialBodyType;
-  public readonly MISSING_PICTURES = MISSING_PICTURES;
-  public readonly HAS_SYMBOL = HAS_SYMBOL;
-  public readonly KM_TO_MILE = KM_TO_MILE;
-  public readonly KG_TO_POUND = KG_TO_POUND;
+  protected readonly SUN = SUN;
+  protected readonly CelestialBodyType = CelestialBodyType;
+  protected readonly MISSING_PICTURES = MISSING_PICTURES;
+  protected readonly HAS_SYMBOL = HAS_SYMBOL;
+  protected readonly KM_TO_MILE = KM_TO_MILE;
+  protected readonly KG_TO_POUND = KG_TO_POUND;
 
-  public get lang(): string {
+  private translate = inject(TranslateService);
+  private settings = inject(SettingsService);
+
+  protected get lang(): string {
     return this.translate.currentLang;
   }
 
-  public get isMetric(): boolean {
+  protected get isMetric(): boolean {
     return this.settings.metric;
   }
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) data: { body: CelestialBody },
-    private translate: TranslateService,
-    private settings: SettingsService
-  ) {
+  constructor() {
+    const data = inject<{ body: CelestialBody }>(MAT_DIALOG_DATA);
     this.body = data.body;
   }
 
-  public getImagePath(body: CelestialBody, format: 'jpg' | 'avif'): string {
+  protected getImagePath(body: CelestialBody, format: 'jpg' | 'avif'): string {
     let path = 'assets/celestial_bodies/';
     if (body.type === CelestialBodyType.PLANET || body.type === CelestialBodyType.DWARF_PLANET) {
       path += body.id + '/';

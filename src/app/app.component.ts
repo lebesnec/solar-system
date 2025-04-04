@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {SettingsService} from './shell/settings/settings.service';
 import {registerLocaleData} from '@angular/common';
@@ -15,10 +15,10 @@ export const AVAILABLE_LANGUAGES = [ 'en', 'fr' ];
 })
 export class AppComponent {
 
-  constructor(
-    translateService: TranslateService,
-    settingsService: SettingsService
-  ) {
+  constructor() {
+    const translateService = inject(TranslateService);
+    const settingsService = inject(SettingsService);
+
     translateService.setDefaultLang('en');
     translateService.use(settingsService.language);
     registerLocaleData(localeEn, 'en');

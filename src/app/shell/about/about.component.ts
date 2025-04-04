@@ -9,7 +9,7 @@ import { VERSION } from '../../../environments/version';
 })
 export class AboutComponent {
 
-  public VERSION = VERSION;
+  protected VERSION = VERSION;
 
   constructor() { }
 

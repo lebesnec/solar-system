@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {TranslateService} from '@ngx-translate/core';
@@ -27,18 +27,16 @@ import {LegalsComponent} from './legals/legals.component';
 })
 export class ShellComponent implements OnInit {
 
-  public showSearchPanel = false;
-  public search = '';
-  private settingsDialog: MatDialogRef<SettingsComponent>;
-  private aboutDialog: MatDialogRef<AboutComponent>;
-  private contactDialog: MatDialogRef<ContactComponent>;
-  private legalsDialog: MatDialogRef<LegalsComponent>;
+  protected showSearchPanel = false;
+  protected search = '';
+  protected settingsDialog: MatDialogRef<SettingsComponent>;
+  protected aboutDialog: MatDialogRef<AboutComponent>;
+  protected contactDialog: MatDialogRef<ContactComponent>;
+  protected legalsDialog: MatDialogRef<LegalsComponent>;
 
-  constructor(
-    public translate: TranslateService,
-    private dialog: MatDialog,
-    private searchPanelService: SearchPanelService
-  ) {  }
+  protected translate = inject(TranslateService);
+  private dialog = inject(MatDialog);
+  private searchPanelService = inject(SearchPanelService);
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe(() => {
@@ -49,7 +47,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public onLogoClick(): void {
+  protected onLogoClick(): void {
     if (this.showSearchPanel) {
       this.closeSearchPanel();
     } else {
@@ -58,22 +56,22 @@ export class ShellComponent implements OnInit {
     }
   }
 
-  public openSearchPanel(): void {
+  protected openSearchPanel(): void {
     this.dialog.closeAll();
     this.showSearchPanel = true;
   }
 
-  public closeSearchPanel(): void {
+  protected closeSearchPanel(): void {
     this.search = '';
     this.showSearchPanel = false;
   }
 
-  public onCloseClick(): void {
+  protected onCloseClick(): void {
     this.dialog.closeAll();
     this.closeSearchPanel();
   }
 
-  public openSettings(): void {
+  protected openSettings(): void {
     this.closeDialogs();
 
     this.settingsDialog = this.dialog.open(SettingsComponent, {
@@ -84,7 +82,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openContact(): void {
+  protected openContact(): void {
     this.closeDialogs();
 
     this.contactDialog = this.dialog.open(ContactComponent, {
@@ -96,7 +94,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openAbout(): void {
+  protected openAbout(): void {
     this.closeDialogs();
 
     this.aboutDialog = this.dialog.open(AboutComponent, {
@@ -107,7 +105,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openLegals(): void {
+  protected openLegals(): void {
     this.closeDialogs();
 
     this.legalsDialog = this.dialog.open(LegalsComponent, {

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import {
   AU_TO_KM,
   Ring,
@@ -89,21 +89,21 @@ const ZOOM_EXTENT: [ number, number ] = [ 0.00025, 200 ];
 })
 export class SceneComponent implements OnInit, AfterViewInit {
 
-  public OrbitsSetting = OrbitsSetting;
+  protected OrbitsSetting = OrbitsSetting;
 
-  public get scaleSetting(): boolean {
+  protected get scaleSetting(): boolean {
     return this.settingsService.scale;
   }
-  public get reticuleSetting(): boolean {
+  protected get reticuleSetting(): boolean {
     return this.settingsService.reticule;
   }
-  public get orbitsSetting(): OrbitsSetting {
+  protected get orbitsSetting(): OrbitsSetting {
     return this.settingsService.orbits;
   }
-  public get labelsSetting(): boolean {
+  protected get labelsSetting(): boolean {
     return this.settingsService.labels;
   }
-  public get milkyWaySetting(): boolean {
+  protected get milkyWaySetting(): boolean {
     return this.settingsService.milkyWay;
   }
 
@@ -115,7 +115,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
   private labelsPath: any;
   private transform: ZoomTransform;
   private bodiesLabels = {};
-  private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }>;
+  private celestialBodyDialogRef: MatDialogRef<{ body: CelestialBody }, void>;
 
   /**
    * SVG does not work well with big number, so we have to divide each value
@@ -134,14 +134,14 @@ export class SceneComponent implements OnInit, AfterViewInit {
     };
   }
 
-  constructor(
-    private dialog: MatDialog,
-    private sceneService: SceneService,
-    private searchPanelService: SearchPanelService,
-    private settingsService: SettingsService,
-    private translateService: TranslateService,
-    private route: ActivatedRoute
-  ) {
+  private dialog = inject(MatDialog);
+  private sceneService = inject(SceneService);
+  private searchPanelService = inject(SearchPanelService);
+  private settingsService = inject(SettingsService);
+  private translateService = inject(TranslateService);
+  private route = inject(ActivatedRoute);
+
+  constructor() {
     // prevents pinch to zoom with a trackpad on desktop
     // https://stackoverflow.com/questions/68808218/how-to-capture-pinch-zoom-gestures-from-the-trackpad-in-a-desktop-browser-and-p
     window.addEventListener('wheel', e => {
