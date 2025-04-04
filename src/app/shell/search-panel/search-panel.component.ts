@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, inject, input } from '@angular/core';
 import { DWARF_PLANETS } from 'src/app/scene/data/DwarfPlanets.data';
 import {HAS_SYMBOL, INNER_PLANETS, OUTER_PLANETS, SOLAR_SYSTEM, SUN} from 'src/app/scene/data/SolarSystem.data';
 import {CelestialBody, LAGRANGE_POINT_I18N_KEY, LAGRANGE_POINT_TYPES, LagrangePointType} from '../../scene/scene.model';
@@ -34,7 +34,7 @@ import { I18nPluralPipe } from '@angular/common';
 })
 export class SearchPanelComponent implements OnInit, OnChanges {
 
-  @Input() public search = '';
+  public readonly search = input('');
 
   protected searchResult: CelestialBody[] | null = null;
   protected searchResultLagrangePoints: LagrangePointType[] | null = null;
@@ -61,7 +61,7 @@ export class SearchPanelComponent implements OnInit, OnChanges {
 
   public ngOnInit(): void {
     this.searchChanged.pipe(debounceTime(300)).subscribe(() => {
-      if (this.search === '') {
+      if (this.search() === '') {
         this.searchResult = null;
       } else {
         this.onSearchChange();
@@ -86,12 +86,12 @@ export class SearchPanelComponent implements OnInit, OnChanges {
   private onSearchChange(): void {
     this.translate.get(SOLAR_SYSTEM.map(b => b.id)).subscribe(translations => {
       const data = SOLAR_SYSTEM.map(body => ({ body, translation: translations[body.id] }));
-      this.searchResult = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.body);
+      this.searchResult = this.searchService.filter(data, [ 'translation' ], this.search()).map(r => r.body);
     });
 
     this.translate.get(LAGRANGE_POINT_TYPES.map(t => LAGRANGE_POINT_I18N_KEY + t)).subscribe(translations => {
       const data = LAGRANGE_POINT_TYPES.map(t => ({ type: t, translation: translations[LAGRANGE_POINT_I18N_KEY + t] }));
-      this.searchResultLagrangePoints = this.searchService.filter(data, [ 'translation' ], this.search).map(r => r.type);
+      this.searchResultLagrangePoints = this.searchService.filter(data, [ 'translation' ], this.search()).map(r => r.type);
     });
   }
 
