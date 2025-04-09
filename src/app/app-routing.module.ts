@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SceneComponent} from './scene/scene.component';
+
 
 const routes: Routes = [
-  { path: '**', component: SceneComponent }
+  { path: '**', loadComponent: () => import('./scene/scene.component').then(m => m.SceneComponent) }
 ];
 
 @NgModule({
