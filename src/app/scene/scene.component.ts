@@ -145,7 +145,7 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // prevents pinch to zoom with a trackpad on desktop
     // https://stackoverflow.com/questions/68808218/how-to-capture-pinch-zoom-gestures-from-the-trackpad-in-a-desktop-browser-and-p
     window.addEventListener('wheel', e => {
-      e.preventDefault();
+      e.preventDefault();//TODO
     }, { passive: false });
    }
 
@@ -160,13 +160,11 @@ export class SceneComponent implements OnInit, AfterViewInit {
         this.deZoom();
       }
     });
-    this.searchPanelService.onLagrangePointSelected.subscribe(type => {
-      this.zoomToLagrangePoint(type);
-    });
+    this.searchPanelService.onLagrangePointSelected.subscribe(type => this.zoomToLagrangePoint(type));
 
-    fromEvent(window, 'resize').pipe(throttleTime(300, undefined, { trailing: true })).subscribe(() => {
-      this.onWindowResize();
-    });
+    fromEvent(window, 'resize')
+      .pipe(throttleTime(300, undefined, { trailing: true }))
+      .subscribe(() => this.onWindowResize());
   }
 
   public ngAfterViewInit(): void {
@@ -182,9 +180,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
     this.initCelestialBodies();
     this.initZoom();
 
-    this.translateService.onLangChange.subscribe(() => {
-      this.onLangChange();
-    });
+    this.translateService.onLangChange.subscribe(() => this.onLangChange());
+    this.onLangChange();
 
     this.route.queryParams.subscribe(params => {
       if (params.goto) {
