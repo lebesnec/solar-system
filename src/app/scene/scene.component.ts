@@ -145,7 +145,9 @@ export class SceneComponent implements OnInit, AfterViewInit {
     // prevents pinch to zoom with a trackpad on desktop
     // https://stackoverflow.com/questions/68808218/how-to-capture-pinch-zoom-gestures-from-the-trackpad-in-a-desktop-browser-and-p
     window.addEventListener('wheel', e => {
-      e.preventDefault();//TODO
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
     }, { passive: false });
    }
 
