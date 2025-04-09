@@ -1,68 +1,86 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {OrbitsSetting, SettingsService} from './settings.service';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
+import { MatDialogTitle, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
+  imports: [
+    MatDialogTitle,
+    CdkDrag,
+    CdkDragHandle,
+    MatIconButton,
+    MatDialogClose,
+    MatIcon,
+    CdkScrollable,
+    MatDialogContent,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    TranslateModule,
+  ],
 })
 export class SettingsComponent {
 
-  public AVAILABLE_LANGUAGES = AVAILABLE_LANGUAGES;
-  public OrbitsSetting = OrbitsSetting;
+  protected AVAILABLE_LANGUAGES = AVAILABLE_LANGUAGES;
+  protected OrbitsSetting = OrbitsSetting;
 
-  public get language(): string {
+  protected get language(): string {
     return this.settingsService.language;
   }
-  public set language(value: string) {
+  protected set language(value: string) {
     this.settingsService.language = value;
   }
 
-  public get metric(): boolean {
+  protected get metric(): boolean {
     return this.settingsService.metric;
   }
-  public set metric(value: boolean) {
+  protected set metric(value: boolean) {
     this.settingsService.metric = value;
   }
 
-  public get reticule(): boolean {
+  protected get reticule(): boolean {
     return this.settingsService.reticule;
   }
-  public set reticule(value: boolean) {
+  protected set reticule(value: boolean) {
     this.settingsService.reticule = value;
   }
 
-  public get orbits(): OrbitsSetting {
+  protected get orbits(): OrbitsSetting {
     return this.settingsService.orbits;
   }
-  public set orbits(value: OrbitsSetting) {
+  protected set orbits(value: OrbitsSetting) {
     this.settingsService.orbits = value;
   }
 
-  public get labels(): boolean {
+  protected get labels(): boolean {
     return this.settingsService.labels;
   }
-  public set labels(value: boolean) {
+  protected set labels(value: boolean) {
     this.settingsService.labels = value;
   }
 
-  public get milkyWay(): boolean {
+  protected get milkyWay(): boolean {
     return this.settingsService.milkyWay;
   }
-  public set milkyWay(value: boolean) {
+  protected set milkyWay(value: boolean) {
     this.settingsService.milkyWay = value;
   }
 
-  public get scale(): boolean {
+  protected get scale(): boolean {
     return this.settingsService.scale;
   }
-  public set scale(value: boolean) {
+  protected set scale(value: boolean) {
     this.settingsService.scale = value;
   }
 
-  constructor(
-    private settingsService: SettingsService
-  ) { }
+  private settingsService = inject(SettingsService);
 
 }

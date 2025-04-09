@@ -1,12 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SettingsComponent} from './settings/settings.component';
 import {ContactComponent} from './contact/contact.component';
 import {AboutComponent} from './about/about.component';
 import {LegalsComponent} from './legals/legals.component';
+import { MatFormField, MatPrefix, MatInput, MatSuffix } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatIconButton } from '@angular/material/button';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { RouterOutlet } from '@angular/router';
+import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-shell',
@@ -14,30 +22,44 @@ import {LegalsComponent} from './legals/legals.component';
   styleUrls: ['./shell.component.scss'],
   animations: [
     trigger('panelAnimation', [
-      transition( ':enter', [
+      transition(':enter', [
         style({ opacity: 0 }),
         animate(100, style({ opacity: 1 }))
       ]),
-      transition( ':leave', [
+      transition(':leave', [
         animate(100, style({ opacity: 0 }))
       ])
     ])
-  ]
+  ],
+  imports: [
+    MatFormField,
+    MatIcon,
+    MatPrefix,
+    MatInput,
+    FormsModule,
+    MatIconButton,
+    MatSuffix,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    RouterOutlet,
+    SearchPanelComponent,
+    AsyncPipe,
+    TranslateModule,
+  ],
 })
 export class ShellComponent implements OnInit {
 
-  public showSearchPanel = false;
-  public search = '';
-  private settingsDialog: MatDialogRef<SettingsComponent>;
-  private aboutDialog: MatDialogRef<AboutComponent>;
-  private contactDialog: MatDialogRef<ContactComponent>;
-  private legalsDialog: MatDialogRef<LegalsComponent>;
+  protected showSearchPanel = false;
+  protected search = '';
+  protected settingsDialog: MatDialogRef<SettingsComponent>;
+  protected aboutDialog: MatDialogRef<AboutComponent>;
+  protected contactDialog: MatDialogRef<ContactComponent>;
+  protected legalsDialog: MatDialogRef<LegalsComponent>;
 
-  constructor(
-    public translate: TranslateService,
-    private dialog: MatDialog,
-    private searchPanelService: SearchPanelService
-  ) {  }
+  protected translate = inject(TranslateService);
+  private dialog = inject(MatDialog);
+  private searchPanelService = inject(SearchPanelService);
 
   public ngOnInit(): void {
     this.searchPanelService.onBodySelected.subscribe(() => {
@@ -48,7 +70,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public onLogoClick(): void {
+  protected onLogoClick(): void {
     if (this.showSearchPanel) {
       this.closeSearchPanel();
     } else {
@@ -57,22 +79,22 @@ export class ShellComponent implements OnInit {
     }
   }
 
-  public openSearchPanel(): void {
+  protected openSearchPanel(): void {
     this.dialog.closeAll();
     this.showSearchPanel = true;
   }
 
-  public closeSearchPanel(): void {
+  protected closeSearchPanel(): void {
     this.search = '';
     this.showSearchPanel = false;
   }
 
-  public onCloseClick(): void {
+  protected onCloseClick(): void {
     this.dialog.closeAll();
     this.closeSearchPanel();
   }
 
-  public openSettings(): void {
+  protected openSettings(): void {
     this.closeDialogs();
 
     this.settingsDialog = this.dialog.open(SettingsComponent, {
@@ -83,7 +105,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openContact(): void {
+  protected openContact(): void {
     this.closeDialogs();
 
     this.contactDialog = this.dialog.open(ContactComponent, {
@@ -95,7 +117,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openAbout(): void {
+  protected openAbout(): void {
     this.closeDialogs();
 
     this.aboutDialog = this.dialog.open(AboutComponent, {
@@ -106,7 +128,7 @@ export class ShellComponent implements OnInit {
     });
   }
 
-  public openLegals(): void {
+  protected openLegals(): void {
     this.closeDialogs();
 
     this.legalsDialog = this.dialog.open(LegalsComponent, {

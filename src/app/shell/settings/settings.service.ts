@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
 import {Meta, Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
@@ -14,6 +14,7 @@ export enum OrbitsSetting {
   providedIn: 'root'
 })
 export class SettingsService {
+  private translateService = inject(TranslateService);
 
   public get language(): string {
     const result = localStorage.getItem('language');
@@ -67,12 +68,11 @@ export class SettingsService {
     localStorage.setItem('scale', value ? 'true' : 'false');
   }
 
-  constructor(
-    titleService: Title,
-    metaService: Meta,
-    @Inject(DOCUMENT) doc: Document,
-    private translateService: TranslateService
-  ) {
+  constructor() {
+    const titleService = inject(Title);
+    const metaService = inject(Meta);
+    const doc = inject<Document>(DOCUMENT);
+
     // Change page title/description/manifest when user changes language preference:
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateService.get('APP_TITLE').subscribe((res: string) => {
