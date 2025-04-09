@@ -13,7 +13,7 @@
         @for (body of searchResult; track body) {
           <mat-grid-tile [class]="'celestial-body ' + body.type" (click)="onBodySelected(body)">
             @if (HAS_SYMBOL.includes(body)) {
-              <img [src]="'assets/symbols/' + body.id + '.svg'" [alt]="body.id | translate">
+              <img [ngSrc]="'assets/symbols/' + body.id + '.svg'" width="25" height="25" [alt]="body.id | translate">
             }
             <span class="name">{{ body.id | translate }}</span>
           </mat-grid-tile>
@@ -31,7 +31,7 @@
 <!-- No search result -->
 @if (searchResult && (searchResult.length + searchResultLagrangePoints.length) === 0) {
   <div class="empty-search">
-    <img src="assets/empty_search.svg" [alt]="'No results' | translate">
+    <img ngSrc="assets/empty_search.svg" width="150" height="160" [alt]="'No results' | translate">
     <h2>{{ 'No results' | translate }}</h2>
     <h4>
       {{ 'Try' | translate }}
@@ -56,7 +56,7 @@
       <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
         <mat-grid-tile [class]="SUN.type" (click)="onBodySelected(SUN)">
           @if (HAS_SYMBOL.includes(SUN)) {
-            <img [src]="'assets/symbols/' + SUN.id + '.svg'" [alt]="SUN.id | translate">
+            <img [ngSrc]="'assets/symbols/' + SUN.id + '.svg'" width="25" height="25" [alt]="SUN.id | translate">
           }
           <span class="name">{{ SUN.id | translate }}</span>
         </mat-grid-tile>
@@ -65,14 +65,14 @@
         <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
           <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
             @if (HAS_SYMBOL.includes(planet)) {
-              <img [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
+              <img [ngSrc]="'assets/symbols/' + planet.id + '.svg'" width="25" height="25" [alt]="planet.id | translate">
             }
             <span class="name">{{ planet.id | translate }}</span>
           </mat-grid-tile>
           @for (moon of planet.satellites; track moon) {
             <mat-grid-tile [class]="moon.type" (click)="onBodySelected(moon)">
               @if (HAS_SYMBOL.includes(moon)) {
-                <img [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
+                <img [ngSrc]="'assets/symbols/' + moon.id + '.svg'" width="25" height="25" [alt]="moon.id | translate">
               }
               <span class="name">{{ moon.id | translate }}</span>
             </mat-grid-tile>
@@ -94,14 +94,14 @@
         <mat-grid-list [cols]="nbCol" gutterSize="10px" rowHeight="50px">
           <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
             @if (HAS_SYMBOL.includes(planet)) {
-              <img [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
+              <img [ngSrc]="'assets/symbols/' + planet.id + '.svg'" width="25" height="25" [alt]="planet.id | translate">
             }
             <span class="name">{{ planet.id | translate }}</span>
           </mat-grid-tile>
           @for (moon of planet.satellites; track moon) {
             <mat-grid-tile [class]="moon.type" (click)="onBodySelected(moon)">
               @if (HAS_SYMBOL.includes(moon)) {
-                <img [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
+                <img [ngSrc]="'assets/symbols/' + moon.id + '.svg'" width="25" height="25" [alt]="moon.id | translate">
               }
               <span class="name">{{ moon.id | translate }}</span>
             </mat-grid-tile>
@@ -122,7 +122,7 @@
           <!-- The dwarf planet -->
           <mat-grid-tile [class]="planet.type" (click)="onBodySelected(planet)">
             @if (HAS_SYMBOL.includes(planet)) {
-              <img [src]="'assets/symbols/' + planet.id + '.svg'" [alt]="planet.id | translate">
+              <img [ngSrc]="'assets/symbols/' + planet.id + '.svg'" width="25" height="25" [alt]="planet.id | translate">
             }
             <span class="name">{{ planet.id | translate }}</span>
           </mat-grid-tile>
@@ -130,7 +130,7 @@
           @for (moon of planet.satellites; track moon) {
             <mat-grid-tile [class]="moon.type" (click)="onBodySelected(moon)">
               @if (HAS_SYMBOL.includes(moon)) {
-                <img [src]="'assets/symbols/' + moon.id + '.svg'" [alt]="moon.id | translate">
+                <img [ngSrc]="'assets/symbols/' + moon.id + '.svg'" width="25" height="25" [alt]="moon.id | translate">
               }
               <span class="name">{{ moon.id | translate }}</span>
             </mat-grid-tile>

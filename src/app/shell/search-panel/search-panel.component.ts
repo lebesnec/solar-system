@@ -12,7 +12,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { RouterLink } from '@angular/router';
-import { I18nPluralPipe } from '@angular/common';
+import {I18nPluralPipe, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-search-panel',
@@ -30,6 +30,7 @@ import { I18nPluralPipe } from '@angular/common';
     MatExpansionPanelDescription,
     I18nPluralPipe,
     TranslateModule,
+    NgOptimizedImage,
   ],
 })
 export class SearchPanelComponent implements OnInit, OnChanges {

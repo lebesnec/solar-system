@@ -6,6 +6,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { TranslateModule } from '@ngx-translate/core';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-about',
@@ -21,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CdkScrollable,
     MatDialogContent,
     TranslateModule,
+    NgOptimizedImage,
   ],
 })
 export class AboutComponent {
