@@ -48,7 +48,7 @@ export interface Ring {
 export interface CelestialBody {
   id: string;
   position: Point;
-  speed?: number;
+  speed?: number; // TODO
   mass: number;
   radius: number;
   semiMajorAxis: number;

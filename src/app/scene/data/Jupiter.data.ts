@@ -1349,7 +1349,6 @@ export const S_2018_J_4: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00042e16,
   radius: 1,
   semiMajorAxis: 16328500,
@@ -1367,7 +1366,6 @@ export const S_2021_J_3: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00042e16,
   radius: 1,
   semiMajorAxis: 20776700,
@@ -1385,7 +1383,6 @@ export const S_2022_J_3: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 20912400,
@@ -1403,7 +1400,6 @@ export const S_2021_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 20926600,
@@ -1421,7 +1417,6 @@ export const S_2021_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 20954700,
@@ -1439,7 +1434,6 @@ export const S_2022_J_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 22015500,
@@ -1457,7 +1451,6 @@ export const S_2022_J_2: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 22413200,
@@ -1475,7 +1468,6 @@ export const S_2016_J_3: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00042e16,
   radius: 1,
   semiMajorAxis: 22719300,
@@ -1493,7 +1485,6 @@ export const S_2021_J_6: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 22870300,
@@ -1511,7 +1502,6 @@ export const S_2021_J_4: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 23019700,
@@ -1529,7 +1519,6 @@ export const S_2016_J_4: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 23113800,
@@ -1547,7 +1536,6 @@ export const S_2018_J_3: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.000052e16,
   radius: 0.5,
   semiMajorAxis: 23400300,
@@ -1565,7 +1553,6 @@ export const S_2021_J_5: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.00042e16,
   radius: 1,
   semiMajorAxis: 23414600,

@@ -1400,7 +1400,6 @@ export const S_2019_S_1: CelestialBody = {
     x: 0,
     y: 0
   },
-  speed: 0, // TODO
   mass: 0.014e15,
   radius: 1.5,
   semiMajorAxis: 11244000,
