@@ -1411,6 +1411,74 @@ export const S_2019_S_1: CelestialBody = {
   orbitBody: null
 };
 
+// a - The mean semi-major axis.
+//   i - The mean inclination.
+//   e - The mean eccentricity.
+//   Peri - The argument of Pariaphis.
+//   Node - The longitude of the ascending node.
+//   M - The mean anomaly.
+//   Period - The time of one revolution around Saturn.
+//   mag - The optical magnitude of the object (R-band).
+//   H - Absolute magnitude of object.
+//   Size - The diameter of the object.
+//   Year - Year first seen.
+//                   Name       a          i       e       Peri    Node    M        Period  mag   Size  Year
+// (km)     (deg)            (deg)   (deg)  (deg)     (days)        (km)
+// L??               S/2004 S37 16003300   164.0   0.506   93.73   147.7   326.7    752.88  25.1  4    2004
+// L??               S/2004 S31 17402800   48.11   0.242   255.0   79.70   275.5    853.80  24.9  4    2004
+// LX                S/2004 S29 17470700   44.43   0.472   330.9   147.2   211.6    858.77  24.9  4    2004
+// LIV     Gridr     S/2004 S20 19211000   163.1   0.204   289.5   341.1   341.3    990.23  25.0  4    2004
+// LIX     Eggther   S/2004 S27 19776700   167.1   0.120   142.5   87.70   92.56    1033.0  24.5  4    2004
+// LV      Angrboda  S/2004 S22 20379900   177.4   0.257   82.77   278.3   118.0    1080.4  25.3  3    2004
+// LXI     Beli      S/2004 S30 20424000   156.3   0.113   248.2   261.6   132.4    1084.1  25.4  3    2004
+// LVII    Gerd      S/2004 S25 20544500   173.3   0.457   325.5   266.6   301.6    1095.0  25.2  3    2004
+// LVI     Skrymir   S/2004 S23 21427000   177.7   0.399   117.9   208.5   357.2    1164.3  24.8  4    2004
+// LXII    Gunnlod   S/2004 S32 21564200   158.5   0.262   158.5   57.51   298.6    1175.3  25.0  4    2004
+// L??               S/2004 S28 21791300   171.0   0.133   205.1   137.0   26.40    1197.2  24.9  4    2004
+// LXV     Alvaldi   S/2004 S35 21953200   176.4   0.182   210.4   327.9   231.7    1208.1  24.6  4    2004
+// L??               S/2004 S39 22790400   167.6   0.081   199.9   184.4   114.7    1277.5  25.5  2    2004
+// LXVI    Geirrod   S/2004 S38 23006200   155.0   0.381   00.72   132.2   134.5    1295.8  25.1  4    2004
+// L??               S/2004 S24 23231300   36.78   0.049   303.0   344.3   162.7    1317.6  25.2  3    2004
+// L??               S/2004 S36 23698700   147.6   0.667   204.6   217.3   32.50    1354.2  25.3  3    2004
+// LXIII   Thiazzi   S/2004 S33 23764800   161.5   0.417   321.1   78.97   84.64    1361.5  25.0  4    2004
+// L??               S/2004 S21 23810400   154.6   0.312   208.8   118.1   136.2    1365.1  25.4  3    2004
+// LXIV              S/2004 S34 24358900   165.7   0.267   15.17   296.7   314.4    1412.5  25.3  3    2004
+// LVIII             S/2004 S26 26737800   171.3   0.148   121.7   340.7   306.6    1624.2  25.0  4    2004
+
+export const S_20004_S_31: CelestialBody = {
+  id: 's_2004-s-31',
+  position: {
+    x: 0,
+    y: 0
+  },
+  mass: -1,
+  radius: 2,
+  semiMajorAxis: 17402800,
+  eccentricity: 0.242,
+  trueAnomaly: 0,
+  meanAnomaly: 275.5,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
+export const S_20004_S_37: CelestialBody = {
+  id: 's_2004-s-37',
+  position: {
+    x: 0,
+    y: 0
+  },
+  mass: -1,
+  radius: 2,
+  semiMajorAxis: 16003300,
+  eccentricity: 0.506,
+  trueAnomaly: 0,
+  meanAnomaly: 326.7,
+  type: CelestialBodyType.SATELLITE,
+  satellites: [],
+  orbitBody: null
+};
+
 export const SATURN: CelestialBody = {
   id: 'saturn',
   position: {
