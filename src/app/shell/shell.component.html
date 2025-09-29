@@ -52,6 +52,6 @@
     <router-outlet />
 
     @if (showSearchPanel) {
-      <app-search-panel @panelAnimation [search]="search" />
+      <app-search-panel animate.enter="enter-search-panel" animate.leave="leave-search-panel" [search]="search" />
     }
   </div>

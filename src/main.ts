@@ -3,7 +3,6 @@ import { environment } from './environments/environment';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AppRoutingModule } from './app/app-routing.module';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -56,7 +55,6 @@ bootstrapApplication(AppComponent, {
       MatMenuModule,
     ),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
   ]
 })
   .catch(err => console.error(err));

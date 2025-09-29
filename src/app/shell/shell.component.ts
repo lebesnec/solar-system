@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import {SearchPanelService} from './search-panel/search-panel.service';
-import {animate, style, transition, trigger} from '@angular/animations';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SettingsComponent} from './settings/settings.component';
@@ -20,17 +19,6 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
-  animations: [
-    trigger('panelAnimation', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate(100, style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate(100, style({ opacity: 0 }))
-      ])
-    ])
-  ],
   imports: [
     MatFormField,
     MatIcon,
