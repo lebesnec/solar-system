@@ -28,7 +28,7 @@
     <picture>
       <source [srcset]="getImagePath(body, 'avif')" type="image/avif">
       <source [srcset]="getImagePath(body, 'jpg')" type="image/jpeg">
-      <img [ngSrc]="getImagePath(body, 'jpg')" fill [alt]="body.id | translate">
+      <img src="getImagePath(body, 'jpg')" [alt]="body.id | translate">
     </picture>
   }
 
