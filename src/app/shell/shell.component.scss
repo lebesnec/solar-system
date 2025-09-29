@@ -152,7 +152,7 @@ app-search-panel {
 }
 
 .enter-search-panel {
-  animation: enter-search-panel 5000ms;
+  animation: enter-search-panel 100ms;
 }
 @keyframes enter-search-panel {
   from {
@@ -164,7 +164,7 @@ app-search-panel {
 }
 
 .leave-search-panel {
-  animation: leave-search-panel 5000ms;
+  animation: leave-search-panel 100ms;
 }
 @keyframes leave-search-panel {
   from {
