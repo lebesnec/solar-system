@@ -555,8 +555,8 @@ export class SceneComponent implements OnInit, AfterViewInit {
                         .attr('d', `M ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY - (SCALE_HEIGHT_LARGE_TICK / 2)} L ${paddingX + COMPAS_WIDTH + nbPxLastTick} ${window.innerHeight - paddingY + (SCALE_HEIGHT_LARGE_TICK / 2)}`);
 
     const translationParams = {
-      NB_AU: formatNumber(scale.max, this.translateService.currentLang, '1.0-4'),
-      NB_KM: formatNumber(scaleSizeKm, this.translateService.currentLang, '1.0-4')
+      NB_AU: formatNumber(scale.max, this.translateService.getCurrentLang(), '1.0-4'),
+      NB_KM: formatNumber(scaleSizeKm, this.translateService.getCurrentLang(), '1.0-4')
     };
     const translationsKeys = [
       SCALE_TEXT_KEY, SCALE_TITLE_KEY, SCALE_TITLE_PLURAL_KEY, COMPASS_TITLE_I18N_KEY

@@ -20,7 +20,7 @@ export class AppComponent {
     const translateService = inject(TranslateService);
     const settingsService = inject(SettingsService);
 
-    translateService.setDefaultLang('en');
+    translateService.setFallbackLang('en');
     translateService.use(settingsService.language);
     registerLocaleData(localeEn, 'en');
     registerLocaleData(localeFr, 'fr');

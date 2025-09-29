@@ -1,11 +1,10 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { HttpLoaderFactory } from './app/app.module';
 import { environment } from './environments/environment';
-import { provideHttpClient, withInterceptorsFromDi, HttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AppRoutingModule } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app/app.component';
+import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 if (environment.production) {
   enableProdMode();
@@ -33,12 +33,11 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       AppRoutingModule,
       TranslateModule.forRoot({
-        defaultLanguage: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
+        fallbackLang: 'en',
+        loader: provideTranslateHttpLoader({
+          prefix: './assets/i18n/',
+          suffix: '.json',
+        })
       }),
       LayoutModule,
       DragDropModule,
