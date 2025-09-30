@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogTitle, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { MatIconButton, MatAnchor } from '@angular/material/button';
+import {MatIconButton, MatAnchor, MatButton} from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDialogTitle,
     CdkDrag,
     CdkDragHandle,
+    MatButton,
     MatIconButton,
     MatDialogClose,
     MatIcon,

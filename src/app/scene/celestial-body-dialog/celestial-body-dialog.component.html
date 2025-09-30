@@ -1,6 +1,6 @@
 <div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   @if (HAS_SYMBOL.includes(body)) {
-    <img [src]="'assets/symbols/' + body.id + '.svg'" class="symbol" [alt]="body.id | translate">
+    <img [ngSrc]="'assets/symbols/' + body.id + '.svg'" width="20" height="20" class="symbol" [alt]="body.id | translate">
   }
   {{ body.id | translate }},
   @switch (body.type) {
@@ -19,7 +19,7 @@
   }
 
   <button mat-icon-button [mat-dialog-close]="true" class="close-button" aria-label="close">
-    <mat-icon fontIcon="close"></mat-icon>
+    <mat-icon fontIcon="close" />
   </button>
 </div>
 

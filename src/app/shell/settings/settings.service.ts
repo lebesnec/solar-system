@@ -1,8 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, DOCUMENT } from '@angular/core';
 import {AVAILABLE_LANGUAGES} from '../../app.component';
 import {Meta, Title} from '@angular/platform-browser';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
-import {DOCUMENT} from '@angular/common';
 
 export enum OrbitsSetting {
   ALL = 'all',
