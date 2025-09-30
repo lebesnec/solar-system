@@ -8,7 +8,7 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { DecimalPipe } from '@angular/common';
+import {DecimalPipe, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-celestial-body-dialog',
@@ -25,6 +25,7 @@ import { DecimalPipe } from '@angular/common';
     MatDialogContent,
     DecimalPipe,
     TranslateModule,
+    NgOptimizedImage,
   ],
 })
 export class CelestialBodyDialogComponent {
@@ -42,7 +43,7 @@ export class CelestialBodyDialogComponent {
   private settings = inject(SettingsService);
 
   protected get lang(): string {
-    return this.translate.currentLang;
+    return this.translate.getCurrentLang();
   }
 
   protected get isMetric(): boolean {

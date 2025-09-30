@@ -9,7 +9,7 @@
   </div>
 
   <mat-form-field appearance="outline" class="search-field" (click)="openSearchPanel()">
-    <mat-icon matPrefix class="prefix" fontIcon="rocket_launch"></mat-icon>
+    <mat-icon matPrefix class="prefix" fontIcon="rocket_launch" />
     <input matInput
       [(ngModel)]="search"
       [placeholder]="translate.get('Navigate') | async"
@@ -19,7 +19,7 @@
           aria-label="clear search"
           matSuffix
           (click)="search = ''">
-          <mat-icon fontIcon="close"></mat-icon>
+          <mat-icon fontIcon="close" />
         </button>
       }
     </mat-form-field>
@@ -30,13 +30,13 @@
         aria-label="close"
         class="close-button"
         (click)="onCloseClick()">
-        <mat-icon fontIcon="close"></mat-icon>
+        <mat-icon fontIcon="close" />
       </button>
     }
     @if (!showSearchPanel) {
       <div [matMenuTriggerFor]="menu">
         <button mat-icon-button class="menu-button" aria-label="menu">
-          <mat-icon fontIcon="more_vert"></mat-icon>
+          <mat-icon fontIcon="more_vert" />
         </button>
       </div>
     }
@@ -49,10 +49,9 @@
   </div>
 
   <div class="content">
-    <router-outlet></router-outlet>
+    <router-outlet />
 
     @if (showSearchPanel) {
-      <app-search-panel @panelAnimation [search]="search">
-      </app-search-panel>
+      <app-search-panel animate.enter="enter-search-panel" animate.leave="leave-search-panel" [search]="search" />
     }
   </div>

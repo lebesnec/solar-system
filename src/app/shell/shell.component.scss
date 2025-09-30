@@ -151,6 +151,30 @@ app-search-panel {
   left: 0;
 }
 
+.enter-search-panel {
+  animation: enter-search-panel 100ms;
+}
+@keyframes enter-search-panel {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.leave-search-panel {
+  animation: leave-search-panel 100ms;
+}
+@keyframes leave-search-panel {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 // mobile
 @media only screen and (max-width: 1150px) {
   .logo h1 {
